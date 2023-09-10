@@ -350,11 +350,11 @@ function handleMenuData(menuData, sliderContainer) {
 
   //페이지 표시 추가
 
-  const page_div = document.querySelector('.pages');
-  const page = document.createElement('div')
-  page.classList.add('page')
-  page.textContent=`${currentPage}/${totalPages} 페이지`;
-  page_div.appendChild(page);
+  // const page_div = document.querySelector('.pages');
+  // const page = document.createElement('div')
+  // page.classList.add('page')
+  // page.textContent=`${currentPage}/${totalPages} 페이지`;
+  // page_div.appendChild(page);
 
   const selectBtn = document.querySelectorAll(".list_content_box");
   selectBtn.forEach(selectBtn => {
