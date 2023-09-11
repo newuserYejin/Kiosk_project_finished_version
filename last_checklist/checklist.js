@@ -332,7 +332,7 @@ fetch('/getOrderData')
   .then(data => {
     addOrdersToDOM(data);
     console.log("Session data:", JSON.stringify(data));
-    if(JSON.stringify(data) == null){
+    if(JSON.stringify(data) === null){
       let orderList = document.querySelector('.list_box');
       orderList.innerHTML=`
       <div class = "no_menu">주문 내역이 없습니다.</div>
