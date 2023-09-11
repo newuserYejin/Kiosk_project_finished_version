@@ -207,7 +207,7 @@ function findParentOrderItem(element) {
 function addOrdersToDOM(orders) {
   let orderList = document.querySelector('.list_box');
   let nextButton = document.querySelector('.next_btnnn');
-  let none_msg = document.querySelector('.speech-bubble');
+  let none_msg = document.querySelectorAll('.speech-bubble');
 
   if (!nextButton) {
     console.error('버튼 없음.');
@@ -220,10 +220,10 @@ function addOrdersToDOM(orders) {
       <div class='no_menu'>주문 내역이 없습니다.</div>
     `;
     nextButton.disabled = true;
-    none_msg.style.visibility = 'visible';
-    setTimeout(() => {
-      none_msg.style.visibility = 'hidden'; // 일정 시간 후에 메시지를 숨김
-    }, 3000);
+    none_msg.forEach((element) => {
+      element.style.visibility = 'visible';
+    });
+    
   } else {
     orders.forEach(order => {
       const orderItem = createOrderItem(order);
