@@ -487,3 +487,13 @@ body {
     font-weight: bold;
     padding-top: 5px;
 }
+
+.no_menu{
+    font-weight: bold;
+    font-size: 4vw;
+    height: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

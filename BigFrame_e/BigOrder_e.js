@@ -50,7 +50,8 @@ const joImage = document.getElementById("imageLink");
                                     2. If you use 'Final Payment', you can proceed to the payment without checking the order list.<br>
                                     &lt;Order List&gt;<br>
                                     3. The order history appears in red if it is warm, blue if it is cold, and black if there is no temperature selection.<br>
-                                    4. Selecting the current order list will take you to the screen where you can modify the menu.
+                                    4. Selecting the current order list will take you to the screen where you can modify the menu.<br>
+                                    (The screen that follows each selection may differ from the image.)
 
                                 </section>
                                 `;

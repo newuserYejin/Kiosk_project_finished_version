@@ -198,7 +198,6 @@ function addOrdersToDOM(orders) {
 
     const splitBorderDiv = document.createElement('div');
     splitBorderDiv.className = "split_border";
-
     orderList.appendChild(splitBorderDiv);
   });
 
@@ -327,11 +326,18 @@ function addOrdersToDOM(orders) {
 let totalAmount = 0;
 
 // 아래 코드를 document.addEventListener("DOMContentLoaded", ...)` 내에 추가
+
 fetch('/getOrderData')
   .then(response => response.json())
   .then(data => {
     addOrdersToDOM(data);
     console.log("Session data:", JSON.stringify(data));
+    if(JSON.stringify(data) == " "){
+      let orderList = document.querySelector('.list_box');
+      orderList.innerHTML=`
+      <div class = "no_menu">주문 내역이 없습니다.</div>
+      `;
+    }
 
     // 주문 데이터를 가지고 총 금액 계산
     totalAmount = calculateTotalAmount(data);
