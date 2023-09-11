@@ -125,7 +125,7 @@ optionContainers.forEach((container, index) => {
         const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
         const textColor = option.op_name === "HOT" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
         return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-          <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>`;
+          <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price})</label></li>`;
       })
       .join("");
   } else if (index === 1) {

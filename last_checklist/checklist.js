@@ -94,7 +94,7 @@ joImage.addEventListener("click", function () {
             관리자를 호출해주세요.
         </video>
 
-        <section class="content_explain"style="border: solid 2px black;height: 60%;">
+        <section class="content_explain"style="height: 60%;">
 
               1. 주문을 수정하길 원하신다면 '수정'을 눌러 수정하고 '저장'으로 저장해주세요.
               => 제품 수량과 추가 사항들의 수정이 가능합니다. <br>
@@ -137,12 +137,12 @@ function createOrderItem(order) {//주문 아이템 생성 함수
   <!--여기까지-->
   <div class="list_content_info">
       <div class="container text-center">
-          <div class="row content_title">
+          <div class="row content_title" style="height: ${order.menu_num >= 600 ? '30%' : '20%'};">
               <div class="col-7 menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
               <div class="col-5 menu_cost">&nbsp;총: ${order.total_price}원</div> <!--메뉴 가격 출력-->
           </div>
           <!--옵션 데이터-->
-          <div class="row list_option">
+          <div class="row list_option" style="visibility: ${order.menu_num >= 600 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 600 ? '30%' : '55%'}">
               <div class="list_option_detail">
                   <div class="row option_detail">
                       <div class="col-6">

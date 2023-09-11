@@ -240,21 +240,31 @@ app.get('/order/:orderNum', (req, res) => {
         // 'op_num'을 주문 정보에서 가져온 'opNumbers'와 'opNumbersFromMenuOp'에서 모두 가져와 배열에 저장합니다.
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
-        connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
-          if (err) {
-            console.error('Error fetching option data:', err);
-            res.status(500).json({ error: 'Error fetching option data' });
-            return;
-          }
+        // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
+        if (orderData.menu_num >= 100 && orderData.menu_num < 600) {
+          connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
+            if (err) {
+              console.error('Error fetching option data:', err);
+              res.status(500).json({ error: 'Error fetching option data' });
+              return;
+            }
 
+            const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
+            // 'op_num'을 배열 형태로 추가합니다.
+            orderData.op_num = combinedOpNumbers;
+            orderData.allergy_names = allergyNames;
+            orderData.option_data = optionResults;
+
+            res.json(orderData);
+          });
+        } else {
+          // 600번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
           const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
-          // 'op_num'을 배열 형태로 추가합니다.
-          orderData.op_num = combinedOpNumbers;
+          orderData.op_num = [];
           orderData.allergy_names = allergyNames;
-          orderData.option_data = optionResults;
-
+          orderData.option_data = [];
           res.json(orderData);
-        });
+        }
       });
     });
   });
@@ -592,6 +602,7 @@ app.get('/order_e/:orderNum', (req, res) => {
     FROM tb_menu_op_e mo
     WHERE mo.menu_num = (SELECT menu_num FROM tb_order WHERE order_num = ?)`;
 
+
   connection.query(getOrderQuery, [orderNum], (err, orderResults) => {
     if (err) {
       console.error('Error fetching order data:', err);
@@ -615,7 +626,7 @@ app.get('/order_e/:orderNum', (req, res) => {
         res.status(500).json({ error: 'Error fetching order allergy data' });
         return;
       }
-
+      //09.10수정
       connection.query(getMenuOpQuery, [orderData.order_num], (err, menuOpResults) => {
         if (err) {
           console.error('Error fetching menu_op data:', err);
@@ -628,22 +639,32 @@ app.get('/order_e/:orderNum', (req, res) => {
         // 'op_num'을 주문 정보에서 가져온 'opNumbers'와 'opNumbersFromMenuOp'에서 모두 가져와 배열에 저장합니다.
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
-        connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
-          if (err) {
-            console.error('Error fetching option data:', err);
-            res.status(500).json({ error: 'Error fetching option data' });
-            return;
-          }
+        // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
+        if (orderData.menu_num >= 100 && orderData.menu_num < 600) {
+          connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
+            if (err) {
+              console.error('Error fetching option data:', err);
+              res.status(500).json({ error: 'Error fetching option data' });
+              return;
+            }
 
+            const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
+            // 'op_num'을 배열 형태로 추가합니다.
+            orderData.op_num = combinedOpNumbers;
+            orderData.allergy_names = allergyNames;
+            orderData.option_data = optionResults;
+
+            res.json(orderData);
+          });
+        } else {
+          // 600번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
           const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
-          // 'op_num'을 배열 형태로 추가합니다.
-          orderData.op_num = combinedOpNumbers;
+          orderData.op_num = [];
           orderData.allergy_names = allergyNames;
-          orderData.option_data = optionResults;
-
+          orderData.option_data = [];
           res.json(orderData);
-        });
-      });
+        }
+      });//09.10여기까지
     });
   });
 });

@@ -1,15 +1,9 @@
-//도움말 버튼
+//도움말
 const joImage = document.getElementById("imageLink");
 
 joImage.addEventListener("click", function () {
   // 먼저 모달 컨테이너를 비웁니다.
   document.getElementById("modalContainer").innerHTML = "";
-
-  // detail_menu.css를 제거합니다.
-  const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
-  if (detailMenuLink) {
-    detailMenuLink.remove();
-  }
 
   // help_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
   fetch("http://localhost:3001/help_msg/help_msg.html")
@@ -25,10 +19,37 @@ joImage.addEventListener("click", function () {
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
-        <p>새로운 내용 11.</p>
-        <p>새로운 내용 2.</p>
-        <p>새로운 내용 3.</p>
-        <!-- 원하는 내용으로 수정 -->`;
+        <video autoplay controls style="width:100%;">
+          <source src="./image/bigorder(1).mp4" type="video/mp4">
+            관리자를 호출해주세요.
+        </video>
+
+        <section class="content_explain" style="height: 50%;">
+
+             1. 원하시는 메뉴를 선택하시면 상세 메뉴창이 나타납니다. <br>
+             => 제품 수량과 선택사항 수정이 가능합니다.<br>
+             2. 카테고리를 이용하면 더욱 다양한 메뉴를 만날 수 있습니다.<br>
+             3. 상품 검색을 이용해 특정 메뉴를 찾을 수 있습니다.<br>
+             => 키워드를 이용한 검색도 가능합니다.<br>
+             4. 상단의 버튼을 통해 다른 구조의 메뉴창을 만날 수 있습니다.
+
+        </section>
+
+        <video controls style="width:100%;">
+        <source src="./image/bicorder(2).mp4" type="video/mp4">
+            관리자를 호출해주세요.
+        </video>
+
+        <section class="content_explain"style="height: 50%;">
+
+              1. 왼쪽의 '주문 확인'을 이용하시면 선택한 메뉴의 리스트를 확인할 수 있습니다.<br>
+              2. '최종 결제'를 이용하시면 주문 목록 확인 없이 결제로 넘어갈 수 있습니다.<br>
+              <현재 주문 목록 설명><br>
+              3. 주문 내역이 따뜻한것이면 빨간색, 차가운거면 파란색, 온도 선택이 없으면 검은색으로 나타납니다.<br>
+              4. 현재 주문 목록을 선택하면 메뉴 수정이 가능한 화면으로 이동합니다.
+
+        </section>
+        `;
 
       // help_msg.css 파일을 로드합니다.
       const linkElement = document.createElement("link");
