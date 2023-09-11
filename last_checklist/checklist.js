@@ -94,7 +94,7 @@ joImage.addEventListener("click", function () {
             관리자를 호출해주세요.
         </video>
 
-        <section class="content_explain"style="border: solid 2px black;height: 60%;">
+        <section class="content_explain"style="height: 60%;">
 
               1. 주문을 수정하길 원하신다면 '수정'을 눌러 수정하고 '저장'으로 저장해주세요.
               => 제품 수량과 추가 사항들의 수정이 가능합니다. <br>

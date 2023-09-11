@@ -597,6 +597,12 @@ app.get('/order_e/:orderNum', (req, res) => {
     FROM tb_op_e op
     WHERE op.op_num IN (?, ?, ?, ?, ?, ?, ?, ?)`;
 
+  const getMenuOpQuery = `
+    SELECT mo.op_num
+    FROM tb_menu_op_e mo
+    WHERE mo.menu_num = (SELECT menu_num FROM tb_order WHERE order_num = ?)`;
+
+
   connection.query(getOrderQuery, [orderNum], (err, orderResults) => {
     if (err) {
       console.error('Error fetching order data:', err);
