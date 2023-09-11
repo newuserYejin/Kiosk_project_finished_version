@@ -137,12 +137,12 @@ function createOrderItem(order) {//주문 아이템 생성 함수
   <!--여기까지-->
   <div class="list_content_info">
       <div class="container text-center">
-          <div class="row content_title">
+          <div class="row content_title" style="height: ${order.menu_num >= 600 ? '30%' : '20%'};">
               <div class="col-7 menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
               <div class="col-5 menu_cost">&nbsp;총: ${order.total_price}원</div> <!--메뉴 가격 출력-->
           </div>
           <!--옵션 데이터-->
-          <div class="row list_option">
+          <div class="row list_option" style="visibility: ${order.menu_num >= 600 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 600 ? '30%' : '55%'}">
               <div class="list_option_detail">
                   <div class="row option_detail">
                       <div class="col-6">

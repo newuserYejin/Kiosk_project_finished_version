@@ -232,6 +232,7 @@ body {
     width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom: solid 1px gray;
 }
 
 .content_title .menu_name {
@@ -297,6 +298,7 @@ body {
 .list_buttons {
     height: 25%;
     border-bottom-left-radius: 10px;
+    border-top: solid 1px gray;
 }
 
 .button_box_num {
