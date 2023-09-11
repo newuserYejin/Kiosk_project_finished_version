@@ -1,42 +1,74 @@
 //도움말
 const joImage = document.getElementById("imageLink");
 
-joImage.addEventListener("click", function () {
-  // 먼저 모달 컨테이너를 비웁니다.
-  document.getElementById("modalContainer_e").innerHTML = "";
+            joImage.addEventListener("click", function () {
+                // 먼저 modalContainer_e를 비웁니다.
+                document.getElementById("modalContainer_e").innerHTML = "";
 
-  // detail_menu.css를 제거합니다.
-  const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
-  if (detailMenuLink) {
-    detailMenuLink.remove();
-  }
+                // help_msg.html 콘텐츠를 로드하여 modalContainer_e에 추가합니다.
+                fetch("http://localhost:3001/help_msg/help_msg.html")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("HTTP Error " + response.status);
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        // modalContainer_e에 help_msg.html 콘텐츠를 추가합니다.
+                        // 모달 제목을 찾아서 변경
+                        document.getElementById("modalContainer_e").innerHTML = data;
 
-  // help_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
-  fetch("http://localhost:3001/help_msg/help_msg.html")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("HTTP Error " + response.status);
-      }
-      return response.text();
-    })
-    .then(data => {
-      // 모달 컨테이너에 help_msg.html 콘텐츠를 추가합니다.
-      $("#modalContainer_e").html(data);
+                        const modalTitle = document.querySelector(".modal-title");
+                        if (modalTitle) {
+                            modalTitle.textContent = "help"; // "help"로 변경
+                        }
 
-      // help_msg.css 파일을 로드합니다.
-      const linkElement = document.createElement("link");
-      linkElement.rel = "stylesheet";
-      linkElement.type = "text/css";
-      linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
-      document.head.appendChild(linkElement);
+                        const modalBody = document.querySelector(".modal-body");
+                        modalBody.innerHTML = `
+                                <video autoplay controls>
+                                    <source src="./image/basicorder_e(1).mp4" type="video/mp4">
+                                    Please call the administrator
+                                </video>
 
-      const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-      modal.show();
-    })
-    .catch(error => {
-      console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
-    });
-});
+                                <section class="content_explain" style="height: 50%;">
+                                    1. If you choose the menu you want, the detailed menu window will appear.
+                                    => Product quantity and options can be modified.<br>
+                                    2. If you use categories, you can meet more diverse menus.<br>
+                                    3. You can find specific menus using product search.<br>
+                                    You can also search using => keywords.<br>
+                                    4. You can meet a menu window with a different structure through the buttons at the top.
+                                </section>
+
+                                <video controls>
+                                    <source src="./image/basicorder_e(2).mp4" type="video/mp4">
+                                    Please call the administrator
+                                </video>
+
+                                <section class="content_explain" style="height: 50%;">
+
+                                    1. You can check the list of selected menus by using 'Check Order' on the left.<br>
+                                    2. If you use 'Final Payment', you can proceed to the payment without checking the order list.<br>
+                                    &lt;Order List&gt;<br>
+                                    3. The order history appears in red if it is warm, blue if it is cold, and black if there is no temperature selection.<br>
+                                    4. Selecting the current order list will take you to the screen where you can modify the menu.
+
+                                </section>
+                                `;
+
+                        // help_msg.css 파일을 로드합니다.
+                        const linkElement = document.createElement("link");
+                        linkElement.rel = "stylesheet";
+                        linkElement.type = "text/css";
+                        linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
+                        document.head.appendChild(linkElement);
+
+                        const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                        modal.show();
+                    })
+                    .catch(error => {
+                        console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                    });
+            });
 
 // // 선택 버튼(메뉴 선택)
 // const selectBtn = document.querySelectorAll(".list_content_box");
