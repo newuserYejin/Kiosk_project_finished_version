@@ -12,6 +12,12 @@ $(document).ready(function () {
     fetch(`/order/${orderNum}`)
       .then(response => response.json())
       .then(data => {
+        if(data.menu_num >= 600) {
+          const boxx = document.querySelector('.op_box');
+          boxx.style.display = "none";
+          const modal_size = document.querySelector('.modal-content')
+          modal_size.style.height = "auto";
+        }
         if (data && Array.isArray(data.op_num)) {
           // 데이터가 유효하고 op_num이 배열인 경우에만 처리
           op_num_o = data.op_num; // op_num_o를 서버에서 받아온 데이터로 설정

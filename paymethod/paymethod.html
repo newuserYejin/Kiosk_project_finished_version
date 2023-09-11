@@ -62,7 +62,7 @@
                         <button type="button" class="coupon_method" onclick="cupon_method()">쿠폰</button>
                     </div>
                     <div class="gohome">
-                        <button type="button" class="gohome" onclick="back()">주문으로 돌아가기</button>
+                        <button type="button" class="gohome" onclick="back()">이전 화면으로 돌아가기</button>
                     </div>
                 </div>
             </div>
@@ -76,9 +76,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}`
             }
         }
 
