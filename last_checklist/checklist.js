@@ -52,9 +52,7 @@ function firstScreen() {
   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
 };
 
-// 다음
 function nextScreen() {
-  // 새로운 페이지로 이동
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
@@ -66,7 +64,24 @@ function nextScreen() {
     // 기본 주문하기 버튼을 클릭한 경우
     location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&pickup=${pickup}`;
   }
-};
+}
+
+
+// // 다음
+// function nextScreen() {
+//   // 새로운 페이지로 이동
+//   const urlParams = new URLSearchParams(window.location.search);
+//   const orderType = urlParams.get('order');
+//   const pickup = urlParams.get('pickup');//09.08 수정
+
+//   if (orderType == 'slow') {
+//     // 천천히 주문하기 버튼을 클릭한 경우
+//     location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&pickup=${pickup}`;
+//   } else if (orderType == 'basic') {
+//     // 기본 주문하기 버튼을 클릭한 경우
+//     location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&pickup=${pickup}`;
+//   }
+// };
 
 //도움말
 const joImage = document.getElementById("imageLink");
@@ -191,16 +206,35 @@ function findParentOrderItem(element) {
 
 function addOrdersToDOM(orders) {
   let orderList = document.querySelector('.list_box');
+  let nextButton = document.querySelector('.next_btnnn');
+  let none_msg = document.querySelector('.speech-bubble');
 
-  orders.forEach(order => {
-    const orderItem = createOrderItem(order);
-    orderList.appendChild(orderItem);
+  if (!nextButton) {
+    console.error('버튼 없음.');
+    return; // 해당 요소를 찾을 수 없으면 함수를 종료합니다.
+  }
 
-    const splitBorderDiv = document.createElement('div');
-    splitBorderDiv.className = "split_border";
+  if (orders.length === 0) {
+    // 주문 목록이 비어 있는 경우 메시지를 추가합니다.
+    orderList.innerHTML = `
+      <div class='no_menu'>주문 내역이 없습니다.</div>
+    `;
+    nextButton.disabled = true;
+    none_msg.style.visibility = 'visible';
+    setTimeout(() => {
+      none_msg.style.visibility = 'hidden'; // 일정 시간 후에 메시지를 숨김
+    }, 3000);
+  } else {
+    orders.forEach(order => {
+      const orderItem = createOrderItem(order);
+      orderList.appendChild(orderItem);
 
-    orderList.appendChild(splitBorderDiv);
-  });
+      const splitBorderDiv = document.createElement('div');
+      splitBorderDiv.className = "split_border";
+      orderList.appendChild(splitBorderDiv);
+    });
+    nextButton.disabled = false;
+  }
 
   //수정 버튼
   const selectBtn = document.querySelectorAll(".updateBtn");
@@ -327,11 +361,18 @@ function addOrdersToDOM(orders) {
 let totalAmount = 0;
 
 // 아래 코드를 document.addEventListener("DOMContentLoaded", ...)` 내에 추가
+
 fetch('/getOrderData')
   .then(response => response.json())
   .then(data => {
     addOrdersToDOM(data);
     console.log("Session data:", JSON.stringify(data));
+    if (JSON.stringify(data) === null) {
+      let orderList = document.querySelector('.list_box');
+      orderList.innerHTML = `
+      <div class = "no_menu">주문 내역이 없습니다.</div>
+      `;
+    }
 
     // 주문 데이터를 가지고 총 금액 계산
     totalAmount = calculateTotalAmount(data);

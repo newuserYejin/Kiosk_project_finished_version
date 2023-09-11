@@ -487,3 +487,54 @@ body {
     font-weight: bold;
     padding-top: 5px;
 }
+
+.no_menu{
+    font-weight: bold;
+    font-size: 4vw;
+    height: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.next_btnnn:disabled {
+    background-color: white; /* 비활성화된 배경색 */
+    color: gray; /* 비활성화된 글자색 */
+    pointer-events: none; /* hover 이벤트를 비활성화합니다. */
+    cursor: not-allowed; /* 마우스 커서를 변경합니다. */
+}
+
+.speech-bubble {
+	position: absolute;
+	background: #0fbac9f7;
+	border-radius: .4em;
+    right: 10px;
+    top: 69%;
+
+    width: 35%;
+    height: 10%;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 44px solid transparent;
+	border-bottom-color: #0fbac9f7;
+	border-top: 0;
+	border-left: 0;
+	margin-left: -22px;
+	margin-top: -44px;
+}
