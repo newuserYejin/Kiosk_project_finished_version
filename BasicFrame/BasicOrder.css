@@ -15,7 +15,6 @@ body {
 /*네비게이션 바*/
 .navigation {
   border: solid 3px black;
-  border-left: none;
   width: 20%;
   height: 100%;
   display: flex;
@@ -197,7 +196,7 @@ body {
 .help {
   position: absolute;
   width: 12%;
-  right: 1%;
+  right: 22%;
   top: 1%;
 }
 
@@ -298,7 +297,6 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-top: none;
 }
 
 .fix_button_detail {

@@ -9,41 +9,42 @@
 </head>
 
 <body>
-    <div class="all">
+    <div class="all" style="background-color: #e9ecef;">
         <div class="help">
-            <img class="helping" src="./image/helpicon.png" width="7.5%" height="7.5%" id="imageLink">
+            <div class="language">
+                <img class="kor selected_lag" src="./image/kor.png">
+                <img class="usa" src="./image/usa.png" onclick="lang_ch()">
+            </div>
+            <img class="helping" src="./image/helpicon.png" id="imageLink" style="width: 12%; height: 100%;">
             <div id="modalContainer"></div>
         </div>
         <div class="first">
             <div class="fir_box">
                 <div class="order">
                     <div>
+                        <img class="qu_icon" onclick="order_info_show(1)" src="./image/question.svg">
                         <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow'">
                             <img src="./image/tutle.png">
-                            <button type="button">천천히주문하기</button>
+                            <button type="button">천천히<br>주문하기</button>
                         </section>
-                        <img onclick="order_info_show(1)" src="./image/question.svg">
-                    </div>
-                    <div>
-                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic'">
-                            <img src="./image/rabbit.png">
-                            <button type="button">기본 주문하기</button>
-                        </section>
-                        <img onclick="order_info_show(2)" src="./image/question.svg">
                     </div>
 
-                </div>
-                <div class="language">
-                    <img class="kor selected_lag" src="./image/kor.png">
-                    <img class="usa" src="./image/usa.png" onclick="lang_ch()">
+                    <div>
+                        <img class="qu_icon" onclick="order_info_show(2)" src="./image/question.svg">
+                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic'">
+                            <img src="./image/rabbit.png">
+                            <button type="button">기본<br>주문하기</button>
+                        </section>
+                    </div>
+
                 </div>
             </div>
         </div>
         <div class="speech-bubble bubble_1" style="display: none;">
-            <p>주문 설정시간이 긴 주문 방식 입니다.</p>
+            <p>주문 설정시간이 &ldquo; 긴 &rdquo; 주문 방식 입니다.</p>
         </div>
         <div class="speech-bubble bubble_2" style="display: none;">
-            <p>기존의 키오스크와 같은 방식 입니다.</p>
+            <p>기존의 키오스크와 <br>같은 방식 입니다.</p>
         </div>
     </div>
 
