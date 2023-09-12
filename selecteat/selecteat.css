@@ -3,6 +3,7 @@ html,body {
     margin: 0;
     padding: 0;
     /*overflow: hidden;*/
+    background-color: #e9ecef;
 }
 
 .all {
@@ -48,38 +49,59 @@ html,body {
     width: 70%;
     display: flex;
     flex-direction: column;
-    margin-top: -15vh;
+    align-items: center;
+    margin-top: -10vh;
+}
+
+.order div{
+    background-color: white;
+    border: solid 1.5px black;
+    border-radius: 15px;
+    box-shadow: 7px 7px gray;
+    height: 14.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .order button{
+    height: 100%;
+    font-size: 5vw;
     border-radius: 15px;
-    box-shadow: 7px 7px gray;
-}
-
-.takeAway {
-    font-size: 5vw;
+    border: none;
     background-color: white;
-    height: 14.5vh;
-    margin-bottom: 5vh;
-    font-weight: bold;
 }
 
-.takeAway:active{
+.order div:last-child {
+    width: 60%;
+    height: 8vh;
+    margin-top: 8vh;
+    box-shadow: none;
+}
+
+.order div:last-child button{
+    font-size: 3.5vw;
+}
+
+.order div:active{
     background-color: skyblue;
     color: white;
     border: none;
 }
 
-.forHere {
-    font-size: 5vw;
-    background-color: white;
-    height: 14.5vh;
-    font-weight: bold;
-    margin-top: 3vh;
-}
-
-.forHere:active{
+.order button:active{
     background-color: skyblue;
     color: white;
     border: none;
+}
+
+.order img{
+    width: 10vw;
+    height: 10vw;
+    margin-right: 20px;
+}
+
+.order div:first-child{
+    margin-bottom: 10vh;
 }

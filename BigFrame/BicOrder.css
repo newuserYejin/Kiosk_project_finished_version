@@ -15,7 +15,7 @@ body {
 /*네비게이션 바*/
 .navigation {
   border: solid 3px black;
-  border-right: none;
+  border-left: none;
   width: 20%;
   height: 100%;
   display: flex;
@@ -165,7 +165,7 @@ body {
 .help {
   position: absolute;
   width: 12%;
-  right: 1%;
+  right: 22%;
   top: 1%;
 }
 

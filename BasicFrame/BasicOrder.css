@@ -15,7 +15,7 @@ body {
 /*네비게이션 바*/
 .navigation {
   border: solid 3px black;
-  border-right: none;
+  border-left: none;
   width: 20%;
   height: 100%;
   display: flex;
@@ -393,7 +393,8 @@ body {
   width: 80%;
   font-size: 1.5vw;
   border: none;
-  height: auto;
+  height: 1.9vw;
+  
 }
 
 .search_icon {
@@ -538,7 +539,7 @@ body {
 
   }
 
-  .searchs {
+  .search {
     height: 3vw;
   }
 
@@ -551,4 +552,8 @@ body {
     font-size: 2vw;
 
   }
+}
+
+.slide{
+  box-shadow: 7px 7px gray;
 }
