@@ -12,55 +12,8 @@
 
 <body>
     <div class="all">
-        <!--navigate bar-->
-        <div class="navigation">
-            <div class="navigation_all_box">
-                <div class="box_line" onclick="select_page()">
-                    <div class="level_button">
-                        <p class="circle_name">메뉴 선택</p>
-                        <button class="circle" style="background-color:skyblue;"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src="./image/line2.jpg" alt="Line 이미지" class="center now">
-                </div>
-
-                <div class="box_line" onclick="check_page()">
-                    <div class="level_button">
-                        <p class="circle_name">주문 확인</p>
-                        <button class="circle"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src="./image/no_line.png" alt="Line 이미지" class="center" width="5vw" height="212vh">
-
-                </div>
-
-                <div class="box_line" onclick="pay_page()">
-                    <div class="level_button">
-                        <p class="circle_name">최종 결제</p>
-                        <button class="circle"></button>
-                    </div>
-                </div>
-
-            </div>
-
-            <!--주문리스트 미리보기-->
-            <div class="select_list" onclick="move_checklist()">
-                <div class="select_list_title">
-                    현재 주문 목록
-                </div>
-                <div class="select_list_list">
-                </div>
-            </div>
-        </div>
-
         <!--오른쪽 목록-->
-        <div class="box list_menu">
+        <div class="list_menu">
 
             <!--주문 목록-->
             <div>
@@ -92,7 +45,7 @@
                 <li class="category"><a href="#" data-category="6">디저트</a></li>
             </ul>
 
-            <div class="box list_box" id="resultContainer">
+            <div class="list_box" id="resultContainer">
                 <!-- <div class="slider_box"> -->
                     <div class="slider-container">
                         <div class="slider">
@@ -143,6 +96,53 @@
                 <button class="fix_button_detail" onclick="nextScreen()">다음</button>
             </div>
         </div>
+
+        <!--navigate bar-->
+        <div class="navigation">
+            <div class="navigation_all_box">
+                <div class="box_line" onclick="select_page()">
+                    <div class="level_button">
+                        <p class="circle_name">메뉴 선택</p>
+                        <button class="circle" style="background-color:skyblue;"></button>
+                    </div>
+                </div>
+
+                <div class="level_line">
+                    <p></p>
+                    <img src="./image/line2.jpg" alt="Line 이미지" class="center now">
+                </div>
+
+                <div class="box_line" onclick="check_page()">
+                    <div class="level_button">
+                        <p class="circle_name">주문 확인</p>
+                        <button class="circle"></button>
+                    </div>
+                </div>
+
+                <div class="level_line">
+                    <p></p>
+                    <img src="./image/no_line.png" alt="Line 이미지" class="center" width="5vw" height="212vh">
+
+                </div>
+
+                <div class="box_line" onclick="pay_page()">
+                    <div class="level_button">
+                        <p class="circle_name">최종 결제</p>
+                        <button class="circle"></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--주문리스트 미리보기-->
+            <div class="select_list" onclick="move_checklist()">
+                <div class="select_list_title">
+                    현재 주문 목록
+                </div>
+                <div class="select_list_list">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -163,7 +163,7 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-    <script>
+    <!-- <script>
 
         var secondsElapsed = 0;
 
@@ -219,7 +219,7 @@
             console.log("터치 이벤트");
         });
 
-    </script>
+    </script> -->
 
 </body>
 

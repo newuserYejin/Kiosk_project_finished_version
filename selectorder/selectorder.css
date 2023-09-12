@@ -1,19 +1,24 @@
-html,body{
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    background-color: #e9ecef;
 }
 
-.all{
+.all {
     height: 100%;
 }
 
 .help {
+    position: absolute;
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: row;
     justify-content: end;
+    align-items: ce;
 }
 
 .helping {
@@ -23,63 +28,133 @@ html,body{
     height: 100%;
 }
 
-.first{
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.fir_box{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.order {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    margin-top: -15vh;
-}
 .language {
-    width: 100%;
     display: flex;
     justify-content: space-evenly;
-    margin-top: 6vh;
+    align-items: center;
+    padding-top: 2%;
+    padding-right: 2%;
 }
 
-.order button{
-    border-radius: 15px;
-    box-shadow: 7px 7px gray;
+.language img{
+    width: 6vw;
+    height: 6vw;
+    margin-right: 10px;
 }
 
-.sloworder {
-    font-size: 5vw;
-    background-color: white;
-    height: 14.5vh;
-    margin-bottom: 5vh;
+.selected_lag {
+    box-shadow: 0 0 5px rgb(231, 170, 27);
 }
-.basicorder {
-    font-size: 5vw;
-    background-color: white;
-    height: 14.5vh;
-    margin-top: 3vh;
-}
+
 .kor {
-    width: 18vW;
-    height: 18vw;
+    background-color: white;
     border: solid 2px black;
     border-radius: 50%;
 }
+
 .usa {
-    width: 18vW;
-    height: 18vw;
+    background-color: white;
     border: solid 0.5px black;
     border-radius: 50%;
 }
 
-.selected_lag{
-    border: solid 10px #00b4d8;
+.first {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fir_box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.order {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order div {
+    background-color: white;
+    border: solid 1.5px black;
+    border-radius: 15px;
+    box-shadow: 7px 7px gray;
+    width: 30vw;
+    height: 50vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.qu_icon{
+    position: relative;
+    width: 5vw;
+    height: 5vw;
+    top: -17%;
+    left: 37%;
+}
+
+.order div:first-child {
+    margin-right: 60px;
+}
+
+.order button {
+    margin-top: 10px;
+    height: 100%;
+    font-size: 5vw;
+    border-radius: 15px;
+    border: none;
+    background-color: white;
+}
+
+.order section {
+    position: relative;
+    top: -8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.speech-bubble {
+    position: absolute;
+    background: #0fbac9f7;
+    border-radius: .4em;
+    width: 22%;
+    top: 26%;
+    right: 6%;
+    font-size: 2vw;
+    font-weight: bold;
+    padding: 0 5px;
+    color: white;
+    text-align: center;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #0fbac9f7;
+    border-bottom: 0;
+    margin-left: -20px;
+    margin-bottom: -15px;
+}
+
+.bubble_1 {
+    position: absolute;
+    right: 48%;
 }

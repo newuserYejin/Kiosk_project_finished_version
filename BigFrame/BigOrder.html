@@ -13,53 +13,8 @@
 
 <body>
     <div class="all">
-        <!--navigate bar-->
-        <div class="navigation">
-            <div class="navigation_all_box">
-                <div class="box_line" onclick="select_page()">
-                    <div class="level_button">
-                        <p class="circle_name">메뉴 선택</p>
-                        <button class="circle" style="background-color:skyblue"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src="./image/line2.jpg" alt="Line 이미지" class="center now">
-                </div>
-
-                <div class="box_line" onclick="check_page()">
-                    <div class="level_button">
-                        <p class="circle_name">주문 확인</p>
-                        <button class="circle"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src="./image/no_line.png" alt="Line 이미지" class="center">
-                </div>
-
-                <div class="box_line" onclick="pay_page()">
-                    <div class="level_button">
-                        <p class="circle_name">최종 결제</p>
-                        <button class="circle"></button>
-                    </div>
-                </div>
-            </div>
-            <!--주문리스트 미리보기-->
-            <div class="select_list" onclick="move_cheklist()">
-                <div class="select_list_title">
-                    현재 주문 목록
-                </div>
-                <div class="select_list_list">
-
-                </div>
-            </div>
-        </div>
-
         <!--오른쪽 목록-->
-        <div class="box list_menu">
+        <div class="list_menu">
 
             <!--주문 목록-->
             <div>
@@ -118,9 +73,54 @@
 
             <!--고정 버튼-->
             <div class="box fix_button">
-                <button class="fix_button_detail" onclick="prvsScren()">이전화면</button>
+                <button class="fix_button_detail" onclick="prvsScren()">이전으로</button>
                 <button class="fix_button_detail" onclick="firstScreen()">처음으로</button>
-                <button class="fix_button_detail" onclick="nextScreen()">다음</button>
+                <button class="fix_button_detail" onclick="nextScreen()">다음으로</button>
+            </div>
+        </div>
+
+        <!--navigate bar-->
+        <div class="navigation">
+            <div class="navigation_all_box">
+                <div class="box_line" onclick="select_page()">
+                    <div class="level_button">
+                        <p class="circle_name">메뉴 선택</p>
+                        <button class="circle" style="background-color:skyblue"></button>
+                    </div>
+                </div>
+
+                <div class="level_line">
+                    <p></p>
+                    <img src="./image/line2.jpg" alt="Line 이미지" class="center now">
+                </div>
+
+                <div class="box_line" onclick="check_page()">
+                    <div class="level_button">
+                        <p class="circle_name">주문 확인</p>
+                        <button class="circle"></button>
+                    </div>
+                </div>
+
+                <div class="level_line">
+                    <p></p>
+                    <img src="./image/no_line.png" alt="Line 이미지" class="center">
+                </div>
+
+                <div class="box_line" onclick="pay_page()">
+                    <div class="level_button">
+                        <p class="circle_name">최종 결제</p>
+                        <button class="circle"></button>
+                    </div>
+                </div>
+            </div>
+            <!--주문리스트 미리보기-->
+            <div class="select_list" onclick="move_cheklist()">
+                <div class="select_list_title">
+                    현재 주문 목록
+                </div>
+                <div class="select_list_list">
+
+                </div>
             </div>
         </div>
     </div>
@@ -141,7 +141,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-
+    <!-- 
     <script>
 
         var secondsElapsed = 0;
@@ -198,7 +198,7 @@
             console.log("터치 이벤트");
         });
 
-    </script>
+    </script> -->
 
 </body>
 

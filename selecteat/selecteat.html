@@ -25,13 +25,28 @@
                 <div class="first">
                     <div class="fir_box">
                         <div class="order">
-                            <button type="button" class="takeAway" onclick="takeAway(1)">포장하기</button>
-                            <button type="button" class="forHere" onclick="forHere(2)">먹고 가기</button>
+                            <div  onclick="takeAway(1)">
+                                <img src="./image/takeout.png">
+                                <button type="button">포장하기</button>
+                            </div>
+                            <div onclick="forHere(2)">
+                                <img src="./image/eat in.png">
+                                <button type="button" class="forHere">매장 이용</button>
+                            </div>
+                            <div onclick="move_previos()">
+                                <button type="button">이전으로 돌아가기</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            function move_previos(){
+                location.href = `http://localhost:3001/selectorder/selectorder.html`;
+            }
+        </script>
 
         <script>
             function takeAway() {
@@ -125,7 +140,7 @@
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
 
-        <script>
+        <!-- <script>
             var secondsElapsed = 0;
 
             // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
@@ -168,7 +183,7 @@
                 console.log("터치 이벤트");
             });
 
-        </script>
+        </script> -->
     </body>
 
 </html>

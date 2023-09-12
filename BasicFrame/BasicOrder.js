@@ -473,7 +473,7 @@ function searchFunction() {
 
       slideItems.forEach(item => {
         const itemDiv = document.createElement('div');
-        itemDiv.className = "box list_content_box";
+        itemDiv.className = "list_content_box";
         itemDiv.setAttribute('id', 'list_click');
         itemDiv.setAttribute('data-menunum', item.menu_num);
         itemDiv.innerHTML = `

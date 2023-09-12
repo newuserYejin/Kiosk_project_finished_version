@@ -509,8 +509,6 @@ body {
 	position: absolute;
 	background: #0fbac9f7;
 	border-radius: .4em;
-    right: 10px;
-    top: 69%;
 
     width: 35%;
     height: 10%;
@@ -524,7 +522,12 @@ body {
     visibility: hidden;
 }
 
-.speech-bubble:after {
+.second_bubble{
+    right: 10px;
+    top: 69%;
+}
+
+.second_bubble:after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -537,4 +540,25 @@ body {
 	border-left: 0;
 	margin-left: -22px;
 	margin-top: -44px;
+}
+
+.first_bubble{
+    position: absolute;
+    left: 20px;
+    top: 73%;
+}
+
+.first_bubble::after{
+    content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 44px solid transparent;
+	border-top-color: #00aabb;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -22px;
+	margin-bottom: -44px;
 }
