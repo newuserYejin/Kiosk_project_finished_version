@@ -112,22 +112,43 @@ optionContainers.forEach((container, index) => {
       .filter(option => option.op_name === "뜨거움" || option.op_name === "차가움");
   
     let defaultOption = "뜨거움"; // 기본값 설정
-  
+    console.log("temperatureOptions:", temperatureOptions);
+
     const hasHot = temperatureOptions.some(option => option.op_name === "뜨거움");
     const hasCold = temperatureOptions.some(option => option.op_name === "차가움");
+
+    let falseoption = "차가움";
   
     if (!hasHot && hasCold) {
       defaultOption = "차가움";
+
+      falseoption = "뜨거움";
     }
-  
-    optionList.innerHTML = temperatureOptions
+
+    if (temperatureOptions.some(option => option.op_name === "뜨거움") && temperatureOptions.some(option => option.op_name === "차가움")){
+      optionList.innerHTML = temperatureOptions
       .map(option => {
-        const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-        const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
-        return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-          <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>`;
-      })
+          const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+          const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+          return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+            `;
+        })
       .join("");
+    }else{
+      optionList.innerHTML = temperatureOptions
+          .map(option => {
+              const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+              const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+              const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
+              return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+                <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+                <li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
+                <label class="form-check-label" for="falseoption" style="color: gray;"> ${falseoptionText} (+0원)</label></li>
+                `;
+            })
+          .join("");
+        }
   } else if (index === 1) {
     optionList.innerHTML = menuData.op_data
       .filter(option => option.op_name === "기본 크기" || option.op_name === "큰 크기")

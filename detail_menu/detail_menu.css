@@ -147,10 +147,16 @@
     justify-content: space-around;
 }
 
+#modalContainer .option_inner_bow div{
+    display: flex;
+    align-items: center;
+}
+
 #modalContainer .option_name {
     margin: 0;
     font-weight: bold;
     font-size: 3vh;
+    margin-right: 10px;
 }
 
 #modalContainer .list-group {
@@ -308,3 +314,15 @@
     width: 20px;
     height: 20px;
 } */
+
+#modalContainer .t_Radio1{
+    color: red;
+}
+
+#modalContainer .t_Radio2{
+    color: blue;
+}
+
+#modalContainer .disabled-label {
+    color: gray;
+}
