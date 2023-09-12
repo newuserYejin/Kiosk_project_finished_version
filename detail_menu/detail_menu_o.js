@@ -40,15 +40,25 @@ $(document).ready(function () {
     // op_num_o 배열에 값 1이 있는지 확인합니다.
     if (op_num_o.includes(1)) {
       t_firstRadioContainer.style.display = "block";
+      t_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      t_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      t_firstRadioContainer.style.display = "none";
+      t_firstRadioContainer.style.color = "gray"
+      t_firstRadioContainer.style.display = "block";
+      t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
+      t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
 
     // op_num_o 배열에 값 2가 있는지 확인합니다.
     if (op_num_o.includes(2)) {
       t_secondRadioContainer.style.display = "block";
+      t_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      t_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      t_secondRadioContainer.style.display = "none";
+      t_secondRadioContainer.style.color = "gray"
+      t_secondRadioContainer.style.display = "block";
+      t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
+      t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
   }
 
