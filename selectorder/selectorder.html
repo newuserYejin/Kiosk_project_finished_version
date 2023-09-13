@@ -23,7 +23,7 @@
                 <div class="order">
                     <div>
                         <img class="qu_icon" onclick="order_info_show(1)" src="./image/question.svg">
-                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow'">
+                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow&timer=330'">
                             <img src="./image/tutle.png">
                             <button type="button">천천히<br>주문하기</button>
                         </section>
@@ -31,7 +31,7 @@
 
                     <div>
                         <img class="qu_icon" onclick="order_info_show(2)" src="./image/question.svg">
-                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic'">
+                        <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic&timer=150'">
                             <img src="./image/rabbit.png">
                             <button type="button">기본<br>주문하기</button>
                         </section>
@@ -40,11 +40,13 @@
                 </div>
             </div>
         </div>
-        <div class="speech-bubble bubble_1" style="display: none;">
-            <p>주문 설정시간이 &ldquo; 긴 &rdquo; 주문 방식 입니다.</p>
-        </div>
-        <div class="speech-bubble bubble_2" style="display: none;">
-            <p>기존의 키오스크와 <br>같은 방식 입니다.</p>
+        <div>
+            <div class="speech-bubble bubble_1" style="display: none;">
+                <p>주문 설정시간이 &ldquo; 긴 &rdquo; 주문 방식 입니다.</p>
+            </div>
+            <div class="speech-bubble bubble_2" style="display: none;">
+                <p>기존의 키오스크와 <br>같은 방식 입니다.</p>
+            </div>
         </div>
     </div>
 

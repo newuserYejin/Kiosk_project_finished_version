@@ -35,8 +35,8 @@ html,body {
 }
 
 .language img{
-    width: 6vw;
-    height: 6vw;
+    width: 8vw;
+    height: 8vw;
     margin-right: 10px;
 }
 
@@ -134,8 +134,8 @@ section img{
     background: #0fbac9f7;
     border-radius: .4em;
     width: 22%;
-    top: 26%;
-    right: 6%;
+    top: 30%;
+    right: 8%;
     font-size: 2vw;
     font-weight: bold;
     padding: 0 5px;
@@ -159,5 +159,5 @@ section img{
 
 .bubble_1 {
     position: absolute;
-    right: 48%;
+    right: 46%;
 }

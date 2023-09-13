@@ -1,29 +1,40 @@
 html,body {
+    width: 100vw;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-/*전체 div flex*/
-.all {
-    display: flex;
+.all_box{
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    background-color: #e9ecef;
+}
+
+/*전체 div flex*/
+.all {
+    padding: 0 15px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+    justify-content: space-between;
 }
 
 /*네비게이션 바*/
 .navigation {
+    background-color: white;
     border: solid 3px black;
-    width: 20%;
-    height: 99%;
+    width: 25%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-}
-
-.list_menu {
-    width: 80%;
-    height: 100%;
-    padding: 2vw;
+    border-radius: 30px;
 }
 
 .navigation_all_box {
@@ -82,15 +93,9 @@ html,body {
 .circle_name {
     text-align: center;
     margin: 0;
-    font-size: 3vw;
+    font-size: 3.3vw;
     font-weight: bold;
     width: 50%;
-}
-
-.selectpay {
-    width: 80%;
-    height: 100%;
-    overflow: hidden;
 }
 
 .help {
@@ -98,13 +103,26 @@ html,body {
     height: auto;
     display: flex;
     justify-content: end;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .helping {
     padding-top: 2%;
     padding-right: 2%;
-    width: 17%;
+    width: 15%;
     height: 100%;
+}
+
+.selectpay {
+    width: 72%;
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .first {
@@ -116,7 +134,7 @@ html,body {
 }
 
 .fir_box {
-    height: 100%;
+    height: 90%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -126,23 +144,22 @@ html,body {
 
 .explain {
     font-size: 4vw;
-    margin-top: -10vh;
     text-align: center;
 }
 
 .video {
-    width: 60vw;
-    height: 50vh;
-    margin-top: 2vh;
+    width: 100%;
+    height: 70%;
     border: solid 3px black;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 2vw;
 }
 
 .pay_card {
     width: 50vw;
-    height: 40vh;
+    height: 90%;
 }
 
 .under_buttons {
@@ -161,7 +178,6 @@ html,body {
     background-color: white;
     height: 8vh;
     margin-top: 4vh;
-    margin-bottom: 8vh;
     font-weight: bold;
     border: solid 2.5px black;
     width: 38vw;
@@ -176,13 +192,12 @@ html,body {
     background-color: white;
     height: 8vh;
     margin-top: 4vh;
-    margin-bottom: 8vh;
     border: solid 2.5px black;
     width: 20vw;
     text-align: center;
 }
 
-@media screen and (min-width:1000px) {
+/* @media screen and (min-width:1000px) {
     .helpimg {
         width: 3%;
         height: 5%;
@@ -195,4 +210,4 @@ html,body {
         text-align: center;
     }
 
-}
+} */

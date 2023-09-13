@@ -25,7 +25,7 @@
                 <div class="first">
                     <div class="fir_box">
                         <div class="order">
-                            <div  onclick="takeAway(1)">
+                            <div onclick="takeAway(1)">
                                 <img src="./image/takeout.png">
                                 <button type="button">포장하기</button>
                             </div>
@@ -45,7 +45,7 @@
         </div>
 
         <script>
-            function move_previos(){
+            function move_previos() {
                 location.href = `http://localhost:3001/selectorder/selectorder.html`;
             }
         </script>
@@ -59,10 +59,10 @@
 
                 if (order === 'slow') {
                     // 천천히 주문하기 버튼을 클릭한 경우
-                    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`;
+                    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
                 } else if (order === 'basic') {
                     // 기본 주문하기 버튼을 클릭한 경우
-                    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`;
+                    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
                 } else {
                     location.href = 'http://localhost:3001/selectorder/selectorder.html';
                 }
@@ -75,10 +75,10 @@
 
                 if (order === 'slow') {
                     // 천천히 주문하기 버튼을 클릭한 경우
-                    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`;
+                    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
                 } else if (order === 'basic') {
                     // 기본 주문하기 버튼을 클릭한 경우
-                    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`;
+                    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
                 } else {
                     location.href = 'http://localhost:3001/selectorder/selectorder.html';
                 }
@@ -186,6 +186,55 @@
             });
 
         </script> -->
+
+        <script>//09.10 추가
+            var currentURL = window.location.href;
+            var url = new URL(currentURL);
+            var params = new URLSearchParams(url.search);
+            var timer = params.get("timer");
+
+            // timer가 존재하고 유효한지 확인
+            if (timer !== null && !isNaN(timer)) {
+                timer = parseInt(timer);
+
+                function updateTimer() {
+                    // 타이머를 1씩 감소
+                    timer--;
+
+                    // URL 파라미터 업데이트
+                    params.set("timer", timer);
+
+                    // 업데이트된 URL 생성
+                    url.search = params.toString();
+                    var newURL = url.toString();
+
+                    // 브라우저 주소 표시줄 업데이트
+                    window.history.replaceState({}, document.title, newURL);
+
+                    // 타이머가 0이 되면 동작을 원하는 대로 처리
+                    if (timer === 0) {
+                        clearInterval(countdownInterval);
+                        var confirmation = confirm("타이머가 종료되었습니다. 타이머를 180초로 재설정하시겠습니까?");
+                        if (confirmation) {
+                            // 확인 버튼을 누르면 timer를 180으로 설정
+                            params.set("timer", 180);
+                            url.search = params.toString();
+                            newURL = url.toString();
+                            window.history.replaceState({}, document.title, newURL);
+                            location.reload();
+                        } else {
+                            // 취소 버튼을 누르면 다른 페이지로 이동
+                            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                        }
+                    }
+                }
+
+                // 매초마다 updateTimer 함수 호출
+                var countdownInterval = setInterval(updateTimer, 1000);
+            } else {
+                alert("유효한 타이머 시간을 지정하지 않았습니다.");
+            }
+        </script>
     </body>
 
 </html>

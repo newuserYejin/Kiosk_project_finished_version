@@ -36,6 +36,8 @@ body {
   border-radius: 15px;
 
   margin-right: 10px;
+
+  padding: 0 5px;
 }
 
 .list_menu {
@@ -49,12 +51,11 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 2px;
 }
 
 .box_line {
   border: solid 2px black;
-  height: 30%;
+  height: 18%;
   display: flex;
   border-radius: 10px;
 }
@@ -495,7 +496,7 @@ body {
 
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 20px;
+  font-size: 5vw;
   font-weight: bold;
   background-color: rgb(255, 255, 128);
 
@@ -511,7 +512,7 @@ body {
   width: 10%;
 
   transform: translateY(-50%);
-  font-size: 20px;
+  font-size: 5vw;
   font-weight: bold;
   cursor: pointer;
   background-color: rgb(255, 255, 128);

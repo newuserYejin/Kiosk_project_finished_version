@@ -125,9 +125,9 @@ function check_page() {
   const pickup = urlParams.get('pickup');//09.08 수정
 
   if (orderType == 'slow') {
-    location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
-    location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
 
@@ -139,10 +139,10 @@ function pay_page() {
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
     // 기본 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
 
@@ -206,10 +206,10 @@ function prvsScren() {
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/selecteat/selecteat.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/selecteat/selecteat.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
     // 기본 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/selecteat/selecteat.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/selecteat/selecteat.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
 
@@ -228,10 +228,10 @@ function nextScreen() {
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
     // 기본 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
 
@@ -271,16 +271,16 @@ radioButtons.forEach(button => {
       switch (button.value) {
         case 'big':
           if (currentOrder === 'slow') {
-            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`;
+            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
           } else if (currentOrder === 'basic') {
-            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=basic&pickup=${pickup}`;
+            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
           }
           break;
         case 'basic':
           if (currentOrder === 'slow') {
-            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=slow&pickup=${pickup}`;
+            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
           } else if (currentOrder === 'basic') {
-            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`;
+            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
           }
           break;
         default:
@@ -403,9 +403,9 @@ function handleMenuData(menuData, sliderContainer) {
         detailMenuLink.remove();
       }
 
-      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}&menuId=${menuNum}`);
+      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}&menuId=${menuNum}`);
       // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-      fetch(`http://localhost:3001/detail_menu/jojo.html?pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
+      fetch(`http://localhost:3001/detail_menu/jojo.html?timer=${timer}&pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
         .then(response => {
           if (!response.ok) {
             throw new Error("HTTP Error " + response.status);
@@ -515,10 +515,10 @@ function searchFunction() {
         detailMenuLink.remove();
       }
 
-      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}&menuId=${menuNum}`);
+      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}&menuId=${menuNum}`);
 
       // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-      fetch(`http://localhost:3001/detail_menu/jojo.html?pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
+      fetch(`http://localhost:3001/detail_menu/jojo.html?timer=${timer}&pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
         .then(response => {
           if (!response.ok) {
             throw new Error("HTTP Error " + response.status);
@@ -568,10 +568,10 @@ function searchFunction() {
         detailMenuLink.remove();
       }
 
-      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}&menuId=${menuNum}`);
+      history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}&menuId=${menuNum}`);
 
       // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-      fetch(`http://localhost:3001/detail_menu/jojo.html?pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
+      fetch(`http://localhost:3001/detail_menu/jojo.html?timer=${timer}&pickup=${pickup}&menuId=${menuNum}`) // 이 부분의 파일 경로를 수정해야합니다.
         .then(response => {
           if (!response.ok) {
             throw new Error("HTTP Error " + response.status);
@@ -683,6 +683,8 @@ window.addEventListener('load', () => {
 function move_checklist() {
   const urlParams = new URLSearchParams(window.location.search);
   const pickup = urlParams.get('pickup');//09.08 수정
+  const order = urlParams.get('order');
+  const timer = urlParams.get('timer')
 
-  location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=basic`;
+  location.href = `http://localhost:3001/last_checklist/checklist.html?order=${order}&timer=${timer}&pickup=${pickup}`;
 }
