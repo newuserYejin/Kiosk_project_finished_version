@@ -199,6 +199,16 @@ body {
   text-align: end;
 }
 
+.none_select_menu{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6vw;
+  font-weight: bold;
+  color: #6c757d;
+}
+
 /*주문 리스트*/
 .box {
   border: solid 2.5px black;

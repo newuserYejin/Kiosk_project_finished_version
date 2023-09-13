@@ -1,0 +1,11 @@
+.modal-dialog{
+    width: 70%;
+}
+.content_font_size{
+    font-size: 1.1rem;
+    line-height: 160%;
+}
+
+.modal-footer{
+    justify-content: space-between;
+}
