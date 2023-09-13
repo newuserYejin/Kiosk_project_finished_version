@@ -85,9 +85,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
 
@@ -97,9 +97,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/pay_card/pay_card.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/pay_card/pay_card.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/pay_card/pay_card.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/pay_card/pay_card.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
 
@@ -109,9 +109,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/pay_coupon/pay_coupon.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/pay_coupon/pay_coupon.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/pay_coupon/pay_coupon.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/pay_coupon/pay_coupon.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
 
@@ -171,9 +171,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
         function openCheck() {
@@ -182,9 +182,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist/checklist.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
         function openPay() {
@@ -248,6 +248,56 @@
         });
 
     </script> -->
+
+    <script>//09.10 추가
+        var currentURL = window.location.href;
+        var url = new URL(currentURL);
+        var params = new URLSearchParams(url.search);
+        var timer = params.get("timer");
+
+        // timer가 존재하고 유효한지 확인
+        if (timer !== null && !isNaN(timer)) {
+            timer = parseInt(timer);
+
+            function updateTimer() {
+                // 타이머를 1씩 감소
+                timer--;
+
+                // URL 파라미터 업데이트
+                params.set("timer", timer);
+
+                // 업데이트된 URL 생성
+                url.search = params.toString();
+                var newURL = url.toString();
+
+                // 브라우저 주소 표시줄 업데이트
+                window.history.replaceState({}, document.title, newURL);
+
+                // 타이머가 0이 되면 동작을 원하는 대로 처리
+                if (timer === 0) {
+                    clearInterval(countdownInterval);
+                    var confirmation = confirm("타이머가 종료되었습니다. 타이머를 180초로 재설정하시겠습니까?");
+                    if (confirmation) {
+                        // 확인 버튼을 누르면 timer를 180으로 설정
+                        params.set("timer", 180);
+                        url.search = params.toString();
+                        newURL = url.toString();
+                        window.history.replaceState({}, document.title, newURL);
+                        location.reload();
+                    } else {
+                        // 취소 버튼을 누르면 다른 페이지로 이동
+                        window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                    }
+                }
+            }
+
+            // 매초마다 updateTimer 함수 호출
+            var countdownInterval = setInterval(updateTimer, 1000);
+        } else {
+            alert("유효한 타이머 시간을 지정하지 않았습니다.");
+        }
+    </script>
+
 
 </body>
 
