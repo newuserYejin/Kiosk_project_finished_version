@@ -12,44 +12,6 @@
 
 <body>
     <div class="all">
-        <!--navigate bar-->
-        <div class="navigation">
-            <div class="navigation_all_box">
-                <div class="box_line">
-                    <div onclick="selectPage()" class="level_button">
-                        <p class="circle_name">메뉴 선택</p>
-                        <button class="circle" style="background-color: skyblue;"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src=".\image\line2.jpg" alt="Line 이미지" class="center">
-                </div>
-
-                <div class="box_line">
-                    <div onclick="navigateclick()" class="level_button">
-                        <p class="circle_name">주문 확인</p>
-                        <button class="circle" style="background-color:skyblue;"></button>
-                    </div>
-                </div>
-
-                <div class="level_line">
-                    <p></p>
-                    <img src=".\image\line2.jpg" alt="Line 이미지" class="center now">
-
-                </div>
-
-                <div class="box_line">
-                    <div onclick="openPay()" class="level_button">
-                        <p class="circle_name">최종 결제</p>
-                        <button class="circle"></button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
         <!--오른쪽 목록-->
         <div class="box list_menu">
 
@@ -77,57 +39,99 @@
                 </ul>
             </div>
 
-            <div class="box list_box">
-                <!-- <div class="box list_content_box">
-                    <div class="box list_img_box">
-                        <img id="im" class="list_img_size" src=".\image\img1.png" />
-                    </div>
-                    <div class="box list_content_info">
-                        <div class=" container text-center">
-                            <div class="row content_title">
-                                <div class="col-7 menu_name">아메리카노</div>
-                                <div class="col-5 menu_cost">3000원</div>
+            <div class="ho">
+                <!--navigate bar-->
+                <div class="navigation">
+                    <div class="navigation_all_box">
+                        <div class="box_line">
+                            <div onclick="selectPage()" class="level_button">
+                                <p class="circle_name">메뉴 선택</p>
+                                <button class="circle" style="background-color: skyblue;"></button>
                             </div>
-                            <div class="row list_option">
-                                <div class="list_option_detail">
-                                    <p class="option_title">현재 선택 내용</p>
-                                    <div class="option_detail">
-                                        <div>
-                                            <span class="option_name">온도: </span>
-                                            <span class="select_tem">차갑게</span>
-                                        </div>
-                                        <div>
-                                            <span class="option_name">크기: </span>
-                                            <span class="select_size">큰거</span>
-                                        </div>
-                                    </div>
+                        </div>
 
-                                </div>
+                        <div class="level_line">
+                            <p></p>
+                            <img src=".\image\line2.jpg" alt="Line 이미지" class="center">
+                        </div>
+
+                        <div class="box_line">
+                            <div onclick="navigateclick()" class="level_button">
+                                <p class="circle_name">주문 확인</p>
+                                <button class="circle" style="background-color:skyblue;"></button>
                             </div>
-                            <div class="row list_buttons">
-                                <div class="col-4 button_box_num">
-                                    <p class="button_num">1개</p>
-                                </div>
-                                <div class="col-8" style="padding: 0px; height: 100%;">
-                                    <div class="content_update_button">
-                                        <button class="updateBtn">수정</button>
-                                        <button class="deleteBtn">삭제</button>
-                                    </div>
-                                </div>
+                        </div>
 
+                        <div class="level_line">
+                            <p></p>
+                            <img src=".\image\line2.jpg" alt="Line 이미지" class="center now">
+
+                        </div>
+
+                        <div class="box_line">
+                            <div onclick="openPay()" class="level_button pay_move">
+                                <p class="circle_name">최종 결제</p>
+                                <button class="circle pay"></button>
                             </div>
                         </div>
                     </div>
-                </div> -->
 
-                <!-- <div class="box list_content_box">
-                    <div class="box list_img_box">
-                        <img class="list_img_size" src=".\image\img1.png" />
+                </div>
+
+                <div class="menu_box">
+                    <div class="box list_box">
+                        <!-- <div class="box list_content_box">
+                        <div class="box list_img_box">
+                            <img id="im" class="list_img_size" src=".\image\img1.png" />
+                        </div>
+                        <div class="box list_content_info">
+                            <div class=" container text-center">
+                                <div class="row content_title">
+                                    <div class="col-7 menu_name">아메리카노</div>
+                                    <div class="col-5 menu_cost">3000원</div>
+                                </div>
+                                <div class="row list_option">
+                                    <div class="list_option_detail">
+                                        <p class="option_title">현재 선택 내용</p>
+                                        <div class="option_detail">
+                                            <div>
+                                                <span class="option_name">온도: </span>
+                                                <span class="select_tem">차갑게</span>
+                                            </div>
+                                            <div>
+                                                <span class="option_name">크기: </span>
+                                                <span class="select_size">큰거</span>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+                                </div>
+                                <div class="row list_buttons">
+                                    <div class="col-4 button_box_num">
+                                        <p class="button_num">1개</p>
+                                    </div>
+                                    <div class="col-8" style="padding: 0px; height: 100%;">
+                                        <div class="content_update_button">
+                                            <button class="updateBtn">수정</button>
+                                            <button class="deleteBtn">삭제</button>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                        <!-- <div class="box list_content_box">
+                        <div class="box list_img_box">
+                            <img class="list_img_size" src=".\image\img1.png" />
+                        </div>
+                        <div class="box list_content_info">
+                            내용내용
+                        </div>
+                    </div> -->
                     </div>
-                    <div class="box list_content_info">
-                        내용내용
-                    </div>
-                </div> -->
+                </div>
             </div>
 
             <!--총금액확인-->
@@ -139,9 +143,14 @@
 
             <!--고정 버튼-->
             <div class="box fix_button">
-                <button class="fix_button_detail" onclick="prvsScren()">이전으로</button>
-                <button class="fix_button_detail" onclick="firstScreen()">처음으로</button>
-                <button class="fix_button_detail next_btnnn" onclick="nextScreen()">다음으로</button>
+                <button class="fix_button_detail" onclick="prvsScren()">
+                    <img src="./image/left.svg">
+                    이전으로</button>
+                <button class="fix_button_detail" onclick="firstScreen()">
+                    <img src="./image//house.svg">
+                    처음으로</button>
+                <button class="fix_button_detail next_btnnn" onclick="nextScreen()">
+                    다음으로 <img src="./image/right.svg"></button>
             </div>
             <div class="speech-bubble first_bubble">
                 <span>주문하러 가기</span>
@@ -229,6 +238,23 @@
         });
         
     </script> -->
+
+    <script>
+        // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
+        function updateMenuHeight() {
+            // Source 요소의 height를 측정
+            const sourceElement = document.querySelector('.navigation');
+            const sourceHeight = sourceElement.clientHeight;
+
+            // Target 요소의 height를 설정
+            const targetElement = document.querySelector('.menu_box');
+            targetElement.style.height = sourceHeight + 'px';
+        }
+
+        // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
+        window.addEventListener('load', updateMenuHeight);
+        window.addEventListener('resize', updateMenuHeight);
+    </script>
 
 </body>
 

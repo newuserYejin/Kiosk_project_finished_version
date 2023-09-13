@@ -5,41 +5,57 @@ body {
   padding: 0;
 }
 
+.all_box{
+  width: 100vw;
+  height: 100vh;
+  padding-bottom: 10px;
+  background-color: #e9ecef;
+}
+
 /*전체 div flex*/
 .all {
-  display: flex;
   width: 100%;
-  height: 100%;
+  height: 85%;
+}
+
+.ho{
+  display: flex;
+  height: 87.5%;
 }
 
 /*네비게이션 바*/
 .navigation {
-  border: solid 3px black;
+  background-color: white;
+  border: solid 2.5px black;
   width: 20%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+
+  margin-right: 10px;
 }
 
 .list_menu {
-  width: 80%;
+  width: 100%;
   height: 100%;
   padding: 2vw;
 }
 
 .navigation_all_box {
-  height: 75%;
-  padding: 0 2.5%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px 2px;
 }
 
 .box_line {
   border: solid 2px black;
-  height: 11.5%;
+  height: 30%;
   display: flex;
-  margin: 0 5px;
   border-radius: 10px;
 }
 
@@ -80,7 +96,7 @@ body {
 }
 
 .level_name {
-  padding: .8rem;
+  padding: 0.8rem;
   font-weight: bold;
 }
 
@@ -102,68 +118,89 @@ body {
 }
 
 /*주문리스트 미리보기*/
+.select_list_box{
+  padding: 0 2vw;
+  height: 15%;
+  overflow: hidden;
+}
+
 .select_list {
-  height: 25%;
-  border-top: solid 3px black;
+  background-color: white;
+  height: 100%;
+  border: solid 2.5px black;
+  right: 0;
+  border-radius: 15px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .select_list_title {
+  height: 100%;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  border-right: solid 3px #ced4da;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   font-weight: bold;
   text-align: center;
-  height: 15%;
+  width: 10%;
+  height: inherit;
   font-size: 2.5vw;
   margin-bottom: 5px;
 }
 
 .select_list_list {
-  border: solid 2px blue;
-  height: 80%;
-  overflow: hidden;
-  overflow-y: visible;
-  margin: 0 1PX;
+  width: 100%;
+  height: 97%;
+  margin: 0 5PX;
   padding-top: 2px;
   border-radius: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+/*주문 리스트 안에 꺼*/
+.move_box{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 5%;
+}
+
+.del_btn{
+  border-radius: 10px;
+  font-size: 3vw;
+  background-color: white;
+  font-weight: bold;
+  margin: 2px 0;
 }
 
 .select_list_detail {
   font-weight: bold;
-  font-size: 2vw;
-  border-bottom: solid 2px black;
+  font-size: 3vw;
+  border-bottom: solid 2.5px #ced4da;
   margin-bottom: 8px;
   margin-left: 2px;
-  padding: 0 2px;
+  padding: 0 20px;
+  height: auto;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .select_num {
   text-align: end;
 }
 
-@media screen and (max-width: 400px) {
-  .select_list_detail {
-    font-size: 4px;
-  }
-  .circle_name{
-    font-size: 1vw;
-  }
-  .circle{
-    width: 5vw;
-    height: 5vw;
-    padding: 0;
-    margin-right: 3px;
-  }
-  
-  .add_fuc_bar .view_button{
-    width: 40%;
-  }
-
-  .search{
-    height: 5vw;
-  }
-}
-
 /*주문 리스트*/
 .box {
-  border: solid 3px rgb(21, 15, 15);
+  border: solid 2.5px black;
 }
 
 .text-center {
@@ -183,7 +220,7 @@ body {
   font-weight: bold;
 }
 
-@media (max-width: 360px) {
+/* @media (max-width: 360px) {
   .list_name {
     font-size: 5vw;
   }
@@ -191,22 +228,29 @@ body {
   .sizes {
     font-size: 0.3rem;
   }
-}
+} */
 
 .help {
   position: absolute;
   width: 12%;
-  right: 22%;
+  right: 2%;
   top: 1%;
+}
+
+.menu_box{
+  width: 80%;
+  padding: 0;
+  margin: 0;
 }
 
 /*주문 리스트*/
 .list_box {
-  display: grid;
-  height: 70%;
+  background-color: white;
+  padding: 1vw;
+  height: 90%;
+  margin: 0;
   overflow: hidden;
-  overflow-x: hidden;
-  position: relative;
+  overflow-y: visible;
 }
 
 .list_content_box {
@@ -292,11 +336,14 @@ body {
 
 /*하단 고정 버튼*/
 .fix_button {
-  height: 12.3%;
+  background-color: white;
+  height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  border-top: none;
+  padding: 3px 0;
 }
 
 .fix_button_detail {
@@ -307,12 +354,21 @@ body {
   border: solid 2px black;
   font-weight: bold;
   font-size: 3vw;
+
+  display: flex;
+  align-items: center;
 }
 
 .fix_button_detail:hover {
   background-color: skyblue;
   color: white;
   border: solid 1px skyblue;
+}
+
+.fix_button_detail img{
+  margin: 0 2px;
+  width: 3.5vw;
+  height: auto;
 }
 
 /*카테고리*/
@@ -379,9 +435,10 @@ body {
 
 /* 검색 입력창*/
 .search_div {
+  background-color: white;
   width: 40%;
   border: solid 1px black;
-  height: 3.5vw;
+  height: 4vw;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -389,9 +446,9 @@ body {
 
 .search {
   width: 80%;
-  font-size: 1.5vw;
+  font-size: 2vw;
   border: none;
-  height: 1.9vw;
+  height: 80%;
   
 }
 
@@ -464,11 +521,35 @@ body {
 }
 
 /*전체적 사이즈 조절 */
+
+/* @media screen and (max-width: 400px) {
+  .select_list_detail {
+    font-size: 4px;
+  }
+  .circle_name{
+    font-size: 1vw;
+  }
+  .circle{
+    width: 5vw;
+    height: 5vw;
+    padding: 0;
+    margin-right: 3px;
+  }
+  
+  .add_fuc_bar .view_button{
+    width: 40%;
+  }
+
+  .search{
+    height: 5vw;
+  }
+}
+
 @media screen and (min-width: 600px) {
   .slider-container {
     grid-template-columns: repeat(3, 1fr);
     /* 화면 크기가 768px 이하일 때 2개의 열로 조정 */
-  }
+  /*}
 
   .list_box {
     height: 70%;
@@ -500,7 +581,7 @@ body {
   .slider-container {
     grid-template-columns: repeat(3, 1fr);
     /* 화면 크기가 768px 이하일 때 2개의 열로 조정 */
-  }
+  /*}
 
   .list_box {
     height: 68%;
@@ -550,8 +631,4 @@ body {
     font-size: 2vw;
 
   }
-}
-
-.slide{
-  box-shadow: 7px 7px gray;
-}
+} */

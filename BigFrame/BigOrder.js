@@ -639,12 +639,24 @@ function generateOrderList(orderData) {
   const selectList = document.querySelector('.select_list_list');
 
   orderData.forEach(order => {
+    console.log(order.menu_num);
     const selectListDetail = document.createElement('div');
     selectListDetail.classList.add('select_list_detail');
 
     const selectName = document.createElement('div');
     selectName.classList.add('select_name');
     selectName.textContent = order.menu_name;
+
+    const move_box = document.createElement('div');
+    move_box.classList.add('move_box')
+    move_box.onclick = "move_cheklist()"
+
+    const move_box_box = document.createElement('div');
+    move_box_box.classList.add('.move_box_box');
+
+    const del_btn = document.createElement('button');
+    del_btn.classList.add('del_btn');
+    del_btn.textContent = "삭제";
 
     //09.05수정
     if (order.op_t === 1) {
@@ -659,10 +671,85 @@ function generateOrderList(orderData) {
     selectNum.classList.add('select_num');
     selectNum.textContent = order.count + '개';
 
-    selectListDetail.appendChild(selectName);
-    selectListDetail.appendChild(selectNum);
+    move_box.appendChild(selectName);
+    move_box.appendChild(selectNum);
+
+    selectListDetail.appendChild(move_box);
+    selectListDetail.appendChild(del_btn);
 
     selectList.appendChild(selectListDetail);
+
+    const move_boies = document.querySelectorAll('.move_box');
+
+    move_boies.forEach(move_boies => {
+      move_boies.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const pickup = urlParams.get('pickup')
+        location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
+      })
+    })
+
+    // 삭제 버튼
+    const deleteBtn = document.querySelectorAll(".del_btn");
+    deleteBtn.forEach(deleteBtn => {
+      deleteBtn.addEventListener("click", function () {
+        console.log("삭제 버튼 눌림");
+        // 클릭된 버튼의 data-orderNum 값을 가져옴
+        const orderNum = this.getAttribute('data-orderNum');
+        console.log("주문 번호:", order.menu_num);
+
+        // 먼저 모달 컨테이너를 비웁니다.
+        document.getElementById("modalContainer").innerHTML = "";
+
+        // detail_menu.css를 제거합니다.
+        const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+        if (detailMenuLink) {
+          detailMenuLink.remove();
+        }
+
+        // caution_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+        fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${order.menu_num}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("HTTP Error " + response.status);
+            }
+            return response.text();
+          })
+          .then(data => {
+            // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
+            $("#modalContainer").html(data);
+            console.log("선택된 주문 번호 :", order.menu_num);
+            // caution_msg.css 파일을 로드합니다.
+            const linkElement = document.createElement("link");
+            linkElement.rel = "stylesheet";
+            linkElement.type = "text/css";
+            linkElement.href = "http://localhost:3001/messagebox/caution_style.css";
+            document.head.appendChild(linkElement);
+
+            // 모달을 열기 위한 코드
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+
+            // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
+            const confirmButton = document.querySelector('.btn-primary');
+            confirmButton.addEventListener("click", function () {
+              console.log("확인 버튼 눌림");
+              // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+              deleteOrder(order.menu_num);
+            });
+
+            const cancelButton = document.querySelector('.btn-secondary');
+            cancelButton.addEventListener("click", function () {
+              console.log("취소 버튼 눌림");
+              // "취소" 버튼이 클릭되면 모달 닫기
+              modal.hide();
+            });
+          })
+          .catch(error => {
+            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+          });
+      });
+    });
   });
 }
 
@@ -677,10 +764,3 @@ window.addEventListener('load', () => {
       console.error('Error fetching order data:', error);
     });
 });
-
-
-function move_cheklist() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const pickup = urlParams.get('pickup')
-  location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
-}

@@ -208,6 +208,8 @@ function addOrdersToDOM(orders) {
   let orderList = document.querySelector('.list_box');
   let nextButton = document.querySelector('.next_btnnn');
   let none_msg = document.querySelectorAll('.speech-bubble');
+  let pay_move = document.querySelector('.pay_move');
+  // let pay_circle = document.querySelector('.pay_circle');
 
   if (!nextButton) {
     console.error('버튼 없음.');
@@ -223,7 +225,17 @@ function addOrdersToDOM(orders) {
     none_msg.forEach((element) => {
       element.style.visibility = 'visible';
     });
-    
+
+    // pay_move 버튼의 클릭 이벤트를 막음
+    if (pay_move) {
+      pay_move.onclick = function (event) {
+        event.preventDefault(); // 클릭 이벤트를 막음
+      };
+  
+      // 배경색 변경
+      pay_move.style.color = "#6c757d";
+      // pay_circle.style.border = "solid 3px #6c757d"
+    }
   } else {
     orders.forEach(order => {
       const orderItem = createOrderItem(order);
@@ -234,6 +246,11 @@ function addOrdersToDOM(orders) {
       orderList.appendChild(splitBorderDiv);
     });
     nextButton.disabled = false;
+
+    // pay_move 버튼 활성화 (옵션: 주문 목록이 비어 있지 않을 때 활성화)
+    if (pay_move) {
+      pay_move.disabled = false;
+    }
   }
 
   //수정 버튼
