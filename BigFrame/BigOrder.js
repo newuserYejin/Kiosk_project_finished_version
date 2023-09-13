@@ -764,3 +764,22 @@ window.addEventListener('load', () => {
       console.error('Error fetching order data:', error);
     });
 });
+
+// // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
+// function updateMenuHeight() {
+//     // Source 요소의 NodeList를 선택
+//     const sourceElements = document.querySelectorAll('.circle');
+
+//     sourceElements.forEach(function (sourceElement) {
+//         // Source 요소의 width를 측정
+//         const sourceWidth = sourceElement.clientWidth;
+
+//         // Target 요소의 height를 설정
+//         const targetElement = sourceElement;
+//         targetElement.style.height = sourceWidth + 'px';
+//     });
+// }
+
+// // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
+// window.addEventListener('load', updateMenuHeight);
+// window.addEventListener('resize', updateMenuHeight);
