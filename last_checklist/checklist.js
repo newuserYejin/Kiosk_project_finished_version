@@ -9,9 +9,9 @@ function selectPage() {
   const pickup = URL.get('pickup');//09.08 수정
 
   if (order_info == 'slow') {
-    window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`
+    window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`
   } else if (order_info == 'basic') {
-    window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`
+    window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`
   }
 }
 
@@ -25,9 +25,9 @@ function openPay() {
   const pickup = URL.get('pickup');//09.08 수정
 
   if (order_info == 'slow') {
-    window.location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&pickup=${pickup}`
+    window.location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&timer=${timer}&pickup=${pickup}`
   } else if (order_info == 'basic') {
-    window.location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&pickup=${pickup}`
+    window.location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&timer=${timer}&pickup=${pickup}`
   }
 }
 
@@ -39,10 +39,10 @@ function prvsScren() {
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
     // 기본 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
 
@@ -52,6 +52,7 @@ function firstScreen() {
   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
 };
 
+//다음으로
 function nextScreen() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
@@ -59,10 +60,10 @@ function nextScreen() {
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&pickup=${pickup}`;
+    location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&timer=${timer}&pickup=${pickup}`;
   } else if (orderType == 'basic') {
     // 기본 주문하기 버튼을 클릭한 경우
-    location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&pickup=${pickup}`;
+    location.href = `http://localhost:3001/paymethod/paymethod.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 }
 
@@ -274,9 +275,9 @@ function addOrdersToDOM(orders) {
         detailMenuLink.remove();
       }
       if (order == 'slow') {
-        history.pushState(null, null, `http://localhost:3001/last_checklist/checklist.html?order=slow&pickup=${pickup}&orderNum=${orderNum}`);
+        history.pushState(null, null, `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
       } else {
-        history.pushState(null, null, `http://localhost:3001/last_checklist/checklist.html?order=basic&pickup=${pickup}&orderNum=${orderNum}`);
+        history.pushState(null, null, `http://localhost:3001/last_checklist/checklist.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
       }
       // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
       fetch("http://localhost:3001/detail_menu/jojo_o.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.
