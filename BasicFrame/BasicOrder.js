@@ -624,21 +624,47 @@ function generateOrderList(orderData) {
     selectName.classList.add('select_name');
     selectName.textContent = order.menu_name;
 
+    const move_box = document.createElement('div');
+    move_box.classList.add('move_box')
+    move_box.onclick = "move_cheklist()"
+
+    const move_box_box = document.createElement('div');
+    move_box_box.classList.add('.move_box_box');
+
+    const del_btn = document.createElement('button');
+    del_btn.classList.add('del_btn');
+    del_btn.textContent = "삭제";
+
     //09.05수정
     if (order.op_t === 1) {
       selectName.style.color = 'red'; // op_t가 1일 때 빨간색
     } else if (order.op_t === 2) {
       selectName.style.color = 'blue'; // op_t가 2일 때 파란색
+    } else if (order.op_t === 1000) {
+      selectName.style.color = 'black';
     }
 
     const selectNum = document.createElement('div');
     selectNum.classList.add('select_num');
     selectNum.textContent = order.count + '개';
 
-    selectListDetail.appendChild(selectName);
-    selectListDetail.appendChild(selectNum);
+    move_box.appendChild(selectName);
+    move_box.appendChild(selectNum);
+
+    selectListDetail.appendChild(move_box);
+    selectListDetail.appendChild(del_btn);
 
     selectList.appendChild(selectListDetail);
+
+    const move_boies = document.querySelectorAll('.move_box');
+
+    move_boies.forEach(move_boies => {
+      move_boies.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const pickup = urlParams.get('pickup')
+        location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
+      })
+    })
   });
 }
 

@@ -7,40 +7,49 @@ body {
 
 /*전체 div flex*/
 .all {
-    display: flex;
+    background-color: #e9ecef;
     width: 100%;
     height: 100%;
 }
 
+.ho {
+    display: flex;
+    height: 65%;
+}
+
 /*네비게이션 바*/
 .navigation {
-    border: solid 3px black;
-    border-right: none;
+    background-color: white;
+    border: solid 2.5px black;
     width: 20%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+
+    margin-right: 10px;
 }
 
 .list_menu {
-    width: 80%;
+    width: 100%;
     height: 100%;
     padding: 2vw;
 }
 
 .navigation_all_box {
     height: 100%;
-    padding: 0 2.5%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 20px 2px;
 }
 
 .box_line {
     border: solid 2px black;
-    height: 11.5%;
+    height: 30%;
     display: flex;
-    margin: 0 5px;
     border-radius: 10px;
 }
 
@@ -131,6 +140,7 @@ body {
 }
 
 .list-group .list-group-item {
+    background-color: #e9ecef;
     border: none;
     width: 100%;
     font-weight: bold;
@@ -154,9 +164,15 @@ body {
     border: solid 3px black;
 }
 
+.menu_box {
+    width: 80%;
+}
+
 .list_box {
+    background-color: white;
+    width: 100%;
     padding: 1vw;
-    height: 64.3%;
+    height: 100%;
     overflow: hidden;
     overflow-y: visible;
 }
@@ -253,9 +269,9 @@ body {
     font-size: 2.5vw;
 }
 
-.split_border{
+.split_border {
     border: solid 2px orange;
-  }
+}
 
 .list_content_info {
     border: solid 1px gray;
@@ -343,6 +359,7 @@ body {
 
 /*최종 금액*/
 .total_cost_box {
+    background-color: white;
     height: 10%;
     border-top: none;
     display: flex;
@@ -358,7 +375,8 @@ body {
 
 /*하단 고정 버튼*/
 .fix_button {
-    height: 12.3%;
+    background-color: white;
+    height: 9%;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -374,6 +392,9 @@ body {
     border: solid 2px black;
     font-weight: bold;
     font-size: 3vw;
+
+    display: flex;
+    align-items: center;
 }
 
 .fix_button_detail:hover {
@@ -382,15 +403,104 @@ body {
     border: solid 1px skyblue;
 }
 
+.fix_button_detail img{
+    margin: 0 2px;
+    width: 3.5vw;
+    height: auto;
+  }
+  
 
-@media screen and (min-width:1000px) {
+.menu_option_box {
+    font-size: 2.3vw;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.no_menu {
+    font-weight: bold;
+    font-size: 4vw;
+    height: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.next_btnnn:disabled {
+    background-color: white;
+    /* 비활성화된 배경색 */
+    color: gray;
+    /* 비활성화된 글자색 */
+    pointer-events: none;
+    /* hover 이벤트를 비활성화합니다. */
+    cursor: not-allowed;
+    /* 마우스 커서를 변경합니다. */
+}
+
+.speech-bubble {
+    position: absolute;
+    background: #0fbac9f7;
+    border-radius: .4em;
+
+    width: 35%;
+    height: 10%;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.second_bubble {
+    right: 10px;
+    top: 69%;
+}
+
+.second_bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 44px solid transparent;
+    border-bottom-color: #0fbac9f7;
+    border-top: 0;
+    border-left: 0;
+    margin-left: -22px;
+    margin-top: -44px;
+}
+
+.first_bubble {
+    position: absolute;
+    left: 10px;
+    top: 71%;
+}
+
+.first_bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #00aabb;
+    border-bottom: 0;
+    margin-left: -20px;
+    margin-bottom: -20px;
+}
+
+/* @media screen and (min-width:1000px) {
     .list-group-item label {
         font-size: 2vw;
         width: 80%;
     }
 
     .list_box {
-        padding: 1vw;
         height: 68%;
         margin-top: 2%;
         overflow: hidden;
@@ -480,85 +590,4 @@ body {
         font-size: 2vw;
         font-weight: bold;
     }
-}
-
-.menu_option_box{
-    font-size: 2.3vw;
-    font-weight: bold;
-    padding-top: 5px;
-}
-
-.no_menu{
-    font-weight: bold;
-    font-size: 4vw;
-    height: 30%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.next_btnnn:disabled {
-    background-color: white; /* 비활성화된 배경색 */
-    color: gray; /* 비활성화된 글자색 */
-    pointer-events: none; /* hover 이벤트를 비활성화합니다. */
-    cursor: not-allowed; /* 마우스 커서를 변경합니다. */
-}
-
-.speech-bubble {
-	position: absolute;
-	background: #0fbac9f7;
-	border-radius: .4em;
-
-    width: 35%;
-    height: 10%;
-    font-size: 3.5vw;
-    font-weight: bold;
-    color: white;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-}
-
-.second_bubble{
-    right: 10px;
-    top: 69%;
-}
-
-.second_bubble:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 44px solid transparent;
-	border-bottom-color: #0fbac9f7;
-	border-top: 0;
-	border-left: 0;
-	margin-left: -22px;
-	margin-top: -44px;
-}
-
-.first_bubble{
-    position: absolute;
-    left: 20px;
-    top: 73%;
-}
-
-.first_bubble::after{
-    content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 44px solid transparent;
-	border-top-color: #00aabb;
-	border-bottom: 0;
-	border-right: 0;
-	margin-left: -22px;
-	margin-bottom: -44px;
-}
+} */

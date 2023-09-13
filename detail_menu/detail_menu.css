@@ -169,10 +169,20 @@
     border: none;
     padding: 1vh;
     min-width: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#modalContainer .hoho{
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 두 개의 열로 나눔 */
 }
 
 #modalContainer .list-group li {
     display: flex;
+    flex-direction: row;
     align-items: center;
 }
 
@@ -325,4 +335,4 @@
 
 #modalContainer .disabled-label {
     color: gray;
-}
+  }

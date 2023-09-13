@@ -91,6 +91,10 @@ html,body {
     height: 100%;
     background-color: #f8f9fa;
     border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .back_btn button:hover{
@@ -99,3 +103,8 @@ html,body {
     border: none;
 }
 
+.back_btn img{
+    margin: 0 5px;
+    width: 5vw;
+    height: auto;
+}
