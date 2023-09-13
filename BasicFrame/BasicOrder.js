@@ -67,52 +67,6 @@ joImage.addEventListener("click", function () {
     });
 });
 
-// // 선택 버튼(메뉴 선택)
-// const selectBtn = document.querySelectorAll(".list_content_box");
-// selectBtn.forEach(selectBtn => {
-//   selectBtn.addEventListener("click", function () {
-//     // 먼저 모달 컨테이너를 비웁니다.
-//     document.getElementById("modalContainer").innerHTML = "";
-
-//     // help_msg.css를 제거합니다.
-//     const detailMenuLink = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
-//     if (detailMenuLink) {
-//       detailMenuLink.remove();
-//     }
-
-//     // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-//     fetch("http://localhost:3001/detail_menu/jojo.html") // 이 부분의 파일 경로를 수정해야합니다.
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error("HTTP Error " + response.status);
-//         }
-//         return response.text();
-//       })
-//       .then(data => {
-//         // 모달 컨테이너에 jojo.html 콘텐츠를 추가합니다.
-//         $("#modalContainer").html(data);
-
-//         // 외부 detail_menu 폴더에 있는 detail_menu.css 파일을 로드합니다.
-//         const linkElement = document.createElement("link");
-//         linkElement.rel = "stylesheet";
-//         linkElement.type = "text/css";
-//         linkElement.href = "http://localhost:3001/detail_menu/detail_menu.css"; // 이 부분의 파일 경로를 수정해야합니다.
-//         document.head.appendChild(linkElement);
-
-//         // 외부 detail_menu 폴더에 있는 detail_menu.js 파일을 로드합니다.
-//         const scriptElement = document.createElement("script");
-//         scriptElement.src = "http://localhost:3001/detail_menu/detail_menu.js"; // 이 부분의 파일 경로를 수정해야합니다.
-//         document.body.appendChild(scriptElement);
-
-//         const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-//         modal.show();
-//       })
-//       .catch(error => {
-//         console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
-//       });
-//   });
-// });
-
 //네비게이션
 function select_page() {
   alert("현재 페이지 입니다.")
@@ -615,57 +569,78 @@ if (keywordValue) {
 //네이베이션 아래의 주문 목록
 function generateOrderList(orderData) {
   const selectList = document.querySelector('.select_list_list');
+  let pay_move = document.querySelector('.pay_move');
 
-  orderData.forEach(order => {
-    const selectListDetail = document.createElement('div');
-    selectListDetail.classList.add('select_list_detail');
+  if (orderData.length == 0) {
+    selectList.innerHTML = `
+    <div class = "none_select_menu">주문한게 없어요!</div>
+    `
+    // pay_move 버튼의 클릭 이벤트를 막음
+    if (pay_move) {
+      pay_move.onclick = function (event) {
+        event.preventDefault(); // 클릭 이벤트를 막음
+      };
 
-    const selectName = document.createElement('div');
-    selectName.classList.add('select_name');
-    selectName.textContent = order.menu_name;
-
-    const move_box = document.createElement('div');
-    move_box.classList.add('move_box')
-    move_box.onclick = "move_cheklist()"
-
-    const move_box_box = document.createElement('div');
-    move_box_box.classList.add('.move_box_box');
-
-    const del_btn = document.createElement('button');
-    del_btn.classList.add('del_btn');
-    del_btn.textContent = "삭제";
-
-    //09.05수정
-    if (order.op_t === 1) {
-      selectName.style.color = 'red'; // op_t가 1일 때 빨간색
-    } else if (order.op_t === 2) {
-      selectName.style.color = 'blue'; // op_t가 2일 때 파란색
-    } else if (order.op_t === 1000) {
-      selectName.style.color = 'black';
+      // 배경색 변경
+      pay_move.style.color = "#6c757d";
+      // pay_circle.style.border = "solid 3px #6c757d"
     }
+  } else {
+    orderData.forEach(order => {
+      const selectListDetail = document.createElement('div');
+      selectListDetail.classList.add('select_list_detail');
 
-    const selectNum = document.createElement('div');
-    selectNum.classList.add('select_num');
-    selectNum.textContent = order.count + '개';
+      const selectName = document.createElement('div');
+      selectName.classList.add('select_name');
+      selectName.textContent = order.menu_name;
 
-    move_box.appendChild(selectName);
-    move_box.appendChild(selectNum);
+      const move_box = document.createElement('div');
+      move_box.classList.add('move_box')
+      move_box.onclick = "move_cheklist()"
 
-    selectListDetail.appendChild(move_box);
-    selectListDetail.appendChild(del_btn);
+      const move_box_box = document.createElement('div');
+      move_box_box.classList.add('.move_box_box');
 
-    selectList.appendChild(selectListDetail);
+      const del_btn = document.createElement('button');
+      del_btn.classList.add('del_btn');
+      del_btn.textContent = "삭제";
 
-    const move_boies = document.querySelectorAll('.move_box');
+      //09.05수정
+      if (order.op_t === 1) {
+        selectName.style.color = 'red'; // op_t가 1일 때 빨간색
+      } else if (order.op_t === 2) {
+        selectName.style.color = 'blue'; // op_t가 2일 때 파란색
+      } else if (order.op_t === 1000) {
+        selectName.style.color = 'black';
+      }
 
-    move_boies.forEach(move_boies => {
-      move_boies.addEventListener('click', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const pickup = urlParams.get('pickup')
-        location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
+      const selectNum = document.createElement('div');
+      selectNum.classList.add('select_num');
+      selectNum.textContent = order.count + '개';
+
+      move_box.appendChild(selectName);
+      move_box.appendChild(selectNum);
+
+      selectListDetail.appendChild(move_box);
+      selectListDetail.appendChild(del_btn);
+
+      selectList.appendChild(selectListDetail);
+
+      const move_boies = document.querySelectorAll('.move_box');
+
+      move_boies.forEach(move_boies => {
+        move_boies.addEventListener('click', () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const pickup = urlParams.get('pickup')
+          location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
+        })
       })
-    })
-  });
+    });
+    // pay_move 버튼 활성화 (옵션: 주문 목록이 비어 있지 않을 때 활성화)
+    if (pay_move) {
+      pay_move.disabled = false;
+    }
+  }
 }
 
 // 페이지 로드 시 주문 목록을 가져와서 생성

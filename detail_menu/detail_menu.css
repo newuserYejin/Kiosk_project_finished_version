@@ -160,12 +160,14 @@
 }
 
 #modalContainer .list-group {
+    background-color: white;
     display: flex;
     flex-direction: row;
     justify-content: start;
 }
 
 #modalContainer .list-group-item {
+    background-color: white;
     border: none;
     padding: 1vh;
     min-width: 20px;
