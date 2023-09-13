@@ -673,6 +673,8 @@ function generateOrderList(orderData) {
       del_btn.classList.add('del_btn');
       del_btn.textContent = "삭제";
 
+      del_btn.setAttribute('data-orderNum', order.order_num);
+
       //09.05수정
       if (order.op_t === 1) {
         selectName.style.color = 'red'; // op_t가 1일 때 빨간색
@@ -713,7 +715,7 @@ function generateOrderList(orderData) {
           console.log("삭제 버튼 눌림");
           // 클릭된 버튼의 data-orderNum 값을 가져옴
           const orderNum = this.getAttribute('data-orderNum');
-          console.log("주문 번호:", order.menu_num);
+          console.log("주문 번호:", orderNum);
 
           // 먼저 모달 컨테이너를 비웁니다.
           document.getElementById("modalContainer").innerHTML = "";
@@ -725,7 +727,7 @@ function generateOrderList(orderData) {
           }
 
           // caution_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
-          fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${order.menu_num}`)
+          fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${orderNum}`)
             .then(response => {
               if (!response.ok) {
                 throw new Error("HTTP Error " + response.status);
@@ -735,7 +737,7 @@ function generateOrderList(orderData) {
             .then(data => {
               // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
               $("#modalContainer").html(data);
-              console.log("선택된 주문 번호 :", order.menu_num);
+              console.log("선택된 주문 번호 :", orderNum);
               // caution_msg.css 파일을 로드합니다.
               const linkElement = document.createElement("link");
               linkElement.rel = "stylesheet";
@@ -752,7 +754,7 @@ function generateOrderList(orderData) {
               confirmButton.addEventListener("click", function () {
                 console.log("확인 버튼 눌림");
                 // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
-                deleteOrder(order.menu_num);
+                deleteOrder(orderNum);
               });
 
               const cancelButton = document.querySelector('.btn-secondary');
