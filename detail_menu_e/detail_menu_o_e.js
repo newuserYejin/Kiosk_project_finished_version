@@ -26,6 +26,8 @@ $(document).ready(function () {
   } else {
     console.error("orderNum이 URL에서 정의되지 않았습니다.");
   }
+
+  //09.13수정
   // 온도 옵션을 표시하거나 숨기는 함수
   function toggleTemperatureOptions() {
     const t_firstRadioContainer = document.getElementById("t_firstRadioContainer");
@@ -34,15 +36,23 @@ $(document).ready(function () {
     // op_num_o 배열에 값 1이 있는지 확인합니다.
     if (op_num_o.includes(1)) {
       t_firstRadioContainer.style.display = "block";
+      t_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      t_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      t_firstRadioContainer.style.display = "none";
+      t_firstRadioContainer.style.display = "block";
+      t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
+      t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
 
     // op_num_o 배열에 값 2가 있는지 확인합니다.
     if (op_num_o.includes(2)) {
       t_secondRadioContainer.style.display = "block";
+      t_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      t_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      t_secondRadioContainer.style.display = "none";
+      t_secondRadioContainer.style.display = "block";
+      t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
+      t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
   }
 
@@ -54,17 +64,26 @@ $(document).ready(function () {
     // op_num_o 배열에 값 3이 있는지 확인합니다.
     if (op_num_o.includes(3)) {
       s_firstRadioContainer.style.display = "block";
+      s_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      s_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      s_firstRadioContainer.style.display = "none";
+      s_firstRadioContainer.style.display = "block";
+      s_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
+      s_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
 
     // op_num_o 배열에 값 4가 있는지 확인합니다.
     if (op_num_o.includes(4)) {
       s_secondRadioContainer.style.display = "block";
+      s_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
+      s_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
     } else {
-      s_secondRadioContainer.style.display = "none";
+      s_secondRadioContainer.style.display = "block";
+      s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
+      s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
   }
+  //09.13여기까지
 
   // 초기에 op_num_o에 기반하여 옵션의 가시성을 설정하는 함수를 호출합니다.
   toggleTemperatureOptions();

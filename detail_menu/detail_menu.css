@@ -150,6 +150,7 @@
 #modalContainer .option_inner_bow div{
     display: flex;
     align-items: center;
+    justify-content: start;
 }
 
 #modalContainer .option_name {
@@ -168,18 +169,12 @@
 
 #modalContainer .list-group-item {
     background-color: white;
-    border: none;
-    padding: 1vh;
+    padding: 1vw;
     min-width: 20px;
     display: flex;
     flex-direction: row;
     align-items: center;
-}
-
-#modalContainer .hoho{
-    padding-left: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 두 개의 열로 나눔 */
+    border: none;
 }
 
 #modalContainer .list-group li {
@@ -337,4 +332,35 @@
 
 #modalContainer .disabled-label {
     color: gray;
-  }
+}
+
+
+#modalContainer .speech-bubble {
+	position: relative;
+    width: auto;
+	background: #00aabb;
+	border-radius: .4em;
+    margin-left: 15px;
+    height: 100%;
+}
+
+#modalContainer .speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 85%;
+	width: 0;
+	height: 0;
+	border: 8px solid transparent;
+	border-right-color: #00aabb;
+	border-left: 0;
+	margin-top: -20px;
+	margin-left: -8px;
+}
+
+#modalContainer .speech-bubble div{
+    color: white;
+    font-size: 2.5vw;
+    font-weight: bold;
+    margin: 0 10px;
+}
