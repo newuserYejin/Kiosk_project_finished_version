@@ -185,7 +185,7 @@
         });
     </script>
 
-    <script>//09.10 추가
+    <script>//09.14 수정
         var currentURL = window.location.href;
         var url = new URL(currentURL);
         var params = new URLSearchParams(url.search);
@@ -194,41 +194,73 @@
         // timer가 존재하고 유효한지 확인
         if (timer !== null && !isNaN(timer)) {
             timer = parseInt(timer);
-
             function updateTimer() {
                 // 타이머를 1씩 감소
                 timer--;
-
                 // URL 파라미터 업데이트
                 params.set("timer", timer);
-
                 // 업데이트된 URL 생성
                 url.search = params.toString();
                 var newURL = url.toString();
-
                 // 브라우저 주소 표시줄 업데이트
                 window.history.replaceState({}, document.title, newURL);
-
                 // 타이머가 0이 되면 동작을 원하는 대로 처리
                 if (timer === 0) {
-                    clearInterval(countdownInterval);
-                    var confirmation = confirm("타이머가 종료되었습니다. 타이머를 180초로 재설정하시겠습니까?");
-                    if (confirmation) {
-                        // 확인 버튼을 누르면 timer를 180으로 설정
-                        params.set("timer", 180);
-                        url.search = params.toString();
-                        newURL = url.toString();
-                        window.history.replaceState({}, document.title, newURL);
-                        location.reload();
-                    } else {
-                        // 취소 버튼을 누르면 다른 페이지로 이동
-                        window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                    document.getElementById("modalContainer").innerHTML = "";
+
+                    // detail_menu.css를 제거합니다.
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+                    if (detailMenuLink) {
+                        detailMenuLink.remove();
                     }
+                    console.log("타이머가 0이 되었습니다.");
+                    clearInterval(countdownInterval);
+
+                    // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+                    fetch(`http://localhost:3001/timeout/timeout.html`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP Error " + response.status);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+                            $("#modalContainer").html(data);
+
+                            // timeout.css 파일을 로드합니다.
+                            const linkElement = document.createElement("link");
+                            linkElement.rel = "stylesheet";
+                            linkElement.type = "text/css";
+                            linkElement.href = "http://localhost:3001/timeout/timeout.css";
+                            document.head.appendChild(linkElement);
+
+                            // 모달을 열기 위한 코드
+                            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                            modal.show();
+
+                            const yes = document.querySelector('.btn-primary');
+                            yes.addEventListener("click", function () {//180초 추가하기
+                                params.set("timer", 180);
+                                url.search = params.toString();
+                                newURL = url.toString();
+                                window.history.replaceState({}, document.title, newURL);
+                                location.reload();
+                            })
+                            const no = document.querySelector('.btn-secondary');
+                            no.addEventListener("click", function () {//시작 페이지로 이동
+                                window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                            })
+
+                        })
+                        .catch(error => {
+                            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                        });
+                } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+                    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
                 }
             }
 
-            // 매초마다 updateTimer 함수 호출
-            var countdownInterval = setInterval(updateTimer, 5000);
         } else {
             alert("유효한 타이머 시간을 지정하지 않았습니다.");
         }

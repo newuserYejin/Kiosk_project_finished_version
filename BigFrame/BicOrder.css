@@ -290,6 +290,7 @@ body {
 }
 
 .menu_name {
+  right: 0;
   width: 60%;
   font-size: 3vw;
   display: flex;

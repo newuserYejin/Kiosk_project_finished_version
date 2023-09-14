@@ -10,6 +10,7 @@ $(document).ready(function () {
         onChange: input => onChange(input),
         onKeyPress: button => onKeyPress(button),
         ...layout
+
     });
 
     let name1NFC;
@@ -152,5 +153,10 @@ function handleKeywordClick() {
         })
     })
 }
+
+function modal_display() {
+    const all_modal = document.querySelector('.modal');
+    all_modal.computedStyleMap.display = 'flex';
+} 
 
 handleKeywordClick(); // 함수 호출
