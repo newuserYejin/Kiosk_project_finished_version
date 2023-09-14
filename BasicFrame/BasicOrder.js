@@ -634,7 +634,8 @@ function generateOrderList(orderData) {
         move_boies.addEventListener('click', () => {
           const urlParams = new URLSearchParams(window.location.search);
           const pickup = urlParams.get('pickup')
-          location.href = `http://localhost:3001/last_checklist/checklist.html?pickup=${pickup}&order=slow`
+          const timer = urlParams.get('timer')
+          location.href = `http://localhost:3001/last_checklist/checklist.html?timer=${timer}&pickup=${pickup}&order=slow`
         })
       })
       
