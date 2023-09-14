@@ -73,17 +73,31 @@
                                     <div class="option">
                                         <div class="option_inner_bow">
                                             <!-- 온도 옵션 -->
-                                            <p class="option_name">온도</p>
+                                            <div>
+                                                <p class="option_name">온도</p>
+                                                <img onclick="show_qr('t')" src="./image/question.svg" style="width: 4vw; height: 4vw;">
+                                                <div class="speech-bubble temp" style="visibility: hidden;">
+                                                    <div>내용</div>
+                                                </div>
+                                            </div>
                                             <ul class="list-group">
-                                                <li class="list-group-item hoho" id="t_firstRadioContainer" style="display: none;">
-                                                    <input class="form-check-input me-1" type="radio" name="temperature"
-                                                        value="1" id="t_firstRadio" checked>
-                                                    <label class="form-check-label t_Radio1" for="t_firstRadio">뜨거움 (+0원)</label>
+                                                <li class="list-group-item" id="t_firstRadioContainer"
+                                                    style="display: none;">
+                                                    <div>
+                                                        <input class="form-check-input me-1" type="radio"
+                                                            name="temperature" value="1" id="t_firstRadio" checked>
+                                                        <label class="form-check-label t_Radio1" for="t_firstRadio">뜨거움
+                                                            (+0원)</label>
+                                                    </div>
                                                 </li>
-                                                <li class="list-group-item hoho" id="t_secondRadioContainer" style="display: none;">
-                                                    <input class="form-check-input me-1" type="radio" name="temperature"
-                                                        value="2" id="t_secondRadio">
-                                                    <label class="form-check-label t_Radio2" for="t_secondRadio">차가움 (+0원)</label>
+                                                <li class="list-group-item" id="t_secondRadioContainer"
+                                                    style="display: none;">
+                                                    <div>
+                                                        <input class="form-check-input me-1" type="radio"
+                                                            name="temperature" value="2" id="t_secondRadio">
+                                                        <label class="form-check-label t_Radio2" for="t_secondRadio">차가움
+                                                            (+0원)</label>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -91,21 +105,29 @@
 
                                     <div class="option">
                                         <div class="option_inner_bow">
-
-                                            <!-- 크기 옵션 -->
-                                            <p class="option_name">크기</p>
+                                            <div>
+                                                <p class="option_name">크기</p>
+                                                <img onclick="show_qr('s')" src="./image/question.svg" style="width: 4vw; height: 4vw;">
+                                                <div class="speech-bubble size" style="visibility: hidden;">
+                                                    <div>내용</div>
+                                                </div>
+                                            </div>
                                             <ul class="list-group">
                                                 <li class="list-group-item" id="s_firstRadioContainer"style="display: none;">
-                                                    <input class="form-check-input me-1" type="radio" name="size"
-                                                        value="3" id="s_firstRadio" checked>
-                                                    <label class="form-check-label" for="s_firstRadio">기본 크기
-                                                        (+0원)</label>
+                                                    <div>
+                                                        <input class="form-check-input me-1" type="radio" name="size"
+                                                            value="3" id="s_firstRadio" checked>
+                                                        <label class="form-check-label" for="s_firstRadio">기본 크기
+                                                            (+0원)</label>
+                                                    </div>
                                                 </li>
-                                                <li class="list-group-item" id="s_secondRadioContainer" style="display: none;">
-                                                    <input class="form-check-input me-1" type="radio" name="size"
-                                                        value="4" id="s_secondRadio">
-                                                    <label class="form-check-label" for="s_secondRadio">큰 크기
-                                                        (+1200원)</label>
+                                                <li class="list-group-item" id="s_secondRadioContainer"style="display: none;">
+                                                    <div>
+                                                        <input class="form-check-input me-1" type="radio" name="size"
+                                                            value="4" id="s_secondRadio">
+                                                        <label class="form-check-label" for="s_secondRadio">큰 크기
+                                                            (+1200원)</label>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -163,7 +185,7 @@
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                        <button type="button" class="btn btn-info" data-dismiss="modal">추가</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">저장</button>
                     </div>
                 </div>
                 <!--08.17수정-->
@@ -218,17 +240,17 @@
                 if (timer === 0) {
                     clearInterval(countdownInterval);
                     var confirmation = confirm("타이머가 종료되었습니다. 타이머를 180초로 재설정하시겠습니까?");
-                        if (confirmation) {
-                            // 확인 버튼을 누르면 timer를 180으로 설정
-                            params.set("timer", 180);
-                            url.search = params.toString();
-                            newURL = url.toString();
-                            window.history.replaceState({}, document.title, newURL);
-                            location.reload();
-                        } else {
-                            // 취소 버튼을 누르면 다른 페이지로 이동
-                            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
-                        }
+                    if (confirmation) {
+                        // 확인 버튼을 누르면 timer를 180으로 설정
+                        params.set("timer", 180);
+                        url.search = params.toString();
+                        newURL = url.toString();
+                        window.history.replaceState({}, document.title, newURL);
+                        location.reload();
+                    } else {
+                        // 취소 버튼을 누르면 다른 페이지로 이동
+                        window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                    }
                 }
             }
 

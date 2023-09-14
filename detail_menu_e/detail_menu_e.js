@@ -68,6 +68,7 @@ $(".btn-info").click(function () {
 
 // 서버로부터 메뉴 정보를 요청합니다.
 // 메뉴 정보를 출력하는 함수
+//09.13 수정
 function renderMenuDetail(menuData) {
   const menuTitle = document.querySelector(".menu_title");
   const menuCost = document.querySelector(".menu_cost");
@@ -75,7 +76,7 @@ function renderMenuDetail(menuData) {
   const menuImage = document.querySelector(".menu_img_size");
 
   menuTitle.textContent = menuData.menuData.menu_name;
-  menuCost.textContent = `price: ₩${menuData.menuData.price}`;
+  menuCost.textContent = `가격: ${menuData.menuData.price}원`;
   menuDescription.textContent = menuData.menuData.menu_explan;
   
   const img_pp = `.${menuData.image_path}`
@@ -112,48 +113,90 @@ optionContainers.forEach((container, index) => {
       .filter(option => option.op_name === "HOT" || option.op_name === "ICED");
   
     let defaultOption = "HOT"; // 기본값 설정
-  
+    console.log("temperatureOptions:", temperatureOptions);
+
     const hasHot = temperatureOptions.some(option => option.op_name === "HOT");
     const hasCold = temperatureOptions.some(option => option.op_name === "ICED");
+
+    let falseoption = "ICED";
   
     if (!hasHot && hasCold) {
       defaultOption = "ICED";
+
+      falseoption = "HOT";
+    }
+
+    if (temperatureOptions.some(option => option.op_name === "HOT") && temperatureOptions.some(option => option.op_name === "ICED")){
+      optionList.innerHTML = temperatureOptions
+      .map(option => {
+          const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+          const textColor = option.op_name === "HOT" ? "red" : "blue"; // HOT은 빨간색, ICED은 파란색
+          return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+            `;
+        })
+      .join("");
+    }else{
+      optionList.innerHTML = temperatureOptions
+          .map(option => {
+              const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+              const textColor = option.op_name === "HOT" ? "red" : "blue"; // HOT은 빨간색, ICED은 파란색
+              const falseoptionText = falseoption === "HOT" ? "HOT" : "ICED"; // falseoption 변수에 따라 출력할 문자 설정
+              return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+                <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+                <li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
+                <label class="form-check-label" for="falseoption" style="color: gray;"> ${falseoptionText} (+0원)</label></li>
+                `;
+            })
+          .join("");
+        }
+  }
+  else if (index === 1) {
+    const sizeOptions = menuData.op_data
+      .filter(option => option.op_name.toLowerCase() === "basic size" || option.op_name.toLowerCase() === "large size");
+  
+    let defaultOption = "basic size"; // 기본값 설정
+    console.log("sizeOptions:", sizeOptions);
+  
+    const hasRegular = sizeOptions.some(option => option.op_name.toLowerCase() === "basic size");
+    const hasLarge = sizeOptions.some(option => option.op_name.toLowerCase() === "large size");
+  
+    let falseoption = "large size";
+  
+    if (!hasRegular && hasLarge) {
+      defaultOption = "large size";
+      falseoption = "basic size";
     }
   
-    optionList.innerHTML = temperatureOptions
+    optionList.innerHTML = sizeOptions
       .map(option => {
-        const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-        const textColor = option.op_name === "HOT" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
-        return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-          <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price})</label></li>`;
-      })
-      .join("");
-  } else if (index === 1) {
-    optionList.innerHTML = menuData.op_data
-      .filter(option => option.op_name === "basic size" || option.op_name === "(EX) size")
-      .map(option => {
-        const checkedAttribute = option.op_name === "basic size" ? "checked" : "";
+        const checkedAttribute = option.op_name.toLowerCase() === defaultOption ? "checked" : "";
         return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-        <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price})</label></li>`;
+          <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>
+          `;
       })
       .join("");
+  
+    if (!hasRegular || !hasLarge) {
+      optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
+        <label class="form-check-label" for="falseoption" style="color: gray;"> ${falseoption} (+0원)</label></li>`;
+    }  
   } else if (index === 2) {
     // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
     const checkboxOptions = menuData.op_data
-      .filter(option => option.op_name !== "HOT" && option.op_name !== "ICED" && option.op_name !== "basic size" && option.op_name !== "(EX) size")
+      .filter(option => option.op_name !== "HOT" && option.op_name !== "ICED" && option.op_name !== "Basic size" && option.op_name !== "Large Size")
       .slice(0, 6); // 첫 4개의 체크박스 옵션 선택
 
     optionList.innerHTML = checkboxOptions
       .map(option => {
         currentSet++;
         return `<li class="list-group-item chch"><input class="form-check-input me-1" type="checkbox" id="${option.op_name}" name="option_set_${currentSet}" value="${option.op_name}">
-        <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price})</label></li>`;
+        <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>`;
       })
       .join("");
   } 
 });
-
-}
+}//09.13 여기까지
 
 // 서버로부터 메뉴 정보를 요청합니다.
 if (window.location.search) {

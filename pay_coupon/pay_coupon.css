@@ -159,6 +159,7 @@ html,body {
 }
 
 .pay_coupon {
+    background-color: white;
     width: 50vw;
     height: 90%;
 }

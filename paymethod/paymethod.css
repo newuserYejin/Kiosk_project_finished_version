@@ -28,7 +28,7 @@ html,body {
 /*네비게이션 바*/
 .navigation {
     background-color: white;
-    border: solid 3px black;
+    border: solid 2.5px black;
     width: 25%;
     height: 100%;
     display: flex;
@@ -129,7 +129,7 @@ html,body {
 
 .fir_box {
     border-radius: 30px;
-    border: solid 3px black;
+    border: solid 2.5px black;
     height: 100%;
     width: 100%;
     display: flex;
@@ -149,7 +149,7 @@ html,body {
     width: 30vw;
     height: 50vw;
     border-radius: 15px;
-    box-shadow: 7px 7px gray;
+    box-shadow: 5px 5px gray;
     font-size: 6vw;
     background-color: white;
     display: flex;

@@ -116,6 +116,8 @@ optionContainers.forEach((container, index) => {
 
     const hasHot = temperatureOptions.some(option => option.op_name === "뜨거움");
     const hasCold = temperatureOptions.some(option => option.op_name === "차가움");
+    const speechBubble = document.querySelector('.temp');
+    const speechBubbleContent = speechBubble.querySelector('div');
 
     let falseoption = "차가움";
   
@@ -126,6 +128,7 @@ optionContainers.forEach((container, index) => {
     }
 
     if (temperatureOptions.some(option => option.op_name === "뜨거움") && temperatureOptions.some(option => option.op_name === "차가움")){
+      speechBubbleContent.textContent = '원하는것을 선택해주세요.'
       optionList.innerHTML = temperatureOptions
       .map(option => {
           const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
@@ -136,6 +139,14 @@ optionContainers.forEach((container, index) => {
         })
       .join("");
     }else{
+      // "뜨거움"이나 "차가움" 중 하나만 없는 경우
+      
+      if (!hasHot) {
+          speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+      } else {
+          speechBubbleContent.textContent = '뜨거운 것만 가능한 상품입니다.';
+      }
+      
       optionList.innerHTML = temperatureOptions
           .map(option => {
               const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
@@ -149,16 +160,51 @@ optionContainers.forEach((container, index) => {
             })
           .join("");
         }
-  } else if (index === 1) {
-    optionList.innerHTML = menuData.op_data
-      .filter(option => option.op_name === "기본 크기" || option.op_name === "큰 크기")
+  } else if (index === 1) {   //09.13
+    const sizeOptions = menuData.op_data
+      .filter(option => option.op_name === "기본 크기" || option.op_name === "큰 크기");
+  
+    let defaultOption = "기본 크기"; // 기본값 설정
+    console.log("sizeOptions:", sizeOptions);
+  
+    const hasRegular = sizeOptions.some(option => option.op_name === "기본 크기");
+    const hasLarge = sizeOptions.some(option => option.op_name === "큰 크기");
+  
+    let falseoption = "큰 크기";
+  
+    if (!hasRegular && hasLarge) {
+      defaultOption = "큰 크기";
+      falseoption = "기본 크기";
+    }
+
+    const speechBubble = document.querySelector('.size');
+    const speechBubbleContent = speechBubble.querySelector('div');
+
+    speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
+  
+    optionList.innerHTML = sizeOptions
       .map(option => {
-        const checkedAttribute = option.op_name === "기본 크기" ? "checked" : "";
+        const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
         return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-        <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>`;
+          <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>
+          `;
       })
       .join("");
-  } else if (index === 2) {
+  
+    if (!hasRegular || !hasLarge) {
+      optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
+        <label class="form-check-label" for="falseoption" style="color: gray;"> ${falseoption} (+0원)</label></li>`;
+        // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
+        const speechBubble = document.querySelector('.size');
+        const speechBubbleContent = speechBubble.querySelector('div');
+            
+        if (!hasRegular) {
+            speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
+        } else {
+            speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
+        }
+    }
+  }else if (index === 2) {
     // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
     const checkboxOptions = menuData.op_data
       .filter(option => option.op_name !== "뜨거움" && option.op_name !== "차가움" && option.op_name !== "기본 크기" && option.op_name !== "큰 크기")
@@ -209,60 +255,24 @@ if (window.location.search) {
     });
 }
 
-// function handleMenuData(menuData) {
-//   // 받아온 데이터를 가지고 출력할 HTML 요소 생성
-//   const menuDetailHtml = menuData.map(menu => {
-//     return `
-//     <div class="menu_img_box">
-//       <img class="menu-img-size" src="${menu.image_path}" alt="${menu.menu_name}">
-//     </div>
+function show_qr(op){
+  const temp_qu = document.querySelector('.temp');
+  const size_qu = document.querySelector('.size');
 
-//     <div class="menu_title">${menu.menu_name}</div>
-//     <div class="menu_cost">가격: ${menu.price}원</div>
-//     <div class="menu_description">${menu.menu_explan}</div>
-    
-//     <div class="allegy_list">
-//       <p class="allegy_name">알레르기 정보</p>
-//       <ul>
-//         ${menu.allegy_names.map(allegyName => `<li>${allegyName}</li>`).join("")}
-//       </ul>
-//     </div>
-
-//     <div class="option_list">
-//       <p class="option_name">옵션 정보</p>
-//       <ul>
-//       ${menu.op_data.map(option => `<li>${option.op_name} (+${option.op_price}원)</li>`).join("")}
-//       </ul>
-//     </div>
-
-//     <div class="num_check">
-//       <div class="input-group">
-//         <div class="input-group-prepend">
-//           <button class="btn btn-outline-secondary" id="decrement">-</button>
-//         </div>
-//         <input type="text" class="form-control" id="quantity" value="1" readonly>
-//         <div class="input-group-append">
-//           <button class="btn btn-outline-secondary" id="increment">+</button>
-//         </div>
-//       </div>
-//     </div>
-//   `;
-//   });
-
-//   // 메뉴 상세 정보를 출력하는 영역을 선택하고 내용을 추가
-//   const menuDetailContainer = document.querySelector(".menu-detail-container");
-//   menuDetailContainer.innerHTML += menuDetailHtml.join("");
-
-//   // jQuery 이벤트 핸들러 등록
-//   $(".input-group").on("click", "#increment", function () {
-//     var input = $(this).closest(".input-group").find("input");
-//     input.val(parseInt(input.val()) + 1);
-//   });
-
-//   $(".input-group").on("click", "#decrement", function () {
-//     var input = $(this).closest(".input-group").find("input");
-//     if (parseInt(input.val()) > 1) {
-//       input.val(parseInt(input.val()) - 1);
-//     }
-//   });
-// }
+  switch(op){
+    case 't' :
+      if(temp_qu.style.visibility === 'hidden'){
+        temp_qu.style.visibility = 'visible';
+      } else{
+        temp_qu.style.visibility = 'hidden';
+      }
+      break;
+    case 's' :
+      if(size_qu.style.visibility === 'hidden'){
+        size_qu.style.visibility = 'visible';
+      } else {
+        size_qu.style.visibility = 'hidden';
+      }
+      break;
+  }
+}
