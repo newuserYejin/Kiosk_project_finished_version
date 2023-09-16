@@ -12,7 +12,7 @@ $(document).ready(function () {
     fetch(`/order/${orderNum}`)
       .then(response => response.json())
       .then(data => {
-        if (data.menu_num >= 600) {
+        if (data.menu_num >= 500) {
           const boxx = document.querySelector('.op_box');
           boxx.style.display = "none";
           const modal_size = document.querySelector('.modal-content')

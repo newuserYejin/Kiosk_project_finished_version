@@ -489,7 +489,7 @@ function searchFunction() {
       const div = document.createElement('div');
       div.className = "list_content_box";
       div.innerHTML = `
-      <div class="box list_img_box">
+      <div class="list_img_box">
         <img id="im" class="list_img_size" src=".${item.Picture}" data-menunum="${item.Menu_Num}"/>
       </div>
       <div class="list_content_info">
