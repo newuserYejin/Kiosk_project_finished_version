@@ -260,7 +260,7 @@ function renderOrderDetail(orderData) {
   const menuDescription = document.querySelector(".menu_description");
 
   const menuImage = document.querySelector(".menu_img_size");
-  menuImage.src = orderData.picture;
+  menuImage.src = `.${orderData.picture}`;//09.15 
   menuImage.alt = orderData.menu_name;
 
   menuTitle.textContent = orderData.menu_name;

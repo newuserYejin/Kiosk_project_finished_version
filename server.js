@@ -52,22 +52,20 @@ const calculateMenuRange = (category) => {
   } else if (category === '2') { // 음료수
     start = 200;
     end = 299;
-  } else if (category === '3') { // 티
+  } else if (category === '3') { // 차
     start = 300;
     end = 399;
-  } else if (category === '4') { // 플랫치노
+  } else if (category === '4') { // 스무디
     start = 400;
     end = 499;
-  } else if (category === '5') { // 쉐이크 & 에이드
+  } else if (category === '5') { // 디저트
     start = 500;
     end = 599;
-  } else if (category === '6') { // 디저트
-    start = 600;
-    end = 699;
   } else {
     start = 0;
     end = 0;
   }
+
   return { start, end };
 };
 
