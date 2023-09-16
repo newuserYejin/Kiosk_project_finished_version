@@ -239,7 +239,7 @@ app.get('/order/:orderNum', (req, res) => {
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
         // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
-        if (orderData.menu_num >= 100 && orderData.menu_num < 600) {
+        if (orderData.menu_num >= 100 && orderData.menu_num < 500) {
           connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
             if (err) {
               console.error('Error fetching option data:', err);
@@ -638,7 +638,7 @@ app.get('/order_e/:orderNum', (req, res) => {
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
         // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
-        if (orderData.menu_num >= 100 && orderData.menu_num < 600) {
+        if (orderData.menu_num >= 100 && orderData.menu_num < 500) {
           connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
             if (err) {
               console.error('Error fetching option data:', err);
