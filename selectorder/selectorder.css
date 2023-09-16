@@ -105,6 +105,7 @@ body {
     font-size: 25px;
     font-weight: 400;
     background-color: #E9E9E9;
+    border: solid 1px black;
 
     display: flex;
     justify-content: center;
@@ -146,10 +147,9 @@ body {
 }
 
 .first {
-    margin: 0 5.8%;
+    margin: 0 7.3%;
     height: 100%;
     width: 100%;
-
 }
 
 .cafe_name{
@@ -195,9 +195,9 @@ body {
 }
 
 .fir_box {
-    height: 44.7%;
     width: 100%;
-    padding: 0 2.5%;
+    height: 44.7%;
+    padding: 0 3.1%;
     box-sizing: border-box;
 }
 
@@ -211,7 +211,7 @@ body {
 
 .order div {
     height: 94.1%;
-    width: 44.7%;
+    width: 46.8%;
     border-radius: 15px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
 

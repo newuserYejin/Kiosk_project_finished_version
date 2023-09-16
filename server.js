@@ -238,7 +238,7 @@ app.get('/order/:orderNum', (req, res) => {
         // 'op_num'을 주문 정보에서 가져온 'opNumbers'와 'opNumbersFromMenuOp'에서 모두 가져와 배열에 저장합니다.
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
-        // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
+        // 옵션 데이터를 가져오는 부분을 500번대 메뉴인 경우에만 실행하도록 수정
         if (orderData.menu_num >= 100 && orderData.menu_num < 500) {
           connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
             if (err) {
@@ -256,7 +256,7 @@ app.get('/order/:orderNum', (req, res) => {
             res.json(orderData);
           });
         } else {
-          // 600번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
+          // 500번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
           const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
           orderData.op_num = [];
           orderData.allergy_names = allergyNames;
@@ -637,7 +637,8 @@ app.get('/order_e/:orderNum', (req, res) => {
         // 'op_num'을 주문 정보에서 가져온 'opNumbers'와 'opNumbersFromMenuOp'에서 모두 가져와 배열에 저장합니다.
         const combinedOpNumbers = [...opNumbers, ...opNumbersFromMenuOp].filter(op => op !== 0);
 
-        // 옵션 데이터를 가져오는 부분을 600번대 메뉴인 경우에만 실행하도록 수정
+        // 옵션 데이터를 가져오는 부분을 500번대 메뉴인 경우에만 실행하도록 수정
+
         if (orderData.menu_num >= 100 && orderData.menu_num < 500) {
           connection.query(getOptionQuery, combinedOpNumbers, (err, optionResults) => {
             if (err) {
@@ -655,7 +656,7 @@ app.get('/order_e/:orderNum', (req, res) => {
             res.json(orderData);
           });
         } else {
-          // 600번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
+          // 500번대 메뉴인 경우에는 옵션 데이터를 가져오지 않고 바로 응답으로 전송
           const allergyNames = [...new Set(allergyResults.map(result => result.allegy_name))];
           orderData.op_num = [];
           orderData.allergy_names = allergyNames;
