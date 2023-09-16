@@ -7,23 +7,36 @@
     <title>더크게</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="shortcut icon" href="#">
+
     <link rel="stylesheet" type="text/css" href="BicOrder.css" />
 
 </head>
 
 <body>
     <div class="all_box">
+        <!--상단 배너-->
+        <div class="top_banner">
+            <img src="./image/banner.jpg" alt="호이카페 배너">
+        </div>
+
+        <!--카테고리-->
+        <div class="category_box">
+            <ul class="categories">
+                <li class="category select_category"><a href="#" data-category="1">커피</a></li>
+                <li class="category"><a href="#" data-category="2">음료수</a></li>
+                <li class="category"><a href="#" data-category="3">차</a></li>
+                <li class="category"><a href="#" data-category="4">스무디</a></li>
+                <!-- <li class="category"><a href="#" data-category="5">쉐이크 & 에이드</a></li> -->
+                <li class="category"><a href="#" data-category="6">디저트</a></li>
+            </ul>
+        </div>
+
+
+        <!--본문-->
         <div class="all">
             <!--오른쪽 목록-->
             <div class="list_menu">
-
-                <!--주문 목록-->
-                <div>
-                    <div class="list_name">메뉴 목록</div>
-                    <img class="help" src="./image/helpicon.png" id="imageLink">
-                    <div id="modalContainer"></div>
-                </div>
-
                 <div class="add_fuc_bar">
                     <div class="view_button">
                         <input type="radio" name="size" value="basic" id="basic_f">
@@ -32,97 +45,93 @@
                         <label for="big_f">더크게</label>
                     </div>
                     <div class="search_div" id="search_div">
-                        <input type="search" name="menu-search" class="search" placeholder="상품 검색">
+                        <input type="search" name="menu-search" class="search" placeholder="검색으로 찾아보세요">
                         <img class="search_icon" src="./image/search.png">
                     </div>
+                    <div class="help">
+                        <div id="imageLink">도움말</div>
+                        <div id="modalContainer"></div>
+                    </div>
                 </div>
-                <!--카테고리-->
-                <ul class="categories">
-                    <li class="category select_category"><a href="#" data-category="1">커피</a></li>
-                    <li class="category"><a href="#" data-category="2">음료수</a></li>
-                    <li class="category"><a href="#" data-category="3">차</a></li>
-                    <li class="category"><a href="#" data-category="4">플랫치노</a></li>
-                    <li class="category"><a href="#" data-category="5">쉐이크 & 에이드</a></li>
-                    <li class="category"><a href="#" data-category="6">디저트</a></li>
-                </ul>
 
                 <div class="ho">
-                    <!--navigate bar-->
-                    <div class="navigation">
-                        <div class="navigation_all_box">
-                            <div class="box_line" onclick="select_page()">
-                                <div class="level_button">
-                                    <p class="circle_name">메뉴 선택</p>
-                                    <button class="circle" style="background-color:skyblue"></button>
+                    <div class="main_box" style="border: soli 1px blue;">
+                        <div class="navigation">
+                            <div class="navigation_all_box">
+                                <div class="box_line" onclick="select_page()">
+                                    <div class="level_button" style="background-color: rgba(0, 122, 194, 0.1);
+                                    border: solid 1px #007AC2; color: #007AC2;">
+                                        <p class="circle_name">1.메뉴선택</p>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="level_line">
-                                <p></p>
-                                <img src="./image/line2.jpg" alt="Line 이미지" class="center now">
-                            </div>
-
-                            <div class="box_line" onclick="check_page()">
-                                <div class="level_button">
-                                    <p class="circle_name">주문 확인</p>
-                                    <button class="circle"></button>
+                                <div class="level_line">
+                                    <p></p>
+                                    <img src="./image/line2.png" alt="Line 이미지" class="center now">
                                 </div>
-                            </div>
 
-                            <div class="level_line">
-                                <p></p>
-                                <img src="./image/no_line.png" alt="Line 이미지" class="center">
-                            </div>
+                                <div class="box_line" onclick="check_page()">
+                                    <div class="level_button">
+                                        <p class="circle_name">2.주문확인</p>
+                                    </div>
+                                </div>
 
-                            <div class="box_line pay_move" onclick="pay_page()">
-                                <div class="level_button">
-                                    <p class="circle_name">최종 결제</p>
-                                    <button class="circle"></button>
+                                <div class="level_line">
+                                    <p></p>
+                                    <img src="./image/line2.png" alt="Line 이미지" class="center">
+                                </div>
+
+                                <div class="box_line pay_move" onclick="pay_page()">
+                                    <div class="level_button">
+                                        <p class="circle_name">3.최종 결제</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="menu_box">
-                        <div class="box list_box" id="resultContainer">
-                            <div class="box list_content_box" style="display: none;">
-                                <div class="box list_img_box">
-                                    <img id="im" class="list_img_size" src="./image/img1.png" />
-                                </div>
-                                <div class="list_content_info"> <!--오른쪽 설명-->
-                                    <div class="content_title">
-                                        <div class="menu_name">아메리카노</div>
-                                        <div class="menu_cost">3000원</div>
+                        <div class="menu_box">
+                            <div class="list_box" id="resultContainer">
+                                <div class="list_content_box" style="display: none;">
+                                    <div class="list_img_box">
+                                        <img id="im" class="list_img_size" src="./image/img1.png" />
                                     </div>
-                                    <div class="list_option_boxes">
-                                        <div class="list_option">
-                                            <div>
-                                                설명
+                                    <div class="list_content_info"> <!--오른쪽 설명-->
+                                        <div class="content_title">
+                                            <div class="menu_name">아메리카노</div>
+                                            <div class="menu_cost">3000원</div>
+                                        </div>
+                                        <div class="list_option_boxes">
+                                            <div class="list_option">
+                                                <div>
+                                                    설명
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="list_buttons">
-                                        <button class="selectBtn" id="selectBtn">선택</button>
+                                        <div class="list_buttons">
+                                            <button class="selectBtn" id="selectBtn">선택</button>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
-
-                        <!--고정 버튼-->
-                        <div class="box fix_button">
-                            <button class="fix_button_detail" onclick="prvsScren()">
-                                <img src="./image/left.svg">
-                                이전화면</button>
-                            <button class="fix_button_detail" onclick="firstScreen()">
-                                <img src="./image//house.svg">
-                                처음화면</button>
-                            <button class="fix_button_detail" onclick="nextScreen()">
-                                다음화면 <img src="./image/right.svg"></button>
+                            <!--고정 버튼-->
+                            <div class="fix_button">
+                                <button class="fix_button_detail fix_button_pre" onclick="prvsScren()">
+                                    <img src="./image/left.svg">
+                                    이전화면</button>
+                                <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
+                                    <img src="./image//house.svg">
+                                    처음화면</button>
+                                <button class="fix_button_detail fix_button_next" onclick="nextScreen()">
+                                    다음화면 <img src="./image/right.svg"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--하단-->
         <div class="select_list_box">
             <!--주문리스트 미리보기-->
             <div class="select_list">
@@ -209,44 +218,6 @@
             console.log("터치 이벤트");
         });
 
-    </script>
-
-    <script>
-        // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
-        function updateMenuHeight() {
-            // Source 요소의 height를 측정
-            const sourceElement = document.querySelector('.navigation');
-            const sourceHeight = sourceElement.clientHeight;
-
-            // Target 요소의 height를 설정
-            const targetElement = document.querySelector('.menu_box');
-            targetElement.style.height = sourceHeight + 'px';
-        }
-
-        // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
-        window.addEventListener('load', updateMenuHeight);
-        window.addEventListener('resize', updateMenuHeight);
-    </script>
-
-    <script>
-        // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
-        function updateCircleHeight() {
-            // Source 요소의 NodeList를 선택
-            const sourceElements = document.querySelectorAll('.circle');
-
-            sourceElements.forEach(function (sourceElement) {
-                // Source 요소의 width를 측정
-                const sourceWidth = sourceElement.clientWidth;
-
-                // Target 요소의 height를 설정
-                const targetElement = sourceElement;
-                targetElement.style.height = sourceWidth + 'px';
-            });
-        }
-
-        // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
-        window.addEventListener('load', updateCircleHeight);
-        window.addEventListener('resize', updateCircleHeight);
     </script>
 
     <script>//09.14 수정
