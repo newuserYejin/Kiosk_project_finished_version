@@ -1,8 +1,0 @@
-http://localhost:3001/menu?category=1
-//기본
-http://localhost:3001/menu?category=1
-//큰화면
-http://localhost:3001/menu/101
-//상세페이지
-http://localhost:3001/checklist
-//주문목록
