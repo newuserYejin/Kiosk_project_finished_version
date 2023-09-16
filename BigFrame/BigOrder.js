@@ -68,6 +68,7 @@ joImage.addEventListener("click", function () {
 });
 
 //네비게이션
+
 function select_page() {
   alert("현재 페이지 입니다.")
 };
@@ -315,10 +316,10 @@ function handleMenuData(menuData) {
     return `
 
       <div class="list_content_box">
-          <div class="box list_img_box">
+          <div class="list_img_box">
               <img id="im" class="list_img_size" src=".${menu.image_path}" data-menunum="${menu.menu_num}" />
           </div>
-          <div class="box list_content_info"> <!--오른쪽 설명-->
+          <div class="list_content_info"> <!--오른쪽 설명-->
               <div class="content_title">
                   <div class="menu_name">${menu.menu_name}</div>
                   <div class="menu_cost">${menu.price}원</div>
@@ -334,7 +335,6 @@ function handleMenuData(menuData) {
               </div>
           </div>
       </div>
-      <div class="split_border"></div>
     `;
   });
 
