@@ -10,77 +10,85 @@
     <link rel="stylesheet" type="text/css" href="checklist.css" />
 </head>
 
-<body>
+<body style="font-family: 'Pretendard';">
     <div class="all">
-        <!--오른쪽 목록-->
-        <div class="box list_menu">
+        <!--상단 배너-->
+        <div class="top_banner">
+            <img src="./image/banner.jpg" alt="호이카페 배너">
+        </div>
 
-            <!--주문 목록-->
-            <div>
-                <div class="list_name">내가 담은 목록</div>
-                <img class="help" src="./image/helpicon.png" id="imageLink">
-                <div id="modalContainer"></div>
-            </div>
+        <!--현재 페이지 표시-->
+        <div class="present_page">내가 담은 목록</div>
 
+        <!--본문-->
+        <div class="main_box">
             <!--포장 확인-->
-            <div class="take_out">
-                <div class="take_out_title">포장확인: </div>
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="forHere"
-                            id="firstRadio">
-                        <label class="form-check-label" for="firstRadio">매장 이용</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="takeAway"
-                            id="secondRadio">
-                        <label class="form-check-label" for="secondRadio">포장</label>
-                    </li>
-                </ul>
+            <div class="main_top_box">
+                <div class="take_out">
+                    <div class="take_out_inner_box">
+                        <div class="take_out_title">포장확인: </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="forHere"
+                                    id="firstRadio">
+                                <label class="form-check-label" for="firstRadio">매장이용</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="takeAway"
+                                    id="secondRadio">
+                                <label class="form-check-label" for="secondRadio">포장</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--도움말-->
+                    <div class="help">
+                        <div id="imageLink">도움말</div>
+                        <div id="modalContainer"></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="ho">
+            <div class="box list_menu">
                 <!--navigate bar-->
-                <div class="navigation">
-                    <div class="navigation_all_box">
-                        <div class="box_line">
-                            <div onclick="selectPage()" class="level_button">
-                                <p class="circle_name">메뉴 선택</p>
-                                <button class="circle" style="background-color: skyblue;"></button>
+                <div class="list_menu_inner_box">
+                    <div class="navigation">
+                        <div class="navigation_all_box">
+                            <div class="box_line">
+                                <div onclick="selectPage()" class="level_button">
+                                    <p class="circle_name">1.메뉴선택</p>
+                                </div>
+                            </div>
+
+                            <div class="level_line">
+                                <p></p>
+                                <img src="./image/progress_arrow.png" alt="Line 이미지" class="center">
+                            </div>
+
+                            <div class="box_line">
+                                <div onclick="navigateclick()" class="level_button">
+                                    <p class="circle_name">2.주문확인</p>
+                                </div>
+                            </div>
+
+                            <div class="level_line">
+                                <p></p>
+                                <img src=".\image\line2.png" alt="Line 이미지" class="center now">
+
+                            </div>
+
+                            <div class="box_line">
+                                <div onclick="openPay()" class="level_button pay_move">
+                                    <p class="circle_name">3.최종결제</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="level_line">
-                            <p></p>
-                            <img src=".\image\line2.jpg" alt="Line 이미지" class="center">
-                        </div>
-
-                        <div class="box_line">
-                            <div onclick="navigateclick()" class="level_button">
-                                <p class="circle_name">주문 확인</p>
-                                <button class="circle" style="background-color:skyblue;"></button>
-                            </div>
-                        </div>
-
-                        <div class="level_line">
-                            <p></p>
-                            <img src=".\image\line2.jpg" alt="Line 이미지" class="center now">
-
-                        </div>
-
-                        <div class="box_line">
-                            <div onclick="openPay()" class="level_button pay_move">
-                                <p class="circle_name">최종 결제</p>
-                                <button class="circle pay"></button>
-                            </div>
-                        </div>
                     </div>
-
-                </div>
-
-                <div class="menu_box">
-                    <div class="box list_box">
-                        <!-- <div class="box list_content_box">
+                    <div class="ho">
+                        <div class="ho_inner_box">
+                            <div class="menu_box">
+                                <div class="list_box">
+                                    <!-- <div class="box list_content_box">
                         <div class="box list_img_box">
                             <img id="im" class="list_img_size" src=".\image\img1.png" />
                         </div>
@@ -122,7 +130,7 @@
                         </div>
                     </div> -->
 
-                        <!-- <div class="box list_content_box">
+                                    <!-- <div class="box list_content_box">
                         <div class="box list_img_box">
                             <img class="list_img_size" src=".\image\img1.png" />
                         </div>
@@ -130,33 +138,43 @@
                             내용내용
                         </div>
                     </div> -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--고정 버튼-->
+                        <div class="fix_button">
+                            <button class="fix_button_detail" onclick="prvsScren()">
+                                <img src="./image/previous.png">
+                                이전화면</button>
+                            <button class="fix_button_detail" onclick="firstScreen()">
+                                <img src="./image//house.svg">
+                                처음화면</button>
+                            <button class="fix_button_detail next_btnnn" onclick="nextScreen()">
+                                다음화면 <img src="./image/next.png"></button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="speech-bubble first_bubble">
+                    <span>주문하러 가기</span>
+                </div>
+                <div class="speech-bubble second_bubble">
+                    <span>주문이 비어 있어요!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_box">
             <!--총금액확인-->
-            <div class="box total_cost_box">
-                <span>총 금액 : </span>
+            <div class="total_cost_box">
+                <span>결제 예정 금액 : </span>
                 <div class="total_cost">0원</div>
             </div>
-
-
-            <!--고정 버튼-->
-            <div class="box fix_button">
-                <button class="fix_button_detail" onclick="prvsScren()">
-                    <img src="./image/left.svg">
-                    이전화면</button>
-                <button class="fix_button_detail" onclick="firstScreen()">
-                    <img src="./image//house.svg">
-                    처음화면</button>
-                <button class="fix_button_detail next_btnnn" onclick="nextScreen()">
-                    다음화면 <img src="./image/right.svg"></button>
-            </div>
-            <div class="speech-bubble first_bubble">
-                <span>주문하러 가기</span>
-            </div>
-            <div class="speech-bubble second_bubble">
-                <span>주문이 비어 있어요!</span>
+            <div class="bottom_button_box" onclick="nextScreen()">
+                <button>
+                    결제하기
+                </button>
             </div>
         </div>
     </div>
@@ -239,7 +257,7 @@
 
     </script>
 
-    <script>
+    <!-- <script>
         // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
         function updateMenuHeight() {
             // Source 요소의 height를 측정
@@ -254,7 +272,7 @@
         // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
         window.addEventListener('load', updateMenuHeight);
         window.addEventListener('resize', updateMenuHeight);
-    </script>
+    </script> -->
 
     <script>//09.14 수정
         var currentURL = window.location.href;

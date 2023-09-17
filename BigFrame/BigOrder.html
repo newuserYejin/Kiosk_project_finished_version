@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body style="font-family: 'pretendard';">
     <div class="all_box">
         <!--상단 배너-->
         <div class="top_banner">
@@ -30,7 +30,6 @@
                 <li class="category"><a href="#" data-category="5">디저트</a></li>
             </ul>
         </div>
-
 
         <!--본문-->
         <div class="all">
@@ -116,13 +115,13 @@
                             <!--고정 버튼-->
                             <div class="fix_button">
                                 <button class="fix_button_detail fix_button_pre" onclick="prvsScren()">
-                                    <img src="./image/left.svg">
+                                    <img src="./image/previous.png">
                                     이전화면</button>
                                 <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
                                     <img src="./image//house.svg">
                                     처음화면</button>
                                 <button class="fix_button_detail fix_button_next" onclick="nextScreen()">
-                                    다음화면 <img src="./image/right.svg"></button>
+                                    다음화면 <img src="./image/next.png"></button>
                             </div>
                         </div>
                     </div>
@@ -147,10 +146,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="BigOrder.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
 
@@ -299,6 +294,18 @@
             alert("유효한 타이머 시간을 지정하지 않았습니다.");
         }
     </script>
+
+    <!-- <script>
+        const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+
+        modal._element.addEventListener('hidden.bs.modal', function () {
+            // 모달 창을 DOM에서 제거
+            modal._element.remove();
+
+            // 모달과 관련된 이벤트 핸들러 및 리소스를 정리할 수도 있습니다.
+            // 이벤트 핸들러를 해제하거나 다른 정리 작업을 수행하세요.
+        });
+    </script> -->
 
 </body>
 
