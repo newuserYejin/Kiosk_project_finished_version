@@ -394,6 +394,8 @@ fetch('/getOrderData')
     // 주문 데이터를 가지고 총 금액 계산
     totalAmount = calculateTotalAmount(data);
     updateTotalAmountUI(totalAmount);
+
+    localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
   });
 
 // 아래에 코드를 추가 (함수 정의)

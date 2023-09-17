@@ -8,27 +8,36 @@
     <link rel="stylesheet" type="text/css" href="ordernum.css" />
 </head>
 
-<body>
+<body style="font-family: 'Pretendard';">
     <div class="all">
-        <div class="help">
-            <img class="helping" src="./image/helpicon.png" id="imageLink">
-            <div id="modalContainer"></div>
+        <!--상단 배너-->
+        <div class="top_banner">
+            <img src="./image/banner.jpg" alt="호이카페 배너">
         </div>
-        <div class="ordernum">
-            <div class="order">
-                <div class="closeimg">
-                    <img class="close" src="./image/close.png" width="6%" height="3%" onclick="openClose()">
-                </div>
-                <div class="info">
-                    <p class="completed">주문 완료</p>
-                    <p class="waitnum">대기 번호</p>
-                    <div class="num">901</div>
+
+        <!--현재 페이지 표시-->
+        <div class="present_page">결제하기</div>
+
+        <div class="main_box">
+            <div class="help">
+                <div class="helping" id="imageLink">도움말</div>
+                <div id="modalContainer"></div>
+            </div>
+            <div class="ordernum">
+                <div class="order">
+                    <div class="info">
+                        <p class="completed">주문 완료</p>
+                        <p class="waitnum">대기 번호</p>
+                        <div class="num">901</div>
+                    </div>
                 </div>
             </div>
-            <div class="gohome_">
-                <button type="button" class="gohome"
-                    onclick="location.href='http://localhost:3001/selectorder/selectorder.html'">처음으로 돌아가기</button>
-            </div>
+        </div>
+        <div class="gohome">
+            <button type="button" class="gohome"
+                onclick="location.href='http://localhost:3001/selectorder/selectorder.html'">
+                <img src="./image/house.svg">
+                처음으로</button>
         </div>
     </div>
 

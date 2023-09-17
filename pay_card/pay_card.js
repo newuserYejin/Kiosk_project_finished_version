@@ -119,6 +119,11 @@ function gohome() {
 
 }
 
+let total_cost = localStorage.getItem('myTotalCost');
+
+const totalCostElement = document.querySelector('.total_cost');
+totalCostElement.textContent = total_cost + '원';
+
 // function showMessageAndRedirect() {
 //     setTimeout(function() {
 //         alert("3초 후에 페이지가 이동됩니다.");
