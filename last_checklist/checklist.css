@@ -438,9 +438,9 @@ html,body {
 }
 
 .content_update_button button:hover {
-    background-color: skyblue;
+    background-color: #00aabb;
     color: white;
-    border: solid 1px skyblue;
+    border: solid 1px #00aabb;
 }
 
 /*하단 고정 버튼*/
@@ -474,6 +474,7 @@ html,body {
     padding: 0;
 
     color: #BBBBBB;
+    border-radius: 15px;
 }
 
 .fix_button_detail:nth-child(2){
@@ -572,8 +573,8 @@ html,body {
     background: #0fbac9f7;
     border-radius: .4em;
 
-    width: 35%;
-    height: 10%;
+    width: 30%;
+    height: 8%;
     font-size: 3.5vw;
     font-weight: bold;
     color: white;
@@ -586,7 +587,7 @@ html,body {
 
 .second_bubble {
     right: 10px;
-    top: 69%;
+    top: 72%;
 }
 
 .second_bubble:after {
@@ -606,8 +607,8 @@ html,body {
 
 .first_bubble {
     position: absolute;
-    left: 10px;
-    top: 71%;
+    left: 190px;
+    top: 68%;
 }
 
 .first_bubble::after {
