@@ -57,13 +57,13 @@ body {
 
 .banner_ment p{
     font-weight: 600;
-    font-size: 20px;
+    font-size: 3vw;
     padding: 0;
     margin: 0;
 }
 
 .banner_ment p:first-child{
-    font-size: 33px;
+    font-size: 5vw;
     margin-bottom: 10px;
 }
 
@@ -104,7 +104,7 @@ body {
     width: 18.4%;
     height: 31.1%;
     border-radius: 10px;
-    font-size: 25px;
+    font-size: 3.5vw;
     font-weight: 400;
     background-color: #E9E9E9;
     border: solid 1px black;
@@ -127,7 +127,7 @@ body {
     align-items: center;
     justify-content: space-between;
 
-    font-size: 25px;
+    font-size: 3.5vw;
     font-weight: 400;
 }
 
@@ -188,7 +188,7 @@ body {
     width: 44.7%;
     height: 100%;
 
-    font-size: 30px;
+    font-size: 4.5vw;
     font-weight: 600;
 
     display: flex;
@@ -254,7 +254,7 @@ body {
     color: white;
     border-radius: 20px;
 
-    font-size: 50px;
+    font-size: 7.5vw;
     font-weight: 600;
 }
 

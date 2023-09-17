@@ -147,47 +147,46 @@ function createOrderItem(order) {//주문 아이템 생성 함수
   orderItem.className = 'list_content_box';
   orderItem.innerHTML = `
   <!-- ... (이미지 내용 관련 부분) ... -->
-  <div class="box list_img_box">
-      <img id="im" class="list_img_size" src=".${order.imagePath}" alt="menu_image"/>
+  <div class="cancel_btn">
+    <img src="./image/close.png" class="deleteBtn" data-orderNum="${order.order_num}">
   </div>
-  <!--여기까지-->
-  <div class="list_content_info">
-      <div class="container text-center">
-          <div class="row content_title" style="height: ${order.menu_num >= 500 ? '30%' : '20%'};">
-              <div class="col-7 menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
-              <div class="col-5 menu_cost">&nbsp;총: ${order.total_price}원</div> <!--메뉴 가격 출력-->
-          </div>
-          <!--옵션 데이터-->
-          <div class="row list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '30%' : '55%'}">
-              <div class="list_option_detail">
-                  <div class="row option_detail">
-                      <div class="col-6">
-                          <span class="option_name">온도: </span>
-                          <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}</span>
-                      </div>
-                      <div class="col-6">
-                          <span class="option_name">크기: </span>
-                          <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}</span>
-                      </div>
-                  </div>
-                  <div class="menu_option_box">
-                      <span class="option_name">추가 옵션: </span>
-                      <span class="select_op">${order.options.length > 0 ? order.options.map(op => op.op_name).join(', ') : '없음'}</span>
-                  </div>
-              </div>
-          </div>
-          <div class="row list_buttons">
-              <div class="col-4 button_box_num">
-                  <p class="button_num">${order.count}개</p>
-              </div>
-              <div class="col-8" style="padding: 0px; height: 100%;">
-                  <div class="content_update_button">
-                      <button class="updateBtn" data-orderNum="${order.order_num}">수정</button>
-                      <button class="deleteBtn" data-orderNum="${order.order_num}">삭제</button>
-                  </div>
-              </div>
-          </div>
+  <div class = "real_content_box">
+    <div class="box list_img_box">
+      <div class = "list_img_size_box">
+        <img id="im" class="list_img_size" src=".${order.imagePath}" alt="menu_image"/>
       </div>
+    </div>
+    <!--여기까지-->
+    <div class="list_content_info">
+        <div class="container text-center">
+            <div class="content_title">
+                <div class="menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
+
+                <div class="cost_info">
+                  <div class="button_box_num">
+                    <p class="button_num">${order.count}개</p>
+                  </div>
+                  <div class="menu_cost">${order.total_price}원</div> <!--메뉴 가격 출력-->
+                </div>
+            </div>
+            
+            <!--옵션 데이터-->
+            <div class="list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '30%' : '55%'}">
+                <div class="list_option_detail">
+                    <div class="option_detail">
+                        <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
+                        <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(+0원)</span>
+                        <span class="select_op">${order.options.length > 0 ? order.options.map(op => op.op_name).join(', ') : '없음'}</span>
+                    </div>
+                </div>
+                <div class="list_buttons">
+                    <div class="content_update_button">
+                        <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 `;
 
@@ -232,7 +231,7 @@ function addOrdersToDOM(orders) {
       pay_move.onclick = function (event) {
         event.preventDefault(); // 클릭 이벤트를 막음
       };
-  
+
       // 배경색 변경
       pay_move.style.color = "#6c757d";
       // pay_circle.style.border = "solid 3px #6c757d"
