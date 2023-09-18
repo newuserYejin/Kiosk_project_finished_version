@@ -299,14 +299,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function handleMenuData(menuData) {
-  // 받아온 데이터를 가지고 출력할 HTML 요소 생성
+
   const menuItems = menuData.map(menu => {
 
     // menu.tag를 띄어쓰기를 기준으로 분리하여 배열로 만듭니다.
     const tagsArray = menu.tag.split(' #');
 
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(menu.price);//09.18 가격 쉼표 넣기
+    // 받아온 데이터를 가지고 출력할 HTML 요소 생성
+
     // 분리된 태그를 별도의 div 요소에 넣어주기 위한 HTML 문자열 생성
     const tagsHTML = tagsArray.map((tag, index) => {
+
       // 첫 번째 요소에는 #를 추가하지 않고, 두 번째 요소부터는 #를 추가
       const prefix = index === 0 ? '' : '#';
 
@@ -322,7 +326,7 @@ function handleMenuData(menuData) {
           <div class="list_content_info"> <!--오른쪽 설명-->
               <div class="content_title">
                   <div class="menu_name">${menu.menu_name}</div>
-                  <div class="menu_cost">${menu.price}원</div>
+                  <div class="menu_cost">${formattedPrice}원</div><!--09.18 가격쉼표 넣기-->
               </div>
               <div class="list_option_boxes">
                   <div class="list_option">
@@ -474,7 +478,7 @@ function searchFunction() {
     categories.forEach(c => c.classList.remove('select_category'));
 
     storeData.forEach(item => {
-
+      const formattedPrice = new Intl.NumberFormat('ko-KR').format(item.price);//09.18 가격 쉼표 넣기
       // menu.tag를 띄어쓰기를 기준으로 분리하여 배열로 만듭니다.
       const tagsArray = item.Tag.split(' #');
 
@@ -495,7 +499,7 @@ function searchFunction() {
       <div class="list_content_info">
         <div class="content_title">
             <div class="menu_name">${item.Menu_Name}</div>
-            <div class="menu_cost">${item.Price}원</div>
+            <div class="menu_cost">${formattedPrice}원</div><!--09.18 가격 쉼표 넣기-->
         </div>
         <div class="list_option_boxes">
             <div class="list_option">
