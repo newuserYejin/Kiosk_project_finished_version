@@ -199,7 +199,7 @@ optionContainers.forEach((container, index) => {
   
     if (!hasRegular || !hasLarge) {
       optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
-        <label class="form-check-label" for="falseoption" style="color: gray;"> ${falseoption} (+0원)</label></li>`;
+        <label class="form-check-label" for="falseoption"> ${falseoption} (+0원)</label></li>`;
         // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
         // const speechBubble = document.querySelector('.size');
         // const speechBubbleContent = speechBubble.querySelector('div');

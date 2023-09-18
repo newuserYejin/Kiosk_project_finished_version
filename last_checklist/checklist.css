@@ -406,7 +406,7 @@ html,body {
     height: 100%;
 }
 
-.option_detail spqn{
+.option_detail span{
     font-size: 3vw;
     font-weight: 400;
     color: #8E8E8E;
@@ -465,7 +465,6 @@ html,body {
     height: 90%;
     background-color: white;
     font-weight: bold;
-    font-size: 3vw;
 
     display: flex;
     align-items: center;
@@ -475,6 +474,10 @@ html,body {
 
     color: #BBBBBB;
     border-radius: 15px;
+}
+
+.fix_button_detail:last-child{
+    text-align: right;
 }
 
 .fix_button_detail:nth-child(2){
