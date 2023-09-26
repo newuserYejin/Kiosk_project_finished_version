@@ -160,3 +160,17 @@ function modal_display() {
 } 
 
 handleKeywordClick(); // 함수 호출
+
+// 모달 배경을 클릭했을 때와 모달 닫기 버튼 클릭 시
+document.querySelector('.modal').addEventListener('click', function (event) {
+    if (event.target === this || event.target.classList.contains("close_btn")) {
+        // 모달을 닫기
+        $('#exampleModal').modal('hide');
+
+        // 페이지 새로고침
+        location.reload();
+    }
+});
+
+
+

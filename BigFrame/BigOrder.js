@@ -478,7 +478,7 @@ function searchFunction() {
     categories.forEach(c => c.classList.remove('select_category'));
 
     storeData.forEach(item => {
-      const formattedPrice = new Intl.NumberFormat('ko-KR').format(item.price);//09.18 가격 쉼표 넣기
+      const formattedPrice = new Intl.NumberFormat('ko-KR').format(item.Price);//09.18 가격 쉼표 넣기
       // menu.tag를 띄어쓰기를 기준으로 분리하여 배열로 만듭니다.
       const tagsArray = item.Tag.split(' #');
 
