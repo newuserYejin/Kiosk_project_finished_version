@@ -154,14 +154,6 @@ function handleKeywordClick() {
     })
 }
 
-const speech_result = localStorage.getItem('speech_result');
-console.log(speech_result);
-
-if (speech_result) {
-    search(speech_result);
-    location.reload();
-}
-
 function modal_display() {
     const all_modal = document.querySelector('.modal');
     all_modal.computedStyleMap.display = 'flex';
