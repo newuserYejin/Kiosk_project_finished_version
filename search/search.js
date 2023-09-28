@@ -86,7 +86,6 @@ function search() {
 
 function search(searchInput) {
     // const searchInput = document.getElementById('input_menu_name').value;
-
     // 검색어가 비어있지 않을 경우에만 서버로 요청 전송
     if (searchInput !== '') {
         fetch(`http://localhost:3001/search?keyword=${encodeURIComponent(searchInput)}`)
