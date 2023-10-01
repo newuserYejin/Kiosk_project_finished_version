@@ -86,7 +86,6 @@ function search() {
 
 function search(searchInput) {
     // const searchInput = document.getElementById('input_menu_name').value;
-
     // 검색어가 비어있지 않을 경우에만 서버로 요청 전송
     if (searchInput !== '') {
         fetch(`http://localhost:3001/search?keyword=${encodeURIComponent(searchInput)}`)
@@ -160,3 +159,17 @@ function modal_display() {
 } 
 
 handleKeywordClick(); // 함수 호출
+
+// 모달 배경을 클릭했을 때와 모달 닫기 버튼 클릭 시
+document.querySelector('.modal').addEventListener('click', function (event) {
+    if (event.target === this || event.target.classList.contains("close_btn")) {
+        // 모달을 닫기
+        $('#exampleModal').modal('hide');
+
+        // 페이지 새로고침
+        location.reload();
+    }
+});
+
+
+
