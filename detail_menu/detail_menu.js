@@ -31,38 +31,89 @@ $(".btn-info").click(function () {
     op8: $("input[name='option_set_8']").prop('checked') ? 12 : 0
   };
 
-  // 서버로 주문 정보 전송
-  fetch('/addOrder', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      menu_num: selectedMenuNum,
-      count: selectedCount,
-      ...selectedOptions
-    })
-  })
+  fetch(`/menu/${selectedMenuNum}`)//tb_order가지고 오기
     .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        console.log("주문이 성공적으로 저장되었습니다.");
-        console.log("메뉴 번호:", selectedMenuNum);
-        console.log("갯수:", selectedCount);
-        console.log("온도 옵션:", selectedOptions.op_t);
-        console.log("크기 옵션:", selectedOptions.op_s);
-        for (let i = 1; i <= 8; i++) {
-          console.log(`옵션${i}:`, selectedOptions[`op${i}`]);
-        }
+    .then(menuData => {
+      console.log("주문 가져옴:", menuData.orders);
+      const menuOrders = menuData.orders; // 서버에서 받아온 주문 데이터
+
+      // tb_order와 새로운 주문 목록 비교
+      const matchingOrder = menuOrders.find(order => {
+        return (
+          order.menu_num === parseInt(selectedMenuNum) &&
+          order.op_t === selectedOptions.op_t &&
+          order.op_s === selectedOptions.op_s &&
+          order.op1 === selectedOptions.op1 &&
+          order.op2 === selectedOptions.op2 &&
+          order.op3 === selectedOptions.op3 &&
+          order.op4 === selectedOptions.op4 &&
+          order.op5 === selectedOptions.op5 &&
+          order.op6 === selectedOptions.op6 &&
+          order.op7 === selectedOptions.op7 &&
+          order.op8 === selectedOptions.op8
+        );
+      });
+
+      if (matchingOrder) {
+        // 일치하는 주문이 이미 있을 경우 서버로 /updateCount 요청을 보내는 코드
+        const orderNumToUpdate = matchingOrder.order_num;
+        fetch(`/updateCount/${orderNumToUpdate}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            count: matchingOrder.count + selectedCount
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log("주문 업데이트 성공");
+            } else {
+              console.log("주문 업데이트 실패");
+            }
+          })
+          .catch(error => {
+            console.error("주문 업데이트 중 오류 발생:", error);
+          });
       } else {
-        console.log("주문 저장에 실패했습니다.");
+        // 일치하는 주문이 없을 경우 서버로 /addOrder /addOrder 요청을 보내는 코드
+        fetch('/addOrder', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            menu_num: selectedMenuNum,
+            count: selectedCount,
+            ...selectedOptions
+          })
+        })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log("주문이 성공적으로 저장되었습니다.");
+              console.log("메뉴 번호:", selectedMenuNum);
+              console.log("갯수:", selectedCount);
+              console.log("온도 옵션:", selectedOptions.op_t);
+              console.log("크기 옵션:", selectedOptions.op_s);
+              for (let i = 1; i <= 8; i++)
+                console.log(`옵션${i}:`, selectedOptions[`op${i}`]);
+            } else {
+              console.log("주문 추가 실패");
+            }
+          })
+          .catch(error => {
+            console.error("주문 추가 중 오류 발생:", error);
+          });
       }
+      //sql연동 끝
+      location.reload();
     })
     .catch(error => {
-      console.error("주문 저장 중 오류 발생:", error);
+      console.error("주문 데이터를 불러오는 중 오류 발생:", error);
     });
-  //sql연동 끝
-  location.reload();
 });
 
 
@@ -77,154 +128,154 @@ function renderMenuDetail(menuData) {
   menuTitle.textContent = menuData.menuData.menu_name;
   menuCost.textContent = `${menuData.menuData.price}원`;
   menuDescription.textContent = menuData.menuData.menu_explan;
-  
+
   const img_pp = `.${menuData.image_path}`
   menuImage.src = img_pp;
   menuImage.alt = menuData.menu_name;
-  
+
   // 알레르기 정보 출력
   const allegyList = document.querySelector(".allegy_list");
   allegyList.innerHTML = menuData.allegy_names
-  if (menuData.allegy_names == 0){
+  if (menuData.allegy_names == 0) {
     allegyList.innerHTML = `<li>없음</li>`
-  }else{
+  } else {
     allegyList.innerHTML = menuData.allegy_names
-    .map(allegyName => `<li>${allegyName}</li>`)
-    .join("");
+      .map(allegyName => `<li>${allegyName}</li>`)
+      .join("");
   }
 
   // 옵션 정보 출력
   const container_box = document.querySelector(".op_box");
   const optionContainers = document.querySelectorAll(".option_inner_bow");
 
-// 각 옵션 컨테이너마다 처리
-optionContainers.forEach((container, index) => {
-  const optionList = container.querySelector(".list-group");
-  let currentSet = 0; // 현재 세트 번호
+  // 각 옵션 컨테이너마다 처리
+  optionContainers.forEach((container, index) => {
+    const optionList = container.querySelector(".list-group");
+    let currentSet = 0; // 현재 세트 번호
 
-  // DB에서 가져온 옵션 데이터가 없을 경우 컨테이너 숨김
-  const all_modal = document.querySelector(".modal-dialog");
-  const r_box = document.querySelector(".r_box");
-  if (menuData.op_data.length == 0) {
-    r_box.style.marginTop = "20px";
-    r_box.textContent = "없음"
-    all_modal.style.height = "auto";
-    container_box.style.display = "none";
-    return; // 옵션 데이터 없으면 여기서 종료
-  }
-
-  if (index === 0) {
-    const temperatureOptions = menuData.op_data
-      .filter(option => option.op_name === "뜨거움" || option.op_name === "차가움");
-  
-    let defaultOption = "뜨거움"; // 기본값 설정
-    console.log("temperatureOptions:", temperatureOptions);
-
-    const hasHot = temperatureOptions.some(option => option.op_name === "뜨거움");
-    const hasCold = temperatureOptions.some(option => option.op_name === "차가움");
-    // const speechBubble = document.querySelector('.temp');
-    // const speechBubbleContent = speechBubble.querySelector('div');
-
-    let falseoption = "차가움";
-  
-    if (!hasHot && hasCold) {
-      defaultOption = "차가움";
-
-      falseoption = "뜨거움";
+    // DB에서 가져온 옵션 데이터가 없을 경우 컨테이너 숨김
+    const all_modal = document.querySelector(".modal-dialog");
+    const r_box = document.querySelector(".r_box");
+    if (menuData.op_data.length == 0) {
+      r_box.style.marginTop = "20px";
+      r_box.textContent = "없음"
+      all_modal.style.height = "auto";
+      container_box.style.display = "none";
+      return; // 옵션 데이터 없으면 여기서 종료
     }
 
-    if (temperatureOptions.some(option => option.op_name === "뜨거움") && temperatureOptions.some(option => option.op_name === "차가움")){
-      // speechBubbleContent.textContent = '원하는것을 선택해주세요.'
-      optionList.innerHTML = temperatureOptions
-      .map(option => {
-          const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-          const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
-          return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+    if (index === 0) {
+      const temperatureOptions = menuData.op_data
+        .filter(option => option.op_name === "뜨거움" || option.op_name === "차가움");
+
+      let defaultOption = "뜨거움"; // 기본값 설정
+      console.log("temperatureOptions:", temperatureOptions);
+
+      const hasHot = temperatureOptions.some(option => option.op_name === "뜨거움");
+      const hasCold = temperatureOptions.some(option => option.op_name === "차가움");
+      // const speechBubble = document.querySelector('.temp');
+      // const speechBubbleContent = speechBubble.querySelector('div');
+
+      let falseoption = "차가움";
+
+      if (!hasHot && hasCold) {
+        defaultOption = "차가움";
+
+        falseoption = "뜨거움";
+      }
+
+      if (temperatureOptions.some(option => option.op_name === "뜨거움") && temperatureOptions.some(option => option.op_name === "차가움")) {
+        // speechBubbleContent.textContent = '원하는것을 선택해주세요.'
+        optionList.innerHTML = temperatureOptions
+          .map(option => {
+            const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+            const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+            return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
             <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
             `;
-        })
-      .join("");
-    }else{
-      // "뜨거움"이나 "차가움" 중 하나만 없는 경우
-      
-      if (!hasHot) {
-          // speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+          })
+          .join("");
       } else {
+        // "뜨거움"이나 "차가움" 중 하나만 없는 경우
+
+        if (!hasHot) {
+          // speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+        } else {
           // speechBubbleContent.textContent = '뜨거운 것만 가능한 상품입니다.';
-      }
-      
-      optionList.innerHTML = temperatureOptions
+        }
+
+        optionList.innerHTML = temperatureOptions
           .map(option => {
-              const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-              const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
-              const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
-              return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+            const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+            const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+            const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
+            return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
                 <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
                 <li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
                 <label class="form-check-label" for="falseoption"> ${falseoptionText} (+0원)</label></li>
                 `;
-            })
+          })
           .join("");
-        }
-  } else if (index === 1) {   //09.13
-    const sizeOptions = menuData.op_data
-      .filter(option => option.op_name === "기본 크기" || option.op_name === "큰 크기");
-  
-    let defaultOption = "기본 크기"; // 기본값 설정
-    console.log("sizeOptions:", sizeOptions);
-  
-    const hasRegular = sizeOptions.some(option => option.op_name === "기본 크기");
-    const hasLarge = sizeOptions.some(option => option.op_name === "큰 크기");
-  
-    let falseoption = "큰 크기";
-  
-    if (!hasRegular && hasLarge) {
-      defaultOption = "큰 크기";
-      falseoption = "기본 크기";
-    }
+      }
+    } else if (index === 1) {   //09.13
+      const sizeOptions = menuData.op_data
+        .filter(option => option.op_name === "기본 크기" || option.op_name === "큰 크기");
 
-    // const speechBubble = document.querySelector('.size');
-    // const speechBubbleContent = speechBubble.querySelector('div');
+      let defaultOption = "기본 크기"; // 기본값 설정
+      console.log("sizeOptions:", sizeOptions);
 
-    // speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
-  
-    optionList.innerHTML = sizeOptions
-      .map(option => {
-        const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-        return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+      const hasRegular = sizeOptions.some(option => option.op_name === "기본 크기");
+      const hasLarge = sizeOptions.some(option => option.op_name === "큰 크기");
+
+      let falseoption = "큰 크기";
+
+      if (!hasRegular && hasLarge) {
+        defaultOption = "큰 크기";
+        falseoption = "기본 크기";
+      }
+
+      // const speechBubble = document.querySelector('.size');
+      // const speechBubbleContent = speechBubble.querySelector('div');
+
+      // speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
+
+      optionList.innerHTML = sizeOptions
+        .map(option => {
+          const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+          return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
           <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>
           `;
-      })
-      .join("");
-  
-    if (!hasRegular || !hasLarge) {
-      optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
+        })
+        .join("");
+
+      if (!hasRegular || !hasLarge) {
+        optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
         <label class="form-check-label" for="falseoption"> ${falseoption} (+0원)</label></li>`;
         // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
         // const speechBubble = document.querySelector('.size');
         // const speechBubbleContent = speechBubble.querySelector('div');
-            
+
         // if (!hasRegular) {
         //     speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
         // } else {
         //     speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
         // }
-    }
-  }else if (index === 2) {
-    // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
-    const checkboxOptions = menuData.op_data
-      .filter(option => option.op_name !== "뜨거움" && option.op_name !== "차가움" && option.op_name !== "기본 크기" && option.op_name !== "큰 크기")
-      .slice(0, 6); // 첫 4개의 체크박스 옵션 선택
+      }
+    } else if (index === 2) {
+      // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
+      const checkboxOptions = menuData.op_data
+        .filter(option => option.op_name !== "뜨거움" && option.op_name !== "차가움" && option.op_name !== "기본 크기" && option.op_name !== "큰 크기")
+        .slice(0, 6); // 첫 4개의 체크박스 옵션 선택
 
-    optionList.innerHTML = checkboxOptions
-      .map(option => {
-        currentSet++;
-        return `<li class="list-group-item chch"><input class="form-check-input me-1" type="checkbox" id="${option.op_name}" name="option_set_${currentSet}" value="${option.op_name}">
+      optionList.innerHTML = checkboxOptions
+        .map(option => {
+          currentSet++;
+          return `<li class="list-group-item chch"><input class="form-check-input me-1" type="checkbox" id="${option.op_name}" name="option_set_${currentSet}" value="${option.op_name}">
         <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>`;
-      })
-      .join("");
-  } 
-});
+        })
+        .join("");
+    }
+  });
 
 }
 
@@ -232,13 +283,13 @@ optionContainers.forEach((container, index) => {
 if (window.location.search) {
   let detail_urlParams = new URLSearchParams(window.location.search);
   const menuId = detail_urlParams.get("menuId");
-  
+
   fetch(`/menu/${menuId}`)
     .then(response => response.json())
     .then(menuData => {
       console.log(menuData); // 서버에서 받은 메뉴 데이터를 확인해보세요
       renderMenuDetail(menuData);
-      
+
       // 라디오 버튼 클릭 이벤트 핸들러 추가
       $("input[type='radio']").on("change", function () {
         const selectedValue = $(this).val();
@@ -261,20 +312,20 @@ if (window.location.search) {
     });
 }
 
-function show_qr(op){
+function show_qr(op) {
   const temp_qu = document.querySelector('.temp');
   const size_qu = document.querySelector('.size');
 
-  switch(op){
-    case 't' :
-      if(temp_qu.style.visibility === 'hidden'){
+  switch (op) {
+    case 't':
+      if (temp_qu.style.visibility === 'hidden') {
         temp_qu.style.visibility = 'visible';
-      } else{
+      } else {
         temp_qu.style.visibility = 'hidden';
       }
       break;
-    case 's' :
-      if(size_qu.style.visibility === 'hidden'){
+    case 's':
+      if (size_qu.style.visibility === 'hidden') {
         size_qu.style.visibility = 'visible';
       } else {
         size_qu.style.visibility = 'hidden';
