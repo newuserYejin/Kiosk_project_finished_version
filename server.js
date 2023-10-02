@@ -96,31 +96,40 @@ app.get('/menu', (req, res) => {
 });
 
 // 메뉴 상세 정보 조회 엔드포인트
-app.get('/menu/:menuId', (req, res) => {
+app.get('/menu/:menuId', (req, res) => {//09.29 전체 수정!!!!!!!!!!
   const menuId = req.params.menuId;
-  console.log(menuId);
 
+  // 메뉴 정보를 가져오는 쿼리
   const getMenuQuery = `
     SELECT menu_name, price, menu_explan, tag
     FROM tb_menu
     WHERE menu_num = ?`;
 
+  // 이미지 정보를 가져오는 쿼리
   const getImagePathQuery = `
     SELECT picture
     FROM img
     WHERE img_num = ?`;
 
+  // 알레르기 정보를 가져오는 쿼리
   const getAllegyQuery = `
     SELECT allegy_name
     FROM tb_allegy
     INNER JOIN tb_menu_allegy ON tb_allegy.allegy_num = tb_menu_allegy.allegy_num
     WHERE tb_menu_allegy.menu_num = ?`;
 
+  // 옵션 정보를 가져오는 쿼리
   const getOptionQuery = `
     SELECT op_name, op_price
     FROM tb_op
     INNER JOIN tb_menu_op ON tb_op.op_num = tb_menu_op.op_num
     WHERE tb_menu_op.menu_num = ?`;
+
+  // 주문 정보를 가져오는 쿼리
+  const getOrderQuery = `
+    SELECT *
+    FROM tb_order
+    WHERE menu_num = ?`;
 
   connection.query(getMenuQuery, [menuId], (err, menuResults) => {
     if (err) {
@@ -159,19 +168,70 @@ app.get('/menu/:menuId', (req, res) => {
             op_price: result.op_price
           }));
 
-          console.log('메뉴 데이터:', menuResults[0]);
+          // 주문 정보를 가져옵니다.
+          connection.query(getOrderQuery, [menuId], (err, orderResults) => {
+            if (err) {
+              console.error('주문 데이터 조회 오류:', err);
+              return;
+            }
 
-          const menuData = {
-            menuData: menuResults[0],
-            allegy_names: allegyNames,
-            image_path: imagePath,
-            op_data: optionData
-          };
+            // 주문 데이터를 배열로 만듭니다.
+            const orders = orderResults.map(order => ({
+              order_num: order.order_num,
+              menu_num: order.menu_num,
+              count: order.count,
+              op_t: order.op_t,
+              op_s: order.op_s,
+              op1: order.op1,
+              op2: order.op2,
+              op3: order.op3,
+              op4: order.op4,
+              op5: order.op5,
+              op6: order.op6,
+              op7: order.op7,
+              op8: order.op8
+            }));
 
-          res.json(menuData);
+            console.log('메뉴 데이터:', menuResults[0]);
+
+            const menuData = {
+              menuData: menuResults[0],
+              allegy_names: allegyNames,
+              image_path: imagePath,
+              op_data: optionData,
+              orders: orders  // 주문 데이터를 추가합니다.
+            };
+
+            res.json(menuData);
+          });
         });
       });
     });
+  });
+});
+
+app.post("/updateCount/:orderNum", (req, res) => {//09.29 추가!!!!!!!!!
+  const orderNum = req.params.orderNum;
+  const { count } = req.body;
+
+  // SQL 쿼리 작성
+  const sql = `
+    UPDATE tb_order
+    SET count = ?
+    WHERE order_num = ?;
+  `;
+
+  const values = [count, orderNum];
+
+  // SQL 쿼리 실행
+  connection.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("Error updating order:", error);
+      res.json({ success: false, message: "갯수 정보 업데이트 중 오류가 발생했습니다." });
+    } else {
+      console.log("Order updated successfully:", results);
+      res.json({ success: true, message: "갯수 정보가 업데이트되었습니다." });
+    }
   });
 });
 
