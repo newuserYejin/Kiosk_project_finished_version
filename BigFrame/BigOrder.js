@@ -673,6 +673,10 @@ function generateOrderList(orderData) {
       const move_box_box = document.createElement('div');
       move_box_box.classList.add('.move_box_box');
 
+      const update_btn = document.createElement('button');
+      update_btn.classList.add('update_btn');
+      update_btn.textContent = "변경";
+
       const del_btn = document.createElement('button');
       del_btn.classList.add('del_btn');
       del_btn.textContent = "삭제";
@@ -696,6 +700,7 @@ function generateOrderList(orderData) {
       move_box.appendChild(selectNum);
 
       selectListDetail.appendChild(move_box);
+      selectListDetail.appendChild(update_btn);
       selectListDetail.appendChild(del_btn);
 
       selectList.appendChild(selectListDetail);
