@@ -119,6 +119,10 @@ function gohome() {
 
 }
 
+function firstScreen(){
+    location.href = 'http://localhost:3001/selectorder/selectorder.html';
+}
+
 let total_cost = localStorage.getItem('myTotalCost');
 
 const totalCostElement = document.querySelector('.total_cost');
