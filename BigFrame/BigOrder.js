@@ -667,15 +667,37 @@ function generateOrderList(orderData) {
       selectName.classList.add('select_name');
       selectName.textContent = order.menu_name;
 
+      // 온도 옵션
+      const selectTem = document.createElement('div');//10.06여기서부터
+      selectTem.classList.add('select_tem');
+      selectTem.textContent = `${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)`;
+
+      const selectSize = document.createElement('div');
+      selectSize.classList.add('select_size');
+      selectSize.textContent = `${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})`;
+
+      // 추가 옵션
+      const selectOp = document.createElement('div');
+      selectOp.classList.add('select_op');
+      selectOp.textContent = `추가사항: ${order.options.length > 0 ? order.options.map(op => op.op_name).join(', ') : '없음'}`;//10.06 여기까지 추가
+
       const move_box = document.createElement('div');
       move_box.classList.add('move_box')
 
-      const move_box_box = document.createElement('div');
-      move_box_box.classList.add('.move_box_box');
+      // const move_box_inner = document.createElement('div');
+      // move_box_inner.classList.add('move_box_inner');
+
+      const move_box_inner_1 = document.createElement('div');   // 제품 명과 수량 표기
+      move_box_inner_1.classList.add('move_box_inner_1');
+
+      const move_box_inner_2 = document.createElement('div');   // 온도 및 옵션 표기
+      move_box_inner_2.classList.add('move_box_inner_2');
 
       const update_btn = document.createElement('button');
       update_btn.classList.add('update_btn');
       update_btn.textContent = "변경";
+
+      update_btn.setAttribute('data-orderNum', order.order_num);//10.06 추가
 
       const del_btn = document.createElement('button');
       del_btn.classList.add('del_btn');
@@ -696,8 +718,16 @@ function generateOrderList(orderData) {
       selectNum.classList.add('select_num');
       selectNum.textContent = order.count + '개';
 
-      move_box.appendChild(selectName);
-      move_box.appendChild(selectNum);
+      move_box.appendChild(move_box_inner_1);
+
+      move_box_inner_1.appendChild(selectName);
+      move_box_inner_1.appendChild(selectNum);
+
+      move_box.appendChild(move_box_inner_2);
+
+      move_box_inner_2.appendChild(selectTem);
+      move_box_inner_2.appendChild(selectSize);
+      move_box_inner_2.appendChild(selectOp);
 
       selectListDetail.appendChild(move_box);
       selectListDetail.appendChild(update_btn);
@@ -716,6 +746,68 @@ function generateOrderList(orderData) {
           location.href = `http://localhost:3001/last_checklist/checklist.html?order=${order}&timer=${timer}&pickup=${pickup}`;
         })
       })
+    });
+    //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
+    const updateBtn = document.querySelectorAll(".update_btn");
+    updateBtn.forEach(updateBtn => {
+      updateBtn.addEventListener("click", function () {
+        console.log("변경 버튼 눌림");
+        // 클릭된 버튼의 data-orderNum 값을 가져옴
+        const orderNum = this.getAttribute('data-orderNum');
+        console.log("주문 번호:", orderNum);
+
+        // 먼저 모달 컨테이너를 비웁니다.
+        document.getElementById("modalContainer").innerHTML = "";
+
+        // help_msg.css를 제거합니다.
+        const detailMenuLink = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
+        const urlParams = new URLSearchParams(window.location.search);
+        const pickup = urlParams.get('pickup');
+        const order = urlParams.get('order');
+        if (detailMenuLink) {
+          detailMenuLink.remove();
+        }
+        if (order == 'slow') {
+          history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+        } else {
+          history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+        }
+        // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
+        fetch("http://localhost:3001/detail_menu/jojo_o.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("HTTP Error " + response.status);
+            }
+            return response.text();
+          })
+          .then(data => {
+            // 모달 컨테이너에 jojo.html 콘텐츠를 추가합니다.
+            $("#modalContainer").html(data);
+
+            // 외부 detail_menu 폴더에 있는 detail_menu.css 파일을 로드합니다.
+            const linkElement = document.createElement("link");
+            linkElement.rel = "stylesheet";
+            linkElement.type = "text/css";
+            linkElement.href = "http://localhost:3001/detail_menu/detail_menu.css"; // 이 부분의 파일 경로를 수정해야합니다.
+            document.head.appendChild(linkElement);
+
+            // 외부 detail_menu 폴더에 있는 detail_menu_o.js 파일을 로드합니다.
+            const scriptElement = document.createElement("script");
+            scriptElement.src = "http://localhost:3001/detail_menu/detail_menu_o.js"; // 이 부분의 파일 경로를 수정해야합니다.
+            document.body.appendChild(scriptElement);
+
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+
+            // 모달이 닫힐 때 이벤트를 감지하여 페이지 새로 골침
+            modal._element.addEventListener('hidden.bs.modal', function () {
+              location.reload();
+            });
+          })
+          .catch(error => {
+            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+          });
+      });
     });
     // 삭제 버튼
     const deleteBtn = document.querySelectorAll(".del_btn");
