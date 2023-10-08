@@ -465,7 +465,7 @@ const getOrderData = (callback) => {
       }));
 
       const orderPromises = combinedResults.map(order => new Promise((resolve, reject) => {
-        const opNumbers = [order.op1, order.op2, order.op3, order.op4,
+        const opNumbers = [order.op_s, order.op1, order.op2, order.op3, order.op4,//10.08수정
         order.op5, order.op6, order.op7, order.op8];
         connection.query(getOptionQuery, opNumbers, (err, optionResults) => {
           if (err) {
