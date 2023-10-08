@@ -679,7 +679,7 @@ function generateOrderList(orderData) {
       // 추가 옵션
       const selectOp = document.createElement('div');
       selectOp.classList.add('select_op');
-      selectOp.textContent = `추가사항: ${order.options.length > 0 ? order.options.map(op => op.op_name).join(', ') : '없음'}`;//10.06 여기까지 추가
+      selectOp.textContent = `추가사항: ${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '없음'}`;//10.08수정
 
       const move_box = document.createElement('div');
       move_box.classList.add('move_box')
