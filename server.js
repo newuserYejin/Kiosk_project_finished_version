@@ -675,7 +675,7 @@ app.get('/order_e/:orderNum', (req, res) => {
 
     const orderData = orderResults[0];
 
-    const opNumbers = [orderData.op1, orderData.op2, orderData.op3, orderData.op4,
+    const opNumbers = [orderData.op_s, orderData.op1, orderData.op2, orderData.op3, orderData.op4,//10.08수정
     orderData.op5, orderData.op6, orderData.op7, orderData.op8];
 
     connection.query(getOrderAllergyQuery, [orderData.menu_num], (err, allergyResults) => {
