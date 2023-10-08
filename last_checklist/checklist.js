@@ -175,8 +175,8 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                 <div class="list_option_detail">
                     <div class="option_detail">
                         <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
-                        <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(+0원)</span>
-                        <span class="select_op">추가사항: ${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '없음'}</span>//10.08수정
+                        <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})</span>
+                        <span class="select_op">추가사항: ${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '없음'}</span>
                     </div>
                 </div>
                 <div class="list_buttons">
