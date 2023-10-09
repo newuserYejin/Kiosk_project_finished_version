@@ -123,10 +123,30 @@ function firstScreen(){
     location.href = 'http://localhost:3001/selectorder/selectorder.html';
 }
 
-let total_cost = localStorage.getItem('myTotalCost');
+let totalAmount = 0;
+fetch('/getOrderData')
+    .then(response => response.json())
+    .then(data => {
+        console.log("Session data:", JSON.stringify(data));
+        // 주문 데이터를 가지고 총 금액 계산
+        totalAmount = calculateTotalAmount(data);
+        updateTotalAmountUI(totalAmount);
 
+        localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+    });
+function calculateTotalAmount(orders) {
+    return orders.reduce((total, order) => total + Number(order.total_price), 0);
+}
+function updateTotalAmountUI(amount) {
+    const totalCostElement = document.querySelector('.total_cost');
+    totalCostElement.textContent = amount + '원';
+}
+
+let total_cost = localStorage.getItem('myTotalCost');
+const formattedPrice = new Intl.NumberFormat('ko-KR').format(total_cost);//09.18 가격 쉼표 넣기
 const totalCostElement = document.querySelector('.total_cost');
-totalCostElement.textContent = total_cost + '원';
+totalCostElement.textContent = formattedPrice + '원';
+
 
 // function showMessageAndRedirect() {
 //     setTimeout(function() {
