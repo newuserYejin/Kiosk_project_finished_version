@@ -9,6 +9,10 @@
     font-family: 'Pretendard';
 }
 
+#modalContainer .modal-dialog{
+
+}
+
 #modalContainer .help_modal_dialog {
     width: 88.2%;
     height: 100%;
@@ -26,7 +30,7 @@
 }
 
 #modalContainer .header_box{
-    width: 88.3%;
+    width: 95%;
     height: 36.3%;
 
     display: flex;

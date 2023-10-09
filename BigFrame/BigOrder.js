@@ -520,7 +520,6 @@ function searchFunction() {
       parentContainer.appendChild(div);
       parentContainer.appendChild(splitBorderDiv);
     })
-    localStorage.removeItem('mydata');
 
     // 선택 버튼(메뉴 선택)
     const selectBtn = document.querySelectorAll(".selectBtn");
@@ -628,6 +627,7 @@ function searchFunction() {
       });
     });
   };
+  localStorage.removeItem('mydata');
 }
 
 // 검색 내용 input태그에 표시
