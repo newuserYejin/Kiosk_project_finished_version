@@ -6,6 +6,8 @@ const app = express();
 const session = require('express-session');
 const port = 3001;
 
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/', {
   setHeaders: (res, path, stat) => {
     if (path.endsWith('.css')) {
@@ -13,9 +15,6 @@ app.use(express.static(__dirname + '/', {
     }
   }
 }));
-app.use(cors());
-app.use(bodyParser.json());
-
 
 // MySQL 연결 설정
 const connection = mysql.createConnection({
@@ -40,10 +39,7 @@ app.use(session({
   saveUninitialized: true
 }));
 //여기까지 기본설정
-
-
-//------한국어-------
-// 카테고리별 메뉴 범위 계산 함수
+/*카테고리별 메뉴 범위 계산 함수*/
 const calculateMenuRange = (category) => {
   let start, end;
   if (category === '1') { // 커피
@@ -69,6 +65,7 @@ const calculateMenuRange = (category) => {
   return { start, end };
 };
 
+/*------한국어-------*/
 // 데이터베이스에서 해당 범위의 메뉴 정보 조회
 const getMenuDataByRange = (category, callback) => {
   const menuRange = calculateMenuRange(category);
@@ -357,7 +354,6 @@ app.post("/addOrder", (req, res) => {
     }
   );
 });
-//detail_menu.js끝
 
 //detail_menu_o에서의 변경 내용 db에 저장
 app.post("/updateOrder", (req, res) => {
@@ -396,7 +392,6 @@ app.post("/updateOrder", (req, res) => {
     }
   });
 });
-//08.20 추가 끝
 
 // DELETE 요청을 처리하는 API 엔드포인트
 app.delete('/deleteOrder/:orderNum', (req, res) => {
@@ -414,7 +409,6 @@ app.delete('/deleteOrder/:orderNum', (req, res) => {
     }
   });
 });
-
 
 // 클라이언트에 주문 데이터 제공하는 API 엔드포인트
 app.get('/getOrderData', (req, res) => {
@@ -526,9 +520,7 @@ app.get('/search', (req, res) => {
   });
 });
 
-
-
-//----------영어---------
+/*----------영어---------*/
 const getMenuDataByRange_e = (category, callback) => {
   const menuRange = calculateMenuRange(category);
   const sql = `SELECT menu_num, menu_name, price, menu_explan, tag, picture AS image_path 
@@ -580,6 +572,11 @@ app.get('/menu_e/:menuId', (req, res) => {
     INNER JOIN tb_menu_op_e ON tb_op_e.op_num = tb_menu_op_e.op_num
     WHERE tb_menu_op_e.menu_num = ?`;
 
+  const getOrderQuery = `
+  SELECT *
+  FROM tb_order
+  WHERE menu_num = ?`;
+
   connection.query(getMenuQuery, [menuId], (err, menuResults) => {
     if (err) {
       console.error('메뉴 데이터 조회 오류:', err);
@@ -617,19 +614,68 @@ app.get('/menu_e/:menuId', (req, res) => {
             op_price: result.op_price
           }));
 
-          console.log('메뉴 데이터:', menuResults[0]);
+          connection.query(getOrderQuery, [menuId], (err, orderResults) => {
+            if (err) {
+              console.error('주문 데이터 조회 오류:', err);
+              return;
+            }
 
-          const menuData = {
-            menuData: menuResults[0],
-            allegy_names: allegyNames,
-            image_path: imagePath,
-            op_data: optionData
-          };
+            const orders = orderResults.map(order => ({
+              order_num: order.order_num,
+              menu_num: order.menu_num,
+              count: order.count,
+              op_t: order.op_t,
+              op_s: order.op_s,
+              op1: order.op1,
+              op2: order.op2,
+              op3: order.op3,
+              op4: order.op4,
+              op5: order.op5,
+              op6: order.op6,
+              op7: order.op7,
+              op8: order.op8
+            }));
 
-          res.json(menuData);
+            console.log('메뉴 데이터:', menuResults[0]);
+
+            const menuData = {
+              menuData: menuResults[0],
+              allegy_names: allegyNames,
+              image_path: imagePath,
+              op_data: optionData,
+              orders: orders  // 주문 데이터를 추가합니다.
+            };
+
+            res.json(menuData);
+          });
         });
       });
     });
+  });
+});
+
+app.post("/updateCount/:orderNum", (req, res) => {//09.29 추가!!!!!!!!!
+  const orderNum = req.params.orderNum;
+  const { count } = req.body;
+
+  // SQL 쿼리 작성
+  const sql = `
+    UPDATE tb_order
+    SET count = ?
+    WHERE order_num = ?;
+  `;
+
+  const values = [count, orderNum];
+
+  // SQL 쿼리 실행
+  connection.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("Error updating order:", error);
+      res.json({ success: false, message: "갯수 정보 업데이트 중 오류가 발생했습니다." });
+    } else {
+      console.log("Order updated successfully:", results);
+      res.json({ success: true, message: "갯수 정보가 업데이트되었습니다." });
+    }
   });
 });
 
@@ -757,7 +803,6 @@ app.post("/addOrder_e", (req, res) => {
     }
   );
 });
-//detail_menu.js끝
 
 //detail_menu_o에서의 변경 내용 db에 저장
 app.post("/updateOrder_e", (req, res) => {
@@ -795,8 +840,7 @@ app.post("/updateOrder_e", (req, res) => {
       res.json({ success: true, message: "주문 정보가 업데이트되었습니다." });
     }
   });
-});
-//08.20 추가 끝
+});//08.20 추가 끝
 
 // DELETE 요청을 처리하는 API 엔드포인트
 app.delete('/deleteOrder/:orderNum', (req, res) => {
@@ -814,7 +858,6 @@ app.delete('/deleteOrder/:orderNum', (req, res) => {
     }
   });
 });
-
 
 // 클라이언트에 주문 데이터 제공하는 API 엔드포인트
 app.get('/getOrderData_e', (req, res) => {
@@ -905,6 +948,26 @@ const getOrderData_e = (callback) => {
   });
 };
 
+//검색 쿼리(영어)
+app.get('/search_e', (req, res) => {
+  const keyword_e = req.query.keyword;
+
+  const sql = `select * from img inner join tb_menu_e
+  on img.img_num = tb_menu_e.Menu_Num
+  where tb_menu_e.Menu_Name LIKE '%${keyword_e}%'`;
+
+  connection.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error executing the query:', err);
+      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json(results);
+    }
+
+    //res.setHeader('Content-Type', 'application/javascript');
+    // res.sendFile(__dirname + '/search/search.js');
+  });
+});
 
 // 09.04추가 selectorder.html 로딩시 tb_order초기화
 app.post("/reset", (req, res) => {
@@ -939,27 +1002,6 @@ app.post("/reset", (req, res) => {
 app.get('/detail_menu.js', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
   res.sendFile(__dirname + '/detail_menu.js');
-});
-
-//검색 쿼리(영어)
-app.get('/search_e', (req, res) => {
-  const keyword_e = req.query.keyword;
-
-  const sql = `select * from img inner join tb_menu_e
-  on img.img_num = tb_menu_e.Menu_Num
-  where tb_menu_e.Menu_Name LIKE '%${keyword_e}%'`;
-
-  connection.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error executing the query:', err);
-      res.status(500).json({ error: 'Internal server error' });
-    } else {
-      res.json(results);
-    }
-
-    //res.setHeader('Content-Type', 'application/javascript');
-    // res.sendFile(__dirname + '/search/search.js');
-  });
 });
 
 app.listen(port, () => {
