@@ -93,7 +93,17 @@
         // 모달 열기 함수
         function openModal() {
             $.get("http://localhost:3001/payment_msg/payment_msg.html", function (data) {
+                // 모달에 HTML 컨텐츠를 추가합니다.
                 $("#modalContainer").html(data);
+
+                // 모달에 CSS 파일을 추가합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css"; // CSS 파일 경로
+                document.head.appendChild(linkElement);
+
+                // 부트스트랩 모달을 생성하고 엽니다.
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });
