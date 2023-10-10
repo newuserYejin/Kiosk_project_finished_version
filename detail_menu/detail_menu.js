@@ -126,7 +126,8 @@ function renderMenuDetail(menuData) {
   const menuImage = document.querySelector(".menu_img_size");
 
   menuTitle.textContent = menuData.menuData.menu_name;
-  menuCost.textContent = `${menuData.menuData.price}원`;
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(menuData.menuData.price);//10.09 가격 쉼표 넣기
+  menuCost.textContent = `${formattedPrice}원`;
   menuDescription.textContent = menuData.menuData.menu_explan;
 
   const img_pp = `.${menuData.image_path}`

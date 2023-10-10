@@ -381,8 +381,9 @@
             return orders.reduce((total, order) => total + Number(order.total_price), 0);
         }
         function updateTotalAmountUI(amount) {
+            const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
             const totalCostElement = document.querySelector('.total_cost');
-            totalCostElement.textContent = amount + '원';
+            totalCostElement.textContent = formattedPrice + '원';
         }
 
         let total_cost = localStorage.getItem('myTotalCost');

@@ -125,9 +125,12 @@ function firstScreen(){
 
 let total_cost = localStorage.getItem('myTotalCost');
 
-const totalCostElement = document.querySelector('.total_cost');
-totalCostElement.textContent = total_cost + '원';
-
+if (total_cost !== null) {//10.09 쉼표 넣기
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(Number(total_cost));
+    
+    const totalCostElement = document.querySelector('.total_cost');
+    totalCostElement.textContent = formattedPrice + '원';
+}
 // function showMessageAndRedirect() {
 //     setTimeout(function() {
 //         alert("3초 후에 페이지가 이동됩니다.");

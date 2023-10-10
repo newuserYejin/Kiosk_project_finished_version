@@ -143,6 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {//서버연동(DOMCon
 });
 
 function createOrderItem(order) {//주문 아이템 생성 함수
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(order.total_price);//10.09 쉼표넣기
   const orderItem = document.createElement('div');
   orderItem.className = 'list_content_box';
   orderItem.innerHTML = `
@@ -166,7 +167,7 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                   <div class="button_box_num">
                     <p class="button_num">${order.count}개</p>
                   </div>
-                  <div class="menu_cost">${order.total_price}원</div> <!--메뉴 가격 출력-->
+                  <div class="menu_cost">${formattedPrice}원</div> <!--메뉴 가격 출력-->
                 </div>
             </div>
             
@@ -404,8 +405,9 @@ function calculateTotalAmount(orders) {
 }
 
 function updateTotalAmountUI(amount) {
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
   const totalCostElement = document.querySelector('.total_cost');
-  totalCostElement.textContent = amount + '원';
+  totalCostElement.textContent = formattedPrice + '원';//10.09 가격 쉼표 넣기
 }
 //08.19 최종 금액 계산
 
