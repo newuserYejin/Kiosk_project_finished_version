@@ -172,7 +172,8 @@ function createOrderItem(order) {//주문 아이템 생성 함수
             </div>
             
             <!--옵션 데이터-->
-            <div class="list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '30%' : '55%'}">
+            <!--<div class="list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '0%' : '55%'}">-->
+            <div class="list_option" ${order.menu_num >= 500 ? 'style="display: none;"' : 'disabled'}>
                 <div class="list_option_detail">
                     <div class="option_detail">
                         <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
@@ -180,10 +181,10 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                         <span class="select_op">추가사항: ${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '없음'}</span>
                     </div>
                 </div>
+            </div>
                 <div class="list_buttons">
-                    <div class="content_update_button">
-                        <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
-                    </div>
+                <div class="content_update_button">
+                    <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
                 </div>
             </div>
         </div>
