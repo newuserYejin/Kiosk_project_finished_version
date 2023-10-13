@@ -264,17 +264,6 @@ body {
   overflow-y: visible;
 }
 
-.list_content_box {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin: 2%;
-  align-items: center;
-  position: relative;
-  border: solid 2px black;
-  border-radius: 8px;
-}
-
 .list_img_box {
   width: 65%;
   height: 65%;
@@ -467,6 +456,10 @@ body {
   height: 3.5vw;
 }
 
+.slide{
+  width: 100%;
+  height: 100%;
+}
 
 /*슬라이드 창*/
 .slider-container {
@@ -487,13 +480,30 @@ body {
 .slide {
   flex: 0 0 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 168px);
   width: 100%;
   height: 100%;
-  overflow: hidden;
   overflow-x: visible;
   overflow-y: visible;
+}
+
+/* 내용을 2열 4행 그리드로 배치 */
+.slide .list_content_box {
+  grid-column: span 1; /* 각 내용 요소는 1열을 차지합니다. */
+  grid-row: span 1;    /* 각 내용 요소는 1행을 차지합니다. */
+  /* 원하는 스타일을 추가하세요. */
+}
+
+.list_content_box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 2%;
+  align-items: center;
+  position: relative;
+  border: solid 2px black;
+  border-radius: 8px;
 }
 
 

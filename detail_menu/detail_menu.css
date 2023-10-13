@@ -204,6 +204,15 @@
     height: 100%;
 }
 
+#modalContainer .input-group-prepend button:hover{
+    background-color: white;
+}
+
+
+#modalContainer .input-group-append button:hover{
+    background-color: white;
+}
+
 #modalContainer .form-control[readonly] {
     background-color: white;
     border: none;

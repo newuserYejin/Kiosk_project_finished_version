@@ -60,16 +60,16 @@ $(document).ready(function () {
       t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
 
-    const speechBubble = document.querySelector('.temp');
-    const speechBubbleContent = speechBubble.querySelector('div');
+    // const speechBubble = document.querySelector('.temp');
+    // const speechBubbleContent = speechBubble.querySelector('div');
 
-    if (!op_num_o.includes(1)) {
-      speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
-    } else if(!op_num_o.includes(2)) {
-      speechBubbleContent.textContent = '따뜻한 것만 가능한 상품입니다.';
-    } else {
-      speechBubbleContent.textContent = '원하는 것을 선택해주세요.';
-    }
+    // if (!op_num_o.includes(1)) {
+    //   speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+    // } else if(!op_num_o.includes(2)) {
+    //   speechBubbleContent.textContent = '따뜻한 것만 가능한 상품입니다.';
+    // } else {
+    //   speechBubbleContent.textContent = '원하는 것을 선택해주세요.';
+    // }
   }
 
   // 크기 옵션을 표시하거나 숨기는 함수
@@ -99,16 +99,16 @@ $(document).ready(function () {
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
     }
 
-    const speechBubble = document.querySelector('.size');
-    const speechBubbleContent = speechBubble.querySelector('div');
+    // const speechBubble = document.querySelector('.size');
+    // const speechBubbleContent = speechBubble.querySelector('div');
 
-    if (!op_num_o.includes(3)) {
-      speechBubbleContent.textContent = '큰 것만 가능한 상품입니다.';
-    } else if(!op_num_o.includes(4)) {
-      speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
-    } else {
-      speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
-    }
+    // if (!op_num_o.includes(3)) {
+    //   speechBubbleContent.textContent = '큰 것만 가능한 상품입니다.';
+    // } else if(!op_num_o.includes(4)) {
+    //   speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
+    // } else {
+    //   speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
+    // }
   }
   //09.13여기까지
 
@@ -129,6 +129,7 @@ $(document).ready(function () {
     } else {
       console.error("주문 번호를 찾을 수 없습니다.");
     }
+    location.reload();
   });
 
   // updateOrder 함수 정의

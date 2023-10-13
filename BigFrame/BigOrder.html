@@ -17,7 +17,15 @@
     <div class="all_box">
         <!--상단 배너-->
         <div class="top_banner">
-            <img src="./image/banner.jpg" alt="호이카페 배너">
+            <div class="hoi_box">
+                <img class="hoi" src="./image/hoi.png" />
+            </div>
+            <img class="cafe_name" src="./image/cafe_name.png" />
+
+            <div class="help">
+                <div id="imageLink">도움말</div>
+                <div id="modalContainer"></div>
+            </div>
         </div>
 
         <!--카테고리-->
@@ -35,48 +43,20 @@
         <div class="all">
             <!--오른쪽 목록-->
             <div class="list_menu">
-                <div class="add_fuc_bar">
-                    <div class="view_button">
-                        <input type="radio" name="size" value="basic" id="basic_f">
-                        <label for="basic_f">기본</label>
-                        <input type="radio" name="size" value="big" id="big_f" checked>
-                        <label for="big_f">더크게</label>
-                    </div>
-                    <div class="search_div" id="search_div">
-                        <input type="search" name="menu-search" class="search" placeholder="검색으로 찾아보세요">
-                        <img class="search_icon" src="./image/search.png">
-                    </div>
-                    <div class="help">
-                        <div id="imageLink">도움말</div>
-                        <div id="modalContainer"></div>
-                    </div>
-                </div>
-
                 <div class="ho">
-                    <div class="main_box" style="border: soli 1px blue;">
+                    <div class="upper_box">
                         <div class="navigation">
                             <div class="navigation_all_box">
                                 <div class="box_line" onclick="select_page()">
-                                    <div class="level_button" style="background-color: rgba(0, 122, 194, 0.1);
-                                    border: solid 1px #007AC2; color: #007AC2;">
+                                    <div class="level_button" style="background-color: rgba(0, 122, 194, 0.1); color: #007AC2;">
                                         <p class="circle_name">1.메뉴선택</p>
                                     </div>
-                                </div>
-
-                                <div class="level_line">
-                                    <p></p>
-                                    <img src="./image/line2.png" alt="Line 이미지" class="center now">
                                 </div>
 
                                 <div class="box_line" onclick="check_page()">
                                     <div class="level_button">
                                         <p class="circle_name">2.주문확인</p>
                                     </div>
-                                </div>
-
-                                <div class="level_line">
-                                    <p></p>
-                                    <img src="./image/line2.png" alt="Line 이미지" class="center">
                                 </div>
 
                                 <div class="box_line pay_move" onclick="pay_page()">
@@ -86,6 +66,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="search_div" id="search_div">
+                            <input type="search" name="menu-search" class="search" placeholder="검색으로 찾아보세요">
+                            <img class="search_icon" src="./image/search_icon.png">
+                        </div>
+                    </div>
+
+                    <div class="main_box" style="border: soli 1px blue;">
                         <div class="menu_box">
                             <div class="list_box" id="resultContainer">
                                 <div class="list_content_box" style="display: none;">
@@ -109,19 +96,41 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
+
+                        <div class="right">
+                            <div class="pickup_op">
+                                <div class="pickup_op_box">
+                                    <div>
+                                        <img src="./image/bag_icon.png" />
+                                        <div>주문목록</div>
+                                    </div>
+                                    <div class="pickup_btn">
+                                        <button class="pickup_selected_btn">포장</button>
+                                        <button>매장</button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!--고정 버튼-->
-                            <div class="fix_button">
-                                <button class="fix_button_detail fix_button_pre" onclick="prvsScren()">
-                                    <img src="./image/left.svg">
-                                    이전단계</button>
-                                <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
-                                    <img src="./image//house.svg">
-                                    처음화면</button>
-                                <button class="fix_button_detail fix_button_next" onclick="nextScreen()">
-                                    다음단계 <img src="./image/right.svg"></button>
+                            <!--주문리스트 미리보기-->
+                            <div class="select_list_box">
+                                <div class="select_list">
+                                    <div class="select_list_list">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pay_button" onclick="pay_page()">
+                                <div class="pay_inner_box">
+                                    <img src="./image/cardpay_white.png" />
+                                    <div class="total_cost_box">
+                                        <div class="total_cost">5000원</div>
+                                        <div>결제하기</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -129,18 +138,36 @@
             </div>
         </div>
 
-        <!--하단-->
-        <div class="select_list_box">
-            <!--주문리스트 미리보기-->
-            <div class="select_list">
-                <div class="select_list_title">
-                    현재 주문 목록
-                </div>
-                <div class="select_list_list">
+        <!--하단 버튼-->
+        <div class="add_fuc_bar">
+            <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
+                <img src="./image/home_icon.png">처음화면
+            </button>
+            <button class="fix_button_detail fix_button_pre" onclick="prvsScren()">
+                <img src="./image/left_icon.png">이전으로
+            </button>
+            <button class="fix_button_detail fix_button_next" onclick="nextScreen()">
+                <img src="./image/right_icon.png">다음으로
+            </button>
 
-                </div>
-            </div>
+            <button class="fix_button_detail fix_button_next size_switch" data-value="basic">
+                <img src="./image/size_icon.png">기본
+            </button>
+
+            <button class="fix_button_detail fix_button_next all_delete" data-value="basic">
+                <img src="./image/delete_black_icon.png">전체 취소
+            </button>
         </div>
+
+        <!-- 라디오버튼일때
+        <div class="view_button">
+            <input type="radio" name="size" value="basic" id="basic_f">
+            <label for="basic_f">기본</label>
+            <input type="radio" name="size" value="big" id="big_f" checked>
+            <label for="big_f">더크게</label>
+        </div> -->
+
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -165,7 +192,7 @@
         }
         // localStorage.removeItem(speech_result)
     </script> -->
-
+    <!-- 
     <script>
 
         var secondsElapsed = 0;
@@ -222,7 +249,7 @@
             console.log("터치 이벤트");
         });
 
-    </script>
+    </script> -->
 
     <script>//09.14 수정
         var currentURL = window.location.href;

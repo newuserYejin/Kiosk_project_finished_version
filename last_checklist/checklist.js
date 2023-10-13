@@ -144,6 +144,12 @@ document.addEventListener("DOMContentLoaded", function () {//서버연동(DOMCon
 
 function createOrderItem(order) {//주문 아이템 생성 함수
   const formattedPrice = new Intl.NumberFormat('ko-KR').format(order.total_price);//10.09 쉼표넣기
+
+  // 옵션 정보를 가져옴
+  const optionsString = order.options.length > 1
+    ? order.options.slice(1).map(op => op.op_name).join(', ')
+    : '없음';
+
   const orderItem = document.createElement('div');
   orderItem.className = 'list_content_box';
   orderItem.innerHTML = `
@@ -164,10 +170,10 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                 <div class="menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
 
                 <div class="cost_info">
-                  <div class="button_box_num">
-                    <p class="button_num">${order.count}개</p>
-                  </div>
-                  <div class="menu_cost">${formattedPrice}원</div> <!--메뉴 가격 출력-->
+                <div class="button_box_num">
+                  <p class="button_num">${order.count}개</p>
+                </div>
+                <div class="menu_cost">${formattedPrice}원</div> <!--메뉴 가격 출력-->
                 </div>
             </div>
             
@@ -178,7 +184,10 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                     <div class="option_detail">
                         <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
                         <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})</span>
-                        <span class="select_op">추가사항: ${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '없음'}</span>
+                        <span class="select_op">
+                            <!-- 여기에 각 옵션을 처리하는 반복문 추가 -->
+                            ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}</div>`).join('') : '<div class="select_op">추가사항: 없음</div>'}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -208,22 +217,15 @@ function findParentOrderItem(element) {
 
 function addOrdersToDOM(orders) {
   let orderList = document.querySelector('.list_box');
-  let nextButton = document.querySelector('.next_btnnn');
   let none_msg = document.querySelectorAll('.speech-bubble');
   let pay_move = document.querySelector('.pay_move');
   // let pay_circle = document.querySelector('.pay_circle');
-
-  if (!nextButton) {
-    console.error('버튼 없음.');
-    return; // 해당 요소를 찾을 수 없으면 함수를 종료합니다.
-  }
 
   if (orders.length === 0) {
     // 주문 목록이 비어 있는 경우 메시지를 추가합니다.
     orderList.innerHTML = `
       <div class='no_menu'>주문 내역이 없습니다.</div>
     `;
-    nextButton.disabled = true;
     none_msg.forEach((element) => {
       element.style.visibility = 'visible';
     });
@@ -247,7 +249,6 @@ function addOrdersToDOM(orders) {
       splitBorderDiv.className = "split_border";
       orderList.appendChild(splitBorderDiv);
     });
-    nextButton.disabled = false;
 
     // pay_move 버튼 활성화 (옵션: 주문 목록이 비어 있지 않을 때 활성화)
     if (pay_move) {
@@ -423,9 +424,9 @@ function updateURL() {
 
   // 선택된 라디오 버튼에 따라 newParamValue 값을 설정합니다.
   if (radioButtons[0].checked) {
-    newParamValue = "2"; // "먹고가기"가 선택된 경우
-  } else if (radioButtons[1].checked) {
     newParamValue = "1"; // "포장하기"가 선택된 경우
+  } else if (radioButtons[1].checked) {
+    newParamValue = "2"; // "먹고가기"가 선택된 경우
   }
 
   // 현재 URL을 가져옵니다.
@@ -448,11 +449,11 @@ function checkRadioButton() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('pickup');
   if (orderType === '1') {
-    radioButtons[0].checked = false;
-    radioButtons[1].checked = true;
-  } else {
-    radioButtons[0].checked = true;
     radioButtons[1].checked = false;
+    radioButtons[0].checked = true;
+  } else {
+    radioButtons[1].checked = true;
+    radioButtons[0].checked = false;
   }
 }
 
