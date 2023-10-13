@@ -184,7 +184,7 @@ body {
 }
 
 .fir_box {
-    height: 91.5%;
+    height: 86.5%;
     width: 100%;
 
     display: flex;
@@ -308,6 +308,19 @@ body {
     flex: 1;
 }
 
+.fix_button_detail img {
+    margin: 0 2px;
+    height: 33.9%;
+    width: auto;
+
+    margin-bottom: 10px;
+}
+
+.fix_button_detail:hover {
+    background-color: #00aabb;
+    border: solid 1px #00aabb;
+}
+
 .total_cost_box {
     flex: 3;
     text-align: center;
@@ -324,17 +337,4 @@ body {
 
 .total_cost{
     font-weight: 600;
-}
-
-.fix_button_detail img {
-    margin: 0 2px;
-    height: 33.9%;
-    width: auto;
-
-    margin-bottom: 10px;
-}
-
-.fix_button_detail:hover {
-    background-color: #00aabb;
-    border: solid 1px #00aabb;
 }
