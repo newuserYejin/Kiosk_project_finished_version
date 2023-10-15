@@ -213,33 +213,26 @@ function updateSliderPosition() {
 }
 
 //사이즈 이동
-const radioButtons = document.getElementsByName('size');
-radioButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    // 선택된 라디오 버튼의 값에 따라 페이지 이동
-    if (button.checked) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const currentOrder = urlParams.get('order');
-      const pickup = urlParams.get('pickup');//09.08 수정
+const sizeButtons = document.querySelectorAll('.size_switch');
 
-      switch (button.value) {
-        case 'big':
-          if (currentOrder === 'slow') {
-            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
-          } else if (currentOrder === 'basic') {
-            window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
-          }
-          break;
-        case 'basic':
-          if (currentOrder === 'slow') {
-            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
-          } else if (currentOrder === 'basic') {
-            window.location.href = `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
-          }
-          break;
-        default:
-          break;
-      }
+sizeButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // 선택된 버튼의 값을 가져옴
+    const selectedValue = button.getAttribute('data-value');
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentOrder = urlParams.get('order');
+    const pickup = urlParams.get('pickup');//09.08 수정
+
+    switch (selectedValue) {
+      case 'big':
+        if (currentOrder === 'slow') {
+          window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`;
+        } else if (currentOrder === 'basic') {
+          window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}`;
+        }
+        break;
+      default:
+        break;
     }
   });
 });
@@ -570,6 +563,7 @@ if (keywordValue) {
 function generateOrderList(orderData) {
   const selectList = document.querySelector('.select_list_list');
   let pay_move = document.querySelector('.pay_move');
+  let circle_name = document.querySelector('.pay_move .circle_name');
 
   if (orderData.length == 0) {
     selectList.innerHTML = `
@@ -582,11 +576,13 @@ function generateOrderList(orderData) {
       };
 
       // 배경색 변경
-      pay_move.style.color = "#6c757d";
+      circle_name.style.color = "#BBBBBB";
+      pay_move.style.backgroundColor = "rgba(233, 233, 233, 0.7)";
       // pay_circle.style.border = "solid 3px #6c757d"
     }
   } else {
     orderData.forEach(order => {
+      console.log(order.menu_num);
       const selectListDetail = document.createElement('div');
       selectListDetail.classList.add('select_list_detail');
 
@@ -594,16 +590,55 @@ function generateOrderList(orderData) {
       selectName.classList.add('select_name');
       selectName.textContent = order.menu_name;
 
+      // 온도 옵션
+      const selectTem = document.createElement('div');//10.06여기서부터
+      selectTem.classList.add('select_tem');
+      selectTem.textContent = `${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)`;
+
+      const selectSize = document.createElement('div');
+      selectSize.classList.add('select_size');
+      selectSize.textContent = `${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})`;
+
+      // 추가 옵션
+      const selectOp = document.createElement('div');
+      selectOp.classList.add('select_op');
+      // selectOp.textContent = `${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '추가사항: 없음'}`;//10.08수정
+      if (order.options.length > 1) {
+        order.options.slice(1).forEach(op => {
+          const optionDiv = document.createElement('div');
+          optionDiv.textContent = op.op_name + "(+" + op.op_price + "원)";
+          selectOp.appendChild(optionDiv);
+        });
+      } else {
+        selectOp.textContent = '추가사항: 없음';
+      }
+
       const move_box = document.createElement('div');
       move_box.classList.add('move_box')
-      move_box.onclick = "move_cheklist()"
 
-      const move_box_box = document.createElement('div');
-      move_box_box.classList.add('.move_box_box');
+      // const move_box_inner = document.createElement('div');
+      // move_box_inner.classList.add('move_box_inner');
+
+      const move_box_inner_1 = document.createElement('div');   // 제품 명과 수량 표기
+      move_box_inner_1.classList.add('move_box_inner_1');
+
+      const move_box_inner_2 = document.createElement('div');   // 온도 및 옵션 표기
+      move_box_inner_2.classList.add('move_box_inner_2');
+
+      const update_btn = document.createElement('button');
+      update_btn.classList.add('update_btn');
+      update_btn.textContent = "옵션변경";
+
+      update_btn.setAttribute('data-orderNum', order.order_num);//10.06 추가
 
       const del_btn = document.createElement('button');
       del_btn.classList.add('del_btn');
-      del_btn.textContent = "삭제";
+
+      const del_btn_icon = document.createElement("img");
+      del_btn_icon.src = "./image/delete_black_icon.png";
+      del_btn_icon.classList.add('del_btn_icon'); // 'add'를 'classList.add'로 수정
+
+      del_btn.appendChild(del_btn_icon);
 
       del_btn.setAttribute('data-orderNum', order.order_num);
 
@@ -620,85 +655,158 @@ function generateOrderList(orderData) {
       selectNum.classList.add('select_num');
       selectNum.textContent = order.count + '개';
 
-      move_box.appendChild(selectName);
-      move_box.appendChild(selectNum);
+      move_box.appendChild(move_box_inner_1);
+
+      move_box_inner_1.appendChild(del_btn);
+      move_box_inner_1.appendChild(selectName);
+
+      move_box.appendChild(move_box_inner_2);
+
+      move_box_inner_2.appendChild(selectTem);
+      move_box_inner_2.appendChild(selectSize);
+      move_box_inner_2.appendChild(selectOp);
+      move_box_inner_2.appendChild(update_btn);
+      move_box_inner_2.appendChild(selectNum);
 
       selectListDetail.appendChild(move_box);
-      selectListDetail.appendChild(del_btn);
 
       selectList.appendChild(selectListDetail);
 
-      const move_boies = document.querySelectorAll('.move_box');
+      // const move_boies = document.querySelectorAll('.move_box');
 
-      move_boies.forEach(move_boies => {
-        move_boies.addEventListener('click', () => {
-          const urlParams = new URLSearchParams(window.location.search);
-          const pickup = urlParams.get('pickup')
-          const timer = urlParams.get('timer')
-          location.href = `http://localhost:3001/last_checklist/checklist.html?timer=${timer}&pickup=${pickup}&order=slow`
-        })
-      })
-      
-      // 삭제 버튼
-      const deleteBtn = document.querySelectorAll(".del_btn");
-      deleteBtn.forEach(deleteBtn => {
-        deleteBtn.addEventListener("click", function () {
-          console.log("삭제 버튼 눌림");
-          // 클릭된 버튼의 data-orderNum 값을 가져옴
-          const orderNum = this.getAttribute('data-orderNum');
-          console.log("주문 번호:", orderNum);
+      // move_boies.forEach(move_boies => {
+      //   move_boies.addEventListener('click', () => {
+      //     const urlParams = new URLSearchParams(window.location.search);
+      //     const pickup = urlParams.get('pickup');//09.08 수정
+      //     const order = urlParams.get('order');
+      //     const timer = urlParams.get('timer')
+      //     location.href = `http://localhost:3001/last_checklist/checklist.html?order=${order}&timer=${timer}&pickup=${pickup}`;
+      //   })
+      // })
+    });
 
-          // 먼저 모달 컨테이너를 비웁니다.
-          document.getElementById("modalContainer").innerHTML = "";
+    
+    //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
+    const updateBtn = document.querySelectorAll(".update_btn");
+    updateBtn.forEach(updateBtn => {
+      updateBtn.addEventListener("click", function () {
+        console.log("변경 버튼 눌림");
+        // 클릭된 버튼의 data-orderNum 값을 가져옴
+        const orderNum = this.getAttribute('data-orderNum');
+        console.log("주문 번호:", orderNum);
 
-          // detail_menu.css를 제거합니다.
-          const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
-          if (detailMenuLink) {
-            detailMenuLink.remove();
-          }
+        // 먼저 모달 컨테이너를 비웁니다.
+        document.getElementById("modalContainer").innerHTML = "";
 
-          // caution_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
-          fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${orderNum}`)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error("HTTP Error " + response.status);
-              }
-              return response.text();
-            })
-            .then(data => {
-              // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
-              $("#modalContainer").html(data);
-              console.log("선택된 주문 번호 :", orderNum);
-              // caution_msg.css 파일을 로드합니다.
-              const linkElement = document.createElement("link");
-              linkElement.rel = "stylesheet";
-              linkElement.type = "text/css";
-              linkElement.href = "http://localhost:3001/messagebox/caution_style.css";
-              document.head.appendChild(linkElement);
+        // help_msg.css를 제거합니다.
+        const detailMenuLink = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
+        const urlParams = new URLSearchParams(window.location.search);
+        const pickup = urlParams.get('pickup');
+        const order = urlParams.get('order');
+        if (detailMenuLink) {
+          detailMenuLink.remove();
+        }
+        if (order == 'slow') {
+          history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+        } else {
+          history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+        }
+        // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
+        fetch("http://localhost:3001/detail_menu/jojo_o.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("HTTP Error " + response.status);
+            }
+            return response.text();
+          })
+          .then(data => {
+            // 모달 컨테이너에 jojo.html 콘텐츠를 추가합니다.
+            $("#modalContainer").html(data);
 
-              // 모달을 열기 위한 코드
-              const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-              modal.show();
+            // 외부 detail_menu 폴더에 있는 detail_menu.css 파일을 로드합니다.
+            const linkElement = document.createElement("link");
+            linkElement.rel = "stylesheet";
+            linkElement.type = "text/css";
+            linkElement.href = "http://localhost:3001/detail_menu/detail_menu.css"; // 이 부분의 파일 경로를 수정해야합니다.
+            document.head.appendChild(linkElement);
 
-              // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
-              const confirmButton = document.querySelector('.btn-primary');
-              confirmButton.addEventListener("click", function () {
-                console.log("확인 버튼 눌림");
-                // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
-                deleteOrder(orderNum);
-              });
+            // 외부 detail_menu 폴더에 있는 detail_menu_o.js 파일을 로드합니다.
+            const scriptElement = document.createElement("script");
+            scriptElement.src = "http://localhost:3001/detail_menu/detail_menu_o.js"; // 이 부분의 파일 경로를 수정해야합니다.
+            document.body.appendChild(scriptElement);
 
-              const cancelButton = document.querySelector('.btn-secondary');
-              cancelButton.addEventListener("click", function () {
-                console.log("취소 버튼 눌림");
-                // "취소" 버튼이 클릭되면 모달 닫기
-                modal.hide();
-              });
-            })
-            .catch(error => {
-              console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+
+            // 모달이 닫힐 때 이벤트를 감지하여 페이지 새로 골침
+            modal._element.addEventListener('hidden.bs.modal', function () {
+              location.reload();
             });
-        });
+          })
+          .catch(error => {
+            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+          });
+      });
+    });
+    // 삭제 버튼
+    const deleteBtn = document.querySelectorAll(".del_btn");
+    deleteBtn.forEach(deleteBtn => {
+      deleteBtn.addEventListener("click", function () {
+        console.log("삭제 버튼 눌림");
+        // 클릭된 버튼의 data-orderNum 값을 가져옴
+        const orderNum = this.getAttribute('data-orderNum');
+        console.log("주문 번호:", orderNum);
+
+        // 먼저 모달 컨테이너를 비웁니다.
+        document.getElementById("modalContainer").innerHTML = "";
+
+        // detail_menu.css를 제거합니다.
+        const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+        if (detailMenuLink) {
+          detailMenuLink.remove();
+        }
+
+        // caution_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+        fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${orderNum}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("HTTP Error " + response.status);
+            }
+            return response.text();
+          })
+          .then(data => {
+            // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
+            $("#modalContainer").html(data);
+            console.log("선택된 주문 번호 :", orderNum);
+            // caution_msg.css 파일을 로드합니다.
+            // const linkElement = document.createElement("link");
+            // linkElement.rel = "stylesheet";
+            // linkElement.type = "text/css";
+            // linkElement.href = "http://localhost:3001/messagebox/caution_style.css";
+            // document.head.appendChild(linkElement);
+
+            // 모달을 열기 위한 코드
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+
+            // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
+            const confirmButton = document.querySelector('.btn-primary');
+            confirmButton.addEventListener("click", function () {
+              console.log("확인 버튼 눌림");
+              // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+              deleteOrder(orderNum);
+            });
+
+            const cancelButton = document.querySelector('.btn-secondary');
+            cancelButton.addEventListener("click", function () {
+              console.log("취소 버튼 눌림");
+              // "취소" 버튼이 클릭되면 모달 닫기
+              modal.hide();
+            });
+          })
+          .catch(error => {
+            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+          });
       });
     });
     // pay_move 버튼 활성화 (옵션: 주문 목록이 비어 있지 않을 때 활성화)
