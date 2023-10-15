@@ -288,7 +288,7 @@ function clearSliderContainer(sliderContainer) {
 }
 
 function handleMenuData(menuData, sliderContainer) {
-  const menuItemsPerSlide = 8; // 슬라이드당 메뉴 개수
+  const menuItemsPerSlide = 6; // 슬라이드당 메뉴 개수
   let currentSlide = document.createElement("div");
   currentSlide.className = "slide";
   let currentPage = 1; // 현재 페이지
