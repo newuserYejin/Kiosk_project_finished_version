@@ -78,6 +78,7 @@ function check_page() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
 
   if (orderType == 'slow') {
     location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`;
@@ -91,6 +92,7 @@ function pay_page() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -108,6 +110,7 @@ function prvsScren() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -122,6 +125,7 @@ function prvsScren() {
 function firstScreen() {
   // 새로운 페이지로 이동
   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+  localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
 };
 
 // 다음
@@ -130,6 +134,7 @@ function nextScreen() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -247,6 +252,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // 페이지 로드 시 기본 카테고리를 설정--start
   const defaultCategory = "1";
+  const selectedClass = 'select_category';//10.15추가
+
+  // 이전에 선택된 카테고리가 있는지 확인하고, 있다면 해당 카테고리로 설정합니다.10.15추가
+  const lastSelectedCategory = localStorage.getItem('selectedCategory');//10.15추가
+  const initialCategory = lastSelectedCategory ? lastSelectedCategory : defaultCategory;//10.15추가
 
   // storeData에 데이터가 있는지 여부를 확인
   if (storeData && storeData.length > 0) {
@@ -255,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("검색 결과 없음");
   } else {
     // storeData에 데이터가 없을 경우 초기 카테고리 메뉴 로드
-    fetch(`/menu?category=${defaultCategory}`)
+    fetch(`/menu?category=${initialCategory}`)
       .then(response => response.json())
       .then(menuData => {
         // 메뉴 목록을 초기화하고 새로운 데이터로 갱신합니다.
@@ -265,11 +275,23 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   //페이지 로드시 기본 카테고리 설정--end
 
+  // 초기 로드 시 선택된 카테고리에 대한 스타일 설정 10.15시작
+  categories.forEach(category => {
+    const categoryLink = category.querySelector('a');
+    const categoryValue = categoryLink.getAttribute('data-category');
+    if (categoryValue === initialCategory) {
+      category.classList.add(selectedClass);
+    } else {
+      category.classList.remove(selectedClass);
+    }
+  });//10.15끝
+
   // 카테고리 링크에 클릭 이벤트 추가
   categoryLinks.forEach(link => {
     link.addEventListener("click", (event) => {
       event.preventDefault(); // 링크의 기본 동작을 막습니다.
       const category = link.getAttribute("data-category");
+      localStorage.setItem('selectedCategory', category); // 선택한 카테고리 저장 10.15추가
 
       // 모든 카테고리에서 select_category 클래스 제거
       categories.forEach(c => c.classList.remove('select_category'));
@@ -674,7 +696,16 @@ function generateOrderList(orderData) {
       // 추가 옵션
       const selectOp = document.createElement('div');
       selectOp.classList.add('select_op');
-      selectOp.textContent = `${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '추가사항: 없음'}`;//10.08수정
+      // selectOp.textContent = `${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '추가사항: 없음'}`;//10.08수정
+      if (order.options.length > 1) {
+        order.options.slice(1).forEach(op => {
+          const optionDiv = document.createElement('div');
+          optionDiv.textContent = op.op_name + "(+" + op.op_price + "원)";
+          selectOp.appendChild(optionDiv);
+        });
+      } else {
+        selectOp.textContent = '추가사항: 없음';
+      }
 
       const move_box = document.createElement('div');
       move_box.classList.add('move_box')
@@ -700,7 +731,7 @@ function generateOrderList(orderData) {
       const del_btn_icon = document.createElement("img");
       del_btn_icon.src = "./image/delete_black_icon.png";
       del_btn_icon.classList.add('del_btn_icon'); // 'add'를 'classList.add'로 수정
-      
+
       del_btn.appendChild(del_btn_icon);
 
       del_btn.setAttribute('data-orderNum', order.order_num);
@@ -747,6 +778,8 @@ function generateOrderList(orderData) {
       //   })
       // })
     });
+
+    
     //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
     const updateBtn = document.querySelectorAll(".update_btn");
     updateBtn.forEach(updateBtn => {
@@ -880,22 +913,22 @@ function generateOrderList(orderData) {
 // 총 금액 연결
 let totalAmount = 0;
 fetch('/getOrderData')
-    .then(response => response.json())
-    .then(data => {
-        console.log("Session data:", JSON.stringify(data));
-        // 주문 데이터를 가지고 총 금액 계산
-        totalAmount = calculateTotalAmount(data);
-        updateTotalAmountUI(totalAmount);
+  .then(response => response.json())
+  .then(data => {
+    console.log("Session data:", JSON.stringify(data));
+    // 주문 데이터를 가지고 총 금액 계산
+    totalAmount = calculateTotalAmount(data);
+    updateTotalAmountUI(totalAmount);
 
-        localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
-    });
+    localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+  });
 function calculateTotalAmount(orders) {
-    return orders.reduce((total, order) => total + Number(order.total_price), 0);
+  return orders.reduce((total, order) => total + Number(order.total_price), 0);
 }
 function updateTotalAmountUI(amount) {
-    const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
-    const totalCostElement = document.querySelector('.total_cost');
-    totalCostElement.textContent = formattedPrice + '원';
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
+  const totalCostElement = document.querySelector('.total_cost');
+  totalCostElement.textContent = formattedPrice + '원';
 }
 
 let total_cost = localStorage.getItem('myTotalCost');

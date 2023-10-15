@@ -460,6 +460,8 @@ body {
     font-size: 2.5vw;
     font-weight: 400;
     color: #8E8E8E;
+
+    text-align: start;
 }
 
 /*수량 체크(text)*/
@@ -620,7 +622,7 @@ body {
 
 .speech-bubble {
     position: absolute;
-    background: #0fbac9f7;
+    background: #00aabb;
     border-radius: .4em;
 
     width: 30%;
@@ -648,7 +650,7 @@ body {
     width: 0;
     height: 0;
     border: 44px solid transparent;
-    border-bottom-color: #0fbac9f7;
+    border-bottom-color: #00aabb;
     border-top: 0;
     border-left: 0;
     margin-left: -22px;
@@ -657,8 +659,8 @@ body {
 
 .first_bubble {
     position: absolute;
-    left: 190px;
-    top: 68%;
+    left: 140px;
+    top: 81%;
 }
 
 .first_bubble::after {

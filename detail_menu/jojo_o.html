@@ -15,10 +15,12 @@
             <div class="modal-content">
                 <div class="all_modal">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">상세 메뉴</h1>
-                        <img src="./image/delete_btn.png" data-bs-dismiss="modal" aria-label="Close">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            style="display: none;"></button>
+                        <div>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">상세 메뉴</h1>
+                            <img src="./image/delete_btn.png" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                style="display: none;"></button>
+                        </div>
                     </div>
 
                     <div class="modal-body">
@@ -26,14 +28,15 @@
                             <div class="info_row">
                                 <div class="info_row_box1">
                                     <div class="menu_img_box">
-                                        <img class="menu_img_size" src="">
+                                        <img class="menu_img_size" src="" />
                                     </div>
                                 </div>
                                 <div class="info_row_box2">
                                     <div class="menu_explain">
                                         <div class="menu_explain_center">
                                             <div class="menu_explain_content menu_title"></div>
-                                            <div class="menu_explain_content menu_description"></div>
+                                            <div class="menu_explain_content menu_explain_detail menu_description">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,21 +89,21 @@
                                         <ul class="list-group">
                                             <li class="list-group-item" id="t_firstRadioContainer"
                                                 style="display: none;">
-                                                <div>
-                                                    <input class="form-check-input me-1" type="radio" name="temperature"
-                                                        value="1" id="t_firstRadio" checked>
-                                                    <label class="form-check-label t_Radio1" for="t_firstRadio">뜨거움
-                                                        (+0원)</label>
-                                                </div>
+                                                <input class="form-check-input me-1" type="radio" name="temperature"
+                                                    value="1" id="t_firstRadio" checked>
+                                                <label class="form-check-label t_Radio1" for="t_firstRadio">뜨거움
+                                                    (+0원)
+                                                    <img src="./image/hot_drink_small.png" />
+                                                </label>
                                             </li>
                                             <li class="list-group-item" id="t_secondRadioContainer"
                                                 style="display: none;">
-                                                <div>
-                                                    <input class="form-check-input me-1" type="radio" name="temperature"
-                                                        value="2" id="t_secondRadio">
-                                                    <label class="form-check-label t_Radio2" for="t_secondRadio">차가움
-                                                        (+0원)</label>
-                                                </div>
+                                                <input class="form-check-input me-1" type="radio" name="temperature"
+                                                    value="2" id="t_secondRadio">
+                                                <label class="form-check-label t_Radio2" for="t_secondRadio">차가움
+                                                    (+0원)
+                                                    <img src="./image/ice_drink.png" />
+                                                </label>
                                             </li>
                                         </ul>
                                     </div>
@@ -119,21 +122,17 @@
                                         <ul class="list-group">
                                             <li class="list-group-item" id="s_firstRadioContainer"
                                                 style="display: none;">
-                                                <div>
-                                                    <input class="form-check-input me-1" type="radio" name="size"
-                                                        value="3" id="s_firstRadio" checked>
-                                                    <label class="form-check-label" for="s_firstRadio">기본 크기
-                                                        (+0원)</label>
-                                                </div>
+                                                <input class="form-check-input me-1" type="radio" name="size" value="3"
+                                                    id="s_firstRadio" checked>
+                                                <label class="form-check-label" for="s_firstRadio">기본 크기
+                                                    (+0원)</label>
                                             </li>
                                             <li class="list-group-item" id="s_secondRadioContainer"
                                                 style="display: none;">
-                                                <div>
-                                                    <input class="form-check-input me-1" type="radio" name="size"
-                                                        value="4" id="s_secondRadio">
-                                                    <label class="form-check-label" for="s_secondRadio">큰 크기
-                                                        (+1200원)</label>
-                                                </div>
+                                                <input class="form-check-input me-1" type="radio" name="size" value="4"
+                                                    id="s_secondRadio">
+                                                <label class="form-check-label" for="s_secondRadio">큰 크기
+                                                    (+1200원)</label>
                                             </li>
                                         </ul>
                                     </div>
@@ -191,7 +190,8 @@
                     <div class="modal-footer">
                         <div class="jojo_bottom_box">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-info save_btn" data-bs-dismiss="modal">저장</button>
+                            <button type="button" class="btn btn-secondary btn-info save_btn"
+                                data-bs-dismiss="modal">저장</button>
                         </div>
                     </div>
                 </div>

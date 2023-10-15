@@ -137,8 +137,8 @@ $(document).ready(function () {
     const newData = {
       // 업데이트할 필드들의 값을 적절히 가져와 newData 객체에 넣어줘야 함
       count: parseInt($("#quantity").val()),
-      op_t: $("input[name='temperature']:checked").val() === "1" ? 1 : 2,
-      op_s: $("input[name='size']:checked").val() === "3" ? 3 : 4,
+      op_t: $("input[name='temperature']:checked").val() === "1" ? 1 : $("input[name='temperature']:checked").val() === "2" ? 2 : 1000,//10.15수정
+      op_s: $("input[name='size']:checked").val() === "3" ? 3 : $("input[name='size']:checked").val() === "4" ? 4 : 1000,//10.15수정
       op1: $("input[name='option_set_1']").prop('checked') ? 5 : 0,
       op2: $("input[name='option_set_2']").prop('checked') ? 6 : 0,
       op3: $("input[name='option_set_3']").prop('checked') ? 7 : 0,
@@ -208,11 +208,19 @@ $(document).ready(function () {
 
 
     // 온도 옵션 라디오 버튼 선택
-    $(`input[name='temperature'][value='${op_t}']`).prop("checked", true);
+    if (op_t !== 1000) {
+      $(`input[name='temperature'][value='${op_t}']`).prop("checked", true);
+    } else {
+      $(`input[name='temperature']`).prop("checked", false);
+    }
 
     // 크기 옵션 라디오 버튼 선택
-    $(`input[name='size'][value='${op_s}']`).prop("checked", true);
-
+    if (op_s !== 1000) {
+      $(`input[name='size'][value='${op_s}']`).prop("checked", true);
+    } else {
+      $(`input[name='size']`).prop("checked", false);
+    }
+    
     // 옵션 체크박스 선택
     const optionValues = [5, 6, 7, 8, 9, 10, 11, 12]; // 체크박스에 해당하는 값들
     for (let i = 0; i < optionValues.length; i++) {
@@ -270,8 +278,13 @@ function renderOrderDetail(orderData) {
 
   const allegyList = document.querySelector(".allegy_list");
   allegyList.innerHTML = orderData.allergy_names
-    .map(allegyName => `<li>${allegyName}</li>`)
-    .join("");
+  if(orderData.allergy_names == 0){
+    allegyList.innerHTML = `<li>없음</li>`
+  } else{
+    allegyList.innerHTML = orderData.allergy_names
+      .map(allegyName => `<li>${allegyName}</li>`)
+      .join(", ");
+  }
 }
 
 $(".input-group").on("click", "#increment1", function () {

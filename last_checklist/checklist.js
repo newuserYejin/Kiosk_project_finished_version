@@ -186,15 +186,15 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                         <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})</span>
                         <span class="select_op">
                             <!-- 여기에 각 옵션을 처리하는 반복문 추가 -->
-                            ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}</div>`).join('') : '<div class="select_op">추가사항: 없음</div>'}
+                            ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price}원)</div>`).join('') : '<div class="select_op">추가사항: 없음</div>'}
                         </span>
                     </div>
                 </div>
             </div>
                 <div class="list_buttons">
-                <div class="content_update_button">
-                    <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
-                </div>
+                    <div class="content_update_button">
+                        <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
+                    </div>
             </div>
         </div>
     </div>
