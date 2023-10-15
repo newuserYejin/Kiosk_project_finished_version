@@ -14,91 +14,76 @@
     <div class="all_box">
         <!--상단 배너-->
         <div class="top_banner">
-            <img src="./image/banner.jpg" alt="호이카페 배너">
-        </div>
+            <div class="hoi_box">
+                <img class="hoi" src="./image/hoi.png" />
+            </div>
+            <img class="cafe_name" src="./image/cafe_name.png" />
 
-        <!--현재 페이지 표시-->
-        <div class="present_page">결제하기</div>
-
-        <!--본문-->
-        <div class="all">
             <div class="help">
-                <div class="helping" id="imageLink">도움말</div>
+                <div id="imageLink">도움말</div>
                 <div id="modalContainer"></div>
             </div>
+        </div>
 
-            <div class="main_box">
-                <!--navigate bar-->
-                <div class="navigation">
-                    <div class="navigation_all_box">
-                        <div class="box_line">
-                            <div onclick="openSelect()" class="level_button">
-                                <p class="circle_name">메뉴 선택</p>
-                            </div>
-                        </div>
-
-                        <div class="level_line">
-                            <p></p>
-                            <img src="./image/progress_arrow.png" alt="Line 이미지" class="center">
-                        </div>
-
-                        <div class="box_line">
-                            <div onclick="openCheck()" class="level_button">
-                                <p class="circle_name">주문 확인</p>
-                            </div>
-                        </div>
-
-                        <div class="level_line">
-                            <p></p>
-                            <img src="./image/progress_arrow.png" alt="Line 이미지" class="center">
-
-                        </div>
-
-                        <div class="box_line">
-                            <div onclick="openPay()" class="level_button">
-                                <p class="circle_name">최종 결제</p>
-                            </div>
+        <!--본문-->
+        <div class="main_box">
+            <!--navigate bar-->
+            <div class="navigation">
+                <div class="navigation_all_box">
+                    <div class="box_line">
+                        <div onclick="openSelect()" class="level_button">
+                            <p class="circle_name">1.메뉴 선택</p>
                         </div>
                     </div>
 
-                </div>
-
-                <div class="selectpay">
-                    <div class="first">
-                        <div class="fir_box">
-                            <div class="explain">
-                                <div class="explain1">카드를 아래의 영상과 같이</div>
-                                <div class="explain2">투입구에 끝까지 넣어주세요.</div>
-                                <div class="video">
-                                    <img class="pay_card" src="./image/pay_card.gif" loop=infinite />
-                                </div>
-                            </div>
+                    <div class="box_line">
+                        <div onclick="openCheck()" class="level_button">
+                            <p class="circle_name">2.주문 확인</p>
                         </div>
                     </div>
-                    <!-- <div class="under_buttons">
-                        <button type="button" class="gohome" onclick="gohome()">주문내역 확인으로<br>돌아가기</button>
-                    </div> -->
-                    <!--고정 버튼-->
-                    <div class="fix_button">
-                        <button class="fix_button_detail" onclick="firstScreen()">
-                            <img src="./image//house.svg">
-                            처음화면</button>
+
+                    <div class="box_line">
+                        <div onclick="openPay()" class="level_button">
+                            <p class="circle_name">3.최종 결제</p>
+                        </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="selectpay">
+                <div class="first">
+                    <div class="title">
+                        <img src="./image/cardpay_mark.png"/>
+                        결제하기
+                    </div>
+                    <div class="fir_box">
+                        <div class="explain">
+                            <div class="explain1">카드를 아래의 영상과 같이<br>투입구에 끝까지 넣어주세요.</div>
+                            <div class="video">
+                                <img class="pay_card" src="./image/pay_card.gif" loop=infinite />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="under_buttons">
+                        <button type="button" class="back" onclick="back()">결제 방법 선택</button>
+                        <button type="button" class="gohome" onclick="gohome()">주문으로 돌아가기</button>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="bottom_box">
+            <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
+                <img src="./image/home_icon.png">처음화면
+            </button>
+            <button class="fix_button_detail fix_button_pre" onclick="back()">
+                <img src="./image/left_icon.png">이전으로
+            </button>
+
             <!--총금액확인-->
             <div class="total_cost_box">
-                <span>결제 예정 금액 :&nbsp;</span>
+                <span>결제 금액 :&nbsp;</span>
                 <div class="total_cost">0원</div>
-            </div>
-            <div class="bottom_button_box" onclick="back()">
-                <button>
-                    결제 방법 변경
-                </button>
             </div>
         </div>
     </div>
@@ -116,31 +101,31 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-        <script>
-            setTimeout(function () {
-                openModal();
-            }, 5000); // 5000 밀리초는 5초입니다
-        
-            // 모달 열기 함수
-            function openModal() {
-                $.get("http://localhost:3001/payment_msg/payment_msg.html", function (data) {
-                    // 모달에 HTML 컨텐츠를 추가합니다.
-                    $("#modalContainer").html(data);
-        
-                    // 모달에 CSS 파일을 추가합니다.
-                    const linkElement = document.createElement("link");
-                    linkElement.rel = "stylesheet";
-                    linkElement.type = "text/css";
-                    linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css"; // CSS 파일 경로
-                    document.head.appendChild(linkElement);
-        
-                    // 부트스트랩 모달을 생성하고 엽니다.
-                    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-                    modal.show();
-                });
-            }
-        </script>
-        
+    <script>
+        setTimeout(function () {
+            openModal();
+        }, 5000); // 5000 밀리초는 5초입니다
+
+        // 모달 열기 함수
+        function openModal() {
+            $.get("http://localhost:3001/payment_msg/payment_msg.html", function (data) {
+                // 모달에 HTML 컨텐츠를 추가합니다.
+                $("#modalContainer").html(data);
+
+                // 모달에 CSS 파일을 추가합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css"; // CSS 파일 경로
+                document.head.appendChild(linkElement);
+
+                // 부트스트랩 모달을 생성하고 엽니다.
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+    </script>
+
 
     <script>//09.14 수정
         var currentURL = window.location.href;

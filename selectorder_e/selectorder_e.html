@@ -8,25 +8,57 @@
     <link rel="stylesheet" type="text/css" href="./selectorder_e.css" />
 </head>
 
-<body>
+<body style="font-family: 'Pretendard';">
     <div class="all">
-        <div class="help">
-            <img class="helping" src="./image/helpicon.png" width="7.5%" height="7.5%" id="imageLink">
-            <div id="modalContainer_e"></div>
-        </div>
-        <div class="first">
-            <div class="fir_box">
-                <div class="order">
-                    <button type="button" class="sloworder"
-                        onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">Ordering
-                        slowly</button>
-                    <button type="button" class="basicorder"
-                        onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">Ordering
-                        basic</button>
+        <div class="banner">
+            <div class="banner_content_box">
+                <img src="./image/banner_card_icon.png" alt="배너 카드 이미지">
+                <div class="banner_ment">
+                    <p>Card / Mobile Coupon Payment Only</p>
+                    <p>If cash or other payments and discounts are required, Please use the counter</p>
+                    <!-- <p>Please use the counter</p> -->
                 </div>
-                <div class="language">
-                    <img class="kor" src="./image/kor.png" onclick="lang_ch()">
-                    <img class="usa selected_lag" src="./image/usa.png">
+            </div>
+        </div>
+        <div class="main">
+            <div class="first">
+                <div class = "cafe_name">
+                    <img src="./image/cafe_name.png">
+                </div>
+                <div class="order_explan">
+                    <div class="order_explan_content">
+                        <div>It's okay to be slow</div>
+                        <div>Shall we do it as usual</div>
+                    </div>
+                </div>
+                <div class="fir_box">
+                    <div class="order">
+                        <div>
+                            <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">
+                                <button type="button" class="order_button">Ordering<br>slowly</button>
+                            </section>
+                        </div>
+
+                        <div>
+                            <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">
+                                <button type="button" class="order_button">Ordering<br>basic</button>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="help">
+                    <div class="help_real_box">
+                        <div class="helping" id="imageLink">help</div>
+                        <div id="modalContainer_e"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="language">
+                <div class="language_content_box">
+                    <div class="kor" onclick="lang_ch()">Kor</div>
+                    <div class="usa selected_lag">Eng</div>
                 </div>
             </div>
         </div>

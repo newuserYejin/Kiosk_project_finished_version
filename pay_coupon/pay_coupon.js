@@ -109,6 +109,7 @@ function back() {
     }
 
 }
+
 function gohome() {
     const pickup = urlParams.get('pickup');
 
@@ -121,7 +122,19 @@ function gohome() {
     } else {
         location.href = 'http://localhost:3001/selectorder/selectorder.html';
     }
+}
 
+function firstScreen(){
+    location.href = 'http://localhost:3001/selectorder/selectorder.html';
+}
+
+let total_cost = localStorage.getItem('myTotalCost');
+
+if (total_cost !== null) {//10.09 쉼표 넣기
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(Number(total_cost));
+    
+    const totalCostElement = document.querySelector('.total_cost');
+    totalCostElement.textContent = formattedPrice + '원';
 }
 
 // function showMessageAndRedirect() {

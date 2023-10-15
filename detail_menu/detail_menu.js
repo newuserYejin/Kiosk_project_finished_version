@@ -20,7 +20,7 @@ $(".btn-info").click(function () {
   // 옵션 값 설정
   const selectedOptions = {
     op_t: $("input[name='temperature']:checked").val() === "뜨거움" ? 1 : $("input[name='temperature']:checked").val() === "차가움" ? 2 : 1000,
-    op_s: $("input[name='size']:checked").val() === "기본 크기" ? 3 : 4,
+    op_s: $("input[name='size']:checked").val() === "기본 크기" ? 3 : $("input[name='size']:checked").val() === "큰 크기" ? 4 : 1000,//10.15수정
     op1: $("input[name='option_set_1']").prop('checked') ? 5 : 0,
     op2: $("input[name='option_set_2']").prop('checked') ? 6 : 0,
     op3: $("input[name='option_set_3']").prop('checked') ? 7 : 0,
@@ -142,12 +142,14 @@ function renderMenuDetail(menuData) {
   } else {
     allegyList.innerHTML = menuData.allegy_names
       .map(allegyName => `<li>${allegyName}</li>`)
-      .join("");
+      .join(", ");
   }
 
   // 옵션 정보 출력
   const container_box = document.querySelector(".op_box");
   const optionContainers = document.querySelectorAll(".option_inner_bow");
+
+  let option_t;
 
   // 각 옵션 컨테이너마다 처리
   optionContainers.forEach((container, index) => {
@@ -156,10 +158,7 @@ function renderMenuDetail(menuData) {
 
     // DB에서 가져온 옵션 데이터가 없을 경우 컨테이너 숨김
     const all_modal = document.querySelector(".modal-dialog");
-    const r_box = document.querySelector(".r_box");
     if (menuData.op_data.length == 0) {
-      r_box.style.marginTop = "20px";
-      r_box.textContent = "없음"
       all_modal.style.height = "auto";
       container_box.style.display = "none";
       return; // 옵션 데이터 없으면 여기서 종료
@@ -191,8 +190,13 @@ function renderMenuDetail(menuData) {
           .map(option => {
             const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
             const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+            option_t = textColor;
+            const imageSrc = option.op_name === "뜨거움" ? "./image/hot_drink_small.png" : "./image/ice_drink.png"; // 이미지 경로 설정
             return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">
+            ${option.op_name} (+${option.op_price}원)
+            <img src="${imageSrc}" />
+            </label></li>
             `;
           })
           .join("");
@@ -209,11 +213,19 @@ function renderMenuDetail(menuData) {
           .map(option => {
             const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
             const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+            option_t = textColor;
+            const imageSrc = option.op_name === "뜨거움" ? "./image/hot_drink_small.png" : "./image/ice_drink.png";// 이미지 경로 설정
             const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
+            const falseimageSrc = falseoption === "뜨거움" ? "./image/hot_drink_small.png" : "./image/ice_drink.png";
             return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-                <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">${option.op_name} (+${option.op_price}원)</label></li>
+                <label class="form-check-label" for="${option.op_name}" style="color: ${textColor}; border-color:${textColor}">
+                    ${option.op_name} (+${option.op_price}원)
+                    <img src="${imageSrc}" />
+                </label></li>
                 <li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
-                <label class="form-check-label" for="falseoption"> ${falseoptionText} (+0원)</label></li>
+                <label class="form-check-label" for="falseoption"> ${falseoptionText} (+0원)
+                <img src="${falseimageSrc}" />
+                </label></li>
                 `;
           })
           .join("");
@@ -235,23 +247,44 @@ function renderMenuDetail(menuData) {
         falseoption = "기본 크기";
       }
 
+      const imageSrc = option_t === "red" ? "./image/hot_drink_small.png" : "./image/ice_drink.png"; // 이미지 경로 설정
+      console.log(option_t);
+
       // const speechBubble = document.querySelector('.size');
       // const speechBubbleContent = speechBubble.querySelector('div');
 
       // speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
 
+      // 라디오 버튼 요소들을 선택
+      const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
+
+      radioInputs.forEach(input => {
+        input.addEventListener('change', function () {
+          const label = this.nextElementSibling; // 라디오 버튼 다음에 위치한 label 요소 선택
+          const checkedAttribute = this.checked ? "checked" : "";
+
+          // 선택된 라디오 버튼에 대해서만 color와 border-color 스타일 변경
+          label.style.color = checkedAttribute ? option_t : "initial";
+          label.style.borderColor = checkedAttribute ? option_t : "initial";
+        });
+      });
+
       optionList.innerHTML = sizeOptions
         .map(option => {
           const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
           return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-          <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>
+          <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)
+          <img src="${imageSrc}" />
+          </label></li>
           `;
         })
         .join("");
 
       if (!hasRegular || !hasLarge) {
         optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
-        <label class="form-check-label" for="falseoption"> ${falseoption} (+0원)</label></li>`;
+        <label class="form-check-label" for="falseoption"> ${falseoption} (+0원)
+        <img src="${imageSrc}" />
+        </label></li>`;
         // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
         // const speechBubble = document.querySelector('.size');
         // const speechBubbleContent = speechBubble.querySelector('div');

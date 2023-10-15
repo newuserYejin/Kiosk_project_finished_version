@@ -14,33 +14,53 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal_size">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">검색창</h1>
-                    <button type="button" class="btn-close close_btn" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">검색창</h1>
+                        <img src="./image/delete_btn.png" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-close close_btn" data-bs-dismiss="modal" aria-label="Close"
+                            style="display: none;"></button>
+                    </div>
                 </div>
                 <div class="modal-body">
-                    <div class="box top_box">
-                        <div>
-                            <input class="input" type="text" id="input_menu_name" placeholder="상품명을 입력하세요" />
-                            <img class="search_icon" id="search_icon" src="./image/search.png" />
+                    <div class="enter_box">
+                        <div class="top_box">
+                            <div>
+                                <input class="input" type="text" id="input_menu_name" placeholder="검색으로 찾아보세요" />
+                                <img class="search_icon" id="search_icon" src="./image/search_icon_bold.png" />
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="box keyword_box" id="resultContainer">
-                        <div class="real_keyword">
-                            <button class="keyword">딸기</button>
-                            <button class="keyword">라떼</button>
-                            <button class="keyword">초코</button>
-                            <button class="keyword">요거트</button>
-                            <button class="keyword">마카롱</button>
-                            <button class="keyword">복숭아</button>
-                            <button class="keyword">민트</button>
-                            <button class="keyword">케이크</button>
+                        <div class="keyword_box" id="resultContainer">
+                            <div class="keyworld_title">추천 검색어</div>
+                            <div class="real_keyword">
+                                <button class="keyword">딸기</button>
+                                <button class="keyword">라떼</button>
+                                <button class="keyword">초코</button>
+                                <button class="keyword">요거트</button>
+                                <button class="keyword">마카롱</button>
+                                <button class="keyword">복숭아</button>
+                                <button class="keyword">민트</button>
+                                <button class="keyword">케이크</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!--키보드-->
-                    <div class="keyboard_size">
-                        <div id="KeyBoard" class="simple-keyboard i_keyboard"></div>
+                        <!--음성인식-->
+                        <div class="voice_box">
+                            <div class="speech_icon">
+                                <button onclick="sendSpeech();" class="mike_box">
+                                    <img src="./image/mike_icon.png" />
+                                </button>
+                            </div>
+                            <div class="speech_result_box">
+                                <p class="output_text">음성인식을 원하시면<br>마이크 버튼을 눌러주세요</p>
+                                <button onclick="search_go();" style="display: none;">검색하기 버튼</button>
+                            </div>
+                        </div>
+
+                        <!--키보드-->
+                        <div class="keyboard_size">
+                            <div id="KeyBoard" class="simple-keyboard i_keyboard"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

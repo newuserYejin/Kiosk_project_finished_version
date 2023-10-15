@@ -4,14 +4,6 @@
     font-family: 'pretendard';
 }
 
-#modalContainer .modal-dialog{
-    width: 90vw;
-    height: 97.5vh;
-    display: flex;
-    max-width: none;
-    max-width: none;
-}
-
 #modalContainer .modal {
     width: 100%;
     height: 100%;
@@ -20,10 +12,18 @@
     align-items: center;
 }
 
+#modalContainer .modal-dialog{
+    width: 90vw;
+    height: 88.7vh;
+    display: flex;
+    max-width: none;
+    max-width: none;
+}
+
 #modalContainer .modal-content {
     width: 100%;
     height: 100%;
-    padding: 6.4% 5.8%;
+    padding: 0 7.75%;
 }
 
 #modalContainer .all_modal{
@@ -34,9 +34,18 @@
 #modalContainer .modal-header{
     margin: 0;
     padding: 0;
-    padding-bottom: 2px;
     width: 100%;
-    height: 4.6%;
+    height: 9%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5% 0;
+}
+
+#modalContainer .modal-header div{
+    height: 100%;
+    width: 100%;
 
     display: flex;
     justify-content: space-between;
@@ -45,23 +54,24 @@
 
 #modalContainer .modal-header img{
     height: 100%;
+    max-height: 40px;
 }
 
 #modalContainer .modal-body{
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 85.6%;
+    height: 77.9%;
 }
 
 #modalContainer .modal-footer{
     width: 100%;
-    height: 9.8%;
+    height: 13.1%;
     margin: 0;
-    padding: 0;
+    padding: 6% 0;
         
     display: flex;
-    align-items: end;
+    align-items: center;
 }
 
 #modalContainer .modal-footer *{
@@ -81,7 +91,7 @@
 /*footer*/
 #modalContainer .jojo_bottom_box{
     width: 100%;
-    height: 70.3%;
+    height: 100%;
 
     display: flex;
     justify-content: space-between;
@@ -92,21 +102,24 @@
     width: 47.5%;
     border-radius: 10px;
 
-    font-size: 4.5vw;
+    font-size: 3.5vw;
     font-weight: 600;
     color: #8E8E8E;
     background-color: #E9E9E9;
+
+    border: solid 1px #E9E9E9;
 }
 
 #modalContainer .save_btn{
     color: white !important;
     background-color: black !important;
+    border: solid 1px black !important;
 }
 
 /*body*/
 #modalContainer .container-fluid{
     width: 100%;
-    height: 29%;
+    height: 18.3%;
     margin: 0;
     padding: 0;
 
@@ -116,18 +129,15 @@
 
 #modalContainer .info_row{
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 #modalContainer .info_row_box1{
-    height: 32vw;
-    width: 32vw;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 100%;
+    width: 30.6%;
 }
 
 #modalContainer .menu_img_box {
@@ -136,6 +146,7 @@
     background-color: rgba(217, 217, 217, 0.7);
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #modalContainer .menu_img_size {
@@ -144,11 +155,12 @@
 }
 
 #modalContainer .info_row_box2{
-    height: 32vw;
-    width: 59.2%;
+    height: 100%;
+    width: 63.9%;
 }
 
 #modalContainer .menu_explain {
+    width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -156,11 +168,12 @@
 }
 
 #modalContainer .menu_explain_center {
-    width: 75.8%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
 #modalContainer .menu_title {
@@ -173,23 +186,30 @@
     font-size: 2.7vw;
     font-weight: 300;
     color: #8E8E8E;
+
+    min-height: 50%;
+    display: flex;
+    align-items: center;
 }
 
 #modalContainer .detail_explain_bottom {
     width: 100%;
-    height: 7%;
+    height: 11.3%;
     display: flex;
     justify-content: end;
 
     border-bottom: solid 3px #E9E9E9;
+
+    padding: 3% 0 2.4%;
 }
 
 /*수량 체크 박스*/
 #modalContainer .num_check {
+
     display: flex;
     justify-content: space-between;
-    width: 93%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
 }
 
 #modalContainer .input-group {
@@ -202,6 +222,15 @@
 #modalContainer .input-group-prepend{
     width: 28%;
     height: 100%;
+}
+
+#modalContainer .input-group-prepend button:hover{
+    background-color: white;
+}
+
+
+#modalContainer .input-group-append button:hover{
+    background-color: white;
 }
 
 #modalContainer .form-control[readonly] {
@@ -231,14 +260,14 @@
 }
 
 #modalContainer .menu_cost{
-    font-size: 4.5vw;
+    font-size: 5vw;
     font-weight: 600;
     color: #007AC2;
 }
 
 /*알레르기*/
 #modalContainer .r_box{
-    height: 3.2%;
+    height: 3.6%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -268,7 +297,7 @@
 /*옵션*/
 #modalContainer .op_box{
     width: 100%;
-    height: 61.4%;
+    height: 66.5%;
     overflow: hidden;
     overflow-y: visible;
 }
@@ -280,7 +309,7 @@
 
 /*상세 옵션*/
 #modalContainer .option {
-    height: 23.9%;
+    height: 34.5%;
     overflow: hidden;
     overflow-y: visible;
     display: flex;
@@ -289,12 +318,22 @@
     border-bottom: solid 3px rgba(217, 217, 217, 0.7);
 }
 
+#modalContainer .option:first-child {
+    height: 33%;
+}
+
 #modalContainer .option_inner_bow {
-    height: 76.6%;
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    padding: 2.7% 0;
+}
+
+#modalContainer .option:first-child .option_inner_bow {
+    padding-top: 0;
 }
 
 #modalContainer .option_name_box_t{
@@ -313,11 +352,11 @@
     margin: 0;
     font-weight: 600;
     font-size: 3.5vw;
-    margin-right: 10px;
+    padding-bottom: 15px;
 }
 
 #modalContainer .list-group {
-    height: 57.2%;
+    height: 65.6%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -339,6 +378,10 @@
     border: none;
 }
 
+#modalContainer .list-group-item input{
+    display: block;
+}
+
 #modalContainer .list-group-item [type="radio"]{
     display: none;
 }
@@ -346,7 +389,7 @@
 #modalContainer .list-group-item label{
     text-align: center;
     height: 100%;
-    width: 100%;
+    width: auto;
     margin: 0;
 
     display: flex;
@@ -361,10 +404,19 @@
     color: #BBBBBB;
 }
 
+#modalContainer .list-group-item img{
+    height: 60%;
+    margin-left: 10px;
+} 
+
+#modalContainer .list-group-item [type="radio"] + label{
+    border: solid 1px #BBBBBB;
+}
+
 #modalContainer .list-group-item [type="radio"]:checked + label{
-    background-color: rgba(0, 122, 194, 0.2);
-    color: #007AC2;
-    border: solid 2px #007AC2;
+    background-color: white;
+    color: #E70A0A;
+    border: solid 2px #E70A0A;
     border-radius: 10px;
 }
 
@@ -393,51 +445,74 @@
 } */
 
 #modalContainer .list-group-item [type="checkbox"]{
-    display: none;
+    border-radius: 50%;
+}
+
+#modalContainer .list-group-item [type="checkbox"]:checked{
+    background-color: red;
 }
 
 #modalContainer .list-group-item [type="checkbox"]:checked + label{
-    border: solid 1px #BBBBBB;
-    background-color: rgba(0, 122, 194, 0.2);
-    color: #007AC2;
-    border: solid 2px #007AC2;
+    font-size: 3vw;
+    color: black;
+    border: none;
+
+    height: auto;
 }
 
 #modalContainer .list-group-item [type="checkbox"]:not(:checked) + label{
-    border: solid 1px #BBBBBB;
-    color: #BBBBBB;
+    font-size: 3vw;
+    color: black;
+    border: none;
+    
+    height: auto;
 }
 
 #modalContainer .check{
     overflow: hidden;
     overflow-x: visible;
-    height: 52.1%;
+    height: 32%;
+
+    padding-bottom: 0;
 }
 
 #modalContainer .check .option_inner_bow{
-    height: 86.5%;
+    height: 100%;
     width: 100%;
+    justify-content: start;
+
+    padding-bottom: 0;
 }
 
+#modalContainer .chek_ul_box{
+    height: auto;
+}
+
+/*여기에 넣기*/
 #modalContainer .chek_ul{
     margin: 0;
     display: grid;
     grid-template-columns: 1fr 1fr; /* 두 개의 열로 나눔 */
-    grid-row-gap: 7%; /* 행 간격을 10px로 설정 */
-    grid-column-gap: 3.7%; /* 열 간격을 20px로 설정 */
+    grid-row-gap: 0;  /*행 간격을 10px로 설정 */
+    grid-column-gap: 3.7%; /*열 간격을 20px로 설정*/
     height: 100%;
 }
+
 
 #modalContainer .chek_ul li{
     width: 100%;
-    height: 100%;
+    height: 10%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* #modalContainer .chek_ul li .form-check-input{
+#modalContainer .chek_ul li .form-check-input{
     border: solid 2px black;
     width: 20px;
     height: 20px;
-} */
+}
 
 /* 추가버튼
 #modalContainer .add_button {
@@ -453,6 +528,7 @@
     font-weight: bold;
     font-size: 3vw;
 } */
+
 
 #modalContainer .t_Radio1{
     color: red;
