@@ -1,80 +1,178 @@
-html,
-body {
-  height: 100%;
+@import url('../Pretendard-1.3.8/web/static/pretendard.css');
+
+html,body {
   margin: 0;
   padding: 0;
+  font-family: 'Pretendard';
 }
 
 .all_box{
   width: 100vw;
   height: 100vh;
-  padding-bottom: 10px;
-  background-color: #e9ecef;
+}
+
+/*상단배너*/
+.top_banner{
+  width: 100%;
+  height: 12.6%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cafe_name{
+  width: 26.5%;
+  height: 28.8%;
+
+  position: relative;
+}
+
+.hoi_box{
+  height: 100%;
+  display: flex;
+  align-items: end;
+}
+
+.hoi{
+  height: 87.3%;
+}
+
+.help {
+  width: 12.1%;
+  height: 5.5%;
+  background-color: black;
+  border-radius: 15px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-size: 3vw;
+  border: solid 1px black;
+
+  position: absolute;
+  right: 4.4%;
+  top: 3.5%;
+}
+
+#imageLink{
+  color: white;
+}
+
+/*카테고리*/
+
+.category_box{
+  width: 100%;
+  height: 5.7%;
+  border-bottom: solid 3px #d9d9d9;
+  border-top: solid 3px #d9d9d9;
+  box-sizing: content-box;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-between; /* 요소들 사이의 간격을 균등하게 분배합니다. */
+  width: 100%;
+  height: 100%;
+  list-style: none; /* 목록 표시 스타일 제거 */
+  padding: 0; /* 내부 패딩 제거 */
+  margin: 0;
+}
+
+.category {
+  flex: 1; /* 동일한 너비로 분할 */
+}
+
+.category a {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vw;
+  text-decoration: none;
+  color: #007AC2;
+}
+
+.select_category{
+  background-color: #007AC2;
+}
+
+.select_category a{
+  background-color: #007AC2;
+  color: white;
+}
+
+@media (max-width: 360px) {
+  .categore {
+    font-size: 0.2rem;
+  }
 }
 
 /*전체 div flex*/
 .all {
   width: 100%;
-  height: 85%;
+  height: 71.4%;
+  padding: 0 4.4%;
+  background-color: #F4F4f4;
 }
 
 .ho{
+  height: 100%;
+  width: 100%;
+}
+
+.upper_box{
   display: flex;
-  height: 87.5%;
+  height: 7.8%;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 1.9%;
 }
 
 /*네비게이션 바*/
 .navigation {
-  background-color: white;
-  border: solid 2.5px black;
-  width: 20%;
+  border: solid 2px #BBBBBB;
+  width: 63.7%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
-
-  margin-right: 10px;
-
-  padding: 0 5px;
+  border-radius: 10px;
+  
+  border:solid 2px #007AC2;
 }
 
 .list_menu {
-  width: 100%;
   height: 100%;
-  padding: 2vw;
+  padding: 10px 0;
 }
 
 .navigation_all_box {
+  width: 100%;
   height: 100%;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; 아래랑 같은 기능*/
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .box_line {
-  border: solid 2px black;
-  height: 18%;
+  background-color: white;
+  flex: 1;
   display: flex;
   border-radius: 10px;
 }
 
+.box_line:nth-child(2){
+  border-left: solid 2px #007AC2;
+  border-right: solid 2px #007AC2;
+  border-radius: 0;
+}
+
 /*단계별 가운데 선*/
-.level_line {
-  display: flex;
-  justify-content: center;
-  padding: 2vh;
-}
 
-.center {
-  width: 100%;
-  height: 100%;
-  max-width: 50%;
-  max-height: 25vh;
-}
-
-.now {
+/* .now {
   animation: progressAnimation 2.5s linear infinite;
 }
 
@@ -85,128 +183,69 @@ body {
   100% {
       height: 100%;
   }
-}
+} */
 
 /*각 단계 버튼*/
 .level_button {
-  display: flex;
   width: 100%;
-  justify-content: space-around;
-  align-items: center;
   cursor: pointer;
-}
-
-.level_name {
-  padding: 0.8rem;
-  font-weight: bold;
-}
-
-.circle {
-  width: 2rem;
-  height: 2rem;
-  border: solid 3px black;
-  border-radius: 50%;
-  background-color: white;
-  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #7A7A7A;
 }
 
 .circle_name {
-  text-align: center;
   margin: 0;
   font-size: 3vw;
-  font-weight: bold;
-  width: 50%;
+  font-weight: 500;
 }
 
-/*주문리스트 미리보기*/
-.select_list_box{
-  padding: 0 2vw;
-  height: 15%;
-  overflow: hidden;
-}
-
-.select_list {
+/* 검색 입력창*/
+.search_div {
   background-color: white;
+  width: 33.8%;
   height: 100%;
-  border: solid 2.5px black;
-  right: 0;
-  border-radius: 15px;
-  cursor: pointer;
-
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-.select_list_title {
-  height: 100%;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  border-right: solid 3px #ced4da;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-weight: bold;
-  text-align: center;
-  width: 10%;
-  height: inherit;
+.search {
+  width: 90%;
   font-size: 2.5vw;
-  margin-bottom: 5px;
-}
-
-.select_list_list {
-  width: 100%;
-  height: 97%;
-  margin: 0 5PX;
-  padding-top: 2px;
-  border-radius: 10px;
-  overflow: hidden;
-  overflow-y: scroll;
-}
-
-/*주문 리스트 안에 꺼*/
-.move_box{
-  width: 80%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 5%;
-}
-
-.del_btn{
-  border-radius: 10px;
-  font-size: 3vw;
+  border: none;
+  height: 80%;
+  text-align: center;
+  font-weight: 500;
   background-color: white;
-  font-weight: bold;
-  margin: 2px 0;
+
+  color: #8c8a8a;
 }
 
-.select_list_detail {
-  font-weight: bold;
-  font-size: 3vw;
-  border-bottom: solid 2.5px #ced4da;
-  margin-bottom: 8px;
-  margin-left: 2px;
-  padding: 0 20px;
-  height: auto;
+.search_icon {
+  height: 3.5vw;
+}
+
+.main_box{
+  width: 100%;
+  height: 90.3%;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  /* overflow: hidden; */
 }
 
-.select_num {
-  text-align: end;
-}
-
-.none_select_menu{
+.menu_box{
+  width: 62.7%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: 6vw;
-  font-weight: bold;
-  color: #6c757d;
+  justify-content: start;
 }
 
 /*주문 리스트*/
@@ -224,13 +263,6 @@ body {
   height: auto;
 }
 
-/*주문 목록 글씨*/
-.list_name {
-  text-align: center;
-  font-size: 4vw;
-  font-weight: bold;
-}
-
 /* @media (max-width: 360px) {
   .list_name {
     font-size: 5vw;
@@ -241,24 +273,12 @@ body {
   }
 } */
 
-.help {
-  position: absolute;
-  width: 12%;
-  right: 2%;
-  top: 1%;
-}
-
-.menu_box{
-  width: 80%;
-  padding: 0;
-  margin: 0;
-}
-
 /*주문 리스트*/
 .list_box {
+  width: 100%;
+  height: 99.5%;
   background-color: white;
   padding: 1vw;
-  height: 90%;
   margin: 0;
   overflow: hidden;
   overflow-y: visible;
@@ -334,96 +354,277 @@ body {
   border-top: solid 1px gray;
 }
 
-/*하단 고정 버튼*/
-.fix_button {
+.right{
+  display: flex;
+  flex-direction: column;
+
+  width: 33.8%;
+  height: 100%;
+  border-radius: 10px;
+
   background-color: white;
-  height: 10%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+
+  border: solid 2px #BBBBBB;
+}
+
+/*포장확인*/
+
+.pickup_op{
   width: 100%;
+  height: 16.5%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  border-top: none;
-  padding: 3px 0;
+  padding: 8% 7.1%;
 }
 
-.fix_button_detail {
-  width: 20vw;
-  height: 90%;
-  background-color: white;
-  border-radius: 20px;
-  border: solid 2px black;
-  font-weight: bold;
+.pickup_op_box{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pickup_op_box div:first-child{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 66.7%;
+  height: 43%;
+
+  font-weight: 600;
   font-size: 3vw;
+}
+
+.pickup_op_box .pickup_btn{
+  width: 100%;
+  height: 40.9%;
 
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.fix_button_detail:hover {
-  background-color: skyblue;
+.pickup_btn button{
+  width: 47.2%;
+  height: 100%;
+
+  background-color: white;
+  color: #BBBBBB;
+  border: solid 3px #BBBBBB;
+  border-radius: 10px;
+}
+
+.pickup_btn .pickup_selected_btn{
   color: white;
-  border: solid 1px skyblue;
+  background-color: #FF991B;
+  border: solid 3px #FF991B;
 }
 
-.fix_button_detail img{
-  margin: 0 2px;
-  width: 3.5vw;
-  height: auto;
-}
+/*주문리스트 미리보기*/
 
-/*카테고리*/
-.categories {
-  display: flex;
-  justify-content: flex-end;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.select_list_box {
+  width: 100%;
+  height: 66%;
   overflow: hidden;
 
+  background-color: white;
 }
 
-.category {
-  display: grid;
-  padding: 0 3px;
-  margin: 0;
-  margin-left: 3px;
-  border: 2px solid black;
-  border-bottom: none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: #dddddd;
+.select_list {
+  height: 100%;
+  cursor: pointer;
 }
 
-.category a {
-  display: block;
-  text-align: center;
-  font-size: 2.5vw;
-  text-decoration: none;
+.select_list_list {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  border-top: solid 2px #BBBBBB;
+
+  overflow: hidden;
+  overflow-y: scroll;
+
+  padding: 0 4.76%;
+}
+
+.select_list_detail {
+  font-weight: bold;
+  font-size: 3vw;
+  border-bottom: solid 2.5px #ced4da;
+
+  border-bottom: solid 2px #BBBBBB;
+
+  height: auto;
+  padding: 10px 5.26% 10px 2.6%;
+}
+
+.select_num {
   color: black;
-}
+  text-align: end;
 
-.select_category{
-  background-color: orange;
-}
-
-.select_category a{
-  color: white;
+  font-weight: 500;
   font-size: 3vw;
 }
 
-@media (max-width: 360px) {
-  .categore {
-    font-size: 0.2rem;
-  }
+/*주문 리스트 안에 내용*/
+.move_box {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* 기본 더크게 검색 nav바*/
+.move_box_inner_1{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.select_name{
+  font-weight: 500;
+  font-size: 2.5vw;
+}
+
+.move_box_inner_2{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  color: rgba(79, 78, 78, 0.308);
+  font-size: 2.5vw;
+
+  font-weight: 500;
+}
+
+.select_op{
+  text-align: end;
+}
+
+.update_btn{
+  font-size: 2.5vw;
+  background-color: white;
+  font-weight: 600;
+  margin: 2px 0;
+  padding: 0;
+
+  color: #42BEAF;
+
+  border: none;
+}
+
+.del_btn {
+  border: none;
+  width: 15.7%;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+}
+
+.del_btn_icon{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.none_select_menu{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5vw;
+  font-weight: 500;
+}
+
+/*결제하기 버튼*/
+.pay_button{
+  width: 100%;
+  height: 17.5%;
+  background-color: #E70A0A;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.pay_inner_box{
+  width: 84.8%;
+  height: 49%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pay_inner_box img{
+  height: 100%;
+}
+
+.total_cost_box{
+  color: white;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: end;
+  font-size: 3vw;
+  font-weight: 600;
+}
+
+.total_cost{
+  font-size: 3.5vw;
+}
+
+/*하단 고정 버튼*/
 .add_fuc_bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1%;
+  padding: 0 4.4%;
+  height: 9.8%;
+  width: 100%;
+  box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
+
+  border-top: solid 3px #d9d9d9;
 }
+
+.fix_button_detail {
+  width: 20vw;
+  height: 100%;
+  background-color: white;
+  font-weight: 400;
+  font-size: 3vw;
+
+  align-items: center;
+  border: none;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+}
+
+.fix_button_detail:hover {
+  background-color: #42BEAF;
+  border: solid 1px #42BEAF;
+}
+
+.fix_button_detail img{
+  margin: 0 2px;
+  height: 33.9%;
+  width: auto;
+
+  margin-bottom: 10px;
+}
+
+/* 기본 더크게 검색 nav바*/
 
 .view_button {
   width: 30%;
@@ -431,29 +632,6 @@ body {
   display: flex;
   justify-content: space-around;
   font-weight: bold;
-}
-
-/* 검색 입력창*/
-.search_div {
-  background-color: white;
-  width: 40%;
-  border: solid 1px black;
-  height: 4vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.search {
-  width: 80%;
-  font-size: 2vw;
-  border: none;
-  height: 80%;
-  
-}
-
-.search_icon {
-  height: 3.5vw;
 }
 
 .slide{
