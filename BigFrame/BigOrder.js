@@ -762,6 +762,12 @@ function generateOrderList(orderData) {
       move_box_inner_2.appendChild(update_btn);
       move_box_inner_2.appendChild(selectNum);
 
+      if(order.menu_num >= 500){
+        selectTem.style.display = "none";
+        selectSize.style.display = "none";
+        selectOp.style.display = "none";
+      }
+
       selectListDetail.appendChild(move_box);
 
       selectList.appendChild(selectListDetail);

@@ -3,12 +3,14 @@ $(".input-group").on("click", "#increment", function () {
   // .input-group 클래스를 가진 요소 내에서 #increment 버튼을 클릭했을 때 실행되는 함수
   var input = $(this).closest(".input-group").find("input");
   // 클릭한 버튼이 속한 .input-group 내에서 input 요소를 찾음
-  input.val(parseInt(input.val()) + 1);
+  if (parseInt(input.val()) < 10) {   //최대 주문 수량 10개 막기
+    input.val(parseInt(input.val()) + 1);
+  }
 });
 
 $(".input-group").on("click", "#decrement", function () {
   var input = $(this).closest(".input-group").find("input");
-  if (parseInt(input.val()) > 1) {
+  if (parseInt(input.val()) > 1) {    // 최소 주문 수량 1개 이상
     input.val(parseInt(input.val()) - 1);
   }
 });

@@ -277,7 +277,7 @@ html,body {
 .list_box {
   width: 100%;
   height: 99.5%;
-  background-color: white;
+  background-color: #F4F4f4;
   padding: 1vw;
   margin: 0;
   overflow: hidden;
@@ -642,9 +642,8 @@ html,body {
 /*슬라이드 창*/
 .slider-container {
   width: 100%;
-  height: 100%;
+  height: 90%;
   overflow: hidden;
-
 }
 
 .slider {
@@ -684,11 +683,35 @@ html,body {
   position: relative;
   border: solid 2px black;
   border-radius: 8px;
+
+  background-color: white;
 }
 
 
 /*슬라이드 창 버튼*/
-#prevBtn {
+.pages_btn{
+
+  width: 100%;
+  height: 10%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pages_btn button{
+  width: 48%;
+  height: 80%;
+  border-radius: 10px;
+
+  background-color: rgba(0, 122, 194, 0.2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #prevBtn {
   position: absolute;
   top: 50%;
   height: 10%;
@@ -719,7 +742,7 @@ html,body {
 
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-}
+} */
 
 /*전체적 사이즈 조절 */
 
