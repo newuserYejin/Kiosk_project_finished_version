@@ -4,6 +4,8 @@ html,body {
   margin: 0;
   padding: 0;
   font-family: 'Pretendard';
+
+  overflow: hidden;
 }
 
 .all_box{
@@ -18,20 +20,22 @@ html,body {
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
 }
 
 .cafe_name{
-  width: 26.5%;
-  height: 28.8%;
-
-  position: relative;
+  width: 29.4%;
+  /* height: 35.4%; */
+  margin-bottom: 10px;
 }
 
 .hoi_box{
   height: 100%;
   display: flex;
   align-items: end;
+
+  position: relative;
+  top: 10%;
 }
 
 .hoi{
@@ -39,8 +43,8 @@ html,body {
 }
 
 .help {
-  width: 12.1%;
-  height: 5.5%;
+  width: 12%;
+  height: 4.8%;
   background-color: black;
   border-radius: 15px;
   
@@ -53,7 +57,7 @@ html,body {
 
   position: absolute;
   right: 4.4%;
-  top: 3.5%;
+  top: 7%;
 }
 
 #imageLink{
@@ -64,9 +68,8 @@ html,body {
 
 .category_box{
   width: 100%;
-  height: 5.7%;
-  border-bottom: solid 3px #d9d9d9;
-  border-top: solid 3px #d9d9d9;
+  height: 6.1%; /*원래는 5.7%*/
+
   box-sizing: content-box;
 }
 
@@ -82,6 +85,11 @@ html,body {
 
 .category {
   flex: 1; /* 동일한 너비로 분할 */
+
+  border-bottom: solid 3px #d9d9d9;
+  border-top: solid 3px #d9d9d9;
+
+  box-sizing: content-box;
 }
 
 .category a {
@@ -96,6 +104,8 @@ html,body {
 
 .select_category{
   background-color: #007AC2;
+  border-bottom: solid 3px #007AC2;
+  border-top: solid 3px #007AC2;
 }
 
 .select_category a{
@@ -249,11 +259,8 @@ html,body {
 }
 
 /*주문 리스트*/
-.box {
-  border: solid 2.5px black;
-}
 
-.text-center {
+/* .text-center {
   height: 100%;
   text-align: center;
   position: relative;
@@ -261,7 +268,7 @@ html,body {
   transform: translateY(-50%);
   width: 100%;
   height: auto;
-}
+} */
 
 /* @media (max-width: 360px) {
   .list_name {
@@ -278,16 +285,29 @@ html,body {
   width: 100%;
   height: 99.5%;
   background-color: #F4F4f4;
-  padding: 1vw;
+
   margin: 0;
   overflow: hidden;
   overflow-y: visible;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
 }
 
 .list_img_box {
-  width: 65%;
-  height: 65%;
-  border: none;
+  width: 75%;
+  border: solid 1px #e7e7e7;
+  border-radius: 50%;
+  padding: 10px;
+
+  background-color: #f4f4f4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .list_img_size {
@@ -317,16 +337,16 @@ html,body {
 }
 
 .menu_name {
-  font-size: 2.4vw;
+  font-size: 2.8vw;
+  font-weight: 600;
   text-align: center;
   align-content: center;
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 70%;
 }
 
-@media screen and (max-width: 360px) {
+/* @media screen and (max-width: 360px) {
   .menu_name {
     font-size: 1px;
     height: 75%;
@@ -335,23 +355,22 @@ html,body {
   .menu_cost {
     font-size: 0.4rem;
   }
-}
+} */
 
 .menu_cost {
   padding: 0;
   text-align: center;
-  font-size: 2.5vw;
+  font-size: 3vw;
+  font-weight: 600;
   margin: 0;
-  color: orangered;
+  color: #007AC2;
 }
 
 
 .list_content_info {
   flex-direction: column;
   width: 100%;
-  height: 35%;
   border: none;
-  border-top: solid 1px gray;
 }
 
 .right{
@@ -641,8 +660,8 @@ html,body {
 
 /*슬라이드 창*/
 .slider-container {
-  width: 100%;
-  height: 90%;
+  width: 90%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -665,6 +684,9 @@ html,body {
   grid-template-rows: repeat(3, 1fr);
   overflow-x: visible;
   overflow-y: visible;
+
+  column-gap: 3%;
+  row-gap: 1%;
 }
 
 /* 내용을 2열 4행 그리드로 배치 */
@@ -678,20 +700,27 @@ html,body {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  margin: 2%;
   align-items: center;
-  position: relative;
-  border: solid 2px black;
+  justify-content: space-around;
+  /* position: relative; */
   border-radius: 8px;
+  border: solid 1px #BBBBBB;
 
   background-color: white;
+
+  padding: 6.5% 10px;
 }
 
 
 /*슬라이드 창 버튼*/
 .pages_btn{
+  position: absolute;
 
-  width: 100%;
+  top: 45%;
+  right: 0;
+
+  /* width: 100%; */
+  width: 10%;
   height: 10%;
 
   display: flex;
@@ -699,16 +728,50 @@ html,body {
   align-items: center;
 }
 
-.pages_btn button{
-  width: 48%;
-  height: 80%;
-  border-radius: 10px;
+.pages_btn:nth-child(2){
+  left: 0%;
+}
 
-  background-color: rgba(0, 122, 194, 0.2);
+.pages_btn button{
+  width: 100%;
+  height: 100%;
+
+  /* background-color: rgba(0, 122, 194, 0.2); */
+  /* background-color: rgba(255, 153, 27, 0.7); */
+  background-color: #ffc300;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 5vw;
+  font-weight: 600;
+
+  border-radius: 10px;
+}
+
+.pages_btn:last-child button{
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+.pages_btn:nth-child(2) button{
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+
+  display: none;
+}
+
+.pages_btn button p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  margin: 0;
+}
+
+.pages_btn button img{
+  width: 90%;
 }
 
 /* #prevBtn {

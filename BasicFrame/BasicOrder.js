@@ -199,11 +199,17 @@ let slideIndex = 0;
 prevBtn.addEventListener("click", () => {
   slideIndex = Math.max(slideIndex - 1, 0);
   updateSliderPosition();
+
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "block";
 });
 
 nextBtn.addEventListener("click", () => {
   slideIndex = Math.min(slideIndex + 1, slider.children.length - 1);
   updateSliderPosition();
+
+  prevBtn.style.display = "block";
+  nextBtn.style.display = "none";
 });
 
 function updateSliderPosition() {
@@ -262,6 +268,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   categoryLinks.forEach(link => {
     link.addEventListener("click", (event) => {
+      
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "block";
+
       event.preventDefault();
       const category = link.getAttribute("data-category");
 
@@ -303,7 +313,7 @@ function handleMenuData(menuData, sliderContainer) {
     }
 
     const menuHTML = `
-      <div class="box list_content_box" id="list_click" data-menunum="${menu.menu_num}">
+      <div class="list_content_box" id="list_click" data-menunum="${menu.menu_num}">
         <div class="box list_img_box">
           <img class="list_img_size" src=".${menu.image_path}" alt="${menu.menu_name}">
         </div>
@@ -400,7 +410,7 @@ function searchFunction() {
 
   const resultContainer = document.querySelector('.slider');
   resultContainer.innerHTML = ''; //이전 결과 초기화
-  const itemsPerPage = 9; // 각 슬라이드당 표시할 아이템 수
+  const itemsPerPage = 6; // 각 슬라이드당 표시할 아이템 수
   // const res = document.querySelector('.list_content_box');
 
   if (storeData.length === 0) {
@@ -685,7 +695,7 @@ function generateOrderList(orderData) {
       // })
     });
 
-    
+
     //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
     const updateBtn = document.querySelectorAll(".update_btn");
     updateBtn.forEach(updateBtn => {

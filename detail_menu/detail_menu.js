@@ -123,13 +123,13 @@ $(".btn-info").click(function () {
 // 메뉴 정보를 출력하는 함수
 function renderMenuDetail(menuData) {
   const menuTitle = document.querySelector(".menu_title");
-  const menuCost = document.querySelector(".menu_cost");
+  // const menuCost = document.querySelector(".EI_menu_cost");
   const menuDescription = document.querySelector(".menu_explain_detail");
   const menuImage = document.querySelector(".menu_img_size");
 
   menuTitle.textContent = menuData.menuData.menu_name;
-  const formattedPrice = new Intl.NumberFormat('ko-KR').format(menuData.menuData.price);//10.09 가격 쉼표 넣기
-  menuCost.textContent = `${formattedPrice}원`;
+  // const formattedPrice = new Intl.NumberFormat('ko-KR').format(menuData.menuData.price);//10.09 가격 쉼표 넣기 삭제
+  // menuCost.textContent = `${formattedPrice}원`;
   menuDescription.textContent = menuData.menuData.menu_explan;
 
   const img_pp = `.${menuData.image_path}`
@@ -306,13 +306,68 @@ function renderMenuDetail(menuData) {
       optionList.innerHTML = checkboxOptions
         .map(option => {
           currentSet++;
-          return `<li class="list-group-item chch"><input class="form-check-input me-1" type="checkbox" id="${option.op_name}" name="option_set_${currentSet}" value="${option.op_name}">
+          return `<li class="list-group-item chch"><input class="form-check-input me-1" type="checkbox" id="${option.op_name}" name="option_set_${currentSet}" value="${option.op_name}" data-price="${option.op_price}">
         <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)</label></li>`;
         })
         .join("");
     }
   });
+  // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 10.16 추가 시작------------------------------------------------------------------
+  function updatePrice() {
+    const baseMenuPrice = parseInt(menuData.menuData.price); // 기본 메뉴 가격
 
+    let selectedOpSPrice = 0; // op_s의 추가 가격
+    let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0]; // 각 op의 추가 가격
+
+    // op_s의 선택 여부에 따라 가격을 업데이트
+    const selectedOpS = $("input[name='size']:checked").val();
+    if (selectedOpS === "큰 크기") {
+      selectedOpSPrice = 1200;
+    }
+
+    // 각 op의 선택 여부에 따라 가격을 업데이트
+    for (let i = 1; i <= 8; i++) {
+      const opCheckbox = $(`input[name='option_set_${i}']`);
+      const opPrice = opCheckbox.is(':checked') ? parseInt(opCheckbox.attr('data-price')) : 0;
+      selectedOpPrices[i - 1] = opPrice;
+      //console.log(`op${i} 가격: ${opPrice}`);
+    }
+
+    const inputVal = parseInt($("#quantity").val()); // input 값
+
+    // 총 가격 계산
+    const TotalPrice = (baseMenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
+    const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice); // 가격 쉼표 넣기
+
+    console.log(`현재금액 : ${TotalPrice}원`);
+    // 계산된 총 가격을 원하는 위치에 표시합니다.
+    $('.EI_menu_cost').text(`${EI_TotalPrice}원`);
+  }
+
+  $(".input-group").on("click", "#increment", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  $(".input-group").on("click", "#decrement", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  // 라디오 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='radio']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+
+  // 체크 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='checkbox']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+
+  // 초기 가격을 표시합니다.
+  updatePrice();//10.16추가 끝------------------------------------------------------------------
 }
 
 // 서버로부터 메뉴 정보를 요청합니다.
