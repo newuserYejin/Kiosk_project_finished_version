@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Pretendard';
+    overflow: hidden;
 }
 
 /*전체 div flex*/
@@ -13,26 +14,29 @@ body {
     height: 100vh;
 }
 
+
 .top_banner {
     width: 100%;
     height: 12.6%;
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
 }
 
 .cafe_name {
-    width: 26.5%;
-    height: 28.8%;
-
-    position: relative;
+    width: 29.4%;
+    /* height: 35.4%; */
+    margin-bottom: 10px;
 }
 
 .hoi_box {
     height: 100%;
     display: flex;
     align-items: end;
+
+    position: relative;
+    top: 10%;
 }
 
 .hoi {
@@ -40,8 +44,8 @@ body {
 }
 
 .help {
-    width: 12.1%;
-    height: 5.5%;
+    width: 12%;
+    height: 4.8%;
     background-color: black;
     border-radius: 15px;
 
@@ -54,7 +58,7 @@ body {
 
     position: absolute;
     right: 4.4%;
-    top: 3.5%;
+    top: 7%;
 }
 
 #imageLink {
@@ -117,13 +121,13 @@ body {
     font-size: 4.5vw;
 }
 
-.take_out_title img{
+.take_out_title img {
     height: 100%;
     width: 27%;
     margin-right: 3px;
 }
 
-.radio_box{
+.radio_box {
     width: 32.7%;
     height: 100%;
 }
@@ -137,7 +141,7 @@ body {
     align-items: center;
 }
 
-.list-group .list-group-item{
+.list-group .list-group-item {
     height: 100%;
     width: 47.2%;
     border: none;
@@ -146,11 +150,11 @@ body {
     align-items: center;
 }
 
-.list-group input{
+.list-group input {
     display: none;
 }
 
-.list-group-item label{
+.list-group-item label {
     width: 100%;
     height: 90%;
     font-weight: 600;
@@ -165,7 +169,7 @@ body {
     border-radius: 10px;
 }
 
-.form-check-input[type='radio']:checked + label{
+.form-check-input[type='radio']:checked+label {
     background-color: #FF991B;
     border: solid 2px #FF991B;
 
@@ -207,8 +211,8 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
-    
-    border:solid 2px #007AC2;
+
+    border: solid 2px #007AC2;
 }
 
 .navigation_all_box {
@@ -227,11 +231,11 @@ body {
     border-radius: 10px;
 }
 
-.box_line:nth-child(2){
+.box_line:nth-child(2) {
     border-left: solid 2px #007AC2;
     border-right: solid 2px #007AC2;
     border-radius: 0;
-  }
+}
 
 /* .now {
     animation: progressAnimation 2.5s linear infinite;
@@ -271,7 +275,7 @@ body {
     border: solid 1px blue;
 }
 
-.explain_box{
+.explain_box {
     width: 100%;
     height: 11.6%;
 
@@ -504,6 +508,7 @@ body {
     padding-left: 4.4%;
     height: 9.8%;
     width: 100%;
+    box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
 
     border-top: solid 3px #d9d9d9;
 }
@@ -527,7 +532,8 @@ body {
 }
 
 .bottom_button_box {
-    flex: 3; /* 너비 비율을 3으로 설정 */
+    flex: 3;
+    /* 너비 비율을 3으로 설정 */
     text-align: center;
 }
 

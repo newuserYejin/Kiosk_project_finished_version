@@ -218,7 +218,8 @@ function findParentOrderItem(element) {
 function addOrdersToDOM(orders) {
   let orderList = document.querySelector('.list_box');
   let none_msg = document.querySelectorAll('.speech-bubble');
-  let pay_move = document.querySelector('.pay_move');
+  let pay_move = document.querySelector('.move_pay_page');
+  let pay_button = document.querySelector('.bottom_button_box');
   // let pay_circle = document.querySelector('.pay_circle');
 
   if (orders.length === 0) {
@@ -237,7 +238,19 @@ function addOrdersToDOM(orders) {
       };
 
       // 배경색 변경
-      pay_move.style.color = "#6c757d";
+      pay_move.style.color = "#BBBBBB";
+      pay_move.style.backgroundColor = "rgba(233, 233, 233, 0.7)";
+      // pay_circle.style.border = "solid 3px #6c757d"
+    }
+
+    if (pay_button) {
+      pay_button.onclick = function (event) {
+        event.preventDefault(); // 클릭 이벤트를 막음
+      };
+
+      // 배경색 변경
+      pay_button.style.color = "#BBBBBB";
+      pay_button.style.backgroundColor = "#8c8a8a";
       // pay_circle.style.border = "solid 3px #6c757d"
     }
   } else {

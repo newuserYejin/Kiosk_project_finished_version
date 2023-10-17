@@ -189,10 +189,32 @@ $(document).ready(function () {
 
       // 주문 데이터를 기반으로 옵션 설정
       setOptionsFromOrderData(orderData);
+      fetchTotalPrice();//10.16 추가s
     })
     .catch(error => {
       console.error("Error fetching order data:", error);
     });
+
+  // total_price를 가져오는 함수 10.17추가 시작--------------------------------------------------------------
+  function fetchTotalPrice() {
+    fetch('/getOrderData')
+      .then(response => response.json())
+      .then(data => {
+        console.log("Session data:", JSON.stringify(data));
+        // 주문 데이터를 가지고 총 금액 계산
+        totalAmount = calculateTotalAmount(data);
+        updateTotalAmountUI(totalAmount);
+
+        localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+      });
+    function calculateTotalAmount(orders) {
+      return orders.reduce((total, order) => total + Number(order.total_price), 0);
+    }
+  }
+  function updateTotalAmountUI(totalAmount) {
+    const CommitPrice = new Intl.NumberFormat('ko-KR').format(totalAmount); // 가격 쉼표 넣기
+    $('.EI_menu_cost').text(`${CommitPrice}원`);
+  }
 
   // 주문 데이터를 처리하고 렌더링하는 함수
   function handleOrderData(orderData) {
@@ -220,7 +242,7 @@ $(document).ready(function () {
     } else {
       $(`input[name='size']`).prop("checked", false);
     }
-    
+
     // 옵션 체크박스 선택
     const optionValues = [5, 6, 7, 8, 9, 10, 11, 12]; // 체크박스에 해당하는 값들
     for (let i = 0; i < optionValues.length; i++) {
@@ -265,7 +287,7 @@ $(document).ready(function () {
 // 08.17 tb_order와 연동 (주문 정보를 출력하는 함수)
 function renderOrderDetail(orderData) {
   const menuTitle = document.querySelector(".menu_title");
-  const menuCost = document.querySelector(".menu_cost");
+  // const menuCost = document.querySelector(".EI_menu_cost");
   const menuDescription = document.querySelector(".menu_description");
 
   const menuImage = document.querySelector(".menu_img_size");
@@ -273,18 +295,75 @@ function renderOrderDetail(orderData) {
   menuImage.alt = orderData.menu_name;
 
   menuTitle.textContent = orderData.menu_name;
-  menuCost.textContent = `가격: ${orderData.menu_price}원`;
+  // menuCost.textContent = `가격: ${orderData.menu_price}원`;
   menuDescription.textContent = orderData.menu_explan;
 
   const allegyList = document.querySelector(".allegy_list");
   allegyList.innerHTML = orderData.allergy_names
-  if(orderData.allergy_names == 0){
+  if (orderData.allergy_names == 0) {
     allegyList.innerHTML = `<li>없음</li>`
-  } else{
+  } else {
     allegyList.innerHTML = orderData.allergy_names
       .map(allegyName => `<li>${allegyName}</li>`)
       .join(", ");
   }
+
+  // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 10.16 추가 시작------------------------------------------------------
+  function updatePrice() {
+    const MenuPrice = parseInt(orderData.menu_price); // 기본 메뉴 가격
+
+    let selectedOpSPrice = 0; // op_s의 추가 가격
+    let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0]; // 각 op의 추가 가격
+
+    // op_s의 선택 여부에 따라 가격을 업데이트
+    const selectedOpS = $("input[name='size']:checked").val();
+    if (selectedOpS === "4") {
+      selectedOpSPrice = 1200;
+    }
+
+    // 각 op의 선택 여부에 따라 가격을 업데이트
+    for (let i = 1; i <= 8; i++) {
+      const opCheckbox = $(`input[name='option_set_${i}']`);
+      const opPrice = opCheckbox.is(':checked') ? parseInt(opCheckbox.attr('data-price')) : 0;
+      selectedOpPrices[i - 1] = opPrice;
+      //console.log(`op${i} 가격: ${opPrice}`);
+    }
+
+    const inputVal = parseInt($("#quantity").val()); // input 값
+
+    // 총 가격 계산
+    const TotalPrice = (MenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
+    const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice); // 가격 쉼표 넣기
+
+    console.log(`현재금액 : ${TotalPrice}원`);
+    // 계산된 총 가격을 원하는 위치에 표시합니다.
+    $('.EI_menu_cost').text(`${EI_TotalPrice}원`);
+  }
+
+  $(".input-group").on("click", "#increment1", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  $(".input-group").on("click", "#decrement1", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  // 라디오 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='radio']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+
+  // 체크 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='checkbox']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+
+  // 초기 가격을 표시합니다.
+  updatePrice();//10.16추가 끝--------------------------------------------------------
 }
 
 $(".input-group").on("click", "#increment1", function () {

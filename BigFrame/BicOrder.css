@@ -4,6 +4,7 @@ html,body {
   margin: 0;
   padding: 0;
   font-family: 'Pretendard';
+  overflow: hidden;
 }
 
 .all_box {
@@ -17,20 +18,22 @@ html,body {
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
 }
 
 .cafe_name{
-  width: 26.5%;
-  height: 28.8%;
-
-  position: relative;
+  width: 29.4%;
+  /* height: 35.4%; */
+  margin-bottom: 10px;
 }
 
 .hoi_box{
   height: 100%;
   display: flex;
   align-items: end;
+
+  position: relative;
+  top: 10%;
 }
 
 .hoi{
@@ -38,8 +41,8 @@ html,body {
 }
 
 .help {
-  width: 12.1%;
-  height: 5.5%;
+  width: 12%;
+  height: 4.8%;
   background-color: black;
   border-radius: 15px;
   
@@ -52,7 +55,7 @@ html,body {
 
   position: absolute;
   right: 4.4%;
-  top: 3.5%;
+  top: 7%;
 }
 
 #imageLink{
@@ -62,9 +65,8 @@ html,body {
 /*카테고리*/
 .category_box{
   width: 100%;
-  height: 5.7%;
-  border-bottom: solid 3px #d9d9d9;
-  border-top: solid 3px #d9d9d9;
+  height: 6.1%; /*원래는 5.7%*/
+
   box-sizing: content-box;
 }
 
@@ -200,7 +202,7 @@ html,body {
 }
 
 .list_box::-webkit-scrollbar {
-  width: 20px;
+  width: 15px;
 }
 
 .list_box::-webkit-scrollbar-track {
@@ -266,7 +268,7 @@ html,body {
 
 .content_title {
   font-size: 3vw;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .menu_name {
@@ -307,7 +309,7 @@ html,body {
 }
 
 .tag {
-  font-size: 2.2vw;
+  font-size: 2.3vw;
   font-weight: 400;
   display: flex;
   align-items: center;
@@ -392,7 +394,62 @@ html,body {
   font-size: 3vw;
 }
 
-.pickup_op_box .pickup_btn{
+.pickup_op_box div:first-child img{
+  height: 100%;
+}
+
+.pickup_op .radio_box{
+  width: 100%;
+  height: 45.9%;
+}
+
+.radio_box .list-group{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pickup_op .list-group-item{
+  height: 100%;
+  width: 47.2%;
+
+  border: none;
+  display: flex;
+  padding: 0;
+  align-items: center;
+}
+
+.list-group input{
+  display: none;
+}
+
+.list-group-item label{
+  height: 100%;
+  width: 100%;
+  font-weight: 600;
+  font-size: 3vw;
+  border: solid 2px #BBBBBB;
+  color: #BBBBBB;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+}
+
+.form-check-input[type='radio']:checked + label{
+  background-color: #FF991B;
+  border: solid 2px #FF991B;
+
+  color: white;
+}
+
+/* .pickup_op_box .pickup_btn{
   width: 100%;
   height: 40.9%;
 
@@ -409,13 +466,19 @@ html,body {
   color: #BBBBBB;
   border: solid 3px #BBBBBB;
   border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 3vw;
 }
 
 .pickup_btn .pickup_selected_btn{
   color: white;
   background-color: #FF991B;
   border: solid 3px #FF991B;
-}
+} */
 
 /*주문리스트 미리보기*/
 
@@ -456,6 +519,14 @@ html,body {
 }
 
 .select_num {
+  color: black;
+  text-align: end;
+
+  font-weight: 500;
+  font-size: 3vw;
+}
+
+.total_price {/*10.16추가*/
   color: black;
   text-align: end;
 
@@ -628,6 +699,11 @@ html,body {
 
 .category {
   flex: 1; /* 동일한 너비로 분할 */
+
+  border-bottom: solid 3px #d9d9d9;
+  border-top: solid 3px #d9d9d9;
+
+  box-sizing: content-box;
 }
 
 .category a {
@@ -642,6 +718,9 @@ html,body {
 
 .select_category {
   background-color: #007AC2;
+
+  border-bottom: solid 3px #007AC2;
+  border-top: solid 3px #007AC2;
 }
 
 .select_category a{

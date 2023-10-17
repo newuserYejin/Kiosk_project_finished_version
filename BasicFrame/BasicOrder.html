@@ -15,9 +15,9 @@
         <!--상단 배너-->
         <div class="top_banner">
             <div class="hoi_box">
-                <img class="hoi" src="./image/hoi.png" />
+                <img class="hoi" src="./image/good_hoi.png" />
             </div>
-            <img class="cafe_name" src="./image/cafe_name.png" />
+            <img class="cafe_name" src="./image/cafe_name_re.png" />
 
             <div class="help">
                 <div id="imageLink">도움말</div>
@@ -73,7 +73,7 @@
 
                     <div class="main_box">
                         <div class="menu_box">
-                            <div class="box list_box" id="resultContainer">
+                            <div class="list_box" id="resultContainer">
                                 <!-- <div class="slider_box"> -->
                                 <div class="slider-container">
                                     <div class="slider">
@@ -110,11 +110,21 @@
                                     </div>
                                 </div> -->
                                     </div>
-                                    <button id="prevBtn"> &lt; </button>
-                                    <button id="nextBtn"> &gt; </button>
                                 </div>
                                 <!-- </div> -->
                                 <!-- <div class="pages"></div> -->
+                                <div class="pages_btn">
+                                    <button id="prevBtn">
+                                        <!-- <img src="./image/left_icon.png" /> -->
+                                        <p>&lt;</p>
+                                    </button>
+                                </div>
+                                <div class="pages_btn">
+                                    <button id="nextBtn">
+                                        <!-- <img src="./image/right_icon.png" /> -->
+                                        <p>&gt;</p>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -301,7 +311,7 @@
                             const linkElement = document.createElement("link");
                             linkElement.rel = "stylesheet";
                             linkElement.type = "text/css";
-                            linkElement.href = "http://localhost:3001/timeout/timeout.css";
+                            linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
                             document.head.appendChild(linkElement);
 
                             // 모달을 열기 위한 코드

@@ -14,20 +14,22 @@ html,body {
 
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
 }
 
 .cafe_name {
-    width: 26.5%;
-    height: 28.8%;
-
-    position: relative;
+    width: 29.4%;
+    /* height: 35.4%; */
+    margin-bottom: 10px;
 }
 
 .hoi_box {
     height: 100%;
     display: flex;
     align-items: end;
+
+    position: relative;
+    top: 10%;
 }
 
 .hoi {
@@ -35,8 +37,8 @@ html,body {
 }
 
 .help {
-    width: 12.1%;
-    height: 5.5%;
+    width: 12%;
+    height: 4.8%;
     background-color: black;
     border-radius: 15px;
 
@@ -49,7 +51,7 @@ html,body {
 
     position: absolute;
     right: 4.4%;
-    top: 3.5%;
+    top: 7%;
 }
 
 #imageLink {
@@ -81,6 +83,10 @@ html,body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.ordernum img{
+    width: 100%;
 }
 
 .order {
