@@ -135,9 +135,19 @@
                                         <img src="./image/bag_icon.png" />
                                         <div>주문목록</div>
                                     </div>
-                                    <div class="pickup_btn">
-                                        <button class="pickup_selected_btn">포장</button>
-                                        <button>매장</button>
+                                    <div class="radio_box">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
+                                                    value="takeAway" id="secondRadio">
+                                                <label class="form-check-label" for="secondRadio">포장</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
+                                                    value="forHere" id="firstRadio">
+                                                <label class="form-check-label" for="firstRadio">매장</label>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +192,7 @@
                 <img src="./image/size_icon.png">더 크게
             </button>
 
-            <button class="fix_button_detail all_delete" data-value="basic">
+            <button class="fix_button_detail all_delete" onclick="all_delete()">
                 <img src="./image/delete_black_icon.png">전체 취소
             </button>
         </div>

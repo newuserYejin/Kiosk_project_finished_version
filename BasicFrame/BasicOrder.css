@@ -420,7 +420,62 @@ html,body {
   font-size: 3vw;
 }
 
-.pickup_op_box .pickup_btn{
+.pickup_op_box div:first-child img{
+  height: 100%;
+}
+
+.pickup_op .radio_box{
+  width: 100%;
+  height: 45.9%;
+}
+
+.radio_box .list-group{
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pickup_op .list-group-item{
+  height: 100%;
+  width: 47.2%;
+
+  border: none;
+  display: flex;
+  padding: 0;
+  align-items: center;
+}
+
+.list-group input{
+  display: none;
+}
+
+.list-group-item label{
+  height: 100%;
+  width: 100%;
+  font-weight: 600;
+  font-size: 3vw;
+  border: solid 2px #BBBBBB;
+  color: #BBBBBB;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+}
+
+.form-check-input[type='radio']:checked + label{
+  background-color: #FF991B;
+  border: solid 2px #FF991B;
+
+  color: white;
+}
+
+/* .pickup_op_box .pickup_btn{
   width: 100%;
   height: 40.9%;
 
@@ -443,7 +498,7 @@ html,body {
   color: white;
   background-color: #FF991B;
   border: solid 3px #FF991B;
-}
+} */
 
 /*주문리스트 미리보기*/
 

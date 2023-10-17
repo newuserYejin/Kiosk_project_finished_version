@@ -189,31 +189,29 @@ $(document).ready(function () {
 
       // 주문 데이터를 기반으로 옵션 설정
       setOptionsFromOrderData(orderData);
-      fetchTotalPrice();//10.16 추가s
+      const orderNum = orderData.order_num; // order_num 가져오기
+      fetchTotalPrice(orderNum);//10.16 추가s
     })
     .catch(error => {
       console.error("Error fetching order data:", error);
     });
 
-  // total_price를 가져오는 함수 10.17추가 시작--------------------------------------------------------------
-  function fetchTotalPrice() {
+  function fetchTotalPrice(orderNum) {
     fetch('/getOrderData')
       .then(response => response.json())
       .then(data => {
         console.log("Session data:", JSON.stringify(data));
-        // 주문 데이터를 가지고 총 금액 계산
-        totalAmount = calculateTotalAmount(data);
-        updateTotalAmountUI(totalAmount);
 
-        localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+        updateTotalAmountUI(data, orderNum);
       });
-    function calculateTotalAmount(orders) {
-      return orders.reduce((total, order) => total + Number(order.total_price), 0);
-    }
   }
-  function updateTotalAmountUI(totalAmount) {
-    const CommitPrice = new Intl.NumberFormat('ko-KR').format(totalAmount); // 가격 쉼표 넣기
-    $('.EI_menu_cost').text(`${CommitPrice}원`);
+  function updateTotalAmountUI(getOrder, orderNum) { //현재 total_price
+    const order = getOrder.find(order => order.order_num === orderNum); // 주문 번호에 해당하는 데이터 찾기
+    console.log(order);
+    if (order) {
+      const CommitPrice = new Intl.NumberFormat('ko-KR').format(order.total_price); // 가격 쉼표 넣기
+      $(`.EI_menu_cost`).text(`${CommitPrice}원`);
+    }
   }
 
   // 주문 데이터를 처리하고 렌더링하는 함수

@@ -100,6 +100,65 @@ function pay_page() {
   }
 };
 
+//전체 취소 버튼
+const all_delete = document.querySelectorAll('.all_delete');//10.16전체삭제 추가 시작
+all_delete.forEach(AdeleteBtn => {
+  AdeleteBtn.addEventListener("click", function () {
+    console.log("전체 삭제 버튼 눌림");
+    // 클릭된 버튼의 data-orderNum 값을 가져옴
+    const orderNum = this.getAttribute('data-orderNum');
+
+    // 먼저 모달 컨테이너를 비웁니다.
+    document.getElementById("modalContainer").innerHTML = "";
+
+    // detail_menu.css를 제거합니다.
+    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+    if (detailMenuLink) {
+      detailMenuLink.remove();
+    }
+
+    fetch(`http://localhost:3001/all_delete_msg/all_delete_msg.html`)//전체 취소 관련 html로 변경 바람
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("HTTP Error " + response.status);
+        }
+        return response.text();
+      })
+      .then(data => {
+        // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
+        $("#modalContainer").html(data);
+        // 모달을 열기 위한 코드
+        const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+        modal.show();
+
+        // css 파일을 로드합니다.
+        const linkElement = document.createElement("link");
+        linkElement.rel = "stylesheet";
+        linkElement.type = "text/css";
+        linkElement.href = "http://localhost:3001/help_msg/help_msg.css"; // 이 부분의 파일 경로를 수정해야합니다.
+        document.head.appendChild(linkElement);
+
+        // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
+        const confirmButton = document.querySelector('.yesButton');
+        confirmButton.addEventListener("click", function () {
+          console.log("확인 버튼 눌림");
+          // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+          AllDelete();
+        });
+
+        const cancelButton = document.querySelector('.cancleButton');
+        cancelButton.addEventListener("click", function () {
+          console.log("취소 버튼 눌림");
+          // "취소" 버튼이 클릭되면 모달 닫기
+          modal.hide();
+        });
+      })
+      .catch(error => {
+        console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+      });
+  });
+});
+
 // 검색버튼
 
 document.getElementById("search_div").addEventListener('click', search);
@@ -569,10 +628,11 @@ if (keywordValue) {
   localStorage.removeItem('searchInput'); // 사용한 값은 제거
 }
 
-//네이베이션 아래의 주문 목록
+//현재 주문 목록
 function generateOrderList(orderData) {
   const selectList = document.querySelector('.select_list_list');
   let pay_move = document.querySelector('.pay_move');
+  let pay_button = document.querySelector('.pay_button');
   let circle_name = document.querySelector('.pay_move .circle_name');
 
   if (orderData.length == 0) {
@@ -588,6 +648,17 @@ function generateOrderList(orderData) {
       // 배경색 변경
       circle_name.style.color = "#BBBBBB";
       pay_move.style.backgroundColor = "rgba(233, 233, 233, 0.7)";
+      // pay_circle.style.border = "solid 3px #6c757d"
+    }
+
+    if (pay_button) {
+      pay_button.onclick = function (event) {
+        event.preventDefault(); // 클릭 이벤트를 막음
+      };
+
+      // 배경색 변경
+      pay_button.style.color = "#BBBBBB";
+      pay_button.style.backgroundColor = "#8c8a8a";
       // pay_circle.style.border = "solid 3px #6c757d"
     }
   } else {
@@ -665,6 +736,12 @@ function generateOrderList(orderData) {
       selectNum.classList.add('select_num');
       selectNum.textContent = order.count + '개';
 
+      //개별 매뉴 가격 추가
+      const totalPrice = document.createElement('div');
+      totalPrice.classList.add('total_price');
+      const Each_Price = new Intl.NumberFormat('ko-KR').format(order.total_price);
+      totalPrice.textContent = Each_Price + '원';
+
       move_box.appendChild(move_box_inner_1);
 
       move_box_inner_1.appendChild(del_btn);
@@ -677,6 +754,14 @@ function generateOrderList(orderData) {
       move_box_inner_2.appendChild(selectOp);
       move_box_inner_2.appendChild(update_btn);
       move_box_inner_2.appendChild(selectNum);
+      move_box_inner_2.appendChild(totalPrice);//10.16 개별 매뉴 가격 추가
+
+      // 디저트일때 옵션 표시 안하기
+      if (order.menu_num >= 500) {
+        selectTem.style.display = "none";
+        selectSize.style.display = "none";
+        selectOp.style.display = "none";
+      }
 
       selectListDetail.appendChild(move_box);
 
@@ -694,7 +779,6 @@ function generateOrderList(orderData) {
       //   })
       // })
     });
-
 
     //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
     const updateBtn = document.querySelectorAll(".update_btn");
@@ -823,8 +907,39 @@ function generateOrderList(orderData) {
     if (pay_move) {
       pay_move.disabled = false;
     }
+
+    if(pay_button){
+      pay_button.disabled = false;
+    }
   }
 }
+
+// 총 금액 연결
+let totalAmount = 0;
+fetch('/getOrderData')
+  .then(response => response.json())
+  .then(data => {
+    console.log("Session data:", JSON.stringify(data));
+    // 주문 데이터를 가지고 총 금액 계산
+    totalAmount = calculateTotalAmount(data);
+    updateTotalAmountUI(totalAmount);
+
+    localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+  });
+function calculateTotalAmount(orders) {
+  return orders.reduce((total, order) => total + Number(order.total_price), 0);
+}
+function updateTotalAmountUI(amount) {
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
+  const totalCostElement = document.querySelector('.total_cost');
+  totalCostElement.textContent = formattedPrice + '원';
+}
+
+let total_cost = localStorage.getItem('myTotalCost');
+const formattedPrice = new Intl.NumberFormat('ko-KR').format(total_cost);//09.18 가격 쉼표 넣기
+const totalCostElement = document.querySelector('.total_cost');
+totalCostElement.textContent = formattedPrice + '원';
+
 
 // 페이지 로드 시 주문 목록을 가져와서 생성
 window.addEventListener('load', () => {
@@ -846,3 +961,47 @@ function move_checklist() {
 
   location.href = `http://localhost:3001/last_checklist/checklist.html?order=${order}&timer=${timer}&pickup=${pickup}`;
 }
+
+//포장 연결
+const radioButtons = document.getElementsByName('listGroupRadio');
+
+// 라디오 버튼의 상태가 변경될 때 호출되는 함수를 정의합니다.
+function updateURL() {
+  let newParamValue = "";
+
+  // 선택된 라디오 버튼에 따라 newParamValue 값을 설정합니다.
+  if (radioButtons[0].checked) {
+    newParamValue = "1"; // "포장하기"가 선택된 경우
+  } else if (radioButtons[1].checked) {
+    newParamValue = "2"; // "먹고가기"가 선택된 경우
+  }
+
+  // 현재 URL을 가져옵니다.
+  let currentURL = new URL(window.location.href);
+
+  // "pickup" 파라미터를 업데이트합니다.
+  currentURL.searchParams.set("pickup", newParamValue);
+
+  // 새 URL로 이동합니다.
+  window.history.pushState({}, '', currentURL);
+}
+
+// 라디오 버튼의 상태가 변경될 때 updateURL 함수를 호출합니다.
+for (const radioButton of radioButtons) {
+  radioButton.addEventListener('change', updateURL);
+}
+
+// 페이지 로드 시 라디오 버튼 상태를 URL 파라미터에 맞게 설정합니다.
+function checkRadioButton() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderType = urlParams.get('pickup');
+  if (orderType === '1') {
+    radioButtons[1].checked = false;
+    radioButtons[0].checked = true;
+  } else {
+    radioButtons[1].checked = true;
+    radioButtons[0].checked = false;
+  }
+}
+
+window.addEventListener('load', checkRadioButton);
