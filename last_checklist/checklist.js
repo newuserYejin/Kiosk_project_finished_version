@@ -7,6 +7,7 @@ function selectPage() {
   var URL = new URLSearchParams(window.location.search);
   var order_info = URL.get('order');
   const pickup = URL.get('pickup');//09.08 수정
+  const timer = URL.get('timer');//10.17 추가
 
   if (order_info == 'slow') {
     window.location.href = `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}`
@@ -16,13 +17,13 @@ function selectPage() {
 }
 
 function navigateclick() {
-  alert("현재 페이지 입니다.")
 }
 
 function openPay() {
   var URL = new URLSearchParams(window.location.search);
   var order_info = URL.get('order');
   const pickup = URL.get('pickup');//09.08 수정
+  const timer = URL.get('timer');//10.17 추가
 
   if (order_info == 'slow') {
     window.location.href = `http://localhost:3001/paymethod/paymethod.html?order=slow&timer=${timer}&pickup=${pickup}`
@@ -36,6 +37,7 @@ function prvsScren() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');//10.17 추가
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -57,6 +59,7 @@ function nextScreen() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');//10.17 추가
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -285,6 +288,7 @@ function addOrdersToDOM(orders) {
       const detailMenuLink = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
       const urlParams = new URLSearchParams(window.location.search);//09.09 추가함
       const pickup = urlParams.get('pickup');
+      const timer = urlParams.get('timer');//10.17 추가
       const order = urlParams.get('order');
       if (detailMenuLink) {
         detailMenuLink.remove();
@@ -428,34 +432,101 @@ function updateTotalAmountUI(amount) {
 
 // 포장 여부 확인
 
-// 09.09 checklist에서 포장 변경시 바로 저장 되게
-const radioButtons = document.getElementsByName('listGroupRadio');
-
 // 라디오 버튼의 상태가 변경될 때 호출되는 함수를 정의합니다.
-function updateURL() {
+function updateData() {
+  const radioButtons = document.getElementsByName('listGroupRadio');
   let newParamValue = "";
 
-  // 선택된 라디오 버튼에 따라 newParamValue 값을 설정합니다.
   if (radioButtons[0].checked) {
-    newParamValue = "1"; // "포장하기"가 선택된 경우
+    newParamValue = "1"; // "매장"이 선택된 경우
   } else if (radioButtons[1].checked) {
-    newParamValue = "2"; // "먹고가기"가 선택된 경우
+    newParamValue = "2"; // "포장"이 선택된 경우
   }
 
-  // 현재 URL을 가져옵니다.
-  let currentURL = new URL(window.location.href);
+  var currentURL = window.location.href;
+  var url = new URL(currentURL);
+  var params = new URLSearchParams(url.search);
+  var timer = params.get("timer");
 
-  // "pickup" 파라미터를 업데이트합니다.
-  currentURL.searchParams.set("pickup", newParamValue);
+  if (timer !== null && !isNaN(timer)) {
+    timer = parseInt(timer);
+    timer--; // 타이머를 1씩 감소
 
-  // 새 URL로 이동합니다.
-  window.history.pushState({}, '', currentURL);
+    // "pickup" 및 "timer" 파라미터를 업데이트합니다.
+    params.set("pickup", newParamValue);
+    params.set("timer", timer);
+    url.search = params.toString();
+    var newURL = url.toString();
+    // 브라우저 주소 표시줄 업데이트
+    window.history.replaceState({}, document.title, newURL);
+
+    // 타이머가 0이 되면 동작을 원하는 대로 처리
+    if (timer === 0) {
+      document.getElementById("modalContainer").innerHTML = "";
+
+      // detail_menu.css를 제거합니다.
+      const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+      if (detailMenuLink) {
+        detailMenuLink.remove();
+      }
+      console.log("타이머가 0이 되었습니다.");
+
+      // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+      fetch(`http://localhost:3001/timeout/timeout.html`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("HTTP Error " + response.status);
+          }
+          return response.text();
+        })
+        .then(data => {
+          // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+          $("#modalContainer").html(data);
+
+          // timeout.css 파일을 로드합니다.
+          const linkElement = document.createElement("link");
+          linkElement.rel = "stylesheet";
+          linkElement.type = "text/css";
+          linkElement.href = "http://localhost:3001/timeout/timeout.css";
+          document.head.appendChild(linkElement);
+
+          // 모달을 열기 위한 코드
+          const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+          modal.show();
+
+          const yes = document.querySelector('.btn-primary');
+          yes.addEventListener("click", function () {//180초 추가하기
+            params.set("timer", 180);
+            url.search = params.toString();
+            newURL = url.toString();
+            window.history.replaceState({}, document.title, newURL);
+            location.reload();
+          })
+          const no = document.querySelector('.btn-secondary');
+          no.addEventListener("click", function () {//시작 페이지로 이동
+            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+          })
+
+        })
+        .catch(error => {
+          console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+        });
+    } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+      window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+    }
+  }
+  else {
+    alert("유효한 타이머 시간을 지정하지 않았습니다.");
+  }
 }
 
-// 라디오 버튼의 상태가 변경될 때 updateURL 함수를 호출합니다.
+// 라디오 버튼의 상태가 변경될 때 updateData 함수를 호출합니다.
+const radioButtons = document.getElementsByName('listGroupRadio');
 for (const radioButton of radioButtons) {
-  radioButton.addEventListener('change', updateURL);
+  radioButton.addEventListener('change', updateData);
 }
+setInterval(updateData, 1000);//10.17 수정 끝
+
 
 // 페이지 로드 시 라디오 버튼 상태를 URL 파라미터에 맞게 설정합니다.
 function checkRadioButton() {
