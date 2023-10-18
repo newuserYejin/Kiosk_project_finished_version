@@ -89,6 +89,8 @@ body {
     justify-content: center;
 
     padding: 4.5% 5.6%;
+
+    border-bottom: solid 2px #d9d9d9;
 }
 
 .take_out {
@@ -194,7 +196,6 @@ body {
 }
 
 .ho {
-    border: solid 1px red;
     height: 69.8%;
     width: 100%;
 
@@ -272,7 +273,6 @@ body {
 .ho_inner_box {
     width: 100%;
     height: 100%;
-    border: solid 1px blue;
 }
 
 .explain_box {
@@ -316,9 +316,19 @@ body {
     background-color: white;
 } */
 
+.real_content_box {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 3.7% 0;
+}
+
 .cancel_btn {
     width: 100%;
-    height: 11.1%;
+    height: 14.4%;
 
     display: flex;
     justify-content: end;
@@ -330,29 +340,32 @@ body {
     width: 4.5vw;
 }
 
-.real_content_box {
+.checklist_box{
     width: 100%;
-    height: 70%;
-
+    height: auto;
     display: flex;
     flex-direction: row;
 
-    border: solid 1px red;
+    padding: 12px 15px 0;
+}
+
+.checklist_box_inner{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 
 .list_img_box {
-    width: 46.7%;
-    height: 70%;
-    padding: 0 4.5%;
+    width: 31.25%;
 
-    border: solid 1px blue;
+    border-radius: 10px;
 }
 
 .list_img_size_box {
     width: 100%;
-    height: 100%;
     border-radius: 10px;
-    border: solid 1px #BBBBBB;
     background-color: rgba(233, 233, 233, 0.7);
 }
 
@@ -363,7 +376,7 @@ body {
 
 /*주문 정보*/
 .list_content_info {
-    width: 53.2%;
+    width: 61%;
     height: 100%;
 }
 
@@ -378,13 +391,24 @@ body {
 }
 
 .content_title {
-    font-weight: bold;
-    text-align: center;
     width: 100%;
-    height: 46.8%;
+    margin-bottom: 6%;
 }
 
-.content_title .menu_name {
+.title_cost{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: 600;
+    font-size: 3.5vw;
+}
+
+.menu_cost{
+    color: #E70A0A;
+}
+
+/* .content_title .menu_name {
     font-size: 3vw;
     font-weight: 600;
     padding: 0;
@@ -398,14 +422,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: start;
-}
+} */
 
 .cost_info {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    width: 100%;
-    height: 48.7%;
+    justify-content: end;
+    width: 20%;
 
     font-size: 3.5vw;
     font-weight: 600;
@@ -413,7 +435,7 @@ body {
 
 /*개수 확인*/
 .button_box_num {
-    width: 41%;
+    width: 100%;
     height: 100%;
 
     display: flex;
@@ -426,12 +448,6 @@ body {
     padding: 0;
 }
 
-.menu_cost {
-    color: #007AC2;
-    padding: 0;
-    text-align: center;
-}
-
 .split_border {
     border: solid 2px rgba(217, 217, 217, 0.7);
 }
@@ -440,12 +456,16 @@ body {
 .list_option {
     height: auto;
     width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 12%;
 }
 
 .list_option .list_option_detail {
     padding: 0;
-    width: 100%;
-    /* height: 55.4%; */
+    width: 75%;
     overflow: hidden;
     overflow-y: visible;
 }
@@ -470,7 +490,10 @@ body {
 
 /*수량 체크(text)*/
 .list_buttons {
-    /* height: 44.6%; */
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
 }
 
 /* 수정 버튼*/
@@ -478,25 +501,28 @@ body {
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: start;
+    justify-content: end;
     align-items: center;
 }
 
 .content_update_button button {
+    width: 39.3%;
+    height: 100%;
     font-weight: 600;
     font-size: 3vw;
-    background-color: white;
-    border: none;
-    color: #00aabb;
+    background-color: #42BEAF;
+    color: white;
+    border-radius: 10px;
+    border: solid 1px #42BEAF;
 
     margin: 0;
-    padding: 0;
+    padding: 5px;
 }
 
 .content_update_button button:hover {
-    background-color: #00aabb;
-    color: white;
-    border: solid 1px #00aabb;
+    color: black;
+    font-weight: 400;
+    border: solid 1px black;
 }
 
 /*하단 고정 버튼*/
@@ -538,8 +564,8 @@ body {
 }
 
 .fix_button_detail:hover {
-    background-color: #00aabb;
-    border: solid 1px #00aabb;
+    background-color: #42BEAF;
+    border: solid 1px #42BEAF;
 }
 
 .fix_button_detail img {
@@ -563,7 +589,7 @@ body {
 .bottom_box {
     width: 100%;
     height: 15.7%;
-    border: solid 2px #d9d9d9;
+    border-top: solid 2px #d9d9d9;
 
     display: flex;
     justify-content: space-between;

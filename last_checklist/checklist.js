@@ -157,49 +157,54 @@ function createOrderItem(order) {//주문 아이템 생성 함수
   orderItem.className = 'list_content_box';
   orderItem.innerHTML = `
   <!-- ... (이미지 내용 관련 부분) ... -->
-  <div class="cancel_btn">
-    <img src="./image/close.png" class="deleteBtn" data-orderNum="${order.order_num}">
-  </div>
   <div class = "real_content_box">
-    <div class="box list_img_box">
-      <div class = "list_img_size_box">
-        <img id="im" class="list_img_size" src=".${order.imagePath}" alt="menu_image"/>
-      </div>
+    <div class="cancel_btn">
+        <img src="./image/delete_black_icon.png" class="deleteBtn" data-orderNum="${order.order_num}">
     </div>
-    <!--여기까지-->
-    <div class="list_content_info">
-        <div class="container text-center">
-            <div class="content_title">
-                <div class="menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
-
-                <div class="cost_info">
-                <div class="button_box_num">
-                  <p class="button_num">${order.count}개</p>
-                </div>
-                <div class="menu_cost">${formattedPrice}원</div> <!--메뉴 가격 출력-->
-                </div>
-            </div>
-            
-            <!--옵션 데이터-->
-            <!--<div class="list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '0%' : '55%'}">-->
-            <div class="list_option" ${order.menu_num >= 500 ? 'style="display: none;"' : 'disabled'}>
-                <div class="list_option_detail">
-                    <div class="option_detail">
-                        <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
-                        <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})</span>
-                        <span class="select_op">
-                            <!-- 여기에 각 옵션을 처리하는 반복문 추가 -->
-                            ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price}원)</div>`).join('') : '<div class="select_op">추가사항: 없음</div>'}
-                        </span>
+    <div class="checklist_box">
+    <div class ="checklist_box_inner">
+        <div class="box list_img_box">
+          <div class = "list_img_size_box">
+            <img id="im" class="list_img_size" src=".${order.imagePath}" alt="menu_image"/>
+          </div>
+        </div>
+        <!--여기까지-->
+        <div class="list_content_info">
+            <div class="container text-center">
+                <div class="content_title">
+                    <div class="title_cost">
+                      <div class="menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
+                      <div class="menu_cost">${formattedPrice}원</div> <!--메뉴 가격 출력-->
                     </div>
                 </div>
-            </div>
-                <div class="list_buttons">
-                    <div class="content_update_button">
-                        <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
+                
+                <!--옵션 데이터-->
+                <!--<div class="list_option" style="visibility: ${order.menu_num >= 500 ? 'hidden' : 'visible'}; height: ${order.menu_num >= 500 ? '0%' : '55%'}">-->
+                <div class="list_option" ${order.menu_num >= 500 ? 'style="display: none;"' : 'disabled'}>
+                    <div class="list_option_detail">
+                        <div class="option_detail">
+                            <span class="select_tem">${order.op_t === 1 ? '뜨거움' : '차가움'}(+0원)</span>
+                            <span class="select_size">${order.op_s === 3 ? '기본 크기' : '큰 크기'}(${order.op_s === 3 ? '+0원' : '+1200원'})</span>
+                            <span class="select_op">
+                                <!-- 여기에 각 옵션을 처리하는 반복문 추가 -->
+                                ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price}원)</div>`).join('') : '<div class="select_op">추가사항: 없음</div>'}
+                            </span>
+                        </div>
                     </div>
+                    <div class="cost_info">
+                      <div class="button_box_num">
+                        <p class="button_num">${order.count}개</p>
+                      </div>
+                    </div>
+                </div>
+                    <div class="list_buttons">
+                        <div class="content_update_button">
+                            <button class="updateBtn" data-orderNum="${order.order_num}">옵션변경</button>
+                        </div>
+                </div>
             </div>
         </div>
+      </div>
     </div>
   </div>
 `;

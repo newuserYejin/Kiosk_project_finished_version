@@ -252,21 +252,22 @@
     </script> -->
 
     <!-- <script>
-        // 페이지가 로드된 후와 뷰포트 크기가 변경될 때 실행
         function updateMenuHeight() {
-            // Source 요소의 height를 측정
-            const sourceElement = document.querySelector('.navigation');
-            const sourceHeight = sourceElement.clientHeight;
-
-            // Target 요소의 height를 설정
-            const targetElement = document.querySelector('.menu_box');
-            targetElement.style.height = sourceHeight + 'px';
+            // 모든 .list_img_box 요소를 선택
+            const sourceElements = document.querySelectorAll('.list_img_box');
+    
+            // 각 .list_img_box 요소의 높이를 설정
+            sourceElements.forEach(sourceElement => {
+                const sourceHeight = sourceElement.clientHeight;
+                sourceElement.style.height = sourceHeight + 'px';
+            });
         }
-
+    
         // 페이지 로드 시와 뷰포트 크기 변경 시에 실행
         window.addEventListener('load', updateMenuHeight);
         window.addEventListener('resize', updateMenuHeight);
-    </script>  -->
+    </script> -->
+    
 
 </body>
 
