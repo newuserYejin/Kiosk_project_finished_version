@@ -282,7 +282,7 @@ html,body {
 
 /*주문 리스트*/
 .list_box {
-  width: 95%;
+  width: 100%;
   height: 100%;
   background-color: #F4F4f4;
 
@@ -778,10 +778,10 @@ html,body {
   position: absolute;
 
   top: 50%;
-  left: 58%;
+  left: 60%;
 
   /* width: 100%; */
-  width: 5%;
+  width: 4%;
   height: 7.5%;
 
   display: flex;
@@ -790,7 +790,7 @@ html,body {
 }
 
 .pages_btn:nth-child(2){
-  left: 3.7%;
+  left: 2.7%;
 }
 
 .pages_btn button{
@@ -833,9 +833,8 @@ html,body {
   margin: 0;
 } */
 
-.pages_btn button i{
-  /* width: 90%; */
-  /* height: 100%; */
+.pages_btn button img{
+  width: 90%;
 }
 
 /* #prevBtn {
