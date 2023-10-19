@@ -250,12 +250,12 @@ html,body {
 }
 
 .menu_box{
-  width: 62.7%;
+  width: 63.7%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
 }
 
 /*주문 리스트*/
@@ -282,8 +282,8 @@ html,body {
 
 /*주문 리스트*/
 .list_box {
-  width: 100%;
-  height: 99.5%;
+  width: 95%;
+  height: 100%;
   background-color: #F4F4f4;
 
   margin: 0;
@@ -298,16 +298,18 @@ html,body {
 }
 
 .list_img_box {
-  width: 85%;
+  width: 52%;
   border: solid 1px #e7e7e7;
   border-radius: 50%;
-  padding: 10px;
+  padding: 5px;
 
-  background-color: #f4f4f4;
+  background-color: #D9D9D9;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 15px;
 }
 
 .list_img_size {
@@ -316,14 +318,15 @@ html,body {
 }
 
 /*주문 정보*/
-.container {
+.container{
   width: 100%;
   height: 100%;
   padding: 0;
-}
 
-.list_content_info .text-center{
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .content_title{
@@ -338,13 +341,14 @@ html,body {
 }
 
 .menu_name {
-  font-size: 2.5vw;
+  /* width: 52%; */
+  font-size: 3vw;
   font-weight: 600;
   text-align: center;
-  align-content: center;
+  /* white-space: pre-line; /* 띄어쓰기를 기준으로 줄 바꿈을 활성화합니다 */
+  /* overflow-wrap: break-spaces; 띄어쓰기를 기준으로 줄 바꿈을 활성화합니다 */
   padding: 0;
-  margin: 0;
-  width: 80%;
+  margin-bottom: 4%;
 }
 
 /* @media screen and (max-width: 360px) {
@@ -716,7 +720,7 @@ html,body {
 
 /*슬라이드 창*/
 .slider-container {
-  width: 95%;
+  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -741,8 +745,8 @@ html,body {
   overflow-x: visible;
   overflow-y: visible;
 
-  column-gap: 1%;
-  row-gap: 1%;
+  column-gap: 2.5%;
+  row-gap: 1.4%;
 }
 
 /* 내용을 2열 4행 그리드로 배치 */
@@ -750,6 +754,9 @@ html,body {
   grid-column: span 1; /* 각 내용 요소는 1열을 차지합니다. */
   grid-row: span 1;    /* 각 내용 요소는 1행을 차지합니다. */
   /* 원하는 스타일을 추가하세요. */
+  
+  padding: 8.3% 0;
+  box-sizing: content-box;
 }
 
 .list_content_box {
@@ -759,12 +766,10 @@ html,body {
   align-items: center;
   justify-content: start;
   /* position: relative; */
-  border-radius: 8px;
+  border-radius: 10px;
   border: solid 1px #BBBBBB;
 
   background-color: white;
-
-  padding: 6.5% 10px;
 }
 
 
@@ -772,12 +777,12 @@ html,body {
 .pages_btn{
   position: absolute;
 
-  top: 45%;
-  right: 0%;
+  top: 50%;
+  left: 58%;
 
   /* width: 100%; */
-  width: 8%;
-  height: 10%;
+  width: 5%;
+  height: 7.5%;
 
   display: flex;
   justify-content: space-between;
@@ -785,7 +790,7 @@ html,body {
 }
 
 .pages_btn:nth-child(2){
-  left: 0%;
+  left: 3.7%;
 }
 
 .pages_btn button{
@@ -794,7 +799,8 @@ html,body {
 
   /* background-color: rgba(0, 122, 194, 0.2); */
   /* background-color: rgba(255, 153, 27, 0.7); */
-  background-color: #ffc300;
+  background-color: #FF991B;
+  border: none;
 
   display: flex;
   justify-content: center;
@@ -802,32 +808,34 @@ html,body {
 
   font-size: 5vw;
   font-weight: 600;
-
-  border-radius: 10px;
-}
-
-.pages_btn:last-child button{
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
 }
 
 .pages_btn:nth-child(2) button{
-  border-bottom-left-radius: 50%;
-  border-top-left-radius: 50%;
-
   display: none;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+
+  box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
-.pages_btn button p{
+.pages_btn:nth-child(3) button{
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  box-shadow: -2px 4px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* .pages_btn button p{
   display: flex;
   align-items: center;
   justify-content: center;
   
   margin: 0;
-}
+} */
 
-.pages_btn button img{
-  width: 90%;
+.pages_btn button i{
+  /* width: 90%; */
+  /* height: 100%; */
 }
 
 /* #prevBtn {

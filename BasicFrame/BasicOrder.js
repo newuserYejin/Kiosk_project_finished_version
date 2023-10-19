@@ -1034,7 +1034,7 @@ function updateData() {
           const linkElement = document.createElement("link");
           linkElement.rel = "stylesheet";
           linkElement.type = "text/css";
-          linkElement.href = "http://localhost:3001/timeout/timeout.css";
+          linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
           document.head.appendChild(linkElement);
 
           // 모달을 열기 위한 코드
