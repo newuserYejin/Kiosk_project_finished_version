@@ -242,8 +242,14 @@ body {
     border: none;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.order section img{
+    /* width: 79.6%; */
+    width: 50%;
 }
 
 .order_button {
@@ -253,6 +259,7 @@ body {
     height: 100%;
     display: flex;
     justify-content: center;
+    /* align-items: end; */
     align-items: center;
     border: none;
 
@@ -260,7 +267,7 @@ body {
     color: white;
     border-radius: 20px;
 
-    font-size: 7.5vw;
+    font-size: 5.7vw;
     font-weight: 600;
 }
 

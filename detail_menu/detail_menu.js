@@ -175,8 +175,8 @@ function renderMenuDetail(menuData) {
 
       const hasHot = temperatureOptions.some(option => option.op_name === "뜨거움");
       const hasCold = temperatureOptions.some(option => option.op_name === "차가움");
-      // const speechBubble = document.querySelector('.temp');
-      // const speechBubbleContent = speechBubble.querySelector('div');
+      const speechBubble = document.querySelector('.temp');
+      const speechBubbleContent = speechBubble.querySelector('div');
 
       let falseoption = "차가움";
 
@@ -187,7 +187,7 @@ function renderMenuDetail(menuData) {
       }
 
       if (temperatureOptions.some(option => option.op_name === "뜨거움") && temperatureOptions.some(option => option.op_name === "차가움")) {
-        // speechBubbleContent.textContent = '원하는것을 선택해주세요.'
+        speechBubbleContent.textContent = '원하는것을 선택해주세요.'
         optionList.innerHTML = temperatureOptions
           .map(option => {
             const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
@@ -206,9 +206,9 @@ function renderMenuDetail(menuData) {
         // "뜨거움"이나 "차가움" 중 하나만 없는 경우
 
         if (!hasHot) {
-          // speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+          speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
         } else {
-          // speechBubbleContent.textContent = '뜨거운 것만 가능한 상품입니다.';
+          speechBubbleContent.textContent = '뜨거운 것만 가능한 상품입니다.';
         }
 
         optionList.innerHTML = temperatureOptions
@@ -225,7 +225,7 @@ function renderMenuDetail(menuData) {
                     <img src="${imageSrc}" />
                 </label></li>
                 <li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
-                <label class="form-check-label" for="falseoption"> ${falseoptionText} (+0원)
+                <label class="form-check-label" for="falseoption" onclick=show_qr('t')> ${falseoptionText} (+0원)
                 <img src="${falseimageSrc}" />
                 </label></li>
                 `;
@@ -252,10 +252,10 @@ function renderMenuDetail(menuData) {
       const imageSrc = option_t === "red" ? "./image/hot_drink_small.png" : "./image/ice_drink.png"; // 이미지 경로 설정
       console.log(option_t);
 
-      // const speechBubble = document.querySelector('.size');
-      // const speechBubbleContent = speechBubble.querySelector('div');
+      const speechBubble = document.querySelector('.size');
+      const speechBubbleContent = speechBubble.querySelector('div');
 
-      // speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
+      speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
 
       // 라디오 버튼 요소들을 선택
       const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
@@ -284,18 +284,19 @@ function renderMenuDetail(menuData) {
 
       if (!hasRegular || !hasLarge) {
         optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
-        <label class="form-check-label" for="falseoption"> ${falseoption} (+0원)
+        <label class="form-check-label" for="falseoption" onclick=show_qr('s')> ${falseoption} (+0원)
         <img src="${imageSrc}" />
         </label></li>`;
         // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
-        // const speechBubble = document.querySelector('.size');
-        // const speechBubbleContent = speechBubble.querySelector('div');
 
-        // if (!hasRegular) {
-        //     speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
-        // } else {
-        //     speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
-        // }
+        const speechBubble = document.querySelector('.size');
+        const speechBubbleContent = speechBubble.querySelector('div');
+
+        if (!hasRegular) {
+            speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
+        } else {
+            speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
+        }
       }
     } else if (index === 2) {
       // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
