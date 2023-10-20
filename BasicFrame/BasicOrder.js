@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else if (storeData !== null) {
     console.log("검색 결과 없음");
   } else {
-    fetch(`/menu?category=${defaultCategory}`)
+    fetch(`/menu?category=${initialCategory}`)//10.20수정
       .then(response => response.json())
       .then(menuData => {
         clearSliderContainer(sliderContainer); // 슬라이더 컨테이너 내용 지우기
