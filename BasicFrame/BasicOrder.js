@@ -78,6 +78,7 @@ function check_page() {
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
   const timer = urlParams.get('timer');//10.17 추가
+  localStorage.removeItem('selectedCategory');//10.20 카테고리 임시저장소 초기화
 
   if (orderType == 'slow') {
     location.href = `http://localhost:3001/last_checklist/checklist.html?order=slow&timer=${timer}&pickup=${pickup}`;
@@ -92,6 +93,7 @@ function pay_page() {
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
   const timer = urlParams.get('timer');//10.17 추가
+  localStorage.removeItem('selectedCategory');//10.20 카테고리 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -219,6 +221,7 @@ function prvsScren() {
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
   const timer = urlParams.get('timer');//10.17 추가
+  localStorage.removeItem('selectedCategory');//10.20 카테고리 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -233,6 +236,7 @@ function prvsScren() {
 function firstScreen() {
   // 새로운 페이지로 이동
   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+  localStorage.removeItem('selectedCategory');//10.20 카테고리 임시저장소 초기화
 };
 
 // 다음
@@ -242,7 +246,7 @@ function nextScreen() {
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
   const timer = urlParams.get('timer');//10.17 추가
-
+  localStorage.removeItem('selectedCategory');//10.20 카테고리 임시저장소 초기화
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -316,6 +320,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const categories = document.querySelectorAll('.category');
 
   const defaultCategory = "1";
+  const selectedClass = 'select_category';//10.20추가(카테고리 유지)
+
+  const lastSelectedCategory = localStorage.getItem('selectedCategory');//10.20추가
+  const initialCategory = lastSelectedCategory ? lastSelectedCategory : defaultCategory;//10.20추가
 
   if (storeData && storeData.length > 0) {
     searchFunction(); // storeData에 데이터가 있을 경우 검색 결과 표시
@@ -328,8 +336,18 @@ document.addEventListener("DOMContentLoaded", function () {
         clearSliderContainer(sliderContainer); // 슬라이더 컨테이너 내용 지우기
         handleMenuData(menuData, sliderContainer); // 메뉴 데이터 추가
       });
-
   }
+
+  // 초기 로드 시 선택된 카테고리에 대한 스타일 설정 10.15시작
+  categories.forEach(category => {
+    const categoryLink = category.querySelector('a');
+    const categoryValue = categoryLink.getAttribute('data-category');
+    if (categoryValue === initialCategory) {
+      category.classList.add(selectedClass);
+    } else {
+      category.classList.remove(selectedClass);
+    }
+  });//10.15끝
 
   categoryLinks.forEach(link => {
     link.addEventListener("click", (event) => {
@@ -339,6 +357,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       event.preventDefault();
       const category = link.getAttribute("data-category");
+      localStorage.setItem('selectedCategory', category); // 선택한 카테고리 저장 10.20추가
 
       categories.forEach(c => c.classList.remove('select_category'));
 
