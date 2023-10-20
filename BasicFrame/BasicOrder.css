@@ -1,6 +1,7 @@
 @import url('../Pretendard-1.3.8/web/static/pretendard.css');
 
-html,body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: 'Pretendard';
@@ -8,13 +9,13 @@ html,body {
   overflow: hidden;
 }
 
-.all_box{
+.all_box {
   width: 100vw;
   height: 100vh;
 }
 
 /*상단배너*/
-.top_banner{
+.top_banner {
   width: 100%;
   height: 12.6%;
 
@@ -23,13 +24,13 @@ html,body {
   align-items: end;
 }
 
-.cafe_name{
+.cafe_name {
   width: 29.4%;
   /* height: 35.4%; */
   margin-bottom: 10px;
 }
 
-.hoi_box{
+.hoi_box {
   height: 100%;
   display: flex;
   align-items: end;
@@ -38,7 +39,7 @@ html,body {
   top: 10%;
 }
 
-.hoi{
+.hoi {
   height: 87.3%;
 }
 
@@ -47,11 +48,11 @@ html,body {
   height: 4.8%;
   background-color: black;
   border-radius: 15px;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   font-size: 3vw;
   border: solid 1px black;
 
@@ -60,31 +61,36 @@ html,body {
   top: 7%;
 }
 
-#imageLink{
+#imageLink {
   color: white;
 }
 
 /*카테고리*/
 
-.category_box{
+.category_box {
   width: 100%;
-  height: 6.1%; /*원래는 5.7%*/
+  height: 6.1%;
+  /*원래는 5.7%*/
 
   box-sizing: content-box;
 }
 
 .categories {
   display: flex;
-  justify-content: space-between; /* 요소들 사이의 간격을 균등하게 분배합니다. */
+  justify-content: space-between;
+  /* 요소들 사이의 간격을 균등하게 분배합니다. */
   width: 100%;
   height: 100%;
-  list-style: none; /* 목록 표시 스타일 제거 */
-  padding: 0; /* 내부 패딩 제거 */
+  list-style: none;
+  /* 목록 표시 스타일 제거 */
+  padding: 0;
+  /* 내부 패딩 제거 */
   margin: 0;
 }
 
 .category {
-  flex: 1; /* 동일한 너비로 분할 */
+  flex: 1;
+  /* 동일한 너비로 분할 */
 
   border-bottom: solid 3px #d9d9d9;
   border-top: solid 3px #d9d9d9;
@@ -102,13 +108,13 @@ html,body {
   color: #007AC2;
 }
 
-.select_category{
+.select_category {
   background-color: #007AC2;
   border-bottom: solid 3px #007AC2;
   border-top: solid 3px #007AC2;
 }
 
-.select_category a{
+.select_category a {
   background-color: #007AC2;
   color: white;
 }
@@ -127,12 +133,12 @@ html,body {
   background-color: #F4F4f4;
 }
 
-.ho{
+.ho {
   height: 100%;
   width: 100%;
 }
 
-.upper_box{
+.upper_box {
   display: flex;
   height: 7.8%;
   width: 100%;
@@ -149,8 +155,8 @@ html,body {
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  
-  border:solid 2px #007AC2;
+
+  border: solid 2px #007AC2;
 }
 
 .list_menu {
@@ -174,7 +180,7 @@ html,body {
   border-radius: 10px;
 }
 
-.box_line:nth-child(2){
+.box_line:nth-child(2) {
   border-left: solid 2px #007AC2;
   border-right: solid 2px #007AC2;
   border-radius: 0;
@@ -221,6 +227,12 @@ html,body {
   justify-content: space-around;
   border-radius: 10px;
   padding: 10px;
+
+  border: solid 1px black;
+}
+
+.search_div input::placeholder {
+  color: black;
 }
 
 .search {
@@ -232,14 +244,14 @@ html,body {
   font-weight: 500;
   background-color: white;
 
-  color: #8c8a8a;
+  color: black;
 }
 
 .search_icon {
   height: 3.5vw;
 }
 
-.main_box{
+.main_box {
   width: 100%;
   height: 90.3%;
 
@@ -249,7 +261,7 @@ html,body {
   /* overflow: hidden; */
 }
 
-.menu_box{
+.menu_box {
   width: 63.7%;
   height: 100%;
   display: flex;
@@ -318,7 +330,7 @@ html,body {
 }
 
 /*주문 정보*/
-.container{
+.container {
   width: 100%;
   height: 100%;
   padding: 0;
@@ -329,7 +341,7 @@ html,body {
   align-items: center;
 }
 
-.content_title{
+.content_title {
   font-weight: bold;
   text-align: center;
   height: 100%;
@@ -378,7 +390,7 @@ html,body {
   border: none;
 }
 
-.right{
+.right {
   display: flex;
   flex-direction: column;
 
@@ -394,7 +406,7 @@ html,body {
 
 /*포장확인*/
 
-.pickup_op{
+.pickup_op {
   width: 100%;
   height: 16.5%;
   display: flex;
@@ -403,7 +415,7 @@ html,body {
   padding: 8% 7.1%;
 }
 
-.pickup_op_box{
+.pickup_op_box {
   width: 100%;
   height: 100%;
 
@@ -413,7 +425,7 @@ html,body {
   align-items: center;
 }
 
-.pickup_op_box div:first-child{
+.pickup_op_box div:first-child {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -425,16 +437,16 @@ html,body {
   font-size: 3vw;
 }
 
-.pickup_op_box div:first-child img{
+.pickup_op_box div:first-child img {
   height: 100%;
 }
 
-.pickup_op .radio_box{
+.pickup_op .radio_box {
   width: 100%;
   height: 45.9%;
 }
 
-.radio_box .list-group{
+.radio_box .list-group {
   width: 100%;
   height: 100%;
 
@@ -444,7 +456,7 @@ html,body {
   align-items: center;
 }
 
-.pickup_op .list-group-item{
+.pickup_op .list-group-item {
   height: 100%;
   width: 47.2%;
 
@@ -454,11 +466,11 @@ html,body {
   align-items: center;
 }
 
-.list-group input{
+.list-group input {
   display: none;
 }
 
-.list-group-item label{
+.list-group-item label {
   height: 100%;
   width: 100%;
   font-weight: 600;
@@ -473,7 +485,7 @@ html,body {
   border-radius: 10px;
 }
 
-.form-check-input[type='radio']:checked + label{
+.form-check-input[type='radio']:checked+label {
   background-color: #FF991B;
   border: solid 2px #FF991B;
 
@@ -558,18 +570,18 @@ html,body {
   justify-content: space-between;
 }
 
-.move_box_inner_1{
+.move_box_inner_1 {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.select_name{
+.select_name {
   font-weight: 500;
   font-size: 2.5vw;
 }
 
-.move_box_inner_2{
+.move_box_inner_2 {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -580,11 +592,11 @@ html,body {
   font-weight: 500;
 }
 
-.select_op{
+.select_op {
   text-align: end;
 }
 
-.update_btn{
+.update_btn {
   font-size: 2.5vw;
   background-color: white;
   font-weight: 600;
@@ -604,13 +616,13 @@ html,body {
   background-color: white;
 }
 
-.del_btn_icon{
+.del_btn_icon {
   width: 100%;
   padding: 0;
   margin: 0;
 }
 
-.none_select_menu{
+.none_select_menu {
   height: 100%;
   display: flex;
   align-items: center;
@@ -620,7 +632,7 @@ html,body {
 }
 
 /*결제하기 버튼*/
-.pay_button{
+.pay_button {
   width: 100%;
   height: 17.5%;
   background-color: #E70A0A;
@@ -633,31 +645,31 @@ html,body {
   border-bottom-right-radius: 10px;
 }
 
-.pay_inner_box{
+.pay_inner_box {
   width: 84.8%;
   height: 49%;
   display: flex;
   justify-content: space-between;
 }
 
-.pay_inner_box img{
+.pay_inner_box img {
   height: 100%;
 }
 
-.total_cost_box{
+.total_cost_box {
   color: white;
 
   height: 100%;
 
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  justify-content: center;
   align-items: end;
   font-size: 3vw;
   font-weight: 600;
 }
 
-.total_cost{
+.total_cost {
   font-size: 3.5vw;
 }
 
@@ -695,7 +707,7 @@ html,body {
   border: solid 1px #42BEAF;
 }
 
-.fix_button_detail img{
+.fix_button_detail img {
   margin: 0 2px;
   height: 33.9%;
   width: auto;
@@ -713,7 +725,7 @@ html,body {
   font-weight: bold;
 }
 
-.slide{
+.slide {
   width: 100%;
   height: 100%;
 }
@@ -739,7 +751,7 @@ html,body {
 
   width: 100%;
   height: 100%;
-  
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);
@@ -752,10 +764,12 @@ html,body {
 
 /* 내용을 2열 4행 그리드로 배치 */
 .slide .list_content_box {
-  grid-column: span 1; /* 각 내용 요소는 1열을 차지합니다. */
-  grid-row: span 1;    /* 각 내용 요소는 1행을 차지합니다. */
+  grid-column: span 1;
+  /* 각 내용 요소는 1열을 차지합니다. */
+  grid-row: span 1;
+  /* 각 내용 요소는 1행을 차지합니다. */
   /* 원하는 스타일을 추가하세요. */
-  
+
   padding: 8.3% 0;
   box-sizing: content-box;
 }
@@ -775,7 +789,7 @@ html,body {
 
 
 /*슬라이드 창 버튼*/
-.pages_btn{
+.pages_btn {
   position: absolute;
 
   top: 50%;
@@ -790,11 +804,11 @@ html,body {
   align-items: center;
 }
 
-.pages_btn:nth-child(2){
+.pages_btn:nth-child(2) {
   left: 2.7%;
 }
 
-.pages_btn button{
+.pages_btn button {
   width: 100%;
   height: 100%;
 
@@ -811,7 +825,7 @@ html,body {
   font-weight: 600;
 }
 
-.pages_btn:nth-child(2) button{
+.pages_btn:nth-child(2) button {
   display: none;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -819,7 +833,7 @@ html,body {
   box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
 }
 
-.pages_btn:nth-child(3) button{
+.pages_btn:nth-child(3) button {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 
@@ -834,8 +848,8 @@ html,body {
   margin: 0;
 } */
 
-.pages_btn button img{
-  width:fit-content;
+.pages_btn button img {
+  width: fit-content;
   max-width: 170%;
   max-height: 50%;
 }
@@ -902,7 +916,7 @@ html,body {
   .slider-container {
     grid-template-columns: repeat(3, 1fr);
     /* 화면 크기가 768px 이하일 때 2개의 열로 조정 */
-  /*}
+/*}
 
   .list_box {
     height: 70%;
@@ -934,7 +948,7 @@ html,body {
   .slider-container {
     grid-template-columns: repeat(3, 1fr);
     /* 화면 크기가 768px 이하일 때 2개의 열로 조정 */
-  /*}
+/*}
 
   .list_box {
     height: 68%;
