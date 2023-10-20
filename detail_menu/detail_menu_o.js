@@ -47,6 +47,9 @@ $(document).ready(function () {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('t');
+      };
     }
 
     // op_num_o 배열에 값 2가 있는지 확인합니다.
@@ -58,18 +61,21 @@ $(document).ready(function () {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('t');
+      };
     }
 
-    // const speechBubble = document.querySelector('.temp');
-    // const speechBubbleContent = speechBubble.querySelector('div');
+    const speechBubble = document.querySelector('.temp');
+    const speechBubbleContent = speechBubble.querySelector('div');
 
-    // if (!op_num_o.includes(1)) {
-    //   speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
-    // } else if(!op_num_o.includes(2)) {
-    //   speechBubbleContent.textContent = '따뜻한 것만 가능한 상품입니다.';
-    // } else {
-    //   speechBubbleContent.textContent = '원하는 것을 선택해주세요.';
-    // }
+    if (!op_num_o.includes(1)) {
+      speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+    } else if(!op_num_o.includes(2)) {
+      speechBubbleContent.textContent = '따뜻한 것만 가능한 상품입니다.';
+    } else {
+      speechBubbleContent.textContent = '원하는 것을 선택해주세요.';
+    }
   }
 
   // 크기 옵션을 표시하거나 숨기는 함수
@@ -86,6 +92,9 @@ $(document).ready(function () {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('s');
+      };
     }
 
     // op_num_o 배열에 값 4가 있는지 확인합니다.
@@ -97,18 +106,21 @@ $(document).ready(function () {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('s');
+      };
     }
 
-    // const speechBubble = document.querySelector('.size');
-    // const speechBubbleContent = speechBubble.querySelector('div');
+    const speechBubble = document.querySelector('.size');
+    const speechBubbleContent = speechBubble.querySelector('div');
 
-    // if (!op_num_o.includes(3)) {
-    //   speechBubbleContent.textContent = '큰 것만 가능한 상품입니다.';
-    // } else if(!op_num_o.includes(4)) {
-    //   speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
-    // } else {
-    //   speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
-    // }
+    if (!op_num_o.includes(3)) {
+      speechBubbleContent.textContent = '큰 것만 가능한 상품입니다.';
+    } else if(!op_num_o.includes(4)) {
+      speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
+    } else {
+      speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
+    }
   }
   //09.13여기까지
 
@@ -377,3 +389,25 @@ $(".input-group").on("click", "#decrement1", function () {
     input.val(parseInt(input.val()) - 1);
   }
 });
+
+function show_qr(op) {
+  const temp_qu = document.querySelector('.temp');
+  const size_qu = document.querySelector('.size');
+
+  switch (op) {
+    case 't':
+      if (temp_qu.style.visibility === 'hidden') {
+        temp_qu.style.visibility = 'visible';
+      } else {
+        temp_qu.style.visibility = 'hidden';
+      }
+      break;
+    case 's':
+      if (size_qu.style.visibility === 'hidden') {
+        size_qu.style.visibility = 'visible';
+      } else {
+        size_qu.style.visibility = 'hidden';
+      }
+      break;
+  }
+}
