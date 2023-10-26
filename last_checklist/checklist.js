@@ -163,11 +163,13 @@ function createOrderItem(order) {//주문 아이템 생성 함수
     </div>
     <div class="checklist_box">
     <div class ="checklist_box_inner">
-        <div class="box list_img_box">
+        <div class="list_img_box">
           <div class = "list_img_size_box">
             <img id="im" class="list_img_size" src=".${order.imagePath}" alt="menu_image"/>
           </div>
         </div>
+
+
         <!--여기까지-->
         <div class="list_content_info">
             <div class="container text-center">
@@ -192,9 +194,9 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                         </div>
                     </div>
                     <div class="cost_info">
-                      <div class="button_box_num">
-                        <p class="button_num">${order.count}개</p>
-                      </div>
+                        <div class="button_box_num">
+                          <p class="button_num">${order.count}개</p>
+                        </div>
                     </div>
                 </div>
                     <div class="list_buttons">
