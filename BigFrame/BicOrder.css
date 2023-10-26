@@ -258,7 +258,7 @@ html,body {
 }
 
 .list_img_size {
-  /* width: 100%; */
+  width: 100%;
   background-color: #F5F5F5;
   height: 95%;
   border-radius:10px;
