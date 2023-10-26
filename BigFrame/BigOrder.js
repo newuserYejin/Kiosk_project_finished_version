@@ -170,7 +170,7 @@ function nextScreen() {
 //   });
 // });
 
-// 버튼 요소 선택
+// 버튼 요소 선택(사이즈 이동)
 const sizeButtons = document.querySelectorAll('.size_switch');
 
 sizeButtons.forEach(button => {

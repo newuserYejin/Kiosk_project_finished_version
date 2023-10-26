@@ -596,7 +596,7 @@
 #modalContainer .speech-bubble div{
     color: white;
     font-size: 3.5vw;
-    font-weight: bold;
+    font-weight: 600;
     margin: 0 10px;
 }
 
