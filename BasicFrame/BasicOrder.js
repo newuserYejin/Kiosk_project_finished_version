@@ -783,10 +783,11 @@ function generateOrderList(orderData) {
       move_box_inner_2.appendChild(selectTem);
       move_box_inner_2.appendChild(selectSize);
       move_box_inner_2.appendChild(selectOp);
-      move_box_inner_2.appendChild(update_btn);
       move_box_inner_2.appendChild(selectNum);
       move_box_inner_2.appendChild(totalPrice);//10.16 개별 매뉴 가격 추가
-
+      
+      move_box_inner_2.appendChild(update_btn);
+      
       // 디저트일때 옵션 표시 안하기
       if (order.menu_num >= 500) {
         selectTem.style.display = "none";

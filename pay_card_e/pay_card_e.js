@@ -1,8 +1,8 @@
 const joImage = document.getElementById("imageLink");
 
-            joImage.addEventListener("click", function () {
+    joImage.addEventListener("click", function () {
                 // 먼저 modalContainer_e를 비웁니다.
-                document.getElementById("modalContainer_e").innerHTML = "";
+        document.getElementById("modalContainer_e").innerHTML = "";
 
                 // help_msg.html 콘텐츠를 로드하여 modalContainer_e에 추가합니다.
                 fetch("http://localhost:3001/help_msg/help_msg.html")
@@ -100,6 +100,10 @@ function openPay() {
 
 }
 
+function firstScreen() {
+    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+}
+
 function back() {
     const pickup = urlParams.get('pickup');
 
@@ -118,10 +122,10 @@ function gohome() {
     const pickup = urlParams.get('pickup');
     if (orderType === 'slow') {
         // 천천히 주문하기 버튼을 클릭한 경우
-        location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`;
+        location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`;
     } else if (orderType === 'basic') {
         // 기본 주문하기 버튼을 클릭한 경우
-        location.href = `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
+        location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
     } else {
         location.href = 'http://localhost:3001/selectorder/selectorder.html';
     }
