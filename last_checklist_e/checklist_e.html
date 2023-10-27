@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="box_line" onclick="openPay()">
+                    <div class="box_line move_pay_page" onclick="openPay()">
                         <div class="level_button pay_move">
                             <p class="circle_name">3.Pay</p>
                         </div>
@@ -227,6 +227,13 @@
 
             $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
                 $("#modalContainer_e").html(data);
+
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });

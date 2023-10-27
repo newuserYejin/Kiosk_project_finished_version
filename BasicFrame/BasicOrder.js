@@ -67,11 +67,6 @@ joImage.addEventListener("click", function () {
     });
 });
 
-//네비게이션
-function select_page() {
-  alert("현재 페이지 입니다.")
-};
-
 // 확인 페이지로 이동
 function check_page() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -401,7 +396,7 @@ function handleMenuData(menuData, sliderContainer) {
         <div class="box list_img_box">
           <img class="list_img_size" src=".${menu.image_path}" alt="${menu.menu_name}">
         </div>
-        <div class="box list_content_info">
+        <div class="list_content_info">
           <div class="container text-center">
             <div class="content_title">
               <div class="menu_name">${menu.menu_name}</div>
@@ -985,15 +980,6 @@ window.addEventListener('load', () => {
       console.error('Error fetching order data:', error);
     });
 });
-
-function move_checklist() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const pickup = urlParams.get('pickup');//09.08 수정
-  const order = urlParams.get('order');
-  const timer = urlParams.get('timer')
-
-  location.href = `http://localhost:3001/last_checklist/checklist.html?order=${order}&timer=${timer}&pickup=${pickup}`;
-}
 
 
 // 포장 연결

@@ -116,7 +116,7 @@ joImage.addEventListener("click", function () {
       const linkElement = document.createElement("link");
       linkElement.rel = "stylesheet";
       linkElement.type = "text/css";
-      linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
+      linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css";
       document.head.appendChild(linkElement);
 
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));

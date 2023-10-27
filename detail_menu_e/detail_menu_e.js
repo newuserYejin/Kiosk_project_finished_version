@@ -21,7 +21,7 @@ $(".btn-info").click(function () {
   // 옵션 값 설정
   const selectedOptions = {
     op_t: $("input[name='temperature']:checked").val() === "HOT" ? 1 : $("input[name='temperature']:checked").val() === "ICED" ? 2 : 1000,
-    op_s: $("input[name='size']:checked").val() === "Baisc Size" ? 3 : $("input[name='size']:checked").val() === "Large Size"? 4 : 1000,
+    op_s: $("input[name='size']:checked").val() === "Basic Size" ? 3 : $("input[name='size']:checked").val() === "Large Size"? 4 : 1000,
     op1: $("input[name='option_set_1']").prop('checked') ? 5 : 0,
     op2: $("input[name='option_set_2']").prop('checked') ? 6 : 0,
     op3: $("input[name='option_set_3']").prop('checked') ? 7 : 0,

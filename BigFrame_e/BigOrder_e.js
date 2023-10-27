@@ -229,7 +229,7 @@ all_delete.forEach(AdeleteBtn => {
         const linkElement = document.createElement("link");
         linkElement.rel = "stylesheet";
         linkElement.type = "text/css";
-        linkElement.href = "http://localhost:3001/help_msg/help_msg.css"; // 이 부분의 파일 경로를 수정해야합니다.
+        linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
         document.head.appendChild(linkElement);
 
         // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
@@ -915,7 +915,7 @@ function generateOrderList(orderData) {
         }
 
         // caution_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
-        fetch(`http://localhost:3001/messagebox/caution_msg.html?orderNum=${orderNum}`)
+        fetch(`http://localhost:3001/messagebox_e/caution_msg_e.html?orderNum=${orderNum}`)
           .then(response => {
             if (!response.ok) {
               throw new Error("HTTP Error " + response.status);
@@ -926,12 +926,13 @@ function generateOrderList(orderData) {
             // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
             $("#modalContainer_e").html(data);
             console.log("선택된 주문 번호 :", orderNum);
+
             // caution_msg.css 파일을 로드합니다.
-            // const linkElement = document.createElement("link");
-            // linkElement.rel = "stylesheet";
-            // linkElement.type = "text/css";
-            // linkElement.href = "http://localhost:3001/messagebox/caution_style.css";
-            // document.head.appendChild(linkElement);
+            const linkElement = document.createElement("link");
+            linkElement.rel = "stylesheet";
+            linkElement.type = "text/css";
+            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+            document.head.appendChild(linkElement);
 
             // 모달을 열기 위한 코드
             const modal = new bootstrap.Modal(document.getElementById("exampleModal"));

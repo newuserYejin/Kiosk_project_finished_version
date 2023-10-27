@@ -36,12 +36,14 @@
                         <div>
                             <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">
                                 <button type="button" class="order_button">Ordering<br>slowly</button>
+                                <img src="../icon_img/q_hoi.png" />
                             </section>
                         </div>
 
                         <div>
                             <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">
                                 <button type="button" class="order_button">Ordering<br>basic</button>
+                                <img src="../icon_img/highlight_hoi.png" />
                             </section>
                         </div>
                     </div>
@@ -94,7 +96,12 @@
 
                     const modalTitle = document.querySelector(".modal-title");
                     if (modalTitle) {
-                        modalTitle.textContent = "help"; // "help"로 변경
+                        modalTitle.textContent = "Help"; // "help"로 변경
+                    }
+
+                    const close_btn = document.querySelector(".help_close");
+                    if(close_btn){
+                        close_btn.textContent = "Close";
                     }
 
                     const modalBody = document.querySelector(".modal-body");

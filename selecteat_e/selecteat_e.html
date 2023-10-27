@@ -76,7 +76,7 @@
         </div>
     </div>
 
-    
+
     <script>
         function move_previos() {
             location.href = `http://localhost:3001/selectorder_e/selectorder_e.html`;
@@ -144,6 +144,11 @@
                         modalTitle.textContent = "help"; // "help"로 변경
                     }
 
+                    const close_btn = document.querySelector(".help_close");
+                    if (close_btn) {
+                        close_btn.textContent = "Close";
+                    }
+
                     const modalBody = document.querySelector(".modal-body");
                     modalBody.innerHTML = `
                     <video autoplay controls>
@@ -194,6 +199,14 @@
         function openModal() {
             $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
                 $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });
@@ -246,10 +259,10 @@
                 window.history.replaceState({}, document.title, newURL);
                 // 타이머가 0이 되면 동작을 원하는 대로 처리
                 if (timer === 0) {
-                    document.getElementById("modalContainer").innerHTML = "";
+                    document.getElementById("modalContainer_e").innerHTML = "";
 
                     // detail_menu.css를 제거합니다.
-                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
                     if (detailMenuLink) {
                         detailMenuLink.remove();
                     }
@@ -266,7 +279,7 @@
                         })
                         .then(data => {
                             // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
-                            $("#modalContainer").html(data);
+                            $("#modalContainer_e").html(data);
 
                             // timeout.css 파일을 로드합니다.
                             const linkElement = document.createElement("link");
