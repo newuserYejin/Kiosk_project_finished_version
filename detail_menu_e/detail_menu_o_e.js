@@ -12,6 +12,12 @@ $(document).ready(function () {
     fetch(`/order_e/${orderNum}`)
       .then(response => response.json())
       .then(data => {
+        if (data.menu_num >= 500) {
+          const boxx = document.querySelector('.op_box');
+          boxx.style.display = "none";
+          const modal_size = document.querySelector('.modal-content')
+          modal_size.style.height = "auto";
+        }
         if (data && Array.isArray(data.op_num)) {
           // 데이터가 유효하고 op_num이 배열인 경우에만 처리
           op_num_o = data.op_num; // op_num_o를 서버에서 받아온 데이터로 설정
@@ -26,7 +32,6 @@ $(document).ready(function () {
   } else {
     console.error("orderNum이 URL에서 정의되지 않았습니다.");
   }
-
   //09.13수정
   // 온도 옵션을 표시하거나 숨기는 함수
   function toggleTemperatureOptions() {
@@ -42,6 +47,9 @@ $(document).ready(function () {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('t');
+      };
     }
 
     // op_num_o 배열에 값 2가 있는지 확인합니다.
@@ -53,6 +61,20 @@ $(document).ready(function () {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('t');
+      };
+    }
+
+    const speechBubble = document.querySelector('.temp');
+    const speechBubbleContent = speechBubble.querySelector('div');
+
+    if (!op_num_o.includes(1)) {
+      speechBubbleContent.textContent = 'Only ICED product.';
+    } else if(!op_num_o.includes(2)) {
+      speechBubbleContent.textContent = 'Only HOT product.';
+    } else {
+      speechBubbleContent.textContent = 'Please choose what you want.';
     }
   }
 
@@ -70,6 +92,9 @@ $(document).ready(function () {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('s');
+      };
     }
 
     // op_num_o 배열에 값 4가 있는지 확인합니다.
@@ -81,6 +106,20 @@ $(document).ready(function () {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+        show_qr('s');
+      };
+    }
+
+    const speechBubble = document.querySelector('.size');
+    const speechBubbleContent = speechBubble.querySelector('div');
+
+    if (!op_num_o.includes(3)) {
+      speechBubbleContent.textContent = 'Only Large Size product.';
+    } else if(!op_num_o.includes(4)) {
+      speechBubbleContent.textContent = 'Only Basic Size product.';
+    } else {
+      speechBubbleContent.textContent = 'Please choose the Size you want.';
     }
   }
   //09.13여기까지
@@ -102,6 +141,7 @@ $(document).ready(function () {
     } else {
       console.error("주문 번호를 찾을 수 없습니다.");
     }
+    location.reload();
   });
 
   // updateOrder 함수 정의
@@ -109,8 +149,8 @@ $(document).ready(function () {
     const newData = {
       // 업데이트할 필드들의 값을 적절히 가져와 newData 객체에 넣어줘야 함
       count: parseInt($("#quantity").val()),
-      op_t: $("input[name='temperature']:checked").val() === "1" ? 1 : 2,
-      op_s: $("input[name='size']:checked").val() === "3" ? 3 : 4,
+      op_t: $("input[name='temperature']:checked").val() === "1" ? 1 : $("input[name='temperature']:checked").val() === "2" ? 2 : 1000,
+      op_s: $("input[name='size']:checked").val() === "3" ? 3 : $("input[name='size']:checked").val() === "4" ? 4 : 1000,
       op1: $("input[name='option_set_1']").prop('checked') ? 5 : 0,
       op2: $("input[name='option_set_2']").prop('checked') ? 6 : 0,
       op3: $("input[name='option_set_3']").prop('checked') ? 7 : 0,
@@ -161,11 +201,31 @@ $(document).ready(function () {
 
       // 주문 데이터를 기반으로 옵션 설정
       setOptionsFromOrderData(orderData);
+      const orderNum = orderData.order_num;
+      fetchTotalPrice(orderNum);
     })
     .catch(error => {
       console.error("Error fetching order data:", error);
     });
 
+    function fetchTotalPrice(orderNum) {
+      fetch('/getOrderData_e')
+        .then(response => response.json())
+        .then(data => {
+          console.log("Session data:", JSON.stringify(data));
+  
+          updateTotalAmountUI(data, orderNum);
+        });
+    }
+
+    function updateTotalAmountUI(getOrder, orderNum) { //현재 total_price
+      const order = getOrder.find(order => order.order_num === orderNum); // 주문 번호에 해당하는 데이터 찾기
+      console.log(order);
+      if (order) {
+        const CommitPrice = new Intl.NumberFormat('ko-KR').format(order.total_price); // 가격 쉼표 넣기
+        $(`.EI_menu_cost`).text(`${CommitPrice}원`);
+      }
+    }
   // 주문 데이터를 처리하고 렌더링하는 함수
   function handleOrderData(orderData) {
     console.log(orderData);
@@ -180,10 +240,18 @@ $(document).ready(function () {
 
 
     // 온도 옵션 라디오 버튼 선택
-    $(`input[name='temperature'][value='${op_t}']`).prop("checked", true);
+    if (op_t !== 1000) {
+      $(`input[name='temperature'][value='${op_t}']`).prop("checked", true);
+    } else {
+      $(`input[name='temperature']`).prop("checked", false);
+    }
 
     // 크기 옵션 라디오 버튼 선택
-    $(`input[name='size'][value='${op_s}']`).prop("checked", true);
+    if (op_s !== 1000) {
+      $(`input[name='size'][value='${op_s}']`).prop("checked", true);
+    } else {
+      $(`input[name='size']`).prop("checked", false);
+    }
 
     // 옵션 체크박스 선택
     const optionValues = [5, 6, 7, 8, 9, 10, 11, 12]; // 체크박스에 해당하는 값들
@@ -229,7 +297,6 @@ $(document).ready(function () {
 // 08.17 tb_order와 연동 (주문 정보를 출력하는 함수)
 function renderOrderDetail(orderData) {
   const menuTitle = document.querySelector(".menu_title");
-  const menuCost = document.querySelector(".menu_cost");
   const menuDescription = document.querySelector(".menu_description");
 
   const menuImage = document.querySelector(".menu_img_size");
@@ -237,20 +304,80 @@ function renderOrderDetail(orderData) {
   menuImage.alt = orderData.menu_name;
 
   menuTitle.textContent = orderData.menu_name;
-  menuCost.textContent = `price: ₩${orderData.menu_price}`;
   menuDescription.textContent = orderData.menu_explan;
 
   const allegyList = document.querySelector(".allegy_list");
   allegyList.innerHTML = orderData.allergy_names
-    .map(allegyName => `<li>${allegyName}</li>`)
-    .join("");
+  if (orderData.allergy_names == 0) {
+    allegyList.innerHTML = `<li>None</li>`
+  } else {
+    allegyList.innerHTML = orderData.allergy_names
+      .map(allegyName => `<li>${allegyName}</li>`)
+      .join(", ");
+  }
+  // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 시작------------------------------------------------------------------
+  function updatePrice() {
+    const baseMenuPrice = parseInt(menuData.menuData.price); // 기본 메뉴 가격
+
+    let selectedOpSPrice = 0; // op_s의 추가 가격
+    let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0]; // 각 op의 추가 가격
+
+    // op_s의 선택 여부에 따라 가격을 업데이트
+    const selectedOpS = $("input[name='size']:checked").val();
+    if (selectedOpS === "Large Size") {
+      selectedOpSPrice = 1200;
+    }
+
+    // 각 op의 선택 여부에 따라 가격을 업데이트
+    for (let i = 1; i <= 8; i++) {
+      const opCheckbox = $(`input[name='option_set_${i}']`);
+      const opPrice = opCheckbox.is(':checked') ? parseInt(opCheckbox.attr('data-price')) : 0;
+      selectedOpPrices[i - 1] = opPrice;
+      //console.log(`op${i} 가격: ${opPrice}`);
+    }
+
+    const inputVal = parseInt($("#quantity").val()); // input 값
+
+    // 총 가격 계산
+    const TotalPrice = (baseMenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
+    const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice); // 가격 쉼표 넣기
+
+    console.log(`현재금액 : ${TotalPrice}원`);
+    // 계산된 총 가격을 원하는 위치에 표시합니다.
+    $('.EI_menu_cost').text(`${EI_TotalPrice}원`);
+  }
+
+  $(".input-group").on("click", "#increment", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  $(".input-group").on("click", "#decrement", function () {
+    var input = $(this).closest(".input-group").find("input");
+    updatePrice();
+    console.log(input.val());
+  });
+
+  // 라디오 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='radio']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+
+  // 체크 박스 변경 이벤트 핸들러를 추가합니다.
+  $("input[type='checkbox']").on("change", function () {
+    updatePrice(); // 가격 업데이트
+  });
+  updatePrice();//(메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 끝------------------------------------------------------------------
 }
 
 $(".input-group").on("click", "#increment1", function () {
   // .input-group 클래스를 가진 요소 내에서 #increment 버튼을 클릭했을 때 실행되는 함수
   var input = $(this).closest(".input-group").find("input");
   // 클릭한 버튼이 속한 .input-group 내에서 input 요소를 찾음
-  input.val(parseInt(input.val()) + 1);
+  if (parseInt(input.val()) < 10) {   //최대 주문 수량 10개 막기
+    input.val(parseInt(input.val()) + 1);
+  }
 });
 
 $(".input-group").on("click", "#decrement1", function () {
@@ -259,3 +386,25 @@ $(".input-group").on("click", "#decrement1", function () {
     input.val(parseInt(input.val()) - 1);
   }
 });
+
+function show_qr(op) {
+  const temp_qu = document.querySelector('.temp');
+  const size_qu = document.querySelector('.size');
+
+  switch (op) {
+    case 't':
+      if (temp_qu.style.visibility === 'hidden') {
+        temp_qu.style.visibility = 'visible';
+      } else {
+        temp_qu.style.visibility = 'hidden';
+      }
+      break;
+    case 's':
+      if (size_qu.style.visibility === 'hidden') {
+        size_qu.style.visibility = 'visible';
+      } else {
+        size_qu.style.visibility = 'hidden';
+      }
+      break;
+  }
+}

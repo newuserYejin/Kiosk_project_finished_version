@@ -228,6 +228,11 @@
     height: 100%;
 }
 
+#modalContainer .input-group-append{
+    width: 28%;
+    height: 100%;
+}
+
 #modalContainer .input-group-prepend button:hover{
     background-color: white;
 }
