@@ -106,7 +106,7 @@ $(document).ready(function () {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
         show_qr('s');
       };
     }
