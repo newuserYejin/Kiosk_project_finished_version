@@ -162,7 +162,7 @@ all_delete.forEach(AdeleteBtn => {
       detailMenuLink.remove();
     }
 
-    fetch(`http://localhost:3001/all_delete_msg/all_delete_msg.html`)//전체 취소 관련 html로 변경 바람
+    fetch(`http://localhost:3001/all_delete_msg/all_delete_msg_e.html`)//전체 취소 관련 html로 변경 바람
       .then(response => {
         if (!response.ok) {
           throw new Error("HTTP Error " + response.status);
@@ -270,10 +270,74 @@ function prvsScren() {
   }
 };
 
+// // 처음으로
+// function firstScreen() {
+//   // 새로운 페이지로 이동
+//   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+// };
+
 // 처음으로
 function firstScreen() {
-  // 새로운 페이지로 이동
-  window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+
+  // 먼저 모달 컨테이너를 비웁니다.
+  document.getElementById("modalContainer_e").innerHTML = "";
+
+  // detail_menu.css를 제거합니다.
+  const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+  if (detailMenuLink) {
+    detailMenuLink.remove();
+  }
+
+  fetch(`http://localhost:3001/all_delete_msg/all_delete_msg_e.html`)//전체 취소 관련 html로 변경 바람
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("HTTP Error " + response.status);
+      }
+      return response.text();
+    })
+    .then(data => {
+      // 모달 컨테이너에 caution_msg.html 콘텐츠를 추가합니다.
+      // $("#modalContainer").html(data);
+      modalContainer_e.innerHTML = data;
+
+      const modalBody = document.querySelector(".modal-body");
+      modalBody.innerHTML = `
+      <p>Back to the beginning, all orders will disappear.</p>
+      <p>Do you want to do that?</p>
+      `
+
+      // css 파일을 로드합니다.
+      const linkElement = document.createElement("link");
+      linkElement.rel = "stylesheet";
+      linkElement.type = "text/css";
+      linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
+      document.head.appendChild(linkElement);
+      
+      // 모달을 열기 위한 코드
+      const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+      modal.show();
+
+      // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
+      const confirmButton = document.querySelector('.yesButton');
+      confirmButton.addEventListener("click", function () {
+        console.log("확인 버튼 눌림");
+        // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+
+        // 새로운 페이지로 이동
+        window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+        localStorage.removeItem('selectedCategory');//10.15 임시저장소 초기화
+      });
+
+      const cancelButton = document.querySelector('.cancleButton');
+      cancelButton.addEventListener("click", function () {
+        console.log("취소 버튼 눌림");
+        // "취소" 버튼이 클릭되면 모달 닫기
+        modal.hide();
+      });
+    })
+    .catch(error => {
+      console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+    });
 };
 
 // 다음
@@ -673,7 +737,7 @@ function generateOrderList(orderData) {
 
   if (orderData.length == 0) {
     selectList.innerHTML = `
-    <div class = "none_select_menu">주문한게 없어요!</div>
+    <div class = "none_select_menu">No Order!</div>
     `
     // pay_move 버튼의 클릭 이벤트를 막음
     if (pay_move) {
