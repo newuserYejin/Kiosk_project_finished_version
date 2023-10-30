@@ -22,7 +22,7 @@
         </div>
         <div class="main">
             <div class="first">
-                <div class = "cafe_name">
+                <div class="cafe_name">
                     <img src="./image/cafe_name_eng.png">
                 </div>
                 <div class="order_explan">
@@ -34,14 +34,16 @@
                 <div class="fir_box">
                     <div class="order">
                         <div>
-                            <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">
                                 <button type="button" class="order_button">Ordering<br>slowly</button>
                                 <img src="../icon_img/q_hoi.png" />
                             </section>
                         </div>
 
                         <div>
-                            <section onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">
                                 <button type="button" class="order_button">Ordering<br>basic</button>
                                 <img src="../icon_img/highlight_hoi.png" />
                             </section>
@@ -100,7 +102,7 @@
                     }
 
                     const close_btn = document.querySelector(".help_close");
-                    if(close_btn){
+                    if (close_btn) {
                         close_btn.textContent = "Close";
                     }
 
@@ -158,6 +160,60 @@
                     console.error("Error reset data:", error);
                 });
         });
+    </script>
+
+    <script>
+
+        var secondsElapsed = 0;
+
+        // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
+        function showDelayedMessage() {
+            secondsElapsed = 15; // 10초 경과
+            console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
+            //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
+            openModal();
+        }
+
+        function openModal() {
+            $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+
+        // showDelayedMessage() 함수가 실행된 후 페이지 리로드 및 경과 시간 초기화
+        function showDelayedMessageAndReload() {
+            showDelayedMessage();
+            setTimeout(function () {
+                //location.reload(); // 일정 시간 후 페이지 리로드
+            }, 10000); // 10초 후 리로드
+        }
+
+        // 페이지가 로드될 때 타이머를 시작
+        var timer = setInterval(function () {
+            secondsElapsed++; // 경과 시간 증가
+            console.log(secondsElapsed + "초");
+            if (secondsElapsed === 15) {
+                clearInterval(timer); // 타이머 중지
+                showDelayedMessage(); // 메시지 표시 함수 호출
+            }
+        }, 1000); // 1초마다 실행
+
+        // 페이지에 클릭 또는 터치 이벤트가 발생하면 경과 시간을 초기화하고 다시 타이머를 시작
+        document.addEventListener('click', function () {
+            secondsElapsed = 0; // 경과 시간 초기화
+            console.log("터치 이벤트");
+        });
+
     </script>
 </body>
 
