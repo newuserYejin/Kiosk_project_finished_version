@@ -108,7 +108,7 @@
             if (order_info == 'slow') {
                 window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html.html?order=basic&timer=${timer}&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
 
@@ -157,13 +157,18 @@
 
                     const modalTitle = document.querySelector(".modal-title");
                     if (modalTitle) {
-                        modalTitle.textContent = "help"; // "help"로 변경
+                        modalTitle.textContent = "Help"; // "help"로 변경
+                    }
+
+                    const close_btn = document.querySelector(".help_close");
+                    if (close_btn) {
+                        close_btn.textContent = "Close";
                     }
 
                     const modalBody = document.querySelector(".modal-body");
                     modalBody.innerHTML = `
         <video autoplay controls>
-            <source src="./image/paymethod_e.mp4" type="video/mp4">
+            <source src="../help_video/paymethod_e.mp4" type="video/mp4">
             Please call the administrator
         </video>
 
@@ -305,11 +310,6 @@
             const totalCostElement = document.querySelector('.total_cost');
             totalCostElement.textContent = '\u20A9' + formattedPrice;
         }
-
-        let total_cost = localStorage.getItem('myTotalCost');
-        const formattedPrice = new Intl.NumberFormat('ko-KR').format(total_cost);//09.18 가격 쉼표 넣기
-        const totalCostElement = document.querySelector('.total_cost');
-        totalCostElement.textContent = '\u20A9' + formattedPrice;
     </script>
 
     <script>//09.14 수정

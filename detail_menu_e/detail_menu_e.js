@@ -21,7 +21,7 @@ $(".btn-info").click(function () {
   // 옵션 값 설정
   const selectedOptions = {
     op_t: $("input[name='temperature']:checked").val() === "HOT" ? 1 : $("input[name='temperature']:checked").val() === "ICED" ? 2 : 1000,
-    op_s: $("input[name='size']:checked").val() === "Basic Size" ? 3 : $("input[name='size']:checked").val() === "Large Size"? 4 : 1000,
+    op_s: $("input[name='size']:checked").val() === "Basic Size" ? 3 : $("input[name='size']:checked").val() === "Large Size" ? 4 : 1000,
     op1: $("input[name='option_set_1']").prop('checked') ? 5 : 0,
     op2: $("input[name='option_set_2']").prop('checked') ? 6 : 0,
     op3: $("input[name='option_set_3']").prop('checked') ? 7 : 0,
@@ -39,7 +39,7 @@ $(".btn-info").click(function () {
       const menuOrders = menuData.orders;
 
       const matchingOrder = menuOrders.find(order => {//tb_order와 주문목록 비교
-        return(
+        return (
           order.menu_num === parseInt(selectedMenuNum) &&
           order.op_t === selectedOptions.op_t &&
           order.op_s === selectedOptions.op_s &&
@@ -54,7 +54,7 @@ $(".btn-info").click(function () {
         );
       });
 
-      if(matchingOrder){
+      if (matchingOrder) {
         const orderNumToUpdate = matchingOrder.order_num;
         fetch(`/updateCount/${orderNumToUpdate}`, {
           method: 'POST',
@@ -65,7 +65,7 @@ $(".btn-info").click(function () {
             count: matchingOrder.count + selectedCount
           })
         })
-        .then(response => response.json())
+          .then(response => response.json())
           .then(data => {
             if (data.success) {
               console.log("주문 업데이트 성공");
@@ -76,7 +76,7 @@ $(".btn-info").click(function () {
           .catch(error => {
             console.error("주문 업데이트 중 오류 발생:", error);
           });
-      } else{
+      } else {
         fetch('/addOrder_e', {// 서버로 주문 정보 전송
           method: 'POST',
           headers: {
@@ -125,11 +125,11 @@ function renderMenuDetail(menuData) {
 
   menuTitle.textContent = menuData.menuData.menu_name;
   menuDescription.textContent = menuData.menuData.menu_explan;
-  
+
   const img_pp = `.${menuData.image_path}`
   menuImage.src = img_pp;
   menuImage.alt = menuData.menu_name;
-  
+
   // 알레르기 정보 출력
   const allegyList = document.querySelector(".allegy_list");
   allegyList.innerHTML = menuData.allegy_names
@@ -147,7 +147,7 @@ function renderMenuDetail(menuData) {
 
   let option_t;
 
-// 각 옵션 컨테이너마다 처리
+  // 각 옵션 컨테이너마다 처리
   optionContainers.forEach((container, index) => {
     const optionList = container.querySelector(".list-group");
     let currentSet = 0; // 현재 세트 번호
@@ -163,7 +163,7 @@ function renderMenuDetail(menuData) {
     if (index === 0) {
       const temperatureOptions = menuData.op_data
         .filter(option => option.op_name === "HOT" || option.op_name === "ICED");
-    
+
       let defaultOption = "HOT"; // 기본값 설정
       console.log("temperatureOptions:", temperatureOptions);
 
@@ -173,20 +173,20 @@ function renderMenuDetail(menuData) {
       const speechBubbleContent = speechBubble.querySelector('div');
 
       let falseoption = "ICED";
-    
+
       if (!hasHot && hasCold) {
         defaultOption = "ICED";
         falseoption = "HOT";
       }
 
-      if (temperatureOptions.some(option => option.op_name === "HOT") && temperatureOptions.some(option => option.op_name === "ICED")){
-        speechBubbleContent.textContent = 'Pick what you want'
+      if (temperatureOptions.some(option => option.op_name === "HOT") && temperatureOptions.some(option => option.op_name === "ICED")) {
+        speechBubbleContent.textContent = 'Pick what you want.'
         optionList.innerHTML = temperatureOptions
-        .map(option => {
+          .map(option => {
             const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
             const textColor = option.op_name === "HOT" ? "red" : "blue"; // HOT은 빨간색, ICED은 파란색
             option_t = textColor;
-            const imageSrc = option.op_name =="HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"
+            const imageSrc = option.op_name == "HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"
             return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
               <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">
               ${option.op_name} (+${option.op_price})
@@ -194,8 +194,8 @@ function renderMenuDetail(menuData) {
               </label></li>
               `;
           })
-        .join("");
-      }else{
+          .join("");
+      } else {
         // "뜨거움"이나 "차가움" 중 하나만 없는 경우
         if (!hasHot) {
           speechBubbleContent.textContent = 'Only ICED product.';
@@ -204,14 +204,14 @@ function renderMenuDetail(menuData) {
         }
 
         optionList.innerHTML = temperatureOptions
-            .map(option => {
-                const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-                const textColor = option.op_name === "HOT" ? "red" : "blue"; // HOT은 빨간색, ICED은 파란색
-                option_t = textColor;
-                const imageSrc = option.op_name === "HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
-                const falseoptionText = falseoption === "HOT" ? "HOT" : "ICED"; // falseoption 변수에 따라 출력할 문자 설정
-                const falseimageSrc = falseoption === "HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
-                return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+          .map(option => {
+            const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+            const textColor = option.op_name === "HOT" ? "red" : "blue"; // HOT은 빨간색, ICED은 파란색
+            option_t = textColor;
+            const imageSrc = option.op_name === "HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
+            const falseoptionText = falseoption === "HOT" ? "HOT" : "ICED"; // falseoption 변수에 따라 출력할 문자 설정
+            const falseimageSrc = falseoption === "HOT" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
+            return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
                   <label class="form-check-label" for="${option.op_name}" style="color: ${textColor}; border-color:${textColor}">
                       ${option.op_name} (+${option.op_price})
                       <img src="${imageSrc}" />
@@ -221,24 +221,24 @@ function renderMenuDetail(menuData) {
                   <img src="${falseimageSrc}" />
                   </label></li>
                   `;
-              })
-            .join("");
-          }
+          })
+          .join("");
+      }
     } else if (index === 1) {
       const sizeOptions = menuData.op_data
-        .filter(option => option.op_name.toLowerCase() === "basic size" || option.op_name.toLowerCase() === "large size");
+        .filter(option => option.op_name === "Basic Size" || option.op_name === "Large Size");
     
-      let defaultOption = "basic Size"; // 기본값 설정
+      let defaultOption = "Basic Size"; // 기본값 설정
       console.log("sizeOptions:", sizeOptions);
     
-      const hasRegular = sizeOptions.some(option => option.op_name.toLowerCase() === "basic size");
-      const hasLarge = sizeOptions.some(option => option.op_name.toLowerCase() === "large size");
+      const hasRegular = sizeOptions.some(option => option.op_name === "Basic Size");
+      const hasLarge = sizeOptions.some(option => option.op_name === "Large Size");
     
-      let falseoption = "large size";
+      let falseoption = "Large Size";
     
       if (!hasRegular && hasLarge) {
-        defaultOption = "large size";
-        falseoption = "basic size";
+        defaultOption = "Large Size";
+        falseoption = "Basic Size";
       }
 
       const imageSrc = option_t === "red" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"; // 이미지 경로 설정
@@ -247,7 +247,7 @@ function renderMenuDetail(menuData) {
       const speechBubble = document.querySelector('.size');
       const speechBubbleContent = speechBubble.querySelector('div');
 
-      speechBubbleContent.textContent = 'Pick what you want';
+      speechBubbleContent.textContent = 'Pick what you want.';
 
       const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
 
@@ -261,10 +261,10 @@ function renderMenuDetail(menuData) {
           label.style.borderColor = checkedAttribute ? option_t : "initial";
         });
       });
-    
+
       optionList.innerHTML = sizeOptions
         .map(option => {
-          const checkedAttribute = option.op_name.toLowerCase() === defaultOption ? "checked" : "";
+          const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
           return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
             <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price})
             <img src="${imageSrc}" />
@@ -272,7 +272,7 @@ function renderMenuDetail(menuData) {
             `;
         })
         .join("");
-    
+
       if (!hasRegular || !hasLarge) {
         optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
           <label class="form-check-label" for="falseoption" onclick=show_qr('s')> ${falseoption} (+0)
@@ -283,11 +283,11 @@ function renderMenuDetail(menuData) {
         const speechBubbleContent = speechBubble.querySelector('div');
 
         if (!hasRegular) {
-            speechBubbleContent.textContent = 'Only Large Size product.';
+          speechBubbleContent.textContent = 'Only Large Size product.';
         } else {
-            speechBubbleContent.textContent = 'Only Basic Size product.';
+          speechBubbleContent.textContent = 'Only Basic Size product.';
         }
-      }  
+      }
     } else if (index === 2) {
       // 세번째 박스에는 나머지 옵션 중 체크박스 옵션 4개를 넣습니다.
       const checkboxOptions = menuData.op_data
@@ -301,7 +301,7 @@ function renderMenuDetail(menuData) {
           <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price})</label></li>`;
         })
         .join("");
-    } 
+    }
   });
   // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 시작------------------------------------------------------------------
   function updatePrice() {
@@ -363,13 +363,13 @@ function renderMenuDetail(menuData) {
 if (window.location.search) {
   let detail_urlParams = new URLSearchParams(window.location.search);
   const menuId = detail_urlParams.get("menuId");
-  
+
   fetch(`/menu_e/${menuId}`)
     .then(response => response.json())
     .then(menuData => {
       console.log(menuData); // 서버에서 받은 메뉴 데이터를 확인해보세요
       renderMenuDetail(menuData);
-      
+
       // 라디오 버튼 클릭 이벤트 핸들러 추가
       $("input[type='radio']").on("change", function () {
         const selectedValue = $(this).val();

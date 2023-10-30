@@ -114,7 +114,7 @@ body {
 }
 
 .take_out_title {
-    width: 28.4%;
+    width: 30.4%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,7 +126,7 @@ body {
 .take_out_title img {
     height: 100%;
     width: 27%;
-    margin-right: 3px;
+    margin-right: 10px;
 }
 
 .radio_box {

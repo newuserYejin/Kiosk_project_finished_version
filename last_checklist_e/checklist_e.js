@@ -4,10 +4,10 @@ var button = document.querySelector('.circle');
 
 //네비게이션 부분
 function selectPage() {
-  var URL = new URLSearchParams(window.location.search);
-  var order_info = URL.get('order');
-  const pickup = URL.get('pickup');
-  // const timer = URL.get('timer');//10.17 추가
+  var urlParams = new URLSearchParams(window.location.search);
+  var order_info = urlParams.get('order');
+  const pickup = urlParams.get('pickup');
+  const timer = urlParams.get('timer');
 
   if (order_info == 'slow') {
     window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`
@@ -17,10 +17,10 @@ function selectPage() {
 }
 
 function openPay() {
-  var URL = new URLSearchParams(window.location.search);
-  var order_info = URL.get('order');
-  const pickup = URL.get('pickup');
-  // const timer = URL.get('timer');//10.17 추가
+  var urlParams = new URLSearchParams(window.location.search);
+  var order_info = urlParams.get('order');
+  const pickup = urlParams.get('pickup');
+  const timer = urlParams.get('timer');
 
   if (order_info == 'slow') {
     window.location.href = `http://localhost:3001/paymethod_e/paymethod_e.html?order=slow&timer=${timer}&pickup=${pickup}`
@@ -34,7 +34,7 @@ function prvsScren() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');
-  // const timer = URL.get('timer');//10.17 추가
+  const timer = urlParams.get('timer');
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -57,7 +57,7 @@ function nextScreen() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');
-  // const timer = URL.get('timer');//10.17 추가
+  const timer = urlParams.get('timer');
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -90,17 +90,22 @@ joImage.addEventListener("click", function () {
 
       const modalTitle = document.querySelector(".modal-title");
       if (modalTitle) {
-        modalTitle.textContent = "help"; // "help"로 변경
+        modalTitle.textContent = "Help"; // "help"로 변경
+      }
+
+      const close_btn = document.querySelector(".help_close");
+      if (close_btn) {
+          close_btn.textContent = "Close";
       }
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <video autoplay controls>
-            <source src="./image/checklist_e.mp4" type="video/mp4">
+            <source src="../help_video/checklist_e.mp4" type="video/mp4">
             Please call the administrator
         </video>
 
-        <section class="content_explain" style="border: solid 2px black; height: 60%;">
+        <section class="content_explain">
         1. If you want to modify your order, please press 'Modify' to modify it and save it as 'Save'.
         => Product quantity and additions can be modify. <br>
         2. If you delete an order history, you will be notified of the deletion<br>
@@ -116,7 +121,7 @@ joImage.addEventListener("click", function () {
       const linkElement = document.createElement("link");
       linkElement.rel = "stylesheet";
       linkElement.type = "text/css";
-      linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css";
+      linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
       document.head.appendChild(linkElement);
 
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
@@ -131,11 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {//서버연동(DOMCon
 });
 
 function createOrderItem(order) {//주문 아이템 생성 함수
-
-  // 옵션 정보를 가져옴
-  const optionsString = order.options.length > 1
-    ? order.options.slice(1).map(op => op.op_name).join(', ')
-    : '없음';
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(order.total_price);
 
   const orderItem = document.createElement('div');
   orderItem.className = 'list_content_box';
@@ -160,7 +161,7 @@ function createOrderItem(order) {//주문 아이템 생성 함수
               <div class="container text-center">
                   <div class="content_title">
                       <div class="menu_name">${order.menu_name}</div> <!--메뉴 이름 출력-->
-                      <div class="menu_cost">Cost: &#8361;${order.total_price}</div> <!--메뉴 가격 출력-->
+                      <div class="menu_cost">Cost: &#8361;${formattedPrice}</div> <!--메뉴 가격 출력-->
                   </div>
 
                   <!--옵션 데이터-->
@@ -168,10 +169,9 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                       <div class="list_option_detail">
                           <div class="option_detail">
                               <span class="select_tem">${order.op_t === 1 ? 'HOT' : 'ICED'}(+0)</span>
-                              <span class="select_size">${order.op_s === 3 ? 'basic size' : '(EX) size'}(${order.op_s === 3 ? '+0' : '+1200'})</span>
+                              <span class="select_size">${order.op_s === 3 ? 'Baisc Size' : 'Large Size'}(${order.op_s === 3 ? '+0' : '+1200'})</span>
                               <span class="select_op">
-                                  ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price})</div>`).join(''): '<div class="select_op">Add Option: none</div>'}
-                                  <!--${order.options.length > 0 ? order.options.map(op => op.op_name).join(', ') : 'none'}-->
+                                  ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price})</div>`).join(''): '<div class="select_op">Add Option: None</div>'}
                               </span>
                           </div>
                       </div>
@@ -218,7 +218,7 @@ function addOrdersToDOM(orders) {
   if (orders.length === 0) {
     // 주문 목록이 비어 있는 경우 메시지를 추가합니다.
     orderList.innerHTML = `
-      <div class='no_menu'>There is no order..</div>
+      <div class='no_menu'>Not order yet!</div>
     `;
     none_msg.forEach((element) => {
       element.style.visibility = 'visible';
@@ -289,7 +289,7 @@ function addOrdersToDOM(orders) {
         history.pushState(null, null, `http://localhost:3001/last_checklist_e/checklist_e.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
       }
       // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-      fetch("http://localhost:3001/detail_menu_e/jojo_o_e.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.
+      fetch(`http://localhost:3001/detail_menu_e/jojo_o_e.html?orderNum=${orderNum}`) // 이 부분의 파일 경로를 수정해야합니다.
         .then(response => {
           if (!response.ok) {
             throw new Error("HTTP Error " + response.status);
@@ -405,59 +405,120 @@ function calculateTotalAmount(orders) {
 }
 
 function updateTotalAmountUI(amount) {
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);
   const totalCostElement = document.querySelector('.total_cost');
-  const wonSymbol = '\u20A9'; // 원화(₩) 기호의 유니코드
-  totalCostElement.textContent = wonSymbol + amount;
+  totalCostElement.textContent = "￦" + formattedPrice;
 }
 //08.19 최종 금액 계산
 
-
-// 09.09 checklist에서 포장 변경시 바로 저장 되게
-const radioButtons = document.getElementsByName('listGroupRadio');
-
-// 라디오 버튼의 상태가 변경될 때 호출되는 함수를 정의합니다.
-function updateURL() {
+// 포장 여부 확인
+function updateData() {
+  const radioButtons = document.getElementsByName('listGroupRadio');
   let newParamValue = "";
 
-  // 선택된 라디오 버튼에 따라 newParamValue 값을 설정합니다.
   if (radioButtons[0].checked) {
-    newParamValue = "2"; // "먹고가기"가 선택된 경우
+    newParamValue = "1"; // "매장"이 선택된 경우
   } else if (radioButtons[1].checked) {
-    newParamValue = "1"; // "포장하기"가 선택된 경우
+    newParamValue = "2"; // "포장"이 선택된 경우
   }
 
-  // 현재 URL을 가져옵니다.
-  let currentURL = new URL(window.location.href);
+  var currentURL = window.location.href;
+  var url = new URL(currentURL);
+  var params = new URLSearchParams(url.search);
+  var timer = params.get("timer");
 
-  // "pickup" 파라미터를 업데이트합니다.
-  currentURL.searchParams.set("pickup", newParamValue);
+  if (timer !== null && !isNaN(timer)) {
+    timer = parseInt(timer);
+    timer--; // 타이머를 1씩 감소
 
-  // 새 URL로 이동합니다.
-  window.history.pushState({}, '', currentURL);
+    // "pickup" 및 "timer" 파라미터를 업데이트합니다.
+    params.set("pickup", newParamValue);
+    params.set("timer", timer);
+    url.search = params.toString();
+    var newURL = url.toString();
+    // 브라우저 주소 표시줄 업데이트
+    window.history.replaceState({}, document.title, newURL);
+
+    // 타이머가 0이 되면 동작을 원하는 대로 처리
+    if (timer === 0) {
+      document.getElementById("modalContainer_e").innerHTML = "";
+
+      // detail_menu.css를 제거합니다.
+      const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+      if (detailMenuLink) {
+        detailMenuLink.remove();
+      }
+      console.log("타이머가 0이 되었습니다.");
+
+      // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+      fetch(`http://localhost:3001/timeout/timeout.html`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("HTTP Error " + response.status);
+          }
+          return response.text();
+        })
+        .then(data => {
+          // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+          $("#modalContainer_e").html(data);
+
+          // timeout.css 파일을 로드합니다.
+          const linkElement = document.createElement("link");
+          linkElement.rel = "stylesheet";
+          linkElement.type = "text/css";
+          linkElement.href = "http://localhost:3001/timeout/timeout.css";
+          document.head.appendChild(linkElement);
+
+          // 모달을 열기 위한 코드
+          const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+          modal.show();
+
+          const yes = document.querySelector('.btn-primary');
+          yes.addEventListener("click", function () {//180초 추가하기
+            params.set("timer", 180);
+            url.search = params.toString();
+            newURL = url.toString();
+            window.history.replaceState({}, document.title, newURL);
+            location.reload();
+          })
+          const no = document.querySelector('.btn-secondary');
+          no.addEventListener("click", function () {//시작 페이지로 이동
+            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+          })
+
+        })
+        .catch(error => {
+          console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+        });
+    } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+      window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+    }
+  }
+  else {
+    alert("유효한 타이머 시간을 지정하지 않았습니다.");
+  }
 }
 
-// 라디오 버튼의 상태가 변경될 때 updateURL 함수를 호출합니다.
+// 라디오 버튼의 상태가 변경될 때 updateData 함수를 호출합니다.
+const radioButtons = document.getElementsByName('listGroupRadio');
 for (const radioButton of radioButtons) {
-  radioButton.addEventListener('change', updateURL);
+  radioButton.addEventListener('change', updateData);
 }
+setInterval(updateData, 1000);//10.17 수정 끝
+
 
 // 페이지 로드 시 라디오 버튼 상태를 URL 파라미터에 맞게 설정합니다.
 function checkRadioButton() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('pickup');
   if (orderType === '1') {
-    radioButtons[0].checked = false;
-    radioButtons[1].checked = true;
-  } else {
-    radioButtons[0].checked = true;
     radioButtons[1].checked = false;
+    radioButtons[0].checked = true;
+  } else {
+    radioButtons[1].checked = true;
+    radioButtons[0].checked = false;
   }
 }
 
 window.addEventListener('load', checkRadioButton);
 //09.09추가 끝
-
-
-
-
-

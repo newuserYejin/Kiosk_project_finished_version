@@ -20,13 +20,18 @@ const joImage = document.getElementById("imageLink");
 
                         const modalTitle = document.querySelector(".modal-title");
                         if (modalTitle) {
-                            modalTitle.textContent = "help"; // "help"로 변경
+                            modalTitle.textContent = "Help"; // "help"로 변경
+                        }
+
+                        const close_btn = document.querySelector(".help_close");
+                        if (close_btn) {
+                            close_btn.textContent = "Close";
                         }
 
                         const modalBody = document.querySelector(".modal-body");
                         modalBody.innerHTML = `
         <video autoplay controls>
-            <source src="./image/paycoupon_e.mp4" type="video/mp4">
+            <source src="../help_video/paycoupon_e.mp4" type="video/mp4">
             Please call the administrator
         </video>
 
@@ -133,6 +138,15 @@ function gohome() {
         location.href = 'http://localhost:3001/selectorder/selectorder.html';
     }
 
+}
+
+let total_cost = localStorage.getItem('myTotalCost');
+
+if (total_cost !== null) {//10.09 쉼표 넣기
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(Number(total_cost));
+    
+    const totalCostElement = document.querySelector('.total_cost');
+    totalCostElement.textContent = '\u20A9 ' + formattedPrice;
 }
 
 // function showMessageAndRedirect() {
