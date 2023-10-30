@@ -4,31 +4,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ordernum</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./ordernum_e.css" />
 </head>
 
-<body>
+<body style="font-family: 'Pretendard';">
     <div class="all">
-        <div class="help">
-            <img class="helping" src="./image/helpicon.png" id="imageLink">
-            <div id="modalContainer_e"></div>
+        <!--상단 배너-->
+        <div class="top_banner">
+            <div class="hoi_box">
+                <img class="hoi" src="../icon_img/good_hoi.png" />
+            </div>
+            <img class="cafe_name" src="../icon_img/cafe_name_eng.png" />
+
+            <div class="help">
+                <div id="imageLink">도움말</div>
+                <div id="modalContainer_e"></div>
+            </div>
         </div>
-        <div class="ordernum">
-            <div class="order">
-                <div class="closeimg">
-                    <img class="close" src="./image/close.png" width="6%" height="3%" onclick="openClose()">
-                </div>
-                <div class="info">
-                    <p class="completed">Order Completed</p>
-                    <p class="waitnum">Waiting number</p>
-                    <div class="num">901</div>
-                </div>
+        <div class="main_box">
+            <div class="ordernum">
+                <!-- <div class="order">
+                    <div class="info">
+                        <p class="completed">주문 완료</p>
+                        <div>
+                            <p class="waitnum">대기 번호</p>
+                            <div class="num">901</div>
+                        </div>
+                    </div>
+                </div> -->
+                <img src="../icon_img/recipt_img.png" />
             </div>
-            <div class="gohome_">
-                <button type="button" class="gohome"
-                    onclick="location.href='http://localhost:3001/selectorder/selectorder.html'">Back to HOME</button>
-            </div>
+        </div>
+
+        <div class="gohome">
+            <button type="button" class="gohome"
+                onclick="location.href='http://localhost:3001/selectorder/selectorder.html'">
+                <img src="../icon_img/home_icon.png">Back to HOME</button>
         </div>
     </div>
     <script>
