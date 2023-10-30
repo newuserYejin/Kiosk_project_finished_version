@@ -19,6 +19,11 @@ joImage.addEventListener("click", function () {
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
+        <div class="help_button">
+            <button onclick="open_help('bigorder_1')">1번</button>
+            <button onclick="open_help('bigorder_2')">2번</button>
+        </div>
+
         <video autoplay controls style="width:100%;">
           <source src="./image/bigorder(1).mp4" type="video/mp4">
             관리자를 호출해주세요.
@@ -34,22 +39,6 @@ joImage.addEventListener("click", function () {
              4. 상단의 버튼을 통해 다른 구조의 메뉴창을 만날 수 있습니다.
 
         </section>
-
-        <video controls style="width:100%;">
-        <source src="./image/bicorder(2).mp4" type="video/mp4">
-            관리자를 호출해주세요.
-        </video>
-
-        <section class="content_explain"style="height: 50%;">
-
-              1. 왼쪽의 '주문 확인'을 이용하시면 선택한 메뉴의 목록을 확인할 수 있습니다.<br>
-              2. '최종 결제'를 이용하시면 주문 목록 확인 없이 결제로 넘어갈 수 있습니다.<br>
-              &lt;현재 주문 목록 설명&gt;<br>
-              3. 주문 내역이 따뜻한것이면 빨간색, 차가운거면 파란색, 온도 선택이 없으면 검은색으로 나타납니다.<br>
-              4. 현재 주문 목록을 선택하면 메뉴 수정이 가능한 화면으로 이동합니다.<br>
-              (각 선택에 이어지는 화면은 영상과 다를 수 있습니다.)
-
-        </section>
         `;
 
       // help_msg.css 파일을 로드합니다.
@@ -58,6 +47,11 @@ joImage.addEventListener("click", function () {
       linkElement.type = "text/css";
       linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
       document.head.appendChild(linkElement);
+
+      // 외부 js 파일을 로드합니다.
+      const scriptElement = document.createElement("script");
+      scriptElement.src = "http://localhost:3001/help_msg/help_msg.js"; // 이 부분의 파일 경로를 수정해야합니다.
+      document.body.appendChild(scriptElement);
 
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
       modal.show();
@@ -160,7 +154,7 @@ function firstScreen() {
       linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css"; // 이 부분의 파일 경로를 수정해야합니다.
       document.head.appendChild(linkElement);
 
-      
+
       // 모달을 열기 위한 코드
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
       modal.show();

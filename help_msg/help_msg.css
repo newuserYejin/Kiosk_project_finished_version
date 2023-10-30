@@ -54,13 +54,33 @@
     max-height: 68.3%;
     height: auto;
     padding: 0;
-    padding-top: 1.9%;
     overflow: hidden;
     overflow-y: auto;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#modalContainer .help_button{
+    width: 88.3%;
+    display: flex;
+    
+    margin: 1.9% 0;
+}
+
+#modalContainer .help_button button{
+    width: 20%;
+    padding: 5px;
+
+    border-radius: 10px;
+    font-size: 3vw;
+    font-weight: 600;
+    
+    margin-right: 10px;
+
+    border: solid 2px black;
+    background-color: white;
 }
 
 #modalContainer .modal-body *{
