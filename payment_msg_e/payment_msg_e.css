@@ -1,8 +1,8 @@
 @import url('../Pretendard-1.3.8/web/static/pretendard.css');
 
 #modalContainer_e .modal {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 #modalContainer_e .modal *{
@@ -10,7 +10,7 @@
 }
 
 #modalContainer_e .modal-dialog{
-
+    margin: 0 auto;
 }
 
 #modalContainer_e .help_modal_dialog {

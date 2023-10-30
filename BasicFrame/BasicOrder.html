@@ -152,7 +152,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="select_list_box">
                                 <!--주문리스트 미리보기-->
                                 <div class="select_list">
@@ -244,6 +244,14 @@
 
             $.get("http://localhost:3001/exithome_msg/exithome_msg.html", function (data) {
                 $("#modalContainer").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css";
+                document.head.appendChild(linkElement);
+
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });

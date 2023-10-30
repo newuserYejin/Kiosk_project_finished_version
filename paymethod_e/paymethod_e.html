@@ -106,9 +106,9 @@
             const pickup = URL.get('pickup');
 
             if (order_info == 'slow') {
-                window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`
             } else if (order_info == 'basic') {
-                window.location.href = `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html.html?order=basic&timer=${timer}&pickup=${pickup}`
             }
         }
 
@@ -245,6 +245,14 @@
         function openModal() {
             $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
                 $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });

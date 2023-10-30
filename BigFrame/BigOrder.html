@@ -48,7 +48,8 @@
                         <div class="navigation">
                             <div class="navigation_all_box">
                                 <div class="box_line" onclick="select_page()">
-                                    <div class="level_button" style="background-color: rgba(0, 122, 194, 0.1); color: #007AC2;">
+                                    <div class="level_button"
+                                        style="background-color: rgba(0, 122, 194, 0.1); color: #007AC2;">
                                         <p class="circle_name">1.메뉴선택</p>
                                     </div>
                                 </div>
@@ -207,7 +208,7 @@
         // localStorage.removeItem(speech_result)
     </script> -->
 
-    <!-- <script>
+    <script>
 
         var secondsElapsed = 0;
 
@@ -234,6 +235,14 @@
 
             $.get("http://localhost:3001/exithome_msg/exithome_msg.html", function (data) {
                 $("#modalContainer").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg/payment_msg.css";
+                document.head.appendChild(linkElement);
+
                 const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                 modal.show();
             });
@@ -263,7 +272,7 @@
             console.log("터치 이벤트");
         });
 
-    </script> -->
+    </script>
 
     <!-- <script>
         const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
