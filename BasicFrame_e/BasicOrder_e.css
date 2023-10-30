@@ -593,6 +593,7 @@ body {
 .select_name {
   font-weight: 500;
   font-size: 2.5vw;
+  text-align: end;
 }
 
 .move_box_inner_2 {

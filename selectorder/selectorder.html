@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시작페이지</title>
-    <link rel="stylesheet" href="selectorder.css" />
+    <link rel="stylesheet" type="text/css" href="selectorder.css" />
 </head>
 
 <body style="font-family: 'Pretendard';">
@@ -22,7 +22,7 @@
         </div>
         <div class="main">
             <div class="first">
-                <div class = "cafe_name">
+                <div class="cafe_name">
                     <img src="./image/cafe_name_re.png">
                 </div>
                 <div class="order_explan">
@@ -34,15 +34,17 @@
                 <div class="fir_box">
                     <div class="order">
                         <div>
-                            <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow&timer=330'">
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow&timer=330'">
                                 <button class="order_button" type="button">천천히<br>주문하기</button>
                                 <!-- <img src="./image/order_hoi.png" /> -->
                                 <img src="../icon_img/q_hoi.png" />
                             </section>
                         </div>
-    
+
                         <div>
-                            <section onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic&timer=150'">
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic&timer=150'">
                                 <button class="order_button" type="button">기본<br>주문하기</button>
                                 <!-- <img src="./image/stand_hoi.png" /> -->
                                 <img src="../icon_img/highlight_hoi.png" />
@@ -97,7 +99,7 @@
                     const modalBody = document.querySelector(".modal-body");
                     modalBody.innerHTML = `
                     <video autoplay controls>
-                        <source src="./image/selectorder.mp4" type="video/mp4">
+                        <source src="../help_video/selectorder.mp4" type="video/mp4">
                         관리자를 호출해주세요.
                     </video>
 
@@ -114,6 +116,11 @@
                     linkElement.type = "text/css";
                     linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
                     document.head.appendChild(linkElement);
+
+                    // 외부 js 파일을 로드합니다.
+                    const scriptElement = document.createElement("script");
+                    scriptElement.src = "http://localhost:3001/help_msg/help_msg.js"; // 이 부분의 파일 경로를 수정해야합니다.
+                    document.body.appendChild(scriptElement);
 
                     const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
                     modal.show();

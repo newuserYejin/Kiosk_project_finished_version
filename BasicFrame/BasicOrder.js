@@ -449,6 +449,7 @@ function handleMenuData(menuData, sliderContainer) {
       currentPage++; // 새로운 슬라이드가 시작되면 현재 페이지 증가
     }
 
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(menu.price);//가격 쉼표 넣기
     const menuHTML = `
       <div class="list_content_box" id="list_click" data-menunum="${menu.menu_num}">
         <div class="box list_img_box">
@@ -458,7 +459,7 @@ function handleMenuData(menuData, sliderContainer) {
           <div class="container text-center">
             <div class="content_title">
               <div class="menu_name">${menu.menu_name}</div>
-              <div class="menu_cost">${menu.price}원</div>
+              <div class="menu_cost">${formattedPrice}원</div>
             </div>
           </div>
         </div>
