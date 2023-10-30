@@ -74,7 +74,7 @@ $(document).ready(function () {
     } else if(!op_num_o.includes(2)) {
       speechBubbleContent.textContent = 'Only HOT product.';
     } else {
-      speechBubbleContent.textContent = 'Please choose what you want.';
+      speechBubbleContent.textContent = 'Pick what you want.';
     }
   }
 
@@ -119,7 +119,7 @@ $(document).ready(function () {
     } else if(!op_num_o.includes(4)) {
       speechBubbleContent.textContent = 'Only Basic Size product.';
     } else {
-      speechBubbleContent.textContent = 'Please choose the Size you want.';
+      speechBubbleContent.textContent = 'Pick what you want.';
     }
   }
   //09.13여기까지
@@ -223,7 +223,7 @@ $(document).ready(function () {
       console.log(order);
       if (order) {
         const CommitPrice = new Intl.NumberFormat('ko-KR').format(order.total_price); // 가격 쉼표 넣기
-        $(`.EI_menu_cost`).text(`${CommitPrice}원`);
+        $(`.EI_menu_cost`).text(`￦${CommitPrice}`);
       }
     }
   // 주문 데이터를 처리하고 렌더링하는 함수
@@ -317,14 +317,14 @@ function renderOrderDetail(orderData) {
   }
   // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 시작------------------------------------------------------------------
   function updatePrice() {
-    const baseMenuPrice = parseInt(menuData.menuData.price); // 기본 메뉴 가격
+    const MenuPrice = parseInt(orderData.menu_price); // 기본 메뉴 가격
 
     let selectedOpSPrice = 0; // op_s의 추가 가격
     let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0]; // 각 op의 추가 가격
 
     // op_s의 선택 여부에 따라 가격을 업데이트
     const selectedOpS = $("input[name='size']:checked").val();
-    if (selectedOpS === "Large Size") {
+    if (selectedOpS === "4") {
       selectedOpSPrice = 1200;
     }
 
@@ -339,21 +339,21 @@ function renderOrderDetail(orderData) {
     const inputVal = parseInt($("#quantity").val()); // input 값
 
     // 총 가격 계산
-    const TotalPrice = (baseMenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
+    const TotalPrice = (MenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
     const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice); // 가격 쉼표 넣기
 
     console.log(`현재금액 : ${TotalPrice}원`);
     // 계산된 총 가격을 원하는 위치에 표시합니다.
-    $('.EI_menu_cost').text(`${EI_TotalPrice}원`);
+    $('.EI_menu_cost').text(`￦${EI_TotalPrice}`);
   }
 
-  $(".input-group").on("click", "#increment", function () {
+  $(".input-group").on("click", "#increment1", function () {
     var input = $(this).closest(".input-group").find("input");
     updatePrice();
     console.log(input.val());
   });
 
-  $(".input-group").on("click", "#decrement", function () {
+  $(".input-group").on("click", "#decrement1", function () {
     var input = $(this).closest(".input-group").find("input");
     updatePrice();
     console.log(input.val());

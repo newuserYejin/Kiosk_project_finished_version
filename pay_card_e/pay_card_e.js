@@ -19,7 +19,12 @@ const joImage = document.getElementById("imageLink");
 
                         const modalTitle = document.querySelector(".modal-title");
                         if (modalTitle) {
-                            modalTitle.textContent = "help"; // "help"로 변경
+                            modalTitle.textContent = "Help"; // "help"로 변경
+                        }
+
+                        const close_btn = document.querySelector(".help_close");
+                        if (close_btn) {
+                            close_btn.textContent = "Close";
                         }
 
                         const modalBody = document.querySelector(".modal-body");
@@ -132,6 +137,14 @@ function gohome() {
 
 }
 
+let total_cost = localStorage.getItem('myTotalCost');
+
+if (total_cost !== null) {//10.09 쉼표 넣기
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(Number(total_cost));
+    
+    const totalCostElement = document.querySelector('.total_cost');
+    totalCostElement.textContent = '\u20A9 ' + formattedPrice;
+}
 // function showMessageAndRedirect() {
 //     setTimeout(function() {
 //         alert("3초 후에 페이지가 이동됩니다.");

@@ -20,7 +20,12 @@ joImage.addEventListener("click", function () {
 
       const modalTitle = document.querySelector(".modal-title");
       if (modalTitle) {
-        modalTitle.textContent = "help"; // "help"로 변경
+        modalTitle.textContent = "Help"; // "help"로 변경
+      }
+
+      const close_btn = document.querySelector(".help_close");
+      if (close_btn) {
+          close_btn.textContent = "Close";
       }
 
       const modalBody = document.querySelector(".modal-body");
@@ -71,57 +76,13 @@ joImage.addEventListener("click", function () {
     });
 });
 
-// // 선택 버튼(메뉴 선택)
-// const selectBtn = document.querySelectorAll(".list_content_box");
-// selectBtn.forEach(selectBtn => {
-//   selectBtn.addEventListener("click", function () {
-//     // 먼저 모달 컨테이너를 비웁니다.
-//     document.getElementById("modalContainer").innerHTML = "";
-
-//     // help_msg.css를 제거합니다.
-//     const detailMenuLink = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
-//     if (detailMenuLink) {
-//       detailMenuLink.remove();
-//     }
-
-//     // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
-//     fetch("http://localhost:3001/detail_menu/jojo.html") // 이 부분의 파일 경로를 수정해야합니다.
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error("HTTP Error " + response.status);
-//         }
-//         return response.text();
-//       })
-//       .then(data => {
-//         // 모달 컨테이너에 jojo.html 콘텐츠를 추가합니다.
-//         $("#modalContainer").html(data);
-
-//         // 외부 detail_menu 폴더에 있는 detail_menu.css 파일을 로드합니다.
-//         const linkElement = document.createElement("link");
-//         linkElement.rel = "stylesheet";
-//         linkElement.type = "text/css";
-//         linkElement.href = "http://localhost:3001/detail_menu/detail_menu.css"; // 이 부분의 파일 경로를 수정해야합니다.
-//         document.head.appendChild(linkElement);
-
-//         // 외부 detail_menu 폴더에 있는 detail_menu.js 파일을 로드합니다.
-//         const scriptElement = document.createElement("script");
-//         scriptElement.src = "http://localhost:3001/detail_menu/detail_menu.js"; // 이 부분의 파일 경로를 수정해야합니다.
-//         document.body.appendChild(scriptElement);
-
-//         const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
-//         modal.show();
-//       })
-//       .catch(error => {
-//         console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
-//       });
-//   });
-// });
-
 // 확인 페이지로 이동
 function check_page() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');
+  localStorage.removeItem('selectedCategory');
 
   if (orderType == 'slow') {
     location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`;
@@ -135,6 +96,8 @@ function pay_page() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');
+  localStorage.removeItem('selectedCategory');
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -150,8 +113,6 @@ const all_delete = document.querySelectorAll('.all_delete');//10.16전체삭제 
 all_delete.forEach(AdeleteBtn => {
   AdeleteBtn.addEventListener("click", function () {
     console.log("전체 삭제 버튼 눌림");
-    // 클릭된 버튼의 data-orderNum 값을 가져옴
-    const orderNum = this.getAttribute('data-orderNum');
 
     // 먼저 모달 컨테이너를 비웁니다.
     document.getElementById("modalContainer_e").innerHTML = "";
@@ -260,6 +221,8 @@ function prvsScren() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');
+  localStorage.removeItem('selectedCategory');
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -269,12 +232,6 @@ function prvsScren() {
     location.href = `http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
   }
 };
-
-// // 처음으로
-// function firstScreen() {
-//   // 새로운 페이지로 이동
-//   window.location.href = "http://localhost:3001/selectorder/selectorder.html";
-// };
 
 // 처음으로
 function firstScreen() {
@@ -346,6 +303,8 @@ function nextScreen() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderType = urlParams.get('order');
   const pickup = urlParams.get('pickup');//09.08 수정
+  const timer = urlParams.get('timer');
+  localStorage.removeItem('selectedCategory');
 
   if (orderType == 'slow') {
     // 천천히 주문하기 버튼을 클릭한 경우
@@ -402,7 +361,7 @@ sizeButtons.forEach(button => {
         if (currentOrder === 'slow') {
           window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`;
         } else if (currentOrder === 'basic') {
-          window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
+          window.location.href = `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
         }
         break;
       default:
@@ -419,13 +378,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const categories = document.querySelectorAll('.category');
 
   const defaultCategory = "1";
+  const selectedClass = 'select_category';//10.19추가
+
+  // 이전에 선택된 카테고리가 있는지 확인하고, 있다면 해당 카테고리로 설정합니다.10.19추가
+  const lastSelectedCategory = localStorage.getItem('selectedCategory');//10.19추가
+  const initialCategory = lastSelectedCategory ? lastSelectedCategory : defaultCategory;//10.19추가
 
   if (storeData && storeData.length > 0) {
     searchFunction(); // storeData에 데이터가 있을 경우 검색 결과 표시
   } else if (storeData !== null) {
     console.log("검색 결과 없음");
   } else {
-    fetch(`/menu_e?category=${defaultCategory}`)
+    fetch(`/menu_e?category=${initialCategory}`)
       .then(response => response.json())
       .then(menuData => {
         clearSliderContainer(sliderContainer); // 슬라이더 컨테이너 내용 지우기
@@ -433,10 +397,26 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  // 초기 로드 시 선택된 카테고리에 대한 스타일 설정 10.19시작
+  categories.forEach(category => {
+    const categoryLink = category.querySelector('a');
+    const categoryValue = categoryLink.getAttribute('data-category');
+    if (categoryValue === initialCategory) {
+      category.classList.add(selectedClass);
+    } else {
+      category.classList.remove(selectedClass);
+    }
+  });//10.19끝
+
   categoryLinks.forEach(link => {
     link.addEventListener("click", (event) => {
+
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "block";
+
       event.preventDefault();
       const category = link.getAttribute("data-category");
+      localStorage.setItem('selectedCategory', category); // 선택한 카테고리 저장 10.19추가
 
       categories.forEach(c => c.classList.remove('select_category'));
 
@@ -474,7 +454,7 @@ function handleMenuData(menuData, sliderContainer) {
       currentSlide.className = "slide";
       currentPage++;
     }
-
+    const formattedPrice = new Intl.NumberFormat('ko-KR').format(menu.price);//가격 쉼표 넣기
     const menuHTML = `
       <div class="list_content_box" id="list_click" data-menunum="${menu.menu_num}">
         <div class="box list_img_box">
@@ -484,13 +464,12 @@ function handleMenuData(menuData, sliderContainer) {
           <div class="container text-center">
             <div class="content_title">
               <div class="menu_name">${menu.menu_name}</div>
-              <div class="menu_cost">&#8361;${menu.price}</div>
+              <div class="menu_cost">&#8361;${formattedPrice}</div>
             </div>
           </div>
         </div>
       </div>
     `;
-
     currentSlide.innerHTML += menuHTML;
   });
 
@@ -502,6 +481,7 @@ function handleMenuData(menuData, sliderContainer) {
   selectBtn.forEach(selectBtn => {
     const urlParams = new URLSearchParams(window.location.search);//09.08 수정
     const pickup = urlParams.get('pickup');//09.08 수정
+    const timer = urlParams.get('timer');
 
     selectBtn.addEventListener("click", function (event) {
       console.log("버튼 눌림");
@@ -572,8 +552,7 @@ function searchFunction() {
 
   if (storeData.length === 0) {
     console.log('결과 없음');
-    resultContainer.innerHTML = '<p style="width:100%; font-size: 4vw; text-align: center; padding: 5vh;">검색 결과가 없습니다.<br>다시 검색해 주세요.</p>';
-    localStorage.removeItem('mydata');
+    resultContainer.innerHTML = '<p style="font-size: 4vw; text-align: center; padding: 5vh;">No results were found for your search.<br>Please search again.</p>';    localStorage.removeItem('mydata');
   } else {
     categories.forEach(c => c.classList.remove('select_category'));
 
@@ -616,7 +595,6 @@ function searchFunction() {
   selectBtn.forEach(selectBtn => {
     const urlParams = new URLSearchParams(window.location.search);//09.08 수정
     const pickup = urlParams.get('pickup');//09.08 수정
-
 
     selectBtn.addEventListener("click", function (event) {
       console.log("버튼 눌림");
@@ -671,6 +649,8 @@ function searchFunction() {
   img_select.forEach(img_select => {
     const urlParams = new URLSearchParams(window.location.search);//09.08 수정
     const pickup = urlParams.get('pickup');//09.08 수정
+    const timer = urlParams.get('timer');
+
     img_select.addEventListener("click", function (event) {
       console.log("버튼 눌림");
       const menuNum = event.target.dataset.menunum;//08.24 menu_num을 가져오기 위한
@@ -728,7 +708,7 @@ if (keywordValue) {
   localStorage.removeItem('searchInput'); // 사용한 값은 제거
 }
 
-//네이베이션 아래의 주문 목록
+//현재 주문 목록
 function generateOrderList(orderData) {
   const selectList = document.querySelector('.select_list_list');
   let pay_move = document.querySelector('.pay_move');
@@ -737,7 +717,7 @@ function generateOrderList(orderData) {
 
   if (orderData.length == 0) {
     selectList.innerHTML = `
-    <div class = "none_select_menu">No Order!</div>
+    <div class = "none_select_menu">Not order yet!</div>
     `
     // pay_move 버튼의 클릭 이벤트를 막음
     if (pay_move) {
@@ -755,7 +735,6 @@ function generateOrderList(orderData) {
       pay_button.onclick = function (event) {
         event.preventDefault(); // 클릭 이벤트를 막음
       };
-
       // 배경색 변경
       pay_button.style.color = "#BBBBBB";
       pay_button.style.backgroundColor = "#8c8a8a";
@@ -778,12 +757,11 @@ function generateOrderList(orderData) {
       //크기 옵션
       const selectSize = document.createElement('div');
       selectSize.classList.add('select_size');
-      selectSize.textContent = `${order.op_s === 3 ? 'Basic Size' : 'Big Size'}(${order.op_s === 3 ? '+0' : '+1200'})`;
+      selectSize.textContent = `${order.op_s === 3 ? 'Basic Size' : 'Large Size'}(${order.op_s === 3 ? '+0' : '+1200'})`;
 
       // 추가 옵션
       const selectOp = document.createElement('div');
       selectOp.classList.add('select_op');
-      // selectOp.textContent = `${order.options.length > 1 ? order.options.slice(1).map(op => op.op_name).join(', ') : '추가사항: 없음'}`;//10.08수정
       if (order.options.length > 1) {
         order.options.slice(1).forEach(op => {
           const optionDiv = document.createElement('div');
@@ -825,6 +803,8 @@ function generateOrderList(orderData) {
         selectName.style.color = 'red'; // op_t가 1일 때 빨간색
       } else if (order.op_t === 2) {
         selectName.style.color = 'blue'; // op_t가 2일 때 파란색
+      } else if (order.op_t === 1000) {
+        selectName.style.color = 'black';
       }
 
       const selectNum = document.createElement('div');
@@ -862,6 +842,7 @@ function generateOrderList(orderData) {
 
       selectList.appendChild(selectListDetail);
     });
+    
     //변경 버튼 10.06(이게 끝나면 새로고침 되도록 해줘)
     const updateBtn = document.querySelectorAll(".update_btn");
     updateBtn.forEach(updateBtn => {
@@ -886,7 +867,7 @@ function generateOrderList(orderData) {
         if (order == 'slow') {
           history.pushState(null, null, `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
         } else {
-          history.pushState(null, null, `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+          history.pushState(null, null, `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
         }
         // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
         fetch("http://localhost:3001/detail_menu_e/jojo_o_e.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.
@@ -998,14 +979,156 @@ function generateOrderList(orderData) {
   }
 }
 
-// 페이지 로드 시 주문 목록을 가져와서 생성
-window.addEventListener('load', () => {
-  fetch('/getOrderData_e')  // 서버의 getOrderData 라우트에 요청
+// 총 금액 연결
+let totalAmount = 0;
+// 주문 데이터 가져오기 및 UI 업데이트
+const fetchAndUpdate = () => {
+  fetch('/getOrderData_e')
     .then(response => response.json())
-    .then(orderData => {
-      generateOrderList(orderData);  // 주문 목록 생성 함수 호출
-    })
-    .catch(error => {
+    .then(data => {
+      console.log("Session data:", JSON.stringify(data));
+      totalAmount = calculateTotalAmount(data);
+      updateTotalAmountUI(totalAmount);
+      localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+      generateOrderList(data);
+    }).catch(error => {
       console.error('Error fetching order data:', error);
     });
-});
+};
+
+// 총 금액 계산 함수
+function calculateTotalAmount(orders) {
+  return orders.reduce((total, order) => total + Number(order.total_price), 0);
+}
+
+// 총 금액 UI 업데이트 함수
+function updateTotalAmountUI(amount) {
+  const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);
+  const totalCostElement = document.querySelector('.total_cost');
+  totalCostElement.textContent = '\u20A9 ' + formattedPrice;
+}
+
+// 페이지 로드 시 주문 목록 생성
+window.addEventListener('load', fetchAndUpdate);
+
+//09.10 아래 모두 수정
+function move_checklist() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const pickup = urlParams.get('pickup');//09.08 수정
+  const order = urlParams.get('order');
+  const timer = urlParams.get('timer')
+
+  location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=${order}&timer=${timer}&pickup=${pickup}`;
+}
+
+// 포장 연결
+// 라디오 버튼의 상태가 변경될 때 호출되는 함수를 정의합니다.
+function updateData() {
+  const radioButtons = document.getElementsByName('listGroupRadio');
+  let newParamValue = "";
+
+  if (radioButtons[0].checked) {
+    newParamValue = "1"; // "매장"이 선택된 경우
+  } else if (radioButtons[1].checked) {
+    newParamValue = "2"; // "포장"이 선택된 경우
+  }
+
+  var currentURL = window.location.href;
+  var url = new URL(currentURL);
+  var params = new URLSearchParams(url.search);
+  var timer = params.get("timer");
+
+  if (timer !== null && !isNaN(timer)) {
+    timer = parseInt(timer);
+    timer--; // 타이머를 1씩 감소
+
+    // "pickup" 및 "timer" 파라미터를 업데이트합니다.
+    params.set("pickup", newParamValue);
+    params.set("timer", timer);
+    url.search = params.toString();
+    var newURL = url.toString();
+    // 브라우저 주소 표시줄 업데이트
+    window.history.replaceState({}, document.title, newURL);
+
+    // 타이머가 0이 되면 동작을 원하는 대로 처리
+    if (timer === 0) {
+      document.getElementById("modalContainer_e").innerHTML = "";
+
+      // detail_menu.css를 제거합니다.
+      const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+      if (detailMenuLink) {
+        detailMenuLink.remove();
+      }
+      console.log("타이머가 0이 되었습니다.");
+
+      // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+      fetch(`http://localhost:3001/timeout/timeout.html`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("HTTP Error " + response.status);
+          }
+          return response.text();
+        })
+        .then(data => {
+          // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+          $("#modalContainer_e").html(data);
+
+          // timeout.css 파일을 로드합니다.
+          const linkElement = document.createElement("link");
+          linkElement.rel = "stylesheet";
+          linkElement.type = "text/css";
+          linkElement.href = "http://localhost:3001/timeout/timeout.css";
+          document.head.appendChild(linkElement);
+
+          // 모달을 열기 위한 코드
+          const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+          modal.show();
+
+          const yes = document.querySelector('.btn-primary');
+          yes.addEventListener("click", function () {//180초 추가하기
+            params.set("timer", 180);
+            url.search = params.toString();
+            newURL = url.toString();
+            window.history.replaceState({}, document.title, newURL);
+            location.reload();
+          })
+          const no = document.querySelector('.btn-secondary');
+          no.addEventListener("click", function () {//시작 페이지로 이동
+            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+          })
+
+        })
+        .catch(error => {
+          console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+        });
+    } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+      window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+    }
+  }
+  else {
+    alert("유효한 타이머 시간을 지정하지 않았습니다.");
+  }
+}
+
+// 라디오 버튼의 상태가 변경될 때 updateData 함수를 호출합니다.
+const radioButtons = document.getElementsByName('listGroupRadio');
+for (const radioButton of radioButtons) {
+  radioButton.addEventListener('change', updateData);
+}
+setInterval(updateData, 1000);//10.17 수정 끝
+
+
+// 페이지 로드 시 라디오 버튼 상태를 URL 파라미터에 맞게 설정합니다.
+function checkRadioButton() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderType = urlParams.get('pickup');
+  if (orderType === '1') {
+    radioButtons[1].checked = false;
+    radioButtons[0].checked = true;
+  } else {
+    radioButtons[1].checked = true;
+    radioButtons[0].checked = false;
+  }
+}
+
+window.addEventListener('load', checkRadioButton);
