@@ -20,7 +20,7 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <video autoplay controls style="width:100%;">
-          <source src="./image/basicorder(1).mp4" type="video/mp4">
+          <source src="../help_video/basicorder(1).mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
@@ -36,7 +36,7 @@ joImage.addEventListener("click", function () {
         </section>
 
         <video controls style="width:100%;">
-        <source src="./image/basicorder(2).mp4" type="video/mp4">
+        <source src="../help_video/basicorder(2).mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
@@ -801,7 +801,7 @@ function generateOrderList(orderData) {
       del_btn.classList.add('del_btn');
 
       const del_btn_icon = document.createElement("img");
-      del_btn_icon.src = "./image/delete_black_icon.png";
+      del_btn_icon.src = "../icon_img/delete_black_icon.png";
       del_btn_icon.classList.add('del_btn_icon'); // 'add'를 'classList.add'로 수정
 
       del_btn.appendChild(del_btn_icon);
@@ -890,7 +890,7 @@ function generateOrderList(orderData) {
         if (order == 'slow') {
           history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=slow&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
         } else {
-          history.pushState(null, null, `http://localhost:3001/BigFrame/BigOrder.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
+          history.pushState(null, null, `http://localhost:3001/BasicFrame/BasicOrder.html?order=basic&timer=${timer}&pickup=${pickup}&orderNum=${orderNum}`);
         }
         // 외부 detail_menu 폴더에 있는 jojo.html 파일을 로드하여 모달 컨테이너에 추가합니다.
         fetch("http://localhost:3001/detail_menu/jojo_o.html?orderNum=${orderNum}") // 이 부분의 파일 경로를 수정해야합니다.

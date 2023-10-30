@@ -25,7 +25,7 @@ joImage.addEventListener("click", function () {
         </div>
 
         <video autoplay controls style="width:100%;">
-          <source src="./image/bigorder(1).mp4" type="video/mp4">
+          <source src="../help_video/bigorder(1).mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
@@ -860,7 +860,7 @@ function generateOrderList(orderData) {
       del_btn.classList.add('del_btn');
 
       const del_btn_icon = document.createElement("img");
-      del_btn_icon.src = "./image/delete_black_icon.png";
+      del_btn_icon.src = "../icon_img/delete_black_icon.png";
       del_btn_icon.classList.add('del_btn_icon'); // 'add'를 'classList.add'로 수정
 
       del_btn.appendChild(del_btn_icon);

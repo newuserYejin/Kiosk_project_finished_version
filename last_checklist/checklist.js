@@ -109,7 +109,7 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <video autoplay controls style="width:100%;">
-        <source src="./image/checklist.mp4" type="video/mp4">
+        <source src="../help_video/checklist.mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
@@ -159,7 +159,7 @@ function createOrderItem(order) {//주문 아이템 생성 함수
   <!-- ... (이미지 내용 관련 부분) ... -->
   <div class = "real_content_box">
     <div class="cancel_btn">
-        <img src="./image/delete_black_icon.png" class="deleteBtn" data-orderNum="${order.order_num}">
+        <img src="../icon_img/delete_black_icon.png" class="deleteBtn" data-orderNum="${order.order_num}">
     </div>
     <div class="checklist_box">
     <div class ="checklist_box_inner">

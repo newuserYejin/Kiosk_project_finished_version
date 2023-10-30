@@ -96,7 +96,7 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <video autoplay controls>
-            <source src="./image/checklist_e.mp4" type="video/mp4">
+            <source src="../help_video/checklist_e.mp4" type="video/mp4">
             Please call the administrator
         </video>
 

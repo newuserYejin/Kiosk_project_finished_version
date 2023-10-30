@@ -26,7 +26,7 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
                                 <video autoplay controls>
-                                    <source src="./image/bicorder_e(1).mp4" type="video/mp4">
+                                    <source src="../help_video/bicorder_e(1).mp4" type="video/mp4">
                                     Please call the administrator
                                 </video>
 
@@ -40,7 +40,7 @@ joImage.addEventListener("click", function () {
                                 </section>
 
                                 <video controls>
-                                    <source src="./image/bigorder_e(2).mp4" type="video/mp4">
+                                    <source src="../help_video/bigorder_e(2).mp4" type="video/mp4">
                                     Please call the administrator
                                 </video>
 

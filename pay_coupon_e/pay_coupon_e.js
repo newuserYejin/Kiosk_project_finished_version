@@ -26,7 +26,7 @@ const joImage = document.getElementById("imageLink");
                         const modalBody = document.querySelector(".modal-body");
                         modalBody.innerHTML = `
         <video autoplay controls>
-            <source src="./image/paycoupon_e.mp4" type="video/mp4">
+            <source src="../help_video/paycoupon_e.mp4" type="video/mp4">
             Please call the administrator
         </video>
 

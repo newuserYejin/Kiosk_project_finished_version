@@ -20,7 +20,7 @@ joImage.addEventListener("click", function () {
         const modalBody = document.querySelector(".modal-body");
         modalBody.innerHTML = `
         <video autoplay controls>
-        <source src="./image/paycard.mp4" type="video/mp4">
+        <source src="../help_video/paycard.mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
