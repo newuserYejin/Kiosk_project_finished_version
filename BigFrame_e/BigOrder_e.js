@@ -13,19 +13,30 @@ joImage.addEventListener("click", function () {
       }
       return response.text();
     })
-    .then(data => {
+    .then(data => {    
+
       // 모달 컨테이너에 help_msg.html 콘텐츠를 추가합니다.
       modalContainer_e.innerHTML = data;
+
+      const modalTitle = document.querySelector(".modal-title");
+      if (modalTitle) {
+        modalTitle.textContent = "Help"; // "help"로 변경
+      }
+
+      const close_btn = document.querySelector(".help_close");
+      if (close_btn) {
+          close_btn.textContent = "Close";
+      }
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <div class="help_button">
-            <button class="help_msg_btn_check" onclick="open_help('bigorder_e_1',this)">Number 1</button>
-            <button onclick="open_help('bigorder_e_2',this)">Number 2</button>
-            <button onclick="open_help('bigorder_e_3',this)">Number 3</button>
+            <button class="help_msg_btn_check" onclick="open_help('bigorder_e_1',this)">Order</button>
+            <button onclick="open_help('bigorder_e_2',this)">Search</button>
+            <button onclick="open_help('bigorder_e_3',this)">Navigation</button>
         </div>
 
-        <video autoplay controls style="width:100%;">
+        <video autoplay controls style="width:100%; margin-bottom:0;">
           <source src="../help_video/bigorder_e(1).mp4" type="video/mp4">
           Please call the administrator.
         </video>
@@ -36,7 +47,7 @@ joImage.addEventListener("click", function () {
         1. Select a category, then select a menu.<br>
         2. Please select the number, temperature, size, and additional options on the detailed menu screen.<br>
         3. Click 'Add' to add the selected menu to the order list.<br>
-        4. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
+        4. Since the temperature was selected as 'hot', you can see that it is added as 'red lettering'.<br>
         => (If you have chosen Cold, you will be added blue and the dessert will be added black.)<br>
         5. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
         6. You can delete the menu by pressing 'x' in the order list.<br>

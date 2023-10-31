@@ -20,23 +20,22 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <div class="help_button">
-            <button class="help_msg_btn_check" onclick="open_help('bigorder_1',this)">1번</button>
-            <button onclick="open_help('bigorder_2',this)">2번</button>
-            <button onclick="open_help('bigorder_3',this)">3번</button>
+            <button class="help_msg_btn_check" onclick="open_help('bigorder_1',this)">주문</button>
+            <button onclick="open_help('bigorder_2',this)">검색</button>
+            <button onclick="open_help('bigorder_3',this)">네비게이션</button>
         </div>
 
-        <video autoplay controls style="width:100%;">
+        <video autoplay controls style="width:100%; margin-bottom:0;">
           <source src="../help_video/bigorder(1).mp4" type="video/mp4">
             관리자를 호출해주세요.
         </video>
 
         <section class="content_explain" style="height: 50%;">
-
         &lt;메뉴 주문&gt;<br>
         1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
         2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
         3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
-        4. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+        4. 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
         => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
         5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
         6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
@@ -1034,14 +1033,14 @@ function generateOrderList(orderData) {
             modal.show();
 
             // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
-            const confirmButton = document.querySelector('.btn-primary');
+            const confirmButton = document.querySelector('.btn-secondary');
             confirmButton.addEventListener("click", function () {
               console.log("확인 버튼 눌림");
               // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
               deleteOrder(orderNum);
             });
 
-            const cancelButton = document.querySelector('.btn-secondary');
+            const cancelButton = document.querySelector('.btn-primary');
             cancelButton.addEventListener("click", function () {
               console.log("취소 버튼 눌림");
               // "취소" 버튼이 클릭되면 모달 닫기
