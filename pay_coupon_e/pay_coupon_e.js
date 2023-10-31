@@ -36,10 +36,15 @@ const joImage = document.getElementById("imageLink");
         </video>
 
         <section class="content_explain">
-        1. If you want to go back to the previous screen, press 'PREVIOUS screen'<br>
-        2. If you want to return to order, please press Return to Order.<br>
-        3. You can move 'Select Menu' and 'Check Order' using the left navigation.<br>
-        4. Don't be surprised if the message pops up! It's a payment completed message. Please wait for the following order number confirmation screen.<br>
+        1. Please pay by copying the video on the screen.<br>
+        2. Click 'Previous' to go to the card and coupon selection screen.<br>
+        3. Click 'Return to order' to go to the final order list screen.<br>
+        4. Click the 'Choose' step in the navigation at the top to go to the menu order screen.<br>
+        5. Click the 'Check' step to go to the final order list screen.<br>
+        6. Click 'Pay' to go to the payment method selection screen.<br>
+        7. Click 'Previous' at the bottom to go to the payment method selection screen.<br>
+        8. Click 'Home' to go to the first screen.<br>
+        9. Don't be surprised if the message pops up! It's a payment completed message. Please wait for the following order number confirmation screen.<br>
         (The screen that follows after selecting each button may be different from the image.)
         </section>
         `;

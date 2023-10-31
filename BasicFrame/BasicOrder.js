@@ -19,38 +19,32 @@ joImage.addEventListener("click", function () {
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
-        <video autoplay controls style="width:100%;">
-          <source src="../help_video/basicorder(1).mp4" type="video/mp4">
-            관리자를 호출해주세요.
-        </video>
+      <div class="help_button">
+        <button class="help_msg_btn_check" onclick="open_help('basicorder_1',this)">1번</button>
+        <button onclick="open_help('basicorder_2',this)">2번</button>
+        <button onclick="open_help('basicorder_3',this)">3번</button>
+      </div>
 
-        <section class="content_explain" style="height: 50%;">
+      <video autoplay controls style="width:100%;">
+        <source src="../help_video/basicorder(1).mp4" type="video/mp4">
+        관리자를 호출해주세요.
+      </video>
 
-             1. 원하시는 메뉴를 선택하시면 상세 메뉴창이 나타납니다. <br>
-             => 제품 수량과 선택사항 수정이 가능합니다.<br>
-             2. 카테고리를 이용하면 더욱 다양한 메뉴를 만날 수 있습니다.<br>
-             3. 상품 검색을 이용해 특정 메뉴를 찾을 수 있습니다.<br>
-             => 키워드를 이용한 검색도 가능합니다.<br>
-             4. 상단의 버튼을 통해 다른 구조의 메뉴창을 만날 수 있습니다.
+      <section class="content_explain" style="height: 50%;">
 
-        </section>
-
-        <video controls style="width:100%;">
-        <source src="../help_video/basicorder(2).mp4" type="video/mp4">
-            관리자를 호출해주세요.
-        </video>
-
-        <section class="content_explain"style="height: 50%;">
-
-              1. 왼쪽의 '주문 확인'을 이용하시면 선택한 메뉴의 목록을 확인할 수 있습니다.<br>
-              2. '최종 결제'를 이용하시면 주문 목록 확인 없이 결제로 넘어갈 수 있습니다.<br>
-              &lt;현재 주문 목록 설명&gt;<br>
-              3. 주문 내역이 따뜻한것이면 빨간색, 차가운거면 파란색, 온도 선택이 없으면 검은색으로 나타납니다.<br>
-              4. 현재 주문 목록을 선택하면 메뉴 수정이 가능한 화면으로 이동합니다.<br>
-              (각 선택에 이어지는 화면은 영상과 다를 수 있습니다.)
-
-        </section>
-        `;
+      &lt;메뉴 주문&gt;<br>
+      1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
+      2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
+      3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
+      4. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+      => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
+      5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
+      6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
+      7. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
+      8. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
+      9. '다음으로'를 누르시면 최종 주문 목록 화면으로 이동합니다. <br>
+      </section>
+      `;
 
       // help_msg.css 파일을 로드합니다.
       const linkElement = document.createElement("link");
@@ -58,6 +52,11 @@ joImage.addEventListener("click", function () {
       linkElement.type = "text/css";
       linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
       document.head.appendChild(linkElement);
+
+      // 외부 js 파일을 로드합니다.
+      const scriptElement = document.createElement("script");
+      scriptElement.src = "http://localhost:3001/help_msg/help_msg.js"; // 이 부분의 파일 경로를 수정해야합니다.
+      document.body.appendChild(scriptElement);
 
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
       modal.show();

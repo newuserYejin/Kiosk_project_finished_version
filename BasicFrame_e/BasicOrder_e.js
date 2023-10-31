@@ -14,52 +14,36 @@ joImage.addEventListener("click", function () {
       return response.text();
     })
     .then(data => {
-      // modalContainer_e에 help_msg.html 콘텐츠를 추가합니다.
-      // 모달 제목을 찾아서 변경
-      document.getElementById("modalContainer_e").innerHTML = data;
-
-      const modalTitle = document.querySelector(".modal-title");
-      if (modalTitle) {
-        modalTitle.textContent = "Help"; // "help"로 변경
-      }
-
-      const close_btn = document.querySelector(".help_close");
-      if (close_btn) {
-          close_btn.textContent = "Close";
-      }
+      // 모달 컨테이너에 help_msg.html 콘텐츠를 추가합니다.
+      modalContainer_e.innerHTML = data;
 
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
-                                <video autoplay controls>
-                                    <source src="../help_video/basicorder_e(1).mp4" type="video/mp4">
-                                    Please call the administrator
-                                </video>
+        <div class="help_button">
+            <button class="help_msg_btn_check" onclick="open_help('basicorder_e_1',this)">Number 1</button>
+            <button onclick="open_help('basicorder_e_2',this)">Number 2</button>
+            <button onclick="open_help('basicorder_e_3',this)">Number 3</button>
+        </div>
 
-                                <section class="content_explain" style="height: 50%;">
-                                    1. If you choose the menu you want, the detailed menu window will appear.
-                                    => Product quantity and options can be modified.<br>
-                                    2. If you use categories, you can meet more diverse menus.<br>
-                                    3. You can find specific menus using product search.<br>
-                                    You can also search using => keywords.<br>
-                                    4. You can meet a menu window with a different structure through the buttons at the top.
-                                </section>
+        <video autoplay controls style="width:100%;">
+          <source src="../help_video/basicorder_e(1).mp4" type="video/mp4">
+          Please call the administrator.
+        </video>
 
-                                <video controls>
-                                    <source src="../help_video/basicorder_e(2).mp4" type="video/mp4">
-                                    Please call the administrator
-                                </video>
+        <section class="content_explain" style="height: 50%;">
 
-                                <section class="content_explain" style="height: 50%;">
-
-                                    1. You can check the list of selected menus by using 'Check Order' on the left.<br>
-                                    2. If you use 'Final Payment', you can proceed to the payment without checking the order list.<br>
-                                    &lt;Order List&gt;<br>
-                                    3. The order history appears in red if it is warm, blue if it is cold, and black if there is no temperature selection.<br>
-                                    4. Selecting the current order list will take you to the screen where you can modify the menu.<br>
-                                    (The screen that follows each selection may differ from the image.)
-
-                                </section>
-                                `;
+        &lt;Menu Order&gt;<br>
+        1. Select a category, then select a menu.<br>
+        2. Please select the number, temperature, size, and additional options on the detailed menu screen.<br>
+        3. Click 'Add' to add the selected menu to the order list.<br>
+        4. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
+        => (If you have chosen Cold, you will be added blue and the dessert will be added black.)<br>
+        5. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
+        6. You can delete the menu by pressing 'x' in the order list.<br>
+        7. Click 'Options' to change the number, temperature, size, and additional options.<br>
+        8. Click 'Paying' to go to the payment method selection screen.<br>
+        9. Click 'Next' to go to the final order list screen.<br>
+        `;
 
       // help_msg.css 파일을 로드합니다.
       const linkElement = document.createElement("link");
@@ -67,6 +51,11 @@ joImage.addEventListener("click", function () {
       linkElement.type = "text/css";
       linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
       document.head.appendChild(linkElement);
+
+      // 외부 js 파일을 로드합니다.
+      const scriptElement = document.createElement("script");
+      scriptElement.src = "http://localhost:3001/help_msg/help_msg.js"; // 이 부분의 파일 경로를 수정해야합니다.
+      document.body.appendChild(scriptElement);
 
       const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
       modal.show();
