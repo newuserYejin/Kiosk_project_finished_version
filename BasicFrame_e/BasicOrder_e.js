@@ -141,7 +141,7 @@ all_delete.forEach(AdeleteBtn => {
         const linkElement = document.createElement("link");
         linkElement.rel = "stylesheet";
         linkElement.type = "text/css";
-        linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
+        linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
         document.head.appendChild(linkElement);
 
         // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.

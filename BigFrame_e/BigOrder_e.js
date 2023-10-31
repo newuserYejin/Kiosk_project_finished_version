@@ -144,6 +144,11 @@ function firstScreen() {
     detailMenuLink.remove();
   }
 
+  const detailMenuLink_o = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_o_e.css"]');
+  if (detailMenuLink_o) {
+    detailMenuLink_o.remove();
+  }
+
   fetch(`http://localhost:3001/all_delete_msg/all_delete_msg_e.html`)//전체 취소 관련 html로 변경 바람
     .then(response => {
       if (!response.ok) {

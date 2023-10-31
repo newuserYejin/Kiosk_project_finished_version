@@ -40,16 +40,16 @@
 
         });
         // 클릭 이벤트가 없을 경우 8초 후에 페이지 이동
-        // function startTimer() {
-        //   timeoutId = setTimeout(function () {
-        //     location.href = 'http://localhost:3001/selectorder/selectorder.html'; // 10초 후에 첫 페이지로 이동
-        //   }, 10000);
-        // }
+        function startTimer() {
+          timeoutId = setTimeout(function () {
+            location.href = 'http://localhost:3001/selectorder/selectorder.html'; // 10초 후에 첫 페이지로 이동
+          }, 10000);
+        }
 
         // 모달 창이 열렸을 때 타이머 시작
         startTimer();
 
-        const yesButton = document.getElementById('yesButton');
+        // const yesButton = document.getElementById('yesButton'); //big이나 basic에서 선언 중
 
         function AllDelete() {
                 // DELETE 요청 보내는 코드 작성
