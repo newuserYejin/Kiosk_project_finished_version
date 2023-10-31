@@ -106,13 +106,15 @@ joImage.addEventListener("click", function () {
         </video>
 
         <section class="content_explain">
-        1. If you want to modify your order, please press 'Modify' to modify it and save it as 'Save'.
-        => Product quantity and additions can be modify. <br>
-        2. If you delete an order history, you will be notified of the deletion<br>
-        => If you want to delete it, press 'Cancel' if you don't want to.<br>
-        3. Packaging can be modified at the top.<br>
-        4. The bottom button allows you to move to the previous screen, the first screen, and the next screen.<br>
-        5. You can use the navigation on the left to go to the menu order screen and payment screen.<br>
+        1. You can check the menu on the order list before payment.<br>
+        2. Click 'Edit' to change the number, temperature, size, and addition.<br>
+        3. You can delete the menu by pressing 'x' on the right.<br>
+        4. You can change the 'Take Out' and 'Eat and Go' selection you see on the right.<br>
+        5. Click 'Choose' in the navigation shown at the top to go to the menu order screen.<br>
+        6. Click 'Pay' to go to the card and coupon selection screen.<br>
+        7. Click 'Prevoius' at the bottom to go to the menu order screen.<br>
+        8. Click 'Going to pay' to go to the card and coupon selection screen.<br>
+        9. Click 'Home' to go to the first screen.<br>
         (The screen that follows each selection may differ from the image.)
         </section>
         `;
