@@ -384,16 +384,16 @@ function addOrdersToDOM(orders) {
           // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
           const confirmButton = document.querySelector('.btn-primary');
           confirmButton.addEventListener("click", function () {
-            console.log("확인 버튼 눌림");
-            // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
-            deleteOrder(orderNum);
+            console.log("취소 버튼 눌림");
+            // "취소" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+            modal.hide();
           });
 
           const cancelButton = document.querySelector('.btn-secondary');
           cancelButton.addEventListener("click", function () {
-            console.log("취소 버튼 눌림");
-            // "취소" 버튼이 클릭되면 모달 닫기
-            modal.hide();
+            console.log("확인 버튼 눌림");
+            // "확인" 버튼이 클릭되면 모달 닫기
+            deleteOrder(orderNum);
           });
         })
         .catch(error => {
