@@ -447,11 +447,19 @@
     border: solid 1px black;
 }
 
+#modalContainer .list-group-item #t_secondRadioContainer .t_Radio2 {
+    color: blue;
+}
+
 #modalContainer .list-group-item [type="radio"]:checked + label{
     background-color: white;
     color: #E70A0A;
     border: solid 2px #E70A0A;
     border-radius: 10px;
+}
+
+#modalContainer .list-group-item [type="radio"]:nth-child(2):checked + label {
+    color: blue;
 }
 
 #modalContainer .list-group-item [type="radio"]:disabled + label{
@@ -491,9 +499,9 @@
     width: 100%;
 }
 
-#modalContainer .list-group-item [type="checkbox"]:checked{
+/* #modalContainer .list-group-item [type="checkbox"]:checked{
     background-color: red;
-}
+} */
 
 #modalContainer .list-group-item [type="checkbox"]:checked + label{
     font-size: 3vw;
@@ -573,13 +581,9 @@
 } */
 
 
-#modalContainer .t_Radio1{
+/* #modalContainer .t_Radio1{
     color: red;
-}
-
-#modalContainer .t_Radio2{
-    color: blue;
-}
+} */
 
 #modalContainer .disabled-label {
     color: gray;
