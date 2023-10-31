@@ -249,7 +249,7 @@ function renderMenuDetail(menuData) {
         falseoption = "기본 크기";
       }
 
-      const imageSrc = option_t === "red" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"; // 이미지 경로 설정
+      // const imageSrc = option_t === "red" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"; // 이미지 경로 설정
       console.log(option_t);
 
       const speechBubble = document.querySelector('.size');
@@ -257,26 +257,25 @@ function renderMenuDetail(menuData) {
 
       speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
 
-      // 라디오 버튼 요소들을 선택
-      const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
+      // // 라디오 버튼 요소들을 선택
+      // const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
 
-      radioInputs.forEach(input => {
-        input.addEventListener('change', function () {
-          const label = this.nextElementSibling; // 라디오 버튼 다음에 위치한 label 요소 선택
-          const checkedAttribute = this.checked ? "checked" : "";
+      // radioInputs.forEach(input => {
+      //   input.addEventListener('change', function () {
+      //     const label = this.nextElementSibling; // 라디오 버튼 다음에 위치한 label 요소 선택
+      //     const checkedAttribute = this.checked ? "checked" : "";
 
-          // 선택된 라디오 버튼에 대해서만 color와 border-color 스타일 변경
-          label.style.color = checkedAttribute ? option_t : "initial";
-          label.style.borderColor = checkedAttribute ? option_t : "initial";
-        });
-      });
+      //     // 선택된 라디오 버튼에 대해서만 color와 border-color 스타일 변경
+      //     label.style.color = checkedAttribute ? option_t : "initial";
+      //     label.style.borderColor = checkedAttribute ? option_t : "initial";
+      //   });
+      // });
 
       optionList.innerHTML = sizeOptions
         .map(option => {
           const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
           return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
           <label class="form-check-label" for="${option.op_name}">${option.op_name} (+${option.op_price}원)
-          <img src="${imageSrc}" />
           </label></li>
           `;
         })
@@ -285,7 +284,6 @@ function renderMenuDetail(menuData) {
       if (!hasRegular || !hasLarge) {
         optionList.innerHTML += `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="size"  id="falseoption" value="${falseoption}" disabled="true">
         <label class="form-check-label" for="falseoption" onclick=show_qr('s')> ${falseoption} (+0원)
-        <img src="${imageSrc}" />
         </label></li>`;
         // "큰 크기"이나 "기본 크기" 중 하나만 없는 경우
 
