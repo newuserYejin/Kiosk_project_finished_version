@@ -1,8 +1,8 @@
 @import url('../Pretendard-1.3.8/web/static/pretendard.css');
 
 #modalContainer_e .modal {
-    width: 100%;
-    height: 98%;
+    width: 100vw;
+    height: 98vh;
     font-family: 'Pretendard';
 
     display: flex;

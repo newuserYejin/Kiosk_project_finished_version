@@ -20,12 +20,12 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
       <div class="help_button">
-        <button class="help_msg_btn_check" onclick="open_help('basicorder_1',this)">1번</button>
-        <button onclick="open_help('basicorder_2',this)">2번</button>
-        <button onclick="open_help('basicorder_3',this)">3번</button>
+        <button class="help_msg_btn_check" onclick="open_help('basicorder_1',this)">주문</button>
+        <button onclick="open_help('basicorder_2',this)">검색</button>
+        <button onclick="open_help('basicorder_3',this)">네비게이션</button>
       </div>
 
-      <video autoplay controls style="width:100%;">
+      <video autoplay controls style="width:100%; margin-bottom:0;">
         <source src="../help_video/basicorder(1).mp4" type="video/mp4">
         관리자를 호출해주세요.
       </video>
@@ -36,7 +36,7 @@ joImage.addEventListener("click", function () {
       1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
       2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
       3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
-      4. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+      4. 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
       => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
       5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
       6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
