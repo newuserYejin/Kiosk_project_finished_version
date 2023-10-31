@@ -83,6 +83,12 @@
     background-color: white;
 }
 
+#modalContainer .help_button .help_msg_btn_check{
+    background-color: #007AC2;
+    border: solid 2px #007AC2;
+    color: white;
+}
+
 #modalContainer .modal-body *{
     font-size: 3.5vw;
     font-weight: 400;

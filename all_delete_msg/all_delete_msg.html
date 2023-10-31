@@ -37,47 +37,48 @@
         document.addEventListener("DOMContentLoaded", function () {
             const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
             modal.show();
-
+    
         });
+    
         // 클릭 이벤트가 없을 경우 8초 후에 페이지 이동
-        // function startTimer() {
-        //   timeoutId = setTimeout(function () {
-        //     location.href = 'http://localhost:3001/selectorder/selectorder.html'; // 10초 후에 첫 페이지로 이동
-        //   }, 10000);
-        // }
-
+        function startTimer() {
+          timeoutId = setTimeout(function () {
+            location.href = 'http://localhost:3001/selectorder/selectorder.html'; // 10초 후에 첫 페이지로 이동
+          }, 10000);
+        }
+    
         // 모달 창이 열렸을 때 타이머 시작
         startTimer();
-
-        const yesButton = document.getElementById('yesButton');
-
+    
+        // const yesButton = document.getElementById('yesButton'); // 이 부분 제거
+    
         function AllDelete() {
-                // DELETE 요청 보내는 코드 작성
-                fetch("http://localhost:3001/reset", {
-                    method: "POST", // 또는 GET 요청으로 변경할 수 있습니다.
+            // DELETE 요청 보내는 코드 작성
+            fetch("http://localhost:3001/reset", {
+                method: "POST", // 또는 GET 요청으로 변경할 수 있습니다.
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // 초기화 작업 완료 후 실행할 코드를 여기에 추가합니다.
+                    console.log(data.message); // 서버 응답 메시지 출력 예제
+                    location.reload();
                 })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        // 초기화 작업 완료 후 실행할 코드를 여기에 추가합니다.
-                        console.log(data.message); // 서버 응답 메시지 출력 예제
-                        location.reload();
-                    })
-                    .catch((error) => {
-                        console.error("Error reset data:", error);
-                    });
-            }
-        
+                .catch((error) => {
+                    console.error("Error reset data:", error);
+                });
+        }
+    
         // yesButton.addEventListener('click', function () {
-
+    
         // })
-
+    
         // const cancleButton = document.getElementById('cancleButton');
-
+    
         // cancleButton.addEventListener('click', function () {
         //     location.href = 'http://localhost:3001/selectorder/selectorder.html'; //처음 화면으로 이동
         // })
     </script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
