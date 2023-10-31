@@ -50,6 +50,10 @@
     height: 39.3%;
 }
 
+#modalContainer .modal-body p{
+    text-align: start;
+}
+
 #modalContainer .modal-body *{
     font-size: 3vw;
     font-weight: 400;

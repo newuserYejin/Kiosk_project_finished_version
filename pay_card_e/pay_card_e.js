@@ -145,6 +145,7 @@ if (total_cost !== null) {//10.09 쉼표 넣기
     const totalCostElement = document.querySelector('.total_cost');
     totalCostElement.textContent = '\u20A9 ' + formattedPrice;
 }
+
 // function showMessageAndRedirect() {
 //     setTimeout(function() {
 //         alert("3초 후에 페이지가 이동됩니다.");

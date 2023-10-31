@@ -13,6 +13,11 @@
     font-weight: normal;
 }
 
+.modal-body p{
+    width: 100%;
+    text-align: start;
+}
+
 #modalContainer .fs-5{
     font-size: 4vw!important;
     font-weight: bold;
