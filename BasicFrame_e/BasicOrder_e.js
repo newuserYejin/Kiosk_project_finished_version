@@ -361,7 +361,7 @@ sizeButtons.forEach(button => {
         if (currentOrder === 'slow') {
           window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`;
         } else if (currentOrder === 'basic') {
-          window.location.href = `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
+          window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`;
         }
         break;
       default:
