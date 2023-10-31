@@ -20,8 +20,8 @@ joImage.addEventListener("click", function () {
       const modalBody = document.querySelector(".modal-body");
       modalBody.innerHTML = `
         <div class="help_button">
-            <button onclick="open_help('bigorder_1')">1번</button>
-            <button onclick="open_help('bigorder_2')">2번</button>
+            <button class="help_msg_btn_check" onclick="open_help('bigorder_1',this)">1번</button>
+            <button onclick="open_help('bigorder_2',this)">2번</button>
         </div>
 
         <video autoplay controls style="width:100%;">

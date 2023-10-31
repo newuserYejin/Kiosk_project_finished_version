@@ -1,9 +1,18 @@
-function open_help(video) {
+function open_help(video, button) {
     const modalBody = document.querySelector(".modal-body"); // modalBody를 찾음
     const videoElement = modalBody.querySelector("video");
     const videoSource = modalBody.querySelector("source");
     const video_explan = modalBody.querySelector(".content_explain"); // modalBody 내에서 .content_explain을 찾음
 
+    // 'help_msg_btn_check' 클래스를 가지고 있는 모든 버튼에서 해당 클래스를 제거
+    const buttons = document.querySelectorAll('.help_button button');
+    buttons.forEach(btn => {
+        btn.classList.remove('help_msg_btn_check');
+    });
+    
+    // 클릭된 버튼에 'help_msg_btn_check' 클래스를 추가
+    button.classList.add('help_msg_btn_check');
+        
     switch (video) {
         case 'bigorder_1':
             videoSource.src = "../help_video/bigorder(1).mp4";
