@@ -13,7 +13,7 @@ joImage.addEventListener("click", function () {
       }
       return response.text();
     })
-    .then(data => {    
+    .then(data => {
 
       // 모달 컨테이너에 help_msg.html 콘텐츠를 추가합니다.
       modalContainer_e.innerHTML = data;
@@ -25,7 +25,7 @@ joImage.addEventListener("click", function () {
 
       const close_btn = document.querySelector(".help_close");
       if (close_btn) {
-          close_btn.textContent = "Close";
+        close_btn.textContent = "Close";
       }
 
       const modalBody = document.querySelector(".modal-body");
@@ -1115,7 +1115,12 @@ function updateData() {
         })
         .then(data => {
           // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
-          $("#modalContainer_e").html(data);
+          modalContainer_e.innerHTML = data;
+
+          const modalTitle = document.querySelector(".modal-title");
+          if (modalTitle) {
+              modalTitle.textContent = "Confirmation message"; // "help"로 변경
+          }
 
           // timeout.css 파일을 로드합니다.
           const linkElement = document.createElement("link");
@@ -1124,11 +1129,25 @@ function updateData() {
           linkElement.href = "http://localhost:3001/timeout/timeout.css";
           document.head.appendChild(linkElement);
 
+          const modalBody = document.querySelector(".modal-body");
+          modalBody.innerHTML = `
+          <p class="content_font_size">
+              The first set order time has ended.<br>
+              Would you like to continue ordering?<br>
+              Example: Continue order (time added).)<br>
+              No : Stop ordering<br>
+              (Order history completely disappears!!!!) 
+          </p>
+              `;
+
           // 모달을 열기 위한 코드
           const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
           modal.show();
 
           const yes = document.querySelector('.btn-primary');
+          if (yes) {
+            yes.textContent = "Yes";
+          }
           yes.addEventListener("click", function () {//180초 추가하기
             params.set("timer", 180);
             url.search = params.toString();
@@ -1137,6 +1156,9 @@ function updateData() {
             location.reload();
           })
           const no = document.querySelector('.btn-secondary');
+          if (no) {
+            no.textContent = "No";
+          }
           no.addEventListener("click", function () {//시작 페이지로 이동
             window.location.href = "http://localhost:3001/selectorder/selectorder.html";
           })
