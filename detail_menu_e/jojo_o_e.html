@@ -84,7 +84,8 @@
                                         <!-- 온도 옵션 -->
                                         <div class="option_name_box_t">
                                             <p class="option_name">Temperature Option</p>
-                                            <img src="../icon_img/question.svg" onclick="show_qr('t')" style="width: 4vw; height: 4vw;"/> <!--물음표-->
+                                            <img src="../icon_img/question.svg" onclick="show_qr('t')"
+                                                style="width: 4vw; height: 4vw;" /> <!--물음표-->
                                             <div class="speech-bubble temp" style="visibility: hidden;">
                                                 <div>content</div>
                                             </div>
@@ -102,7 +103,7 @@
                                                 style="display: none;">
                                                 <input class="form-check-input me-1" type="radio" name="temperature"
                                                     value="2" id="t_secondRadio">
-                                                <label class="form-check-label t_Radio2" for="t_secondRadio" >Cold (+0)
+                                                <label class="form-check-label t_Radio2" for="t_secondRadio">Cold (+0)
                                                     <img src="../icon_img/ice_drink.png" />
                                                 </label>
                                             </li>
@@ -114,7 +115,8 @@
                                     <div class="option_inner_bow">
                                         <div class="option_name_box_s">
                                             <p class="option_name">Size Option</p>
-                                            <img src="../icon_img/question.svg" onclick="show_qr('s')" style="width: 4vw; height: 4vw;"/>
+                                            <img src="../icon_img/question.svg" onclick="show_qr('s')"
+                                                style="width: 4vw; height: 4vw;" />
                                             <div class="speech-bubble size" style="visibility: hidden;">
                                                 <div>content</div>
                                             </div>
@@ -191,7 +193,8 @@
                     <div class="modal-footer">
                         <div class="jojo_bottom_box">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-secondary btn-info save_btn" data-dismiss="modal">save</button>
+                            <button type="button" class="btn btn-secondary btn-info save_btn"
+                                data-dismiss="modal">save</button>
                         </div>
                     </div>
                 </div>
@@ -251,24 +254,24 @@
                             // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
                             modalContainer_e.innerHTML = data;
 
-                            const modalTitle = document.querySelector(".modal-title");
-                            if (modalTitle) {
-                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
-                            }
-
                             // timeout.css 파일을 로드합니다.
                             const linkElement = document.createElement("link");
                             linkElement.rel = "stylesheet";
                             linkElement.type = "text/css";
-                            linkElement.href = "http://localhost:3001/timeout/timeout.css";
+                            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
                             document.head.appendChild(linkElement);
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
 
                             const modalBody = document.querySelector(".modal-body");
                             modalBody.innerHTML = `
                             <p class="content_font_size">
                                 The first set order time has ended.<br>
                                 Would you like to continue ordering?<br>
-                                Example: Continue order (time added).)<br>
+                                Yes: Continue order (time added).)<br>
                                 No : Stop ordering<br>
                                 (Order history completely disappears!!!!) 
                             </p>

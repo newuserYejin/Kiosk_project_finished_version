@@ -52,7 +52,7 @@
             <div class="selectpay">
                 <div class="first">
                     <div class="title">
-                        <img src="../icon_img/cardpay_mark.png"/>
+                        <img src="../icon_img/cardpay_mark.png" />
                         Paying
                     </div>
 
@@ -168,24 +168,24 @@
                             // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
                             modalContainer_e.innerHTML = data;
 
-                            const modalTitle = document.querySelector(".modal-title");
-                            if (modalTitle) {
-                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
-                            }
-
                             // timeout.css 파일을 로드합니다.
                             const linkElement = document.createElement("link");
                             linkElement.rel = "stylesheet";
                             linkElement.type = "text/css";
-                            linkElement.href = "http://localhost:3001/timeout/timeout.css";
+                            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
                             document.head.appendChild(linkElement);
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
 
                             const modalBody = document.querySelector(".modal-body");
                             modalBody.innerHTML = `
                             <p class="content_font_size">
                                 The first set order time has ended.<br>
                                 Would you like to continue ordering?<br>
-                                Example: Continue order (time added).)<br>
+                                Yes: Continue order (time added).)<br>
                                 No : Stop ordering<br>
                                 (Order history completely disappears!!!!) 
                             </p>
