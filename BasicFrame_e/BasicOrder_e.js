@@ -264,7 +264,7 @@ function firstScreen() {
       const linkElement = document.createElement("link");
       linkElement.rel = "stylesheet";
       linkElement.type = "text/css";
-      linkElement.href = "http://localhost:3001/payment_msg/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
+      linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css"; // 이 부분의 파일 경로를 수정해야합니다.
       document.head.appendChild(linkElement);
 
       // 모달을 열기 위한 코드
@@ -1074,7 +1074,7 @@ function updateData() {
           const linkElement = document.createElement("link");
           linkElement.rel = "stylesheet";
           linkElement.type = "text/css";
-          linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+          linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
           document.head.appendChild(linkElement);
 
           const modalTitle = document.querySelector(".modal-title");
