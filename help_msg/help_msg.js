@@ -17,40 +17,38 @@ function open_help(video, button) {
         case 'bigorder_1':
             videoSource.src = "../help_video/bigorder(1).mp4";
             video_explan.innerHTML = `
-            &lt;메뉴 주문&gt;<br>
+            <br>
             1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
-            2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
-            3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
-            4. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+            2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택하고 '담기'를 눌러주세요.<br>
+            3. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
             => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
-            5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
-            6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
-            7. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
-            8. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
-            9. '다음으로'를 누르시면 최종 주문 목록 화면으로 이동합니다. <br>
+            4. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
+            5. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
+            6. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
+            7. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
             `;
             break;
         case 'bigorder_2':
             videoSource.src = "../help_video/bigorder(2).mp4";
             video_explan.innerHTML = `
-            &lt;검색&gt;<br>
+            <br>
             1. 검색을 하실 경우 검색 바를 눌러주세요.<br>
             2. 검색은 3가지 방법으로 가능합니다. '초코 라떼'를 검색해보겠습니다.<br>
             3. 먼저 추천 검색어(키워드)를 선택하는 방법입니다.<br>
             4. '초코'를 누르시면 초코가 들어간 모든 메뉴가 검색 됩니다.<br>
             5. 다음은 음성인식 방법입니다.<br>
             6. '마이크 버튼'을 누르시고 '초코'를 말씀해주세요.<br>
-            7. 음성인식 결과에 초코가 제대로 떴다면 검색하기를 눌러주세요.<br>
+            7. 음성인식 결과에 초코가 제대로 떴다면 '검색하기'ㄴ를 눌러주세요.<br>
             => (제대로 음성인식이 되지 않았다면 다시 음성인식을 해주세요.)<br>
             8. 다음은 키보드를 눌러 검색하는 방법입니다.<br>
-            9. 초코를 입력하여 돋보기 버튼을 눌러주세요.<br>
+            9. '초코'를 입력하여 돋보기 버튼을 눌러주세요.<br>
             (각 선택에 이어지는 화면은 영상과 다를 수 있습니다.)
             `;
             break;
         case 'bigorder_3':
             videoSource.src = "../help_video/bigorder(3).mp4";
             video_explan.innerHTML = `
-            &lt;버튼&gt;<br>
+            <br>
             1. 상단에 보이는 네비게이션을 통해 어느 단계에 있는지 알 수 있습니다.<br>
             2. '주문 확인'을 누르시면 최종 주문 목록 화면으로 이동합니다.<br>
             3. '최종 결제'를 누르시면 결제 방법 선택 화면으로 이동합니다.<br>
@@ -65,26 +63,24 @@ function open_help(video, button) {
         case 'bigorder_e_1':
             videoSource.src = "../help_video/bigorder_e(1).mp4";
             video_explan.innerHTML = `
-            &lt;Menu Order&gt;<br>
+            <br>
             1. Select a category, then select a menu.<br>
-            2. Please select the number, temperature, size, and additional options on the detailed menu screen.<br>
-            3. Click 'Add' to add the selected menu to the order list.<br>
-            4. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
+            2. On the Details menu screen, select the number, temperature, size, additional options, and click 'Add'.<br>
+            3. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
             => (If you have chosen Cold, you will be added blue and the dessert will be added black.)<br>
-            5. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
-            6. You can delete the menu by pressing 'x' in the order list.<br>
-            7. Click 'Options' to change the number, temperature, size, and additional options.<br>
-            8. Click 'Paying' to go to the payment method selection screen.<br>
-            9. Click 'Next' to go to the final order list screen.<br>
+            4. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
+            5. You can delete the menu by pressing 'x' in the order list.<br>
+            6. Click 'Options' to change the number, temperature, size, and additional options.<br>
+            7. Click 'Paying' to go to the payment method selection screen.<br>
             `;
             break;
         case 'bigorder_e_2':
             videoSource.src = "../help_video/bigorder_e(2).mp4";
             video_explan.innerHTML = `
-            &lt;Search&gt;<br>
+            <br>
             1. If you're searching, please press the search bar.<br>
             2. Search is possible in three ways. Let's search for 'Chocolate Latte'.<br>
-            3. First, select the recommended search word(keyword).<br>
+            3. First, select the recommended keyword.<br>
             4. If you press 'Chocolate', you will be able to searchable.<br>
             5. The following is a voice recognition method.<br>
             6. Press the 'microphone button' and say 'Chocolate'.<br>
@@ -98,7 +94,7 @@ function open_help(video, button) {
         case 'bigorder_e_3':
             videoSource.src = "../help_video/bigorder_e(3).mp4";
             video_explan.innerHTML = `
-            &lt;Buttons&gt;<br>
+            <br>
             1. The navigation shown at the top shows where you are at.<br>
             2. Click 'Check' step to go to the final order list screen.<br>
             3. Click 'Pay' step to go to the Payment Method Selection screen.<br>
@@ -113,40 +109,39 @@ function open_help(video, button) {
         case 'basicorder_1':
             videoSource.src = "../help_video/basicorder(1).mp4";
             video_explan.innerHTML = `
-            &lt;메뉴 주문&gt;<br>
+            <br>
             1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
-            2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
-            3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
-            4. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+            2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택하고 '담기'를 눌러주세요.<br>
+            3. 에스프레소 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
             => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
-            5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
-            6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
-            7. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
-            8. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
-            9. '다음으로'를 누르시면 최종 주문 목록 화면으로 이동합니다. <br>
+            4. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
+            5. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
+            6. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
+            7. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
             `;
             break;
         case 'basicorder_2':
             videoSource.src = "../help_video/basicorder(2).mp4";
             video_explan.innerHTML = `
-            &lt;검색&gt;<br>
+            <br>
             1. 검색을 하실 경우 검색 바를 눌러주세요.<br>
             2. 검색은 3가지 방법으로 가능합니다. '초코 라떼'를 검색해보겠습니다.<br>
             3. 먼저 추천 검색어(키워드)를 선택하는 방법입니다.<br>
             4. '초코'를 누르시면 초코가 들어간 모든 메뉴가 검색 됩니다.<br>
             5. 다음은 음성인식 방법입니다.<br>
             6. '마이크 버튼'을 누르시고 '초코'를 말씀해주세요.<br>
-            7. 음성인식 결과에 초코가 제대로 떴다면 검색하기를 눌러주세요.<br>
+            7. 음성인식 결과에 초코가 제대로 떴다면 '검색하기'를 눌러주세요.<br>
             => (제대로 음성인식이 되지 않았다면 다시 음성인식을 해주세요.)<br>
             (각 선택에 이어지는 화면은 영상과 다를 수 있습니다.)<br>
             8. 다음은 키보드를 눌러 검색하는 방법입니다.<br>
-            9. 초코를 입력하여 돋보기 버튼을 눌러주세요.
+            9. '초코'를 입력하여 돋보기 버튼을 눌러주세요.<br>
+            (각 선택에 이어지는 화면은 영상과 다를 수 있습니다.)
             `;
             break;
         case 'basicorder_3':
             videoSource.src = "../help_video/basicorder(3).mp4";
             video_explan.innerHTML = `
-            &lt;버튼&gt;<br>
+            <br>
             1. 상단에 보이는 네비게이션을 통해 어느 단계에 있는지 알 수 있습니다.<br>
             2. '주문 확인'을 누르시면 최종 주문 목록 화면으로 이동합니다.<br>
             3. '최종 결제'를 누르시면 결제 방법 선택 화면으로 이동합니다.<br>
@@ -161,26 +156,24 @@ function open_help(video, button) {
         case 'basicorder_e_1':
         videoSource.src = "../help_video/basicorder_e(1).mp4";
         video_explan.innerHTML = `
-        &lt;Menu Order&gt;<br>
+        <br>
         1. Select a category, then select a menu.<br>
-        2. Please select the number, temperature, size, and additional options on the detailed menu screen.<br>
-        3. Click 'Add' to add the selected menu to the order list.<br>
-        4. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
+        2. On the Details menu screen, select the number, temperature, size, additional options, and click 'Add'.<br>
+        3. Since I chose the Espresso temperature as 'hot', you can see that it is added in red letters.<br>
         => (If you have chosen Cold, you will be added blue and the dessert will be added black.)<br>
-        5. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
-        6. You can delete the menu by pressing 'x' in the order list.<br>
-        7. Click 'Options' to change the number, temperature, size, and additional options.<br>
-        8. Click 'Paying' to go to the payment method selection screen.<br>
-        9. Click 'Next' to go to the final order list screen.<br>
+        4. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
+        5. You can delete the menu by pressing 'x' in the order list.<br>
+        6. Click 'Options' to change the number, temperature, size, and additional options.<br>
+        7. Click 'Paying' to go to the payment method selection screen.<br>
         `;
         break;
     case 'basicorder_e_2':
         videoSource.src = "../help_video/basicorder_e(2).mp4";
         video_explan.innerHTML = `
-        &lt;Search&gt;<br>
+        <br>
         1. If you're searching, please press the search bar.<br>
         2. Search is possible in three ways. Let's search for 'Chocolate Latte'.<br>
-        3. First, select the recommended search word(keyword).<br>
+        3. First, select the recommended keyword.<br>
         4. If you press 'Chocolate', you will be able to searchable.<br>
         5. The following is a voice recognition method.<br>
         6. Press the 'microphone button' and say 'Chocolate'.<br>
@@ -194,7 +187,7 @@ function open_help(video, button) {
     case 'basicorder_e_3':
         videoSource.src = "../help_video/basicorder_e(3).mp4";
         video_explan.innerHTML = `
-        &lt;Buttons&gt;<br>
+        <br>
         1. The navigation shown at the top shows where you are at.<br>
         2. Click 'Check' step to go to the final order list screen.<br>
         3. Click 'Pay' step to go to the Payment Method Selection screen.<br>

@@ -43,17 +43,15 @@ joImage.addEventListener("click", function () {
 
         <section class="content_explain" style="height: 50%;">
 
-        &lt;Menu Order&gt;<br>
+        <br>
         1. Select a category, then select a menu.<br>
-        2. Please select the number, temperature, size, and additional options on the detailed menu screen.<br>
-        3. Click 'Add' to add the selected menu to the order list.<br>
-        4. Since the temperature was selected as 'hot', you can see that it is added as 'red lettering'.<br>
+        2. On the Details menu screen, select the number, temperature, size, additional options, and click 'Add'.<br>
+        3. Since the temperature was selected as 'hot', you can see that it is added as 'red lettering'.<br>
         => (If you have chosen Cold, you will be added blue and the dessert will be added black.)<br>
-        5. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
-        6. You can delete the menu by pressing 'x' in the order list.<br>
-        7. Click 'Options' to change the number, temperature, size, and additional options.<br>
-        8. Click 'Paying' to go to the payment method selection screen.<br>
-        9. Click 'Next' to go to the final order list screen.<br>
+        4. You can change the 'Take Out' and 'Eat and Go' from the order list.<br>
+        5. You can delete the menu by pressing 'x' in the order list.<br>
+        6. Click 'Options' to change the number, temperature, size, and additional options.<br>
+        7. Click 'Paying' to go to the payment method selection screen.<br>
         `;
 
       // help_msg.css 파일을 로드합니다.
@@ -1008,16 +1006,16 @@ function generateOrderList(orderData) {
             // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
             const confirmButton = document.querySelector('.btn-primary');
             confirmButton.addEventListener("click", function () {
-              console.log("확인 버튼 눌림");
-              // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
-              deleteOrder(orderNum);
+              console.log("취소 버튼 눌림");
+              // "취소" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+              modal.hide();
             });
 
             const cancelButton = document.querySelector('.btn-secondary');
             cancelButton.addEventListener("click", function () {
-              console.log("취소 버튼 눌림");
-              // "취소" 버튼이 클릭되면 모달 닫기
-              modal.hide();
+              console.log("확인 버튼 눌림");
+              // "확인" 버튼이 클릭되면 모달 닫기
+              deleteOrder(orderNum);
             });
           })
           .catch(error => {

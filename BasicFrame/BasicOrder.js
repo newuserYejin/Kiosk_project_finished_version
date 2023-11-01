@@ -32,17 +32,15 @@ joImage.addEventListener("click", function () {
 
       <section class="content_explain" style="height: 50%;">
 
-      &lt;메뉴 주문&gt;<br>
+      <br>
       1. 카테고리를 선택 후, 메뉴를 선택해주세요.<br>
-      2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택해주세요.<br>
-      3. '담기'를 누르시면 주문 목록에 선택한 메뉴가 추가됩니다.<br>
-      4. 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
+      2. 상세 메뉴 화면에서 개수, 온도, 크기, 추가 사항을 선택하고 '담기'를 눌러주세요.<br>
+      3. 온도를 '뜨거움'으로 선택했기에 '빨간 글씨'로 추가되는 것을 확인할 수 있습니다.<br>
       => (차가움을 선택했으면 파란색으로, 디저트는 검은색으로 추가됩니다.)<br>
-      5. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
-      6. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
-      7. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
-      8. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
-      9. '다음으로'를 누르시면 최종 주문 목록 화면으로 이동합니다. <br>
+      4. 주문 목록에서 '포장', '매장'을 변경할 수 있습니다.<br>
+      5. 주문 목록에서 'x'를 누르시면 메뉴를 삭제할 수 있습니다.<br>
+      6. '옵션변경'을 누르시면 개수, 온도, 크기, 추가 사항을 변경할 수 있습니다.<br>
+      7. '결제하기'를 누르시면 결제 방법 선택화면으로 이동합니다.<br>
       </section>
       `;
 
@@ -972,16 +970,16 @@ function generateOrderList(orderData) {
             // 주문 확인 모달 내부의 버튼 이벤트 리스너 등을 여기서 추가하면 됩니다.
             const confirmButton = document.querySelector('.btn-primary');
             confirmButton.addEventListener("click", function () {
-              console.log("확인 버튼 눌림");
-              // "확인" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
-              deleteOrder(orderNum);
+              console.log("취소 버튼 눌림");
+              // "취소" 버튼이 클릭되면 orderNum 값을 사용하여 DELETE 요청을 보내는 코드 작성
+              modal.hide();
             });
 
             const cancelButton = document.querySelector('.btn-secondary');
             cancelButton.addEventListener("click", function () {
-              console.log("취소 버튼 눌림");
-              // "취소" 버튼이 클릭되면 모달 닫기
-              modal.hide();
+              console.log("확인 버튼 눌림");
+              // "확인" 버튼이 클릭되면 모달 닫기
+              deleteOrder(orderNum);
             });
           })
           .catch(error => {
