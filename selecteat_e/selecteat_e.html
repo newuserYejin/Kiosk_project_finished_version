@@ -280,7 +280,17 @@
                         })
                         .then(data => {
                             // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
-                            $("#modalContainer_e").html(data);
+                            modalContainer_e.innerHTML = data;
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
+
+                            const close_btn = document.querySelector(".help_close");
+                            if (close_btn) {
+                                close_btn.textContent = "Close";
+                            }
 
                             // timeout.css 파일을 로드합니다.
                             const linkElement = document.createElement("link");
