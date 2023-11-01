@@ -95,7 +95,7 @@ joImage.addEventListener("click", function () {
 
       const close_btn = document.querySelector(".help_close");
       if (close_btn) {
-          close_btn.textContent = "Close";
+        close_btn.textContent = "Close";
       }
 
       const modalBody = document.querySelector(".modal-body");
@@ -173,7 +173,7 @@ function createOrderItem(order) {//주문 아이템 생성 함수
                               <span class="select_tem">${order.op_t === 1 ? 'HOT' : 'ICED'}(+0)</span>
                               <span class="select_size">${order.op_s === 3 ? 'Baisc Size' : 'Large Size'}(${order.op_s === 3 ? '+0' : '+1200'})</span>
                               <span class="select_op">
-                                  ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price})</div>`).join(''): '<div class="select_op">Add Option: None</div>'}
+                                  ${order.options.length > 1 ? order.options.slice(1).map(op => `<div class="select_op">${op.op_name}(+${op.op_price})</div>`).join('') : '<div class="select_op">Add Option: None</div>'}
                               </span>
                           </div>
                       </div>
@@ -462,20 +462,39 @@ function updateData() {
         })
         .then(data => {
           // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
-          $("#modalContainer_e").html(data);
+          modalContainer_e.innerHTML = data;
 
           // timeout.css 파일을 로드합니다.
           const linkElement = document.createElement("link");
           linkElement.rel = "stylesheet";
           linkElement.type = "text/css";
-          linkElement.href = "http://localhost:3001/timeout/timeout.css";
+          linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
           document.head.appendChild(linkElement);
+
+          const modalTitle = document.querySelector(".modal-title");
+          if (modalTitle) {
+            modalTitle.textContent = "Confirmation message"; // "help"로 변경
+          }
+
+          const modalBody = document.querySelector(".modal-body");
+          modalBody.innerHTML = `
+          <p class="content_font_size">
+              The first set order time has ended.<br>
+              Would you like to continue ordering?<br>
+              Yes: Continue order (time added).)<br>
+              No : Stop ordering<br>
+              (Order history completely disappears!!!!) 
+          </p>
+              `;
 
           // 모달을 열기 위한 코드
           const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
           modal.show();
 
           const yes = document.querySelector('.btn-primary');
+          if (yes) {
+            yes.textContent = "Yes";
+          }
           yes.addEventListener("click", function () {//180초 추가하기
             params.set("timer", 180);
             url.search = params.toString();
@@ -484,6 +503,9 @@ function updateData() {
             location.reload();
           })
           const no = document.querySelector('.btn-secondary');
+          if (no) {
+            no.textContent = "No";
+          }
           no.addEventListener("click", function () {//시작 페이지로 이동
             window.location.href = "http://localhost:3001/selectorder/selectorder.html";
           })
