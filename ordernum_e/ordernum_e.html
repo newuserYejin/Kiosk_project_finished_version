@@ -129,7 +129,7 @@
 
         // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
         function showDelayedMessage() {
-            secondsElapsed = 10; // 10초 경과
+            secondsElapsed = 20; // 10초 경과
             console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
             //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
             openModal();
@@ -163,7 +163,7 @@
         var timer = setInterval(function () {
             secondsElapsed++; // 경과 시간 증가
             console.log(secondsElapsed + "초");
-            if (secondsElapsed === 10) {
+            if (secondsElapsed === 20) {
                 clearInterval(timer); // 타이머 중지
                 showDelayedMessage(); // 메시지 표시 함수 호출
             }
