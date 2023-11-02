@@ -484,8 +484,8 @@
 /*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 끝*/
 #modalContainer .list-group-item [type="radio"]:checked+label {
     background-color: white;
-    color: #E70A0A;
-    border: solid 2px #E70A0A;
+    color: #19A097;
+    border: solid 2px #42BEAF;
     border-radius: 10px;
 }
 
