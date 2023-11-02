@@ -43,12 +43,13 @@ $(document).ready(function () {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       t_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
-        show_qr('t');
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function () {
+        show_qr('t')
       };
     }
 
@@ -57,12 +58,14 @@ $(document).ready(function () {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
-        show_qr('t');
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function () {
+        show_qr('t')
       };
     }
 
@@ -71,7 +74,7 @@ $(document).ready(function () {
 
     if (!op_num_o.includes(1)) {
       speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
-    } else if(!op_num_o.includes(2)) {
+    } else if (!op_num_o.includes(2)) {
       speechBubbleContent.textContent = '따뜻한 것만 가능한 상품입니다.';
     } else {
       speechBubbleContent.textContent = '원하는 것을 선택해주세요.';
@@ -88,11 +91,13 @@ $(document).ready(function () {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       s_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('s');
       };
     }
@@ -102,11 +107,13 @@ $(document).ready(function () {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       s_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('s');
       };
     }
@@ -116,7 +123,7 @@ $(document).ready(function () {
 
     if (!op_num_o.includes(3)) {
       speechBubbleContent.textContent = '큰 것만 가능한 상품입니다.';
-    } else if(!op_num_o.includes(4)) {
+    } else if (!op_num_o.includes(4)) {
       speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
     } else {
       speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
@@ -380,7 +387,7 @@ $(".input-group").on("click", "#increment1", function () {
   // .input-group 클래스를 가진 요소 내에서 #increment 버튼을 클릭했을 때 실행되는 함수
   var input = $(this).closest(".input-group").find("input");
   // 클릭한 버튼이 속한 .input-group 내에서 input 요소를 찾음
-  if(parseInt(input.val())<10){
+  if (parseInt(input.val()) < 10) {
     input.val(parseInt(input.val()) + 1);
   }
 });
