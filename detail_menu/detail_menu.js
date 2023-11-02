@@ -122,48 +122,37 @@ $(".btn-info").click(function () {
 // 서버로부터 메뉴 정보를 요청합니다.
 // 메뉴 정보를 출력하는 함수
 function renderMenuDetail(menuData) {
-  const menuTitle = document.querySelector(".menu_title");
-  // const menuCost = document.querySelector(".EI_menu_cost");
-  const menuDescription = document.querySelector(".menu_explain_detail");
-  const menuImage = document.querySelector(".menu_img_size");
+  const select = (selector) => document.querySelector(selector);
+  const selectAll = (selector) => document.querySelectorAll(selector);
+  const menuTitle = select(".menu_title");
+  const menuDescription = select(".menu_explain_detail");
+  const menuImage = select(".menu_img_size");
 
   menuTitle.textContent = menuData.menuData.menu_name;
-  // const formattedPrice = new Intl.NumberFormat('ko-KR').format(menuData.menuData.price);//10.09 가격 쉼표 넣기 삭제
-  // menuCost.textContent = `${formattedPrice}원`;
   menuDescription.textContent = menuData.menuData.menu_explan;
-
-  const img_pp = `.${menuData.image_path}`
-  menuImage.src = img_pp;
+  menuImage.src = `.${menuData.image_path}`;
   menuImage.alt = menuData.menu_name;
 
-  // 알레르기 정보 출력
-  const allegyList = document.querySelector(".allegy_list");
-  allegyList.innerHTML = menuData.allegy_names
-  if (menuData.allegy_names == 0) {
-    allegyList.innerHTML = `<li>없음</li>`
+  const allegyList = select(".allegy_list");
+  if (menuData.allegy_names.length === 0) {
+    allegyList.innerHTML = "<li>없음</li>";
   } else {
-    allegyList.innerHTML = menuData.allegy_names
-      .map(allegyName => `<li>${allegyName}</li>`)
-      .join(", ");
+    allegyList.innerHTML = menuData.allegy_names.map(allegyName => `<li>${allegyName}</li>`).join(", ");
   }
 
-  // 옵션 정보 출력
-  const container_box = document.querySelector(".op_box");
-  const optionContainers = document.querySelectorAll(".option_inner_bow");
+  const container_box = select(".op_box");
+  const optionContainers = selectAll(".option_inner_bow");
 
-  let option_t;
-
-  // 각 옵션 컨테이너마다 처리
   optionContainers.forEach((container, index) => {
     const optionList = container.querySelector(".list-group");
-    let currentSet = 0; // 현재 세트 번호
+    let currentSet = 0;
 
-    // DB에서 가져온 옵션 데이터가 없을 경우 컨테이너 숨김
-    const all_modal = document.querySelector(".modal-dialog");
-    if (menuData.op_data.length == 0) {
+    const all_modal = select(".modal-dialog");
+    const opDataLength = menuData.op_data.length;
+    if (opDataLength === 0) {
       all_modal.style.height = "auto";
       container_box.style.display = "none";
-      return; // 옵션 데이터 없으면 여기서 종료
+      return;
     }
 
     if (index === 0) {
@@ -182,7 +171,6 @@ function renderMenuDetail(menuData) {
 
       if (!hasHot && hasCold) {
         defaultOption = "차가움";
-
         falseoption = "뜨거움";
       }
 
@@ -203,23 +191,40 @@ function renderMenuDetail(menuData) {
           })
           .join("");
       } else {
-        // "뜨거움"이나 "차가움" 중 하나만 없는 경우
-
+        /* "뜨거움"이나 "차가움" 중 하나만 없는 경우 11.02수정 시작*/
         if (!hasHot) {
           speechBubbleContent.textContent = '차가운 것만 가능한 상품입니다.';
+          optionList.innerHTML = temperatureOptions
+            .map(option => {
+              const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+              const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+              option_t = textColor;
+              const imageSrc = option.op_name === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";// 이미지 경로 설정
+              const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
+              const falseimageSrc = falseoption === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
+              return `<li class="list-group-item"><input class="form-check-input me-1 falseoption" type="radio" name="temperature"  id="falseoption" disabled="true">
+            <label class="form-check-label" for="falseoption" onclick=show_qr('t')> ${falseoptionText} (+0원)
+            <img src="${falseimageSrc}" />
+            </label></li>
+            <li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor}; border-color:${textColor}">
+                ${option.op_name} (+${option.op_price}원)
+                <img src="${imageSrc}" />
+            </label></li>
+                `;
+            })
+            .join("");
         } else {
           speechBubbleContent.textContent = '뜨거운 것만 가능한 상품입니다.';
-        }
-
-        optionList.innerHTML = temperatureOptions
-          .map(option => {
-            const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
-            const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
-            option_t = textColor;
-            const imageSrc = option.op_name === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";// 이미지 경로 설정
-            const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
-            const falseimageSrc = falseoption === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
-            return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
+          optionList.innerHTML = temperatureOptions
+            .map(option => {
+              const checkedAttribute = option.op_name === defaultOption ? "checked" : "";
+              const textColor = option.op_name === "뜨거움" ? "red" : "blue"; // 뜨거움은 빨간색, 차가움은 파란색
+              option_t = textColor;
+              const imageSrc = option.op_name === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";// 이미지 경로 설정
+              const falseoptionText = falseoption === "뜨거움" ? "뜨거움" : "차가움"; // falseoption 변수에 따라 출력할 문자 설정
+              const falseimageSrc = falseoption === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png";
+              return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
                 <label class="form-check-label" for="${option.op_name}" style="color: ${textColor}; border-color:${textColor}">
                     ${option.op_name} (+${option.op_price}원)
                     <img src="${imageSrc}" />
@@ -229,8 +234,9 @@ function renderMenuDetail(menuData) {
                 <img src="${falseimageSrc}" />
                 </label></li>
                 `;
-          })
-          .join("");
+            })
+            .join("");
+        }/*11.02수정 끝*/
       }
     } else if (index === 1) {   //09.13
       const sizeOptions = menuData.op_data
@@ -248,28 +254,12 @@ function renderMenuDetail(menuData) {
         defaultOption = "큰 크기";
         falseoption = "기본 크기";
       }
-
-      // const imageSrc = option_t === "red" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"; // 이미지 경로 설정
       console.log(option_t);
 
       const speechBubble = document.querySelector('.size');
       const speechBubbleContent = speechBubble.querySelector('div');
 
       speechBubbleContent.textContent = '원하는 크기를 선택해주세요.';
-
-      // // 라디오 버튼 요소들을 선택
-      // const radioInputs = document.querySelectorAll('.option_size .list-group-item [type="radio"]');
-
-      // radioInputs.forEach(input => {
-      //   input.addEventListener('change', function () {
-      //     const label = this.nextElementSibling; // 라디오 버튼 다음에 위치한 label 요소 선택
-      //     const checkedAttribute = this.checked ? "checked" : "";
-
-      //     // 선택된 라디오 버튼에 대해서만 color와 border-color 스타일 변경
-      //     label.style.color = checkedAttribute ? option_t : "initial";
-      //     label.style.borderColor = checkedAttribute ? option_t : "initial";
-      //   });
-      // });
 
       optionList.innerHTML = sizeOptions
         .map(option => {
@@ -291,9 +281,9 @@ function renderMenuDetail(menuData) {
         const speechBubbleContent = speechBubble.querySelector('div');
 
         if (!hasRegular) {
-            speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
+          speechBubbleContent.textContent = '큰 사이즈만 가능한 상품입니다.';
         } else {
-            speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
+          speechBubbleContent.textContent = '기본 크기만 가능한 상품입니다.';
         }
       }
     } else if (index === 2) {
@@ -311,62 +301,37 @@ function renderMenuDetail(menuData) {
         .join("");
     }
   });
-  // (메뉴가격+사이즈+옵션1~8)*갯수 = 실시간 반영 10.16 추가 시작------------------------------------------------------------------
+
   function updatePrice() {
-    const baseMenuPrice = parseInt(menuData.menuData.price); // 기본 메뉴 가격
-
-    let selectedOpSPrice = 0; // op_s의 추가 가격
-    let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0]; // 각 op의 추가 가격
-
-    // op_s의 선택 여부에 따라 가격을 업데이트
+    const baseMenuPrice = parseInt(menuData.menuData.price);
+    let selectedOpSPrice = 0;
+    let selectedOpPrices = [0, 0, 0, 0, 0, 0, 0, 0];
     const selectedOpS = $("input[name='size']:checked").val();
     if (selectedOpS === "큰 크기") {
       selectedOpSPrice = 1200;
     }
-
-    // 각 op의 선택 여부에 따라 가격을 업데이트
     for (let i = 1; i <= 8; i++) {
       const opCheckbox = $(`input[name='option_set_${i}']`);
       const opPrice = opCheckbox.is(':checked') ? parseInt(opCheckbox.attr('data-price')) : 0;
       selectedOpPrices[i - 1] = opPrice;
-      //console.log(`op${i} 가격: ${opPrice}`);
     }
-
-    const inputVal = parseInt($("#quantity").val()); // input 값
-
-    // 총 가격 계산
+    const inputVal = parseInt($("#quantity").val());
     const TotalPrice = (baseMenuPrice + selectedOpSPrice + selectedOpPrices.reduce((a, b) => a + b, 0)) * inputVal;
-    const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice); // 가격 쉼표 넣기
-
-    console.log(`현재금액 : ${TotalPrice}원`);
-    // 계산된 총 가격을 원하는 위치에 표시합니다.
+    const EI_TotalPrice = new Intl.NumberFormat('ko-KR').format(TotalPrice);
     $('.EI_menu_cost').text(`${EI_TotalPrice}원`);
   }
 
-  $(".input-group").on("click", "#increment", function () {
+  $(".input-group").on("click", "#increment, #decrement", function () {
     var input = $(this).closest(".input-group").find("input");
     updatePrice();
     console.log(input.val());
   });
 
-  $(".input-group").on("click", "#decrement", function () {
-    var input = $(this).closest(".input-group").find("input");
+  $("input[type='radio'], input[type='checkbox']").on("change", function () {
     updatePrice();
-    console.log(input.val());
   });
 
-  // 라디오 박스 변경 이벤트 핸들러를 추가합니다.
-  $("input[type='radio']").on("change", function () {
-    updatePrice(); // 가격 업데이트
-  });
-
-  // 체크 박스 변경 이벤트 핸들러를 추가합니다.
-  $("input[type='checkbox']").on("change", function () {
-    updatePrice(); // 가격 업데이트
-  });
-
-  // 초기 가격을 표시합니다.
-  updatePrice();//10.16추가 끝------------------------------------------------------------------
+  updatePrice();
 }
 
 // 서버로부터 메뉴 정보를 요청합니다.

@@ -443,6 +443,8 @@
     transform: scale(1.3);
 }
 
+
+
 #modalContainer .list-group-item [type="radio"] + label{
     border: solid 1px black;
 }
@@ -451,18 +453,47 @@
     color: blue;
 }
 
-#modalContainer .list-group-item [type="radio"]:checked + label{
+/*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 시작*/
+#modalContainer .list-group-item [type="radio"][value="뜨거움"]:checked+label {
     background-color: white;
     color: #E70A0A;
     border: solid 2px #E70A0A;
     border-radius: 10px;
 }
 
-#modalContainer .list-group-item [type="radio"]:nth-child(2):checked + label {
-    color: blue;
+#modalContainer .list-group-item [type="radio"][value="차가움"]:checked+label {
+    background-color: white;
+    color: #320ae7;
+    border: solid 2px #320ae7;
+    border-radius: 10px;
 }
 
-#modalContainer .list-group-item [type="radio"]:disabled + label{
+#modalContainer .list-group-item [type="radio"][value="1"]:checked+label {
+    background-color: white;
+    color: #E70A0A;
+    border: solid 2px #E70A0A;
+    border-radius: 10px;
+}
+
+#modalContainer .list-group-item [type="radio"][value="2"]:checked+label {
+    background-color: white;
+    color: #320ae7;
+    border: solid 2px #320ae7;
+    border-radius: 10px;
+}
+/*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 끝*/
+#modalContainer .list-group-item [type="radio"]:checked+label {
+    background-color: white;
+    color: #E70A0A;
+    border: solid 2px #E70A0A;
+    border-radius: 10px;
+}
+
+/* #modalContainer .list-group-item [type="radio"]:nth-child(2):checked+label {
+    color: blue;
+} */
+
+#modalContainer .list-group-item [type="radio"]:disabled+label {
     border: solid 1px #BBBBBB;
     background-color: #BBBBBB;
     color: white;
@@ -585,9 +616,9 @@
     color: red;
 } */
 
-#modalContainer .disabled-label {
+/* #modalContainer .disabled-label {
     color: gray;
-}
+} */
 
 #modalContainer .speech-bubble div{
     display: flex;
