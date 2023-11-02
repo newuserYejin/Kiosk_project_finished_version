@@ -614,13 +614,13 @@
 } */
 
 
-#modalContainer_e .t_Radio1{
+/*#modalContainer_e .t_Radio1{
     color: red;
 }
 
 #modalContainer_e .t_Radio2{
     color: blue;
-}
+}11.02 선택되지 않은 온도 옵션 회색으로 만들기*/
 
 #modalContainer_e .disabled-label {
     color: gray;
