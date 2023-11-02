@@ -447,13 +447,13 @@
     color: blue;
 }
 
-#modalContainer_e .list-group-item [type="radio"][value="HOT"] + label {
+/*#modalContainer_e .list-group-item [type="radio"][value="HOT"] + label {
     color: #E70A0A;
 }
 
 #modalContainer_e .list-group-item [type="radio"][value="ICED"] + label {
     color: #320ae7;
-}
+}11.02 선택되지 않은 온도 옵션 회색으로 만들기*/
 
 /*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 시작*/
 #modalContainer_e .list-group-item [type="radio"][value="HOT"]:checked+label {
