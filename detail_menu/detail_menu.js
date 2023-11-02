@@ -183,7 +183,7 @@ function renderMenuDetail(menuData) {
             option_t = textColor;
             const imageSrc = option.op_name === "뜨거움" ? "../icon_img/hot_drink_small.png" : "../icon_img/ice_drink.png"; // 이미지 경로 설정
             return `<li class="list-group-item"><input class="form-check-input me-1" type="radio" name="temperature"  id="${option.op_name}" value="${option.op_name}" ${checkedAttribute}>
-            <label class="form-check-label" for="${option.op_name}" style="color: ${textColor};">
+            <label class="form-check-label" for="${option.op_name}">
             ${option.op_name} (+${option.op_price}원)
             <img src="${imageSrc}" />
             </label></li>
