@@ -434,22 +434,68 @@
     margin-left: 10px;
 }
 
-#modalContainer_e .option_size .list-group-item:last-child img{
-    transform: scale(1.3);
-}
+/*크기 이미지 사이즈 조절 코드*/
+/* #modalContainer_e .option_size .list-group-item:last-child img{
+    transform: scale(1.3); 
+} */
 
 #modalContainer_e .list-group-item [type="radio"] + label{
     border: solid 1px black;
 }
 
-#modalContainer_e .list-group-item [type="radio"]:checked + label{
+#modalContainer_e .list-group-item #t_secondRadioContainer .t_Radio2 {
+    color: blue;
+}
+
+#modalContainer_e .list-group-item [type="radio"][value="HOT"] + label {
+    color: #E70A0A;
+}
+
+#modalContainer_e .list-group-item [type="radio"][value="ICED"] + label {
+    color: #320ae7;
+}
+
+/*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 시작*/
+#modalContainer_e .list-group-item [type="radio"][value="HOT"]:checked+label {
     background-color: white;
     color: #E70A0A;
     border: solid 2px #E70A0A;
     border-radius: 10px;
 }
 
-#modalContainer_e .list-group-item [type="radio"]:disabled + label{
+#modalContainer_e .list-group-item [type="radio"][value="ICED"]:checked+label {
+    background-color: white;
+    color: #320ae7;
+    border: solid 2px #320ae7;
+    border-radius: 10px;
+}
+
+#modalContainer_e .list-group-item [type="radio"][value="1"]:checked+label {
+    background-color: white;
+    color: #E70A0A;
+    border: solid 2px #E70A0A;
+    border-radius: 10px;
+}
+
+#modalContainer_e .list-group-item [type="radio"][value="2"]:checked+label {
+    background-color: white;
+    color: #320ae7;
+    border: solid 2px #320ae7;
+    border-radius: 10px;
+}
+/*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 끝*/
+#modalContainer_e .list-group-item [type="radio"]:checked+label {
+    background-color: white;
+    color: #E70A0A;
+    border: solid 2px #E70A0A;
+    border-radius: 10px;
+}
+
+#modalContainer_e .list-group-item [type="radio"]:nth-child(2):checked+label {
+    color: blue;
+}
+
+#modalContainer_e .list-group-item [type="radio"]:disabled+label {
     border: solid 1px #BBBBBB;
     background-color: #BBBBBB;
     color: white;
