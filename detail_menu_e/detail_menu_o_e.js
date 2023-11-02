@@ -43,11 +43,13 @@ $(document).ready(function () {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       t_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       t_firstRadioContainer.style.display = "block";
       t_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       t_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      t_firstRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('t');
       };
     }
@@ -57,11 +59,14 @@ $(document).ready(function () {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = null;
+
     } else {
       t_secondRadioContainer.style.display = "block";
       t_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다.
       t_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      t_secondRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('t');
       };
     }
@@ -71,7 +76,7 @@ $(document).ready(function () {
 
     if (!op_num_o.includes(1)) {
       speechBubbleContent.textContent = 'Only ICED product.';
-    } else if(!op_num_o.includes(2)) {
+    } else if (!op_num_o.includes(2)) {
       speechBubbleContent.textContent = 'Only HOT product.';
     } else {
       speechBubbleContent.textContent = 'Pick what you want.';
@@ -88,11 +93,13 @@ $(document).ready(function () {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       s_firstRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       s_firstRadioContainer.style.display = "block";
       s_firstRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_firstRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      s_firstRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('s');
       };
     }
@@ -102,11 +109,13 @@ $(document).ready(function () {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = false; // 비활성화 상태를 해제합니다.
       s_secondRadioContainer.querySelector("label.form-check-label").classList.remove("disabled-label");
+      // 삭제: onclick 핸들러를 제거
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = null;
     } else {
       s_secondRadioContainer.style.display = "block";
       s_secondRadioContainer.querySelector("input[type='radio']").disabled = true; // 비활성화 상태로 설정합니다
       s_secondRadioContainer.querySelector("label.form-check-label").classList.add("disabled-label");
-      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function() {
+      s_secondRadioContainer.querySelector("label.form-check-label").onclick = function () {
         show_qr('s');
       };
     }
@@ -116,7 +125,7 @@ $(document).ready(function () {
 
     if (!op_num_o.includes(3)) {
       speechBubbleContent.textContent = 'Only Large Size product.';
-    } else if(!op_num_o.includes(4)) {
+    } else if (!op_num_o.includes(4)) {
       speechBubbleContent.textContent = 'Only Basic Size product.';
     } else {
       speechBubbleContent.textContent = 'Pick what you want.';
@@ -208,24 +217,24 @@ $(document).ready(function () {
       console.error("Error fetching order data:", error);
     });
 
-    function fetchTotalPrice(orderNum) {
-      fetch('/getOrderData_e')
-        .then(response => response.json())
-        .then(data => {
-          console.log("Session data:", JSON.stringify(data));
-  
-          updateTotalAmountUI(data, orderNum);
-        });
-    }
+  function fetchTotalPrice(orderNum) {
+    fetch('/getOrderData_e')
+      .then(response => response.json())
+      .then(data => {
+        console.log("Session data:", JSON.stringify(data));
 
-    function updateTotalAmountUI(getOrder, orderNum) { //현재 total_price
-      const order = getOrder.find(order => order.order_num === orderNum); // 주문 번호에 해당하는 데이터 찾기
-      console.log(order);
-      if (order) {
-        const CommitPrice = new Intl.NumberFormat('ko-KR').format(order.total_price); // 가격 쉼표 넣기
-        $(`.EI_menu_cost`).text(`￦${CommitPrice}`);
-      }
+        updateTotalAmountUI(data, orderNum);
+      });
+  }
+
+  function updateTotalAmountUI(getOrder, orderNum) { //현재 total_price
+    const order = getOrder.find(order => order.order_num === orderNum); // 주문 번호에 해당하는 데이터 찾기
+    console.log(order);
+    if (order) {
+      const CommitPrice = new Intl.NumberFormat('ko-KR').format(order.total_price); // 가격 쉼표 넣기
+      $(`.EI_menu_cost`).text(`￦${CommitPrice}`);
     }
+  }
   // 주문 데이터를 처리하고 렌더링하는 함수
   function handleOrderData(orderData) {
     console.log(orderData);
