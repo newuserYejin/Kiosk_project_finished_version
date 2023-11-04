@@ -277,6 +277,10 @@
     font-size: 5vw;
     font-weight: 600;
     color: #007AC2;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*알레르기*/
@@ -450,7 +454,7 @@
 }
 
 #modalContainer .list-group-item #t_secondRadioContainer .t_Radio2 {
-    color: blue;
+    color: #007AC2;
 }
 
 /*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 시작*/
@@ -463,8 +467,10 @@
 
 #modalContainer .list-group-item [type="radio"][value="차가움"]:checked+label {
     background-color: white;
-    color: #320ae7;
-    border: solid 2px #320ae7;
+    /* color: #320ae7;
+    border: solid 2px #320ae7; */
+    color: #007AC2;
+    border: solid 1px #007AC2;
     border-radius: 10px;
 }
 
@@ -477,8 +483,10 @@
 
 #modalContainer .list-group-item [type="radio"][value="2"]:checked+label {
     background-color: white;
-    color: #320ae7;
-    border: solid 2px #320ae7;
+    /* color: #320ae7;
+    border: solid 2px #320ae7; */
+    color: #007AC2;
+    border: solid 2px #007AC2;
     border-radius: 10px;
 }
 /*11.02 뜨거움 선택시 빨간색으로 차가움 선택시 파란색으로 아닐 때는 검은색으로 끝*/

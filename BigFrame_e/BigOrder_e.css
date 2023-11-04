@@ -519,9 +519,8 @@ html,body {
 .select_list_detail {
   font-weight: bold;
   font-size: 3vw;
-  border-bottom: solid 2.5px #ced4da;
 
-  border-bottom: solid 2px #BBBBBB;
+  border-bottom: solid 1px #BBBBBB;
 
   height: auto;
   padding: 10px 3.26% 10px 1.6%;
