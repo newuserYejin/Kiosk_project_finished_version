@@ -548,9 +548,8 @@ body {
 .select_list_detail {
   font-weight: bold;
   font-size: 3vw;
-  border-bottom: solid 2.5px #ced4da;
 
-  border-bottom: solid 2px #BBBBBB;
+  border-bottom: solid 1px #BBBBBB;
 
   height: auto;
   padding: 10px 5.26% 10px 2.6%;
@@ -697,7 +696,7 @@ body {
   width: 100%;
   box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
 
-  border-top: solid 3px #d9d9d9;
+  /* border-top: solid 3px #d9d9d9; */
 }
 
 .fix_button_detail {

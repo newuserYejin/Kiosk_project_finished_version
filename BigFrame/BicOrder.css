@@ -516,9 +516,9 @@ html,body {
 .select_list_detail {
   font-weight: bold;
   font-size: 3vw;
-  border-bottom: solid 2.5px #ced4da;
+  /* border-bottom: solid 2.5px #ced4da; */
 
-  border-bottom: solid 2px #BBBBBB;
+  border-bottom: solid 1px #BBBBBB;
 
   height: auto;
   padding: 10px 3.26% 10px 1.6%;
@@ -631,8 +631,8 @@ html,body {
   justify-content: center;
   align-items: center;
 
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .pay_inner_box{
@@ -673,7 +673,7 @@ html,body {
   width: 100%;
   box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
 
-  border-top: solid 3px #d9d9d9;
+  /* border-top: solid 3px #d9d9d9; */
 }
 
 .fix_button_detail {
