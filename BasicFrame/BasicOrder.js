@@ -807,9 +807,9 @@ function generateOrderList(orderData) {
 
       //09.05수정
       if (order.op_t === 1) {
-        selectName.style.color = 'red'; // op_t가 1일 때 빨간색
+        selectName.style.color = '#E70A0A'; // op_t가 1일 때 빨간색
       } else if (order.op_t === 2) {
-        selectName.style.color = 'blue'; // op_t가 2일 때 파란색
+        selectName.style.color = '#007AC2'; // op_t가 2일 때 파란색
       } else if (order.op_t === 1000) {
         selectName.style.color = 'black';
       }

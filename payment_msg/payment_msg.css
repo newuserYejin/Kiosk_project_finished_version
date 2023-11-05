@@ -89,3 +89,9 @@
     font-size: 3vw;
     font-weight: 600;
 }
+
+#modalContainer .modal-footer .btn .btn-primary{
+    border: none;
+    --bs-btn-bg: black;
+    --bs-btn-border-color:black;
+}
