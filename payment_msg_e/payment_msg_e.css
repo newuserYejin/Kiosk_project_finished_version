@@ -27,6 +27,8 @@
 #modalContainer_e .modal-header{
     height: 27.2%;
     width: 100%;
+
+    border: none;
 }
 
 #modalContainer_e .header_box{
@@ -48,6 +50,8 @@
 #modalContainer_e .modal-body{
     width: 100%;
     height: 39.3%;
+
+    border: none;
 }
 
 #modalContainer_e .modal-body *{
@@ -63,6 +67,8 @@
     display: flex;
     justify-content: end;
     align-items: center;
+
+    border: none;
 }
 
 #modalContainer_e .modal-footer button{

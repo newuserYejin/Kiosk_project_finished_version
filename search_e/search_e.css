@@ -38,9 +38,9 @@
     align-items: center;
 }
 
-#modalContainer_e .modal-header img{
+/* #modalContainer_e .modal-header img{
     height: 100%;
-}
+} */
 
 #modalContainer_e .modal-title {
     font-size: 4.5vw !important;
