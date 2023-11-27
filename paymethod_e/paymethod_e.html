@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="korea">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paymethod</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./paymethod_e.css" />
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <div class="all_box">
+
+        <!--상단 배너-->
+        <div class="top_banner">
+            <div class="hoi_box">
+                <img class="hoi" src="../icon_img/good_hoi.png" />
+            </div>
+            <img class="cafe_name" src="../icon_img/cafe_name_eng.png" />
+
+            <div class="help">
+                <div id="imageLink">Help</div>
+                <div id="modalContainer_e"></div>
+            </div>
+        </div>
+
+        <div class="main_box">
+            <!--navigate bar-->
+            <div class="navigation">
+                <div class="navigation_all_box">
+                    <div class="box_line">
+                        <div onclick="openSelect()" class="level_button">
+                            <p class="circle_name">1.Choose</p>
+                        </div>
+                    </div>
+
+                    <div class="box_line">
+                        <div onclick="openCheck()" class="level_button">
+                            <p class="circle_name">2.Check</p>
+                        </div>
+                    </div>
+
+                    <div class="box_line">
+                        <div onclick="openPay()" class="level_button">
+                            <p class="circle_name">3.Pay</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="selectpay">
+                <div class="first">
+                    <div class="title">
+                        <img src="../icon_img/cardpay_mark.png" />
+                        Paying
+                    </div>
+                    <div class="fir_box">
+                        <div class="pay">
+                            <div class="paymethod_ment">
+                                Please choose<br>a payment method
+                            </div>
+                            <div class="pay_method" onclick="card_method()">
+                                <div class="img_box">
+                                    <img class="card" src="../icon_img/card.png" />
+                                </div>
+                                <button type="button" class="card_method">Card</button>
+                            </div>
+                            <div class="pay_method" onclick="cupon_method()">
+                                <div class="img_box">
+                                    <img class="coupon" src="../icon_img/coupon.png" />
+                                </div>
+                                <button type="button" class="coupon_method">Coupon</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_box">
+            <button class="fix_button_detail" onclick="firstScreen()">
+                <img src="../icon_img/home_icon.png" />Home
+            </button>
+            <button class="fix_button_detail" onclick="back()">
+                <img src="../icon_img/left_icon.png" />Previous
+            </button>
+
+            <!-- 총금액확인 -->
+            <div class="total_cost_box">
+                <span>Total Cost :&nbsp;</span>
+                <div class="total_cost">&#8361;0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function firstScreen() {
+            window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+        }
+
+        function back() {
+            var URL = new URLSearchParams(window.location.search);
+            var order_info = URL.get('order');
+            const pickup = URL.get('pickup');
+
+            if (order_info == 'slow') {
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+            } else if (order_info == 'basic') {
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+            }
+        }
+
+        function card_method() {
+            var URL = new URLSearchParams(window.location.search);
+            var order_info = URL.get('order');
+            const pickup = URL.get('pickup');
+
+            if (order_info == 'slow') {
+                window.location.href = `http://localhost:3001/pay_card_e/pay_card_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+            } else if (order_info == 'basic') {
+                window.location.href = `http://localhost:3001/pay_card_e/pay_card_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+            }
+        }
+
+        function cupon_method() {
+            var URL = new URLSearchParams(window.location.search);
+            var order_info = URL.get('order');
+            const pickup = URL.get('pickup');
+
+            if (order_info == 'slow') {
+                window.location.href = `http://localhost:3001/pay_coupon_e/pay_coupon_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+            } else if (order_info == 'basic') {
+                window.location.href = `http://localhost:3001/pay_coupon_e/pay_coupon_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+            }
+        }
+
+        const joImage = document.getElementById("imageLink");
+
+        joImage.addEventListener("click", function () {
+            // 먼저 modalContainer_e를 비웁니다.
+            document.getElementById("modalContainer_e").innerHTML = "";
+
+            // help_msg.html 콘텐츠를 로드하여 modalContainer_e에 추가합니다.
+            fetch("http://localhost:3001/help_msg/help_msg.html")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP Error " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // modalContainer_e에 help_msg.html 콘텐츠를 추가합니다.
+                    // 모달 제목을 찾아서 변경
+                    document.getElementById("modalContainer_e").innerHTML = data;
+
+                    const modalTitle = document.querySelector(".modal-title");
+                    if (modalTitle) {
+                        modalTitle.textContent = "Help"; // "help"로 변경
+                    }
+
+                    const close_btn = document.querySelector(".help_close");
+                    if (close_btn) {
+                        close_btn.textContent = "Close";
+                    }
+
+                    const modalBody = document.querySelector(".modal-body");
+                    modalBody.innerHTML = `
+        <video autoplay controls>
+            <source src="../help_video/paymethod_e.mp4" type="video/mp4">
+            Please call the administrator
+        </video>
+
+        <section class="content_explain">
+            1. If you want to pay by credit card, please select 'Card'.<br>
+            2. If you want to pay for the coupon, please select 'Coupon'.<br>
+            3. Click the 'Choose' step in the navigation at the top to go to the menu order screen.<br>
+            4. Click the 'Check' step to go to the final order list screen.<br>
+            5. Click 'Previous' at the bottom to go to the final order list screen.<br>
+            6. Click 'Home' to go to the first screen.<br>
+            (The screen that follows after selecting each button may be different from the image.)
+        </section>
+        `;
+
+                    // help_msg.css 파일을 로드합니다.
+                    const linkElement = document.createElement("link");
+                    linkElement.rel = "stylesheet";
+                    linkElement.type = "text/css";
+                    linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
+                    document.head.appendChild(linkElement);
+
+                    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                });
+        });
+
+
+        function openSelect() {
+            var URL = new URLSearchParams(window.location.search);
+            var order_info = URL.get('order');
+            const pickup = URL.get('pickup');
+
+            if (order_info == 'slow') {
+                window.location.href = `http://localhost:3001/BigFrame_e/BigOrder_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+            } else if (order_info == 'basic') {
+                window.location.href = `http://localhost:3001/BasicFrame_e/BasicOrder_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+            }
+        }
+        function openCheck() {
+            var URL = new URLSearchParams(window.location.search);
+            var order_info = URL.get('order');
+            const pickup = URL.get('pickup');
+
+            if (order_info == 'slow') {
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=slow&timer=${timer}&pickup=${pickup}`
+            } else if (order_info == 'basic') {
+                window.location.href = `http://localhost:3001/last_checklist_e/checklist_e.html?order=basic&timer=${timer}&pickup=${pickup}`
+            }
+        }
+        function openPay() {
+            window.location.href = "#"
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        var secondsElapsed = 0;
+
+        // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
+        function showDelayedMessage() {
+            secondsElapsed = 45; // 10초 경과
+            console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
+            //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
+            openModal();
+        }
+
+        function openModal() {
+            $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+
+        // showDelayedMessage() 함수가 실행된 후 페이지 리로드 및 경과 시간 초기화
+        function showDelayedMessageAndReload() {
+            showDelayedMessage();
+            setTimeout(function () {
+                //location.reload(); // 일정 시간 후 페이지 리로드
+            }, 10000); // 10초 후 리로드
+        }
+
+        // 페이지가 로드될 때 타이머를 시작
+        var timer = setInterval(function () {
+            secondsElapsed++; // 경과 시간 증가
+            console.log(secondsElapsed + "초");
+            if (secondsElapsed === 45) {
+                clearInterval(timer); // 타이머 중지
+                showDelayedMessage(); // 메시지 표시 함수 호출
+            }
+        }, 1000); // 1초마다 실행
+
+        // 페이지에 클릭 또는 터치 이벤트가 발생하면 경과 시간을 초기화하고 다시 타이머를 시작
+        document.addEventListener('click', function () {
+            secondsElapsed = 0; // 경과 시간 초기화
+            console.log("터치 이벤트");
+        });
+
+    </script>
+
+    <!--한글 버전 복붙한 곳-->
+    <script>
+        let totalAmount = 0;
+        fetch('/getOrderData')
+            .then(response => response.json())
+            .then(data => {
+                console.log("Session data:", JSON.stringify(data));
+                // 주문 데이터를 가지고 총 금액 계산
+                totalAmount = calculateTotalAmount(data);
+                updateTotalAmountUI(totalAmount);
+
+                localStorage.setItem('myTotalCost', JSON.stringify(totalAmount));
+            });
+        function calculateTotalAmount(orders) {
+            return orders.reduce((total, order) => total + Number(order.total_price), 0);
+        }
+        function updateTotalAmountUI(amount) {
+            const formattedPrice = new Intl.NumberFormat('ko-KR').format(amount);//10.09 가격 쉼표 넣기
+            const totalCostElement = document.querySelector('.total_cost');
+            totalCostElement.textContent = '\u20A9' + formattedPrice;
+        }
+    </script>
+
+    <script>//09.14 수정
+        var currentURL = window.location.href;
+        var url = new URL(currentURL);
+        var params = new URLSearchParams(url.search);
+        var timer = params.get("timer");
+
+        // timer가 존재하고 유효한지 확인
+        if (timer !== null && !isNaN(timer)) {
+            timer = parseInt(timer);
+            function updateTimer() {
+                // 타이머를 1씩 감소
+                timer--;
+                // URL 파라미터 업데이트
+                params.set("timer", timer);
+                // 업데이트된 URL 생성
+                url.search = params.toString();
+                var newURL = url.toString();
+                // 브라우저 주소 표시줄 업데이트
+                window.history.replaceState({}, document.title, newURL);
+                // 타이머가 0이 되면 동작을 원하는 대로 처리
+                if (timer === 0) {
+                    document.getElementById("modalContainer").innerHTML = "";
+
+                    // detail_menu.css를 제거합니다.
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+                    if (detailMenuLink) {
+                        detailMenuLink.remove();
+                    }
+                    console.log("타이머가 0이 되었습니다.");
+                    clearInterval(countdownInterval);
+
+                    // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+                    fetch(`http://localhost:3001/timeout/timeout.html`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP Error " + response.status);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+                            modalContainer_e.innerHTML = data;
+
+                            // timeout.css 파일을 로드합니다.
+                            const linkElement = document.createElement("link");
+                            linkElement.rel = "stylesheet";
+                            linkElement.type = "text/css";
+                            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                            document.head.appendChild(linkElement);
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
+
+
+                            const modalBody = document.querySelector(".modal-body");
+                            modalBody.innerHTML = `
+                            <p class="content_font_size">
+                                The first set order time has ended.<br>
+                                Would you like to continue ordering?<br>
+                                Yes: Continue order (time added).)<br>
+                                No : Stop ordering<br>
+                                (Order history completely disappears!!!!) 
+                            </p>
+                                `;
+
+                            // 모달을 열기 위한 코드
+                            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                            modal.show();
+
+                            const yes = document.querySelector('.btn-primary');
+                            if (yes) {
+                                yes.textContent = "Yes";
+                            }
+                            yes.addEventListener("click", function () {//180초 추가하기
+                                params.set("timer", 180);
+                                url.search = params.toString();
+                                newURL = url.toString();
+                                window.history.replaceState({}, document.title, newURL);
+                                location.reload();
+                            })
+                            const no = document.querySelector('.btn-secondary');
+                            if (no) {
+                                no.textContent = "No";
+                            }
+                            no.addEventListener("click", function () {//시작 페이지로 이동
+                                window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                            })
+
+                        })
+                        .catch(error => {
+                            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                        });
+                } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+                    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                }
+            }
+            var countdownInterval = setInterval(updateTimer, 1000);//jojo등 모달창 html에 들어가야 하면 이 줄을 삭제 바람 안그러면 너무 빠르게 시간이 줄어들음
+        } else {
+            alert("유효한 타이머 시간을 지정하지 않았습니다.");
+        }
+    </script>
+
+</body>
+
+</html>

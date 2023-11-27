@@ -1,0 +1,807 @@
+@import url('../Pretendard-1.3.8/web/static/pretendard.css');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard';
+    overflow: hidden;
+}
+
+/*전체 div flex*/
+.all {
+    width: 100vw;
+    height: 100vh;
+}
+
+.top_banner {
+    width: 100%;
+    height: 12.6%;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.cafe_name {
+    width: 29.4%;
+    /* height: 35.4%; */
+    margin-bottom: 10px;
+}
+
+.hoi_box {
+    height: 100%;
+    display: flex;
+    align-items: end;
+
+    position: relative;
+    top: 10%;
+}
+
+.hoi {
+    height: 87.3%;
+}
+
+.help {
+    width: 12%;
+    height: 4.8%;
+    background-color: black;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 3vw;
+    border: solid 1px black;
+
+    position: absolute;
+    right: 4.4%;
+    top: 7%;
+}
+
+#imageLink {
+    color: white;
+}
+
+.main_box {
+    width: 100%;
+    height: 77.6%;
+    padding: 3.2% 4.4%;
+
+    background-color: #f4f4f4;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*포장 확인*/
+
+.main_top_box {
+    width: 100%;
+    height: 14.5%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4.5% 5.6%;
+
+    border-bottom: solid 2px #d9d9d9;
+}
+
+.take_out {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.take_out_inner_box {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.take_out_title {
+    width: 28.4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 4.5vw;
+}
+
+.take_out_title img {
+    height: 100%;
+    width: 27%;
+    margin-right: 10px;
+}
+
+.radio_box {
+    width: 45.7%;
+    height: 100%;
+}
+
+.take_out .list-group {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group .list-group-item {
+    height: 100%;
+    width: 47.2%;
+    border: none;
+    display: flex;
+    padding: 0;
+    align-items: center;
+}
+
+.list-group input {
+    display: none;
+}
+
+.list-group-item label {
+    width: 100%;
+    height: 90%;
+    font-weight: 600;
+    font-size: 3vw;
+    border: solid 2px #BBBBBB;
+    color: #BBBBBB;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+}
+
+.form-check-input[type='radio']:checked+label {
+    background-color: #FF991B;
+    border: solid 2px #FF991B;
+
+    color: white;
+}
+
+.list_menu {
+    width: 100%;
+    height: 89.5%;
+    background-color: white;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.list_menu_inner_box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.ho {
+    height: 69.8%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*네비게이션 바*/
+.navigation {
+    height: 7.5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+
+    border: solid 2px #007AC2;
+}
+
+.navigation_all_box {
+    width: 100%;
+    height: 100%;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr 1fr; 아래랑 같은 기능*/
+    display: flex;
+    justify-content: space-between;
+}
+
+.box_line {
+    background-color: white;
+    flex: 1;
+    display: flex;
+    border-radius: 10px;
+}
+
+.box_line:nth-child(2) {
+    border-left: solid 2px #007AC2;
+    border-right: solid 2px #007AC2;
+    border-radius: 0;
+}
+
+/* .now {
+    animation: progressAnimation 2.5s linear infinite;
+  }
+  
+  @keyframes progressAnimation {
+    0% {
+      height: 0;
+    }
+  
+    100% {
+      height: 100%;
+    }
+  } */
+
+/*각 단계 버튼*/
+.level_button {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7A7A7A;
+}
+
+.circle_name {
+    margin: 0;
+    font-size: 3vw;
+    font-weight: 500;
+}
+
+/*주문 리스트*/
+
+.ho_inner_box {
+    width: 100%;
+    height: 100%;
+}
+
+.explain_box {
+    width: 100%;
+    height: 11.6%;
+
+    background-color: rgba(187, 187, 187, 0.3);
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 3vw;
+}
+
+.menu_box {
+    width: 100%;
+    height: 100%;
+}
+
+.list_box {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: visible;
+    padding: 0 5.6%;
+}
+
+.list_content_box {
+    /* height: 65.4%; */
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    padding: 0 3.2%;
+}
+
+/* .list_content_box * {
+    background-color: white;
+} */
+
+.real_content_box {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 3.7% 0;
+}
+
+.cancel_btn {
+    width: 100%;
+    height: 14.4%;
+
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.cancel_btn img {
+    height: 4.5vw;
+    width: 4.5vw;
+}
+
+.checklist_box{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+
+    padding: 12px 15px 0;
+}
+
+.checklist_box_inner{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.list_img_box {
+    width: 31.25%;
+
+    border-radius: 10px;
+}
+
+.list_img_size_box {
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgba(233, 233, 233, 0.7);
+}
+
+.list_img_size {
+    width: 98%;
+    height: 98%;
+}
+
+/*주문 정보*/
+.list_content_info {
+    width: 61%;
+    height: 100%;
+}
+
+.text-center {
+    height: 100%;
+    width: 100%;
+    padding: 0 4.6%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content_title {
+    width: 100%;
+    margin-bottom: 4%;
+
+    font-weight: 600;
+    font-size: 3.5vw;
+
+    text-align: start;
+}
+
+.menu_cost{
+    margin-top: 2%;
+    color: #E70A0A;
+}
+
+/* .content_title .menu_name {
+    font-size: 3vw;
+    font-weight: 600;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    width: 100%;
+    height: 49.3%;
+
+    display: flex;
+    align-items: center;
+    justify-content: start;
+} */
+
+.cost_info {
+
+    display: flex;
+    justify-content: end;
+    width: 20%;
+
+    font-size: 3.5vw;
+    font-weight: 600;
+}
+
+/*개수 확인*/
+.button_box_num {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+.button_num {
+    margin: 0;
+    padding: 0;
+}
+
+.split_border {
+    border: solid 2px rgba(217, 217, 217, 0.7);
+}
+
+/*옵션*/
+.list_option {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 12%;
+}
+
+.list_option .list_option_detail {
+    padding: 0;
+    width: 75%;
+    overflow: hidden;
+    overflow-y: visible;
+}
+
+.list_option_detail .option_detail {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.option_detail span {
+    font-size: 2.5vw;
+    font-weight: 400;
+    color: #8E8E8E;
+
+    text-align: start;
+}
+
+/*수량 체크(text)*/
+.list_buttons {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+/* 수정 버튼*/
+.content_update_button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.content_update_button button {
+    width: 39.3%;
+    height: 100%;
+    font-weight: 600;
+    font-size: 3vw;
+    background-color: #42BEAF;
+    color: white;
+    border-radius: 10px;
+    border: solid 1px #42BEAF;
+
+    margin: 0;
+    padding: 5px;
+}
+
+.content_update_button button:hover {
+    color: black;
+    font-weight: 400;
+    border: solid 1px black;
+}
+
+/*하단 고정 버튼*/
+
+.add_fuc_bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 4.4%;
+    height: 9.8%;
+    width: 100%;
+    box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
+
+    border-top: solid 3px #d9d9d9;
+}
+
+.fix_button_detail {
+    width: 20vw;
+    height: 100%;
+    background-color: white;
+    font-weight: 400;
+    font-size: 3vw;
+
+    align-items: center;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+
+    flex: 1;
+}
+
+.bottom_button_box {
+    flex: 3;
+    /* 너비 비율을 3으로 설정 */
+    text-align: center;
+    border: none;
+}
+
+.fix_button_detail:hover {
+    background-color: #42BEAF;
+    border: solid 1px #42BEAF;
+}
+
+.fix_button_detail img {
+    margin: 0 2px;
+    height: 33.9%;
+    width: auto;
+
+    margin-bottom: 10px;
+}
+
+.no_menu {
+    font-weight: bold;
+    font-size: 4vw;
+    height: 30%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom_box {
+    width: 100%;
+    height: 15.7%;
+    /* border-top: solid 2px #d9d9d9; */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*최종 금액*/
+.total_cost_box {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+    font-size: 4.5vw;
+}
+
+.total_cost {
+    color: #E70A0A;
+    font-size: 5vw;
+    font-weight: 600;
+}
+
+.bottom_button_box {
+    height: 100%;
+    background-color: #E70A0A;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pay_inner_box {
+    width: 84.8%;
+    height: 49%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 4.5vw;
+    font-weight: 600;
+    color: white;
+}
+
+.pay_inner_box img {
+    height: 100%;
+    margin-right: 10px;
+}
+
+.next_btnnn:disabled {
+    background-color: white;
+    /* 비활성화된 배경색 */
+    color: gray;
+    /* 비활성화된 글자색 */
+    pointer-events: none;
+    /* hover 이벤트를 비활성화합니다. */
+    cursor: not-allowed;
+    /* 마우스 커서를 변경합니다. */
+}
+
+.speech-bubble {
+    position: absolute;
+    background: #00aabb;
+    border-radius: .4em;
+
+    width: 30%;
+    height: 8%;
+    font-size: 3.5vw;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+
+.second_bubble {
+    width: 40%;
+    right: 10px;
+    top: 72%;
+}
+
+.second_bubble:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 44px solid transparent;
+    border-bottom-color: #00aabb;
+    border-top: 0;
+    border-left: 0;
+    margin-left: -22px;
+    margin-top: -44px;
+}
+
+.first_bubble {
+    position: absolute;
+    left: 140px;
+    top: 81%;
+}
+
+.first_bubble::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: #00aabb;
+    border-bottom: 0;
+    margin-left: -20px;
+    margin-bottom: -20px;
+}
+
+/* @media screen and (min-width:1000px) {
+    .list-group-item label {
+        font-size: 2vw;
+        width: 80%;
+    }
+
+    .list_box {
+        height: 68%;
+        margin-top: 2%;
+        overflow: hidden;
+        overflow-y: visible;
+    }
+
+    .take_out_title {
+        font-weight: bold;
+        font-size: 2vw;
+        padding-right: 1rem;
+        width: 40%;
+        text-align: end;
+    }
+
+    .button_num {
+        position: relative;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2vw;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .list_option {
+        margin-top: 1%;
+        border-top: 3px solid black;
+        border-bottom: 3px solid black;
+        height: 55%;
+    }
+
+    .list_content_box {
+        display: flex;
+        justify-content: space-between;
+        margin: 1vw;
+        height: 45%;
+        border: none;
+    }
+
+    .content_update_button {
+        height: 96%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-left: solid 2px black;
+    }
+
+    .content_update_button button {
+        width: 45%;
+        height: 85%;
+        background-color: white;
+        font-weight: bold;
+        font-size: 1.5vw;
+        border-radius: 20%;
+    }
+
+    .take_out_title {
+        font-weight: bold;
+        font-size: 2vw;
+        padding-right: 1rem;
+        width: 40%;
+        text-align: end;
+    }
+
+    .list-group-item label {
+        font-size: 2vw;
+        width: 80%;
+    }
+
+    .menu_name {
+        font-size: 2vw;
+        text-align: left;
+        padding: 0;
+        border-right: solid 2px black;
+    }
+
+    .menu_cost {
+        padding: 0;
+        text-align: left;
+        font-size: 2vw;
+    }
+
+    .option_detail {
+        padding: 0;
+        margin: 0;
+        font-size: 2vw;
+        font-weight: bold;
+    }
+} */

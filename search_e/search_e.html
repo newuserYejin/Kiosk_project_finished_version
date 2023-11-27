@@ -1,0 +1,200 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/css/index.css">
+    <!-- <link rel="stylesheet" type="text/css"  href="./search_e.css"/> -->
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal_size">
+                <div class="modal-header">
+                    <div>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Search</h1>
+                        <img src="../icon_img/delete_btn.png" data-bs-dismiss="modal" aria-label="Close" />
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            style="display: none;"></button>
+                    </div>
+                </div>
+
+                <div class="modal-body">
+                    <div class="top_box">
+                        <div>
+                            <input class="input" type="text" id="input_menu_name" placeholder="Enter a product name" />
+                            <img class="search_icon" id="search_icon" src="../icon_img/search_black.png" />
+                        </div>
+                    </div>
+
+                    <!--키워드-->
+                    <div class="keyword_box" id="resultContainer">
+                        <div class="keyworld_title">Recommended keyword</div>
+                        <div class="real_keyword">
+                            <button class="keyword">Strawberry</button>
+                            <button class="keyword">Latte</button>
+                            <button class="keyword">Chocolate</button>
+                            <button class="keyword">Sandwich</button>
+                            <button class="keyword">Macaron</button>
+                            <button class="keyword">Peach</button>
+                            <button class="keyword">Mint</button>
+                            <button class="keyword">Cake</button>
+                        </div>
+                    </div>
+
+                    <!--음성인식-->
+                    <div class="voice_box">
+                        <div class="speech_icon">
+                            <button onclick="sendSpeech();" class="mike_box">
+                                <img src="../icon_img/mike_icon.png" />
+                            </button>
+                        </div>
+                        <div class="speech_result_box">
+                            <p class="output_text">If you want voice recognition,<br> press the microphone button</p>
+                            <button onclick="search_go();" style="display: none;">Search button</button>
+                        </div>
+                    </div>
+
+                    <!--키보드-->
+                    <div class="keyboard_size">
+                        <div id="KeyBoard" class="simple-keyboard i_keyboard"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close_btn" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+        integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
+    <!-- <script src="./search_e.js"></script> -->
+
+    <!-- <script>
+        // 페이지 로딩 후 모달 창을 자동으로 표시합니다.
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+        });
+
+    </script> -->
+    <script>//09.14 수정
+        var currentURL = window.location.href;
+        var url = new URL(currentURL);
+        var params = new URLSearchParams(url.search);
+        var timer = params.get("timer");
+
+        // timer가 존재하고 유효한지 확인
+        if (timer !== null && !isNaN(timer)) {
+            timer = parseInt(timer);
+            function updateTimer() {
+                // 타이머를 1씩 감소
+                timer--;
+                // URL 파라미터 업데이트
+                params.set("timer", timer);
+                // 업데이트된 URL 생성
+                url.search = params.toString();
+                var newURL = url.toString();
+                // 브라우저 주소 표시줄 업데이트
+                window.history.replaceState({}, document.title, newURL);
+                // 타이머가 0이 되면 동작을 원하는 대로 처리
+                if (timer === 0) {
+                    document.getElementById("modalContainer").innerHTML = "";
+
+                    // detail_menu.css를 제거합니다.
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+                    if (detailMenuLink) {
+                        detailMenuLink.remove();
+                    }
+                    console.log("타이머가 0이 되었습니다.");
+                    clearInterval(countdownInterval);
+
+                    // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+                    fetch(`http://localhost:3001/timeout/timeout.html`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP Error " + response.status);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+                            modalContainer_e.innerHTML = data;
+
+                            // timeout.css 파일을 로드합니다.
+                            const linkElement = document.createElement("link");
+                            linkElement.rel = "stylesheet";
+                            linkElement.type = "text/css";
+                            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                            document.head.appendChild(linkElement);
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
+
+                            const modalBody = document.querySelector(".modal-body");
+                            modalBody.innerHTML = `
+                            <p class="content_font_size">
+                                The first set order time has ended.<br>
+                                Would you like to continue ordering?<br>
+                                Yes: Continue order (time added).)<br>
+                                No : Stop ordering<br>
+                                (Order history completely disappears!!!!) 
+                            </p>
+                                `;
+
+                            // 모달을 열기 위한 코드
+                            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                            modal.show();
+
+                            const yes = document.querySelector('.btn-primary');
+                            if (yes) {
+                                yes.textContent = "Yes";
+                            }
+                            yes.addEventListener("click", function () {//180초 추가하기
+                                params.set("timer", 180);
+                                url.search = params.toString();
+                                newURL = url.toString();
+                                window.history.replaceState({}, document.title, newURL);
+                                location.reload();
+                            })
+                            const no = document.querySelector('.btn-secondary');
+                            if (no) {
+                                no.textContent = "No";
+                            }
+                            no.addEventListener("click", function () {//시작 페이지로 이동
+                                window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                            })
+
+                        })
+                        .catch(error => {
+                            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                        });
+                } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+                    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                }
+            }
+
+        } else {
+            alert("유효한 타이머 시간을 지정하지 않았습니다.");
+        }
+    </script>
+
+</body>

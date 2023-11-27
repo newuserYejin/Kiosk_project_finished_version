@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>start_page</title>
+    <link rel="stylesheet" type="text/css" href="./selectorder_e.css" />
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <div class="all">
+        <div class="banner">
+            <div class="banner_content_box">
+                <img src="../icon_img/banner_card_icon.png" alt="배너 카드 이미지">
+                <div class="banner_ment">
+                    <p>Card / Mobile Coupon Payment Only</p>
+                    <p>If cash or other payments and discounts are required, Please use the counter</p>
+                    <!-- <p>Please use the counter</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="first">
+                <div class="cafe_name">
+                    <img src="../icon_img/cafe_name_eng.png">
+                </div>
+                <div class="order_explan">
+                    <div class="order_explan_content">
+                        <div>It's okay to be slow</div>
+                        <div>Shall we do it as usual</div>
+                    </div>
+                </div>
+                <div class="fir_box">
+                    <div class="order">
+                        <div>
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=slow&timer=330'">
+                                <button type="button" class="order_button">Ordering<br>slowly</button>
+                                <img src="../icon_img/q_hoi.png" />
+                            </section>
+                        </div>
+
+                        <div>
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat_e/selecteat_e.html?order=basic&timer=150'">
+                                <button type="button" class="order_button">Ordering<br>basic</button>
+                                <img src="../icon_img/highlight_hoi.png" />
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="help">
+                    <div class="help_real_box">
+                        <div class="helping" id="imageLink">Help</div>
+                        <div id="modalContainer_e"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="language">
+                <div class="language_content_box">
+                    <div class="kor" onclick="lang_ch()">Kor</div>
+                    <div class="usa selected_lag">Eng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // 이미지 클릭 시 모달 열기 및 도움말 및 비디오 표시
+        const joImage = document.getElementById("imageLink");
+
+        joImage.addEventListener("click", function () {
+            // 먼저 modalContainer_e를 비웁니다.
+            document.getElementById("modalContainer_e").innerHTML = "";
+
+            // help_msg.html 콘텐츠를 로드하여 modalContainer_e에 추가합니다.
+            fetch("http://localhost:3001/help_msg/help_msg.html")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP Error " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // modalContainer_e에 help_msg.html 콘텐츠를 추가합니다.
+                    // 모달 제목을 찾아서 변경
+                    document.getElementById("modalContainer_e").innerHTML = data;
+
+                    const modalTitle = document.querySelector(".modal-title");
+                    if (modalTitle) {
+                        modalTitle.textContent = "Help"; // "help"로 변경
+                    }
+
+                    const close_btn = document.querySelector(".help_close");
+                    if (close_btn) {
+                        close_btn.textContent = "Close";
+                    }
+
+                    const modalBody = document.querySelector(".modal-body");
+                    modalBody.innerHTML = `
+                        <video autoplay controls>
+                            <source src="../help_video/selectorder_e.mp4" type="video/mp4">
+                            Please call the administrator
+                        </video>
+    
+                        <section class="content_explain">
+                            1. This is the first screen of the HOI Cafe kiosk.<br>
+                            2. If you are not familiar with kiosks, please select 'Ordering slowly'.<br>
+                            3. If you are familiar with kiosks, please select 'Ordering basic'.<br>
+                            4. If you want to order in Korean, please choose 'Kor'.
+                        </section>
+                    `;
+
+                    // help_msg.css 파일을 로드합니다.
+                    const linkElement = document.createElement("link");
+                    linkElement.rel = "stylesheet";
+                    linkElement.type = "text/css";
+                    linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
+                    document.head.appendChild(linkElement);
+
+                    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                });
+        });
+    </script>
+
+    <script>
+        function lang_ch() {
+            window.location.href = 'http://localhost:3001/selectorder/selectorder.html';
+        }
+    </script>
+
+
+    <!--09.04추가-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 페이지 로드 시 서버에 초기화 요청을 보냅니다.
+            fetch("http://localhost:3001/reset", {
+                method: "POST", // 또는 GET 요청으로 변경할 수 있습니다.
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // 초기화 작업 완료 후 실행할 코드를 여기에 추가합니다.
+                    console.log(data.message); // 서버 응답 메시지 출력 예제
+                })
+                .catch((error) => {
+                    console.error("Error reset data:", error);
+                });
+        });
+    </script>
+
+    <script>
+
+        var secondsElapsed = 0;
+
+        // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
+        function showDelayedMessage() {
+            secondsElapsed = 25; // 10초 경과
+            console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
+            //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
+            openModal();
+        }
+
+        function openModal() {
+            $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+
+        // showDelayedMessage() 함수가 실행된 후 페이지 리로드 및 경과 시간 초기화
+        function showDelayedMessageAndReload() {
+            showDelayedMessage();
+            setTimeout(function () {
+                //location.reload(); // 일정 시간 후 페이지 리로드
+            }, 10000); // 10초 후 리로드
+        }
+
+        // 페이지가 로드될 때 타이머를 시작
+        var timer = setInterval(function () {
+            secondsElapsed++; // 경과 시간 증가
+            console.log(secondsElapsed + "초");
+            if (secondsElapsed === 25) {
+                clearInterval(timer); // 타이머 중지
+                showDelayedMessage(); // 메시지 표시 함수 호출
+            }
+        }, 1000); // 1초마다 실행
+
+        // 페이지에 클릭 또는 터치 이벤트가 발생하면 경과 시간을 초기화하고 다시 타이머를 시작
+        document.addEventListener('click', function () {
+            secondsElapsed = 0; // 경과 시간 초기화
+            console.log("터치 이벤트");
+        });
+
+    </script>
+</body>
+
+</html>

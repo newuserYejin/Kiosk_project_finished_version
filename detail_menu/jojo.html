@@ -1,200 +1,236 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>상세 메뉴</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="detail_menu.js"></script>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="detail_menu.css" rel="stylesheet" type="text/css" /> -->
+    <link rel="icon" href="/favicon.ico">
+
 </head>
 
-<body>
-    <!DOCTYPE html>
-    <html>
-
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>replit</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet" type="text/css" />
-    </head>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-        Launch demo modal
-    </button>
-
+<body style="font-family: 'pretendard';">
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+        style="display: flex;">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="all_modal">
-                    <div class="modal-header border_line">
-                        <h5 class="modal-title" id="exampleModalLongTitle">상세 메뉴</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <div class="modal-header">
+                        <div>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">상세 메뉴</h1>
+                            <img src="../icon_img/delete_btn.png" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                style="display: none;"></button>
+                        </div>
                     </div>
-                    <div class="modal-body border_line">
+
+                    <div class="modal-body">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-6">
+                            <div class="info_row">
+                                <div class="info_row_box1">
                                     <div class="menu_img_box">
-                                        <img class="menu_img_size"
-                                            src="https://search.pstatic.net/common/?src=http%3A%2F%2Fshop1.phinf.naver.net%2F20230515_3%2F1684110362848RHjpp_JPEG%2F12428024669556457_1834440081.jpg&type=sc960_832" />
+                                        <img class="menu_img_size" src="" />
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="info_row_box2">
                                     <div class="menu_explain">
                                         <div class="menu_explain_center">
-                                            <div class="menu_explain_content menu_title">
-                                                아메리카노
-                                            </div>
-                                            <div class="menu_explain_content">
-                                                가격: 3000원
-                                            </div>
-                                            <div class="menu_explain_content">
-                                                카페의 가장 기본적인 음료!
-                                            </div>
-
-                                            <!--수량 체크 박스-->
-                                            <div class="num_check">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <button class="btn btn-outline-secondary"
-                                                            id="decrement">-</button>
-                                                    </div>
-                                                    <input type="text" class="form-control" id="quantity" value="1"
-                                                        readonly>
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary"
-                                                            id="increment">+</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-
+                                            <div class="menu_explain_content menu_title"></div>
+                                            <div class="menu_explain_content menu_explain_detail"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 ml-auto">
-                                <div class="option_box">
-                                    <div class="option">
 
-                                        <!--라디오 박스-->
-                                        <p class="option_name">
-                                            첫번째 옵션
-                                        </p>
+                        <div class="detail_explain_bottom">
+                            <!--수량 체크 박스-->
+                            <div class="num_check">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" id="decrement">
+                                            <img src="../icon_img/decrement.png">
+                                        </button>
+                                    </div>
+                                    <input type="text" class="form-control" id="quantity" value="1" readonly />
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" id="increment">
+                                            <img src="../icon_img/increment.png">
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="menu_explain_content EI_menu_cost"></div>
+                            </div>
+                            <!-- <div class="add_button">
+                                <button class="btn-info" data-bs-dismiss="modal">추가</button>
+                            </div> -->
+                        </div>
 
+                        <!--알레르기-->
+                        <div class="r_box">
+                            <p class="r_name">알레르기 : </p>
+                            <ul class="allegy_list">
+                                <li>없음</li>
+                            </ul>
+                        </div>
+
+                        <div class="op_box">
+                            <div class="option_box">
+                                <div class="option">
+                                    <div class="option_inner_bow">
+                                        <!-- 라디오 박스 -->
+                                        <div class="option_name_box_t">
+                                            <p class="option_name">온도</p>
+                                            <img onclick="show_qr('t')" src="../icon_img/question.svg"
+                                                style="width: 4vw; height: 4vw;">
+                                            <div class="speech-bubble temp" style="visibility: hidden;">
+                                                <div>내용</div>
+                                            </div>
+                                        </div>
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
-                                                    value="" id="firstRadio" checked>
-                                                <label class="form-check-label" for="firstRadio">First
-                                                    radio</label>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
-                                                    value="" id="secondRadio">
-                                                <label class="form-check-label" for="secondRadio">Second
-                                                    radio</label>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
-                                                    value="" id="thirdRadio">
-                                                <label class="form-check-label" for="thirdRadio">Third
-                                                    radio</label>
-                                            </li>
+                                            <!-- 라디오 박스 내용은 JavaScript에서 생성됨 -->
                                         </ul>
-
-
                                     </div>
-                                    <div class="option">
-                                        <!--체크 박스-->
-                                        <p class="option_name">
-                                            두번째 옵션
-                                        </p>
+                                </div>
 
+                                <div class="option">
+                                    <div class="option_inner_bow option_size">
+                                        <!-- 라디오 박스 -->
+                                        <div class="option_name_box_s">
+                                            <p class="option_name">크기</p>
+                                            <img onclick="show_qr('s')" src="../icon_img/question.svg"
+                                                style="width: 4vw; height: 4vw;">
+                                            <div class="speech-bubble size" style="visibility: hidden;">
+                                                <div>내용</div>
+                                            </div>
+                                        </div>
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                              <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                                              <label class="form-check-label" for="firstCheckbox">First checkbox</label>
-                                            </li>
-                                            <li class="list-group-item">
-                                              <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                                              <label class="form-check-label" for="secondCheckbox">Second checkbox</label>
-                                            </li>
-                                            <li class="list-group-item">
-                                              <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                                              <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
-                                            </li>
-                                          </ul>
+                                            <!-- 라디오 박스 내용은 JavaScript에서 생성됨 -->
+                                        </ul>
+                                    </div>
+                                </div>
 
-                                    </div>
-                                    <div class="option">
-                                        <div class="option_title">
-                                            커피 진하기
-                                        </div>
-                                        <div>
-                                            진하게 vs 연하게
-                                        </div>
-                                    </div>
-                                    <div class="option">
-                                        <div class="option_title">
-                                            커피 진하기
-                                        </div>
-                                        <div>
-                                            진하게 vs 연하게
-                                        </div>
-                                    </div>
-                                    <div class="option">
-                                        <div class="option_title">
-                                            커피 진하기
-                                        </div>
-                                        <div>
-                                            진하게 vs 연하게
+                                <div class="option check">
+                                    <div class="option_inner_bow">
+                                        <!-- 체크박스 -->
+                                        <p class="option_name">추가 사항</p>
+                                        <div class="chek_ul_box">
+                                            <ul class="list-group ch chek_ul">
+                                                <!-- 체크박스 내용은 JavaScript에서 생성됨 -->
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">추가</button>
+                    <div class="modal-footer">
+                        <div class="jojo_bottom_box">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-secondary btn-info save_btn"
+                                data-bs-dismiss="modal">담기</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
-
-
-
-
-
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+    <!-- <script src="http://localhost:3001/detail_menu/detail_menu.js"></script> -->
+
+    <!-- <script>//09.14 수정
+        var currentURL = window.location.href;
+        var url = new URL(currentURL);
+        var params = new URLSearchParams(url.search);
+        var timer = params.get("timer");
+
+        // timer가 존재하고 유효한지 확인
+        if (timer !== null && !isNaN(timer)) {
+            timer = parseInt(timer);
+            function updateTimer() {
+                // 타이머를 1씩 감소
+                timer--;
+                // URL 파라미터 업데이트
+                params.set("timer", timer);
+                // 업데이트된 URL 생성
+                url.search = params.toString();
+                var newURL = url.toString();
+                // 브라우저 주소 표시줄 업데이트
+                window.history.replaceState({}, document.title, newURL);
+                // 타이머가 0이 되면 동작을 원하는 대로 처리
+                if (timer === 0) {
+                    document.getElementById("modalContainer").innerHTML = "";
+
+                    // detail_menu.css를 제거합니다.
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu/detail_menu.css"]');
+                    if (detailMenuLink) {
+                        detailMenuLink.remove();
+                    }
+                    console.log("타이머가 0이 되었습니다.");
+                    clearInterval(countdownInterval);
+
+                    // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+                    fetch(`http://localhost:3001/timeout/timeout.html`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP Error " + response.status);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+                            $("#modalContainer").html(data);
+
+                            // timeout.css 파일을 로드합니다.
+                            const linkElement = document.createElement("link");
+                            linkElement.rel = "stylesheet";
+                            linkElement.type = "text/css";
+                            linkElement.href = "http://localhost:3001/timeout/timeout.css";
+                            document.head.appendChild(linkElement);
+
+                            // 모달을 열기 위한 코드
+                            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                            modal.show();
+
+                            const yes = document.querySelector('.btn-primary');
+                            yes.addEventListener("click", function () {//180초 추가하기
+                                params.set("timer", 180);
+                                url.search = params.toString();
+                                newURL = url.toString();
+                                window.history.replaceState({}, document.title, newURL);
+                                location.reload();
+                            })
+                            const no = document.querySelector('.btn-secondary');
+                            no.addEventListener("click", function () {//시작 페이지로 이동
+                                window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                            })
+
+                        })
+                        .catch(error => {
+                            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                        });
+                } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+                    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                }
+            }
+
+        } else {
+            alert("유효한 타이머 시간을 지정하지 않았습니다.");
+        }
+    </script> -->
+
 </body>
-
-</html>

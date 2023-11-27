@@ -1,0 +1,97 @@
+@import url('../Pretendard-1.3.8/web/static/pretendard.css');
+
+#modalContainer .modal {
+    width: 100vw;
+    height: 100vh;
+}
+
+#modalContainer .modal *{
+    font-family: 'Pretendard';
+}
+
+#modalContainer .modal-dialog{
+    margin: 0 auto;
+}
+
+#modalContainer .help_modal_dialog {
+    width: 88.2%;
+    height: 100%;
+    max-width: none;
+}
+
+#modalContainer .modal-content{
+    width: 100%;
+    height: 33.6%;
+}
+
+#modalContainer .modal-header{
+    height: 27.2%;
+    width: 100%;
+
+    /* border: none; */
+}
+
+#modalContainer .header_box{
+    width: 95%;
+    height: 36.3%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#modalContainer .fs-5{
+    font-size: 4.5vw!important;
+    font-weight: 600;
+
+    color: #007AC2;
+}
+
+#modalContainer .modal-body{
+    width: 100%;
+    height: 39.3%;
+
+    /* border: none; */
+}
+
+#modalContainer .modal-body p{
+    text-align: start;
+}
+
+#modalContainer .modal-body *{
+    font-size: 3vw;
+    font-weight: 400;
+}
+
+#modalContainer .modal-footer{
+    width: 100%;
+    height: 24.4%;
+    padding: 0 5.8%;
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    /* border: none; */
+}
+
+#modalContainer .modal-footer button{
+    width: 18.6%;
+    height: 48.1%;
+
+    background-color: black;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3vw;
+    font-weight: 600;
+}
+
+#modalContainer .modal-footer .btn .btn-primary{
+    border: none;
+    --bs-btn-bg: black;
+    --bs-btn-border-color:black;
+}

@@ -1,0 +1,174 @@
+@import url('../Pretendard-1.3.8/web/static/pretendard.css');
+
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pretendard';
+}
+
+.top_banner {
+    width: 100%;
+    height: 12.6%;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.cafe_name {
+    width: 29.4%;
+    /* height: 35.4%; */
+    margin-bottom: 10px;
+}
+
+.hoi_box {
+    height: 100%;
+    display: flex;
+    align-items: end;
+
+    position: relative;
+    top: 10%;
+}
+
+.hoi {
+    height: 87.3%;
+}
+
+.help {
+    width: 12%;
+    height: 4.8%;
+    background-color: black;
+    border-radius: 15px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 3vw;
+    border: solid 1px black;
+
+    position: absolute;
+    right: 4.4%;
+    top: 7%;
+}
+
+#imageLink {
+    color: white;
+}
+
+.main_box{
+    width: 100%;
+    height: 77.6%;
+
+    padding: 4.4% 3.2%;
+
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+}
+
+.all {
+    width: 100vw;
+    height: 100vh;
+}
+
+.ordernum {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ordernum img{
+    width: 100%;
+}
+
+.order {
+    border: solid 3px black;
+    width: 60.5%;
+    height: 70.3%;
+
+    border-radius: 10px;
+
+    padding: 20.6% 13.4%;
+}
+
+.info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.completed {
+    font-size: 7.5vw;
+    font-weight: 600;
+}
+
+.waitnum {
+    font-size: 6vw;
+    font-weight: 600;
+}
+
+.num {
+    font-size: 7.5vw;
+    font-weight: 700;
+    text-align: center;
+    color: #007AC2;
+}
+
+.gohome {
+    width: 100%;
+    height: 9.8%;
+
+    font-size: 3vw;
+    font-weight: 400;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+.gohome img{
+    margin: 0 2px;
+    height: 33.9%;
+    width: auto;
+
+    margin-bottom: 10px;
+}
+
+.gohome button{
+    width: 88.2%;
+    height: 68.4%;
+    border-radius: 10px;
+
+    font-size: 3vw;
+    font-weight: 600;
+
+    border: none;
+    box-shadow: none;
+}
+
+.gohome button:hover {
+    background-color: #00aabb;
+    border: solid 1px #00aabb;
+}

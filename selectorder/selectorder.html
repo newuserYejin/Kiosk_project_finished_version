@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시작페이지</title>
+    <link rel="stylesheet" type="text/css" href="selectorder.css" />
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <div class="all">
+        <div class="banner">
+            <div class="banner_content_box">
+                <img src="../icon_img/banner_card_icon.png" alt="배너 카드 이미지">
+                <div class="banner_ment">
+                    <p>카드 / 모바일 쿠폰 결제 전용</p>
+                    <p>현금 기타 결제 및 할인이 필요한 경우,</p>
+                    <p>카운터를 이용해주세요</p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="first">
+                <div class="cafe_name">
+                    <img src="../icon_img/cafe_name_re.png">
+                </div>
+                <div class="order_explan">
+                    <div class="order_explan_content">
+                        <div>천천히 해볼래요</div>
+                        <div>잘 할 수 있어요</div>
+                    </div>
+                </div>
+                <div class="fir_box">
+                    <div class="order">
+                        <div>
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=slow&timer=330'">
+                                <button class="order_button" type="button">천천히<br>주문하기</button>
+                                <!-- <img src="./image/order_hoi.png" /> -->
+                                <img src="../icon_img/q_hoi.png" />
+                            </section>
+                        </div>
+
+                        <div>
+                            <section
+                                onclick="location.href='http://localhost:3001/selecteat/selecteat.html?order=basic&timer=150'">
+                                <button class="order_button" type="button">기본<br>주문하기</button>
+                                <!-- <img src="./image/stand_hoi.png" /> -->
+                                <img src="../icon_img/highlight_hoi.png" />
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="help">
+                    <div class="help_real_box">
+                        <div class="helping" id="imageLink">도움말</div>
+                        <div id="modalContainer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="language">
+                <div class="language_content_box">
+                    <div class="kor selected_lag">한국어</div>
+                    <div class="usa" onclick="lang_ch()">ENG</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const joImage = document.getElementById("imageLink");
+
+        joImage.addEventListener("click", function () {
+            // 먼저 모달 컨테이너를 비웁니다.
+            document.getElementById("modalContainer").innerHTML = "";
+
+            // help_msg.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+            fetch("http://localhost:3001/help_msg/help_msg.html")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP Error " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // 모달 컨테이너에 help_msg.html 콘텐츠를 추가합니다.
+                    modalContainer.innerHTML = data;
+
+                    const modalBody = document.querySelector(".modal-body");
+                    modalBody.innerHTML = `
+                    <video autoplay controls>
+                        <source src="../help_video/selectorder.mp4" type="video/mp4">
+                        관리자를 호출해주세요.
+                    </video>
+
+                    <section class="content_explain">
+                        1. 호이카페 키오스크의 첫 화면입니다.<br>
+                        2. 키오스크가 익숙하지 않으시면 '천천히 주문하기'를 선택해주세요.<br>
+                        3. 키오스크가 익숙하시면 '기본 주문하기'를 선택해주세요.<br>
+                        4. 영어로 주문하실 경우 'ENG'를 선택해주세요.
+                    </section>
+                    `;
+
+                    // help_msg.css 파일을 로드합니다.
+                    const linkElement = document.createElement("link");
+                    linkElement.rel = "stylesheet";
+                    linkElement.type = "text/css";
+                    linkElement.href = "http://localhost:3001/help_msg/help_msg.css";
+                    document.head.appendChild(linkElement);
+
+                    // 외부 js 파일을 로드합니다.
+                    const scriptElement = document.createElement("script");
+                    scriptElement.src = "http://localhost:3001/help_msg/help_msg.js"; // 이 부분의 파일 경로를 수정해야합니다.
+                    document.body.appendChild(scriptElement);
+
+                    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                });
+        });
+
+    </script>
+
+    <!-- 09.04추가 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 페이지 로드 시 서버에 초기화 요청을 보냅니다.
+            fetch("http://localhost:3001/reset", {
+                method: "POST", // 또는 GET 요청으로 변경할 수 있습니다.
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    // 초기화 작업 완료 후 실행할 코드를 여기에 추가합니다.
+                    console.log(data.message); // 서버 응답 메시지 출력 예제
+                })
+                .catch((error) => {
+                    console.error("Error reset data:", error);
+                });
+        });
+
+        function lang_ch() {
+            window.location.href = 'http://localhost:3001/selectorder_e/selectorder_e.html';
+        }
+        localStorage.removeItem('selectedCategory');//10.31 추가
+    </script>
+
+    <!-- <script>
+        function adjustBodyWidth() {
+            var windowHeight = window.innerHeight;
+            var windowWidth = window.innerWidth;
+            var heightMinusWidthDifference = windowHeight - windowWidth;
+
+            if (heightMinusWidthDifference >= 500) {
+                // height와 width의 차이가 500px 이상일 때 body의 width를 680px로 설정
+                document.body.style.width = "700px";
+            } else {
+                // 그렇지 않을 경우 body의 width를 100%로 설정
+                document.body.style.width = "100%";
+            }
+        }
+
+        // 윈도우 크기가 변경될 때마다 함수를 호출하여 스타일을 업데이트
+        window.addEventListener("resize", adjustBodyWidth);
+
+        // 초기에도 함수를 호출하여 초기 스타일 설정
+        adjustBodyWidth();
+    </script> -->
+
+</body>
+
+</html>

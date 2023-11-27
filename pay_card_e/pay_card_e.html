@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="korean">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card_pay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./pay_card_e.css" />
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <div class="all_box">
+        <div class="top_banner">
+            <div class="hoi_box">
+                <img class="hoi" src="../icon_img/good_hoi.png" />
+            </div>
+            <img class="cafe_name" src="../icon_img/cafe_name_eng.png" />
+
+            <div class="help">
+                <div id="imageLink">Help</div>
+                <div id="modalContainer_e"></div>
+            </div>
+        </div>
+
+        <div class="main_box">
+            <!--navigate bar-->
+            <div class="navigation">
+                <div class="navigation_all_box">
+                    <div class="box_line">
+                        <div onclick="openSelect()" class="level_button">
+                            <p class="circle_name">1.Choose</p>
+                        </div>
+                    </div>
+
+                    <div class="box_line">
+                        <div onclick="openCheck()" class="level_button">
+                            <p class="circle_name">2.Check</p>
+                        </div>
+                    </div>
+
+                    <div class="box_line">
+                        <div onclick="openPay()" class="level_button">
+                            <p class="circle_name">3.Pay</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="selectpay">
+                <div class="first">
+                    <div class="title">
+                        <img src="../icon_img/cardpay_mark.png" />
+                        Paying
+                    </div>
+
+                    <div class="fir_box">
+                        <div class="explain">
+                            <div class="explain1">Please insert the card <br> into the slot like the video</div>
+                            <div class="video">
+                                <img class="pay_card" src="../icon_img/pay_card.gif" loop=infinite />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="under_buttons">
+                        <button type="button" class="back" onclick="back()">Previous screen</button>
+                        <button type="button" class="gohome" onclick="gohome()">Return to order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_box">
+            <button class="fix_button_detail fix_button_home" onclick="firstScreen()">
+                <img src="../icon_img/home_icon.png">Home
+            </button>
+            <button class="fix_button_detail fix_button_pre" onclick="back()">
+                <img src="../icon_img/left_icon.png">Previous
+            </button>
+
+            <!--총금액확인-->
+            <div class="total_cost_box">
+                <span>Total Cost :&nbsp;</span>
+                <div class="total_cost">&#8361;0</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="./pay_card_e.js"></script>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        setTimeout(function () {
+            openModal();
+        }, 15000); // 3000 밀리초는 3초입니다
+
+        // 모달 열기 함수
+        function openModal() {
+            $.get("http://localhost:3001/payment_msg_e/payment_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // 모달에 CSS 파일을 추가합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css"; // CSS 파일 경로
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+    </script>
+
+    <script>//09.14 수정
+        var currentURL = window.location.href;
+        var url = new URL(currentURL);
+        var params = new URLSearchParams(url.search);
+        var timer = params.get("timer");
+
+        // timer가 존재하고 유효한지 확인
+        if (timer !== null && !isNaN(timer)) {
+            timer = parseInt(timer);
+            function updateTimer() {
+                // 타이머를 1씩 감소
+                timer--;
+                // URL 파라미터 업데이트
+                params.set("timer", timer);
+                // 업데이트된 URL 생성
+                url.search = params.toString();
+                var newURL = url.toString();
+                // 브라우저 주소 표시줄 업데이트
+                window.history.replaceState({}, document.title, newURL);
+                // 타이머가 0이 되면 동작을 원하는 대로 처리
+                if (timer === 0) {
+                    document.getElementById("modalContainer_e").innerHTML = "";
+
+                    // detail_menu.css를 제거합니다.
+                    const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+                    if (detailMenuLink) {
+                        detailMenuLink.remove();
+                    }
+                    console.log("타이머가 0이 되었습니다.");
+                    clearInterval(countdownInterval);
+
+                    // timeout.html 콘텐츠를 로드하여 모달 컨테이너에 추가합니다.
+                    fetch(`http://localhost:3001/timeout/timeout.html`)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("HTTP Error " + response.status);
+                            }
+                            return response.text();
+                        })
+                        .then(data => {
+                            // 모달 컨테이너에 timeout.html 콘텐츠를 추가합니다.
+                            modalContainer_e.innerHTML = data;
+
+                            // timeout.css 파일을 로드합니다.
+                            const linkElement = document.createElement("link");
+                            linkElement.rel = "stylesheet";
+                            linkElement.type = "text/css";
+                            linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                            document.head.appendChild(linkElement);
+
+                            const modalTitle = document.querySelector(".modal-title");
+                            if (modalTitle) {
+                                modalTitle.textContent = "Confirmation message"; // "help"로 변경
+                            }
+
+                            const modalBody = document.querySelector(".modal-body");
+                            modalBody.innerHTML = `
+                            <p class="content_font_size">
+                                The first set order time has ended.<br>
+                                Would you like to continue ordering?<br>
+                                Yes: Continue order (time added).)<br>
+                                No : Stop ordering<br>
+                                (Order history completely disappears!!!!) 
+                            </p>
+                                `;
+
+                            // 모달을 열기 위한 코드
+                            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                            modal.show();
+
+                            const yes = document.querySelector('.btn-primary');
+                            if (yes) {
+                                yes.textContent = "Yes";
+                            }
+                            yes.addEventListener("click", function () {//180초 추가하기
+                                params.set("timer", 180);
+                                url.search = params.toString();
+                                newURL = url.toString();
+                                window.history.replaceState({}, document.title, newURL);
+                                location.reload();
+                            })
+                            const no = document.querySelector('.btn-secondary');
+                            if (no) {
+                                no.textContent = "No";
+                            }
+                            no.addEventListener("click", function () {//시작 페이지로 이동
+                                window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                            })
+
+                        })
+                        .catch(error => {
+                            console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                        });
+                } else if (timer < -10) {//타이머가 0보다 작을때 강제로 시작페이지로
+                    window.location.href = "http://localhost:3001/selectorder/selectorder.html";
+                }
+            }
+            var countdownInterval = setInterval(updateTimer, 1000);//jojo등 모달창 html에 들어가야 하면 이 줄을 삭제 바람 안그러면 너무 빠르게 시간이 줄어들음
+        } else {
+            alert("유효한 타이머 시간을 지정하지 않았습니다.");
+        }
+    </script>
+</body>
+
+</html>

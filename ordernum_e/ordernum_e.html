@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="korea">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordernum</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./ordernum_e.css" />
+</head>
+
+<body style="font-family: 'Pretendard';">
+    <div class="all">
+        <!--상단 배너-->
+        <div class="top_banner">
+            <div class="hoi_box">
+                <img class="hoi" src="../icon_img/good_hoi.png" />
+            </div>
+            <img class="cafe_name" src="../icon_img/cafe_name_eng.png" />
+
+            <div class="help">
+                <div id="imageLink">Help</div>
+                <div id="modalContainer_e"></div>
+            </div>
+        </div>
+        <div class="main_box">
+            <div class="ordernum">
+                <!-- <div class="order">
+                    <div class="info">
+                        <p class="completed">주문 완료</p>
+                        <div>
+                            <p class="waitnum">대기 번호</p>
+                            <div class="num">901</div>
+                        </div>
+                    </div>
+                </div> -->
+                <img src="../icon_img/recipt_img_e.png" />
+            </div>
+        </div>
+
+        <div class="gohome">
+            <button type="button" class="gohome"
+                onclick="location.href='http://localhost:3001/selectorder/selectorder.html'">
+                <img src="../icon_img/home_icon.png">Back to HOME</button>
+        </div>
+    </div>
+    <script>
+        const joImage = document.getElementById("imageLink");
+
+        joImage.addEventListener("click", function () {
+            // 먼저 modalContainer_e를 비웁니다.
+            document.getElementById("modalContainer_e").innerHTML = "";
+
+            // help_msg.html 콘텐츠를 로드하여 modalContainer_e에 추가합니다.
+            fetch("http://localhost:3001/help_msg/help_msg.html")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("HTTP Error " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // modalContainer_e에 help_msg.html 콘텐츠를 추가합니다.
+                    // 모달 제목을 찾아서 변경
+                    document.getElementById("modalContainer_e").innerHTML = data;
+
+                    const modalTitle = document.querySelector(".modal-title");
+                    if (modalTitle) {
+                        modalTitle.textContent = "Help"; // "help"로 변경
+                    }
+
+                    const close_btn = document.querySelector(".help_close");
+                    if (close_btn) {
+                        close_btn.textContent = "Close";
+                    }
+
+                    const modalBody = document.querySelector(".modal-body");
+                    modalBody.innerHTML = `
+                    <video autoplay controls>
+                        <source src="../help_video/ordernum_e.mp4" type="video/mp4">
+                        Please call the administrator
+                    </video>
+
+                    <section class="content_explain">
+                        1. The waiting number will appear when the payment is completed.<br>
+                        2. Please remember the waiting number and take the menu you ordered.<br>
+                        3. Please press 'Home' for the next customer to order.
+                    </section>
+                    `;
+
+                    // help_msg.css 파일을 로드합니다.
+                    const linkElement = document.createElement("link");
+                    linkElement.rel = "stylesheet";
+                    linkElement.type = "text/css";
+                    linkElement.href = "http://localhost:3001/help_msg/help_msg_e.css";
+                    document.head.appendChild(linkElement);
+
+                    const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                    modal.show();
+                })
+                .catch(error => {
+                    console.error("콘텐츠를 가져오는 중 오류가 발생했습니다:", error);
+                });
+        });
+
+    </script>
+    <script>
+        function openClose() {
+            window.location.href = "http://localhost:3001/selectorder/selectorder.html"
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        var secondsElapsed = 0;
+
+        // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
+        function showDelayedMessage() {
+            secondsElapsed = 20; // 10초 경과
+            console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
+            //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
+            openModal();
+        }
+
+        function openModal() {
+            $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+
+        // showDelayedMessage() 함수가 실행된 후 페이지 리로드 및 경과 시간 초기화
+        function showDelayedMessageAndReload() {
+            showDelayedMessage();
+            setTimeout(function () {
+                //location.reload(); // 일정 시간 후 페이지 리로드
+            }, 10000); // 10초 후 리로드
+        }
+
+        // 페이지가 로드될 때 타이머를 시작
+        var timer = setInterval(function () {
+            secondsElapsed++; // 경과 시간 증가
+            console.log(secondsElapsed + "초");
+            if (secondsElapsed === 20) {
+                clearInterval(timer); // 타이머 중지
+                showDelayedMessage(); // 메시지 표시 함수 호출
+            }
+        }, 1000); // 1초마다 실행
+
+        // 페이지에 클릭 또는 터치 이벤트가 발생하면 경과 시간을 초기화하고 다시 타이머를 시작
+        document.addEventListener('click', function () {
+            secondsElapsed = 0; // 경과 시간 초기화
+            console.log("터치 이벤트");
+        });
+
+    </script>
+
+</body>
+
+</html>

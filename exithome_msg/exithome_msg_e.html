@@ -1,0 +1,65 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용 여부 확인</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="../payment_msg_e/payment_msg_e.css"/>
+</head>
+
+<body>
+
+    <!-- Modal -->
+    <div class="modal fade help_modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered help_modal_dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title fs-5" id="exampleModalLabel">Confirmation Message</p>
+                    <!-- <button type="button" class="btn-close" id="cancleButton" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to continue using the kiosk?</p>
+                    <p>Yes: Continue<br>
+                    No: Stop using kiosks<br>
+                    (If there is no choice, it will return to the first screen after 10 seconds.)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="yesButton" data-bs-dismiss="modal">Yes</button>
+                    <button type="button" class="btn btn-secondary" id="cancleButton" data-bs-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로딩 후 모달 창을 자동으로 표시
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+            modal.show();
+
+        });
+        // 클릭 이벤트가 없을 경우 8초 후에 페이지 이동
+        function startTimer() {
+          timeoutId = setTimeout(function () {
+            location.href = 'http://localhost:3001/selectorder/selectorder.html'; // 10초 후에 첫 페이지로 이동
+          }, 10000);
+        }
+
+        // 모달 창이 열렸을 때 타이머 시작
+        startTimer(); 
+
+        
+        const yesButton = document.getElementById('yesButton'); 
+        const cancleButton = document.getElementById('cancleButton');
+
+        yesButton.addEventListener('click', function () {
+            window.location.href = window.location.href; //현재 위치한 페이지로 이동
+        });
+
+        cancleButton.addEventListener('click', function(){
+            location.href = 'http://localhost:3001/selectorder/selectorder.html'; //처음 화면으로 이동
+        })
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+</body>

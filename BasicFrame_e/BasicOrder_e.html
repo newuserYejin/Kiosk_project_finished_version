@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./BasicOrder_e.css" />
+</head>
+
+<body style="font-family: 'pretendard';">
+    <div class="all_box">
+        <!--상단 배너-->
+        <div class="top_banner">
+            <div class="hoi_box">
+                <img class="hoi" src="../icon_img/good_hoi.png" />
+            </div>
+            <img class="cafe_name" src="../icon_img/cafe_name_eng.png" />
+
+            <div class="help">
+                <div id="imageLink">Help</div>
+                <div id="modalContainer_e"></div>
+            </div>
+        </div>
+
+        <!--카테고리-->
+        <div class="category_box">
+            <ul class="categories">
+                <li class="category select_category"><a href="#" data-category="1">Coffee</a></li>
+                <li class="category"><a href="#" data-category="2">Beverage</a></li>
+                <li class="category"><a href="#" data-category="3">Tea</a></li>
+                <li class="category"><a href="#" data-category="4">Smoothie</a></li>
+                <li class="category"><a href="#" data-category="5">Dessert</a></li>
+            </ul>
+        </div>
+
+        <!--오른쪽 목록-->
+        <div class="all">
+            <div class="list_menu">
+                <div class="ho">
+                    <div class="upper_box">
+                        <div class="navigation">
+                            <div class="navigation_all_box">
+                                <div class="box_line" onclick="select_page()">
+                                    <div class="level_button"
+                                        style="background-color: rgba(0, 122, 194, 0.1); color: #007AC2;">
+                                        <p class="circle_name">1.Choose</p>
+                                    </div>
+                                </div>
+
+                                <div class="box_line" onclick="check_page()">
+                                    <div class="level_button">
+                                        <p class="circle_name">2.Check</p>
+                                    </div>
+                                </div>
+
+                                <div class="box_line pay_move" onclick="pay_page()">
+                                    <div class="level_button">
+                                        <p class="circle_name">3.Pay</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="search_div" id="search_div">
+                            <input type="search" name="menu-search" class="search" placeholder="product name">
+                            <img class="search_icon" src="../icon_img/search_black.png">
+                        </div>
+                    </div>
+
+                    <div class="main_box">
+                        <div class="menu_box">
+                            <!--메뉴 목록-->
+                            <div class="list_box" id="resultContainer">
+                                <div class="slider-container">
+                                    <div class="slider">
+                                        <!-- 슬라이드할 내용들을 추가합니다. -->
+                                        <!-- <div class="slide">
+                            <div class="box list_content_box" id="list_click">
+                                <div class="box list_img_box">
+                                    <img class="list_img_size" src="image/img1.PNG">
+                                </div>
+                                <div class="box list_content_info">
+                                    <div class=" container text-center">
+                                        <div class="content_title">
+                                            <div class="menu_name">Americano</div>
+                                            <div class="menu_cost">3000won</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                                        <!-- <div class="slide">
+                            <div class="box list_content_box" id="list_click">
+                                <div class="box list_img_box">
+                                    <img class="list_img_size" src="image/img1.PNG">
+                                </div>
+                                <div class="box list_content_info">
+                                    <div class=" container text-center">
+                                        <div class="content_title">
+                                            <div class="menu_name">Americano</div>
+                                            <div class="menu_cost">3000won</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pages_btn">
+                            <button id="prevBtn">
+                                <img src="../icon_img/less.png">
+                            </button>
+                        </div>
+                        <div class="pages_btn">
+                            <button id="nextBtn">
+                                <img src="../icon_img/more.png" />
+                            </button>
+                        </div>
+
+                        <div class="right">
+                            <div class="pickup_op">
+                                <div class="pickup_op_box">
+                                    <div>
+                                        <img src="../icon_img/bag_icon.png" />
+                                        <div>Order List</div>
+                                    </div>
+                                    <div class="radio_box">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
+                                                    value="takeAway" id="secondRadio">
+                                                <label class="form-check-label" for="secondRadio">Take Out</label>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <input class="form-check-input me-1" type="radio" name="listGroupRadio"
+                                                    value="forHere" id="firstRadio">
+                                                <label class="form-check-label" for="firstRadio">Eat and Go</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--현재 주문 목록-->
+                            <div class="select_list_box">
+                                <div class="select_list">
+                                    <div class="select_list_list">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pay_button" onclick="pay_page()">
+                                <div class="pay_inner_box">
+                                    <img src="../icon_img/cardpay_white.png" />
+                                    <div class="total_cost_box">
+                                        <div class="total_cost">&#8361;0</div>
+                                        <div>Paying</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--하단 버튼-->
+        <!--추가기능 바-->
+        <div class="add_fuc_bar">
+            <!--고정 버튼-->
+            <button class="fix_button_detail" onclick="firstScreen()">
+                <img src="../icon_img/home_icon.png" />Home
+            </button>
+            <button class="fix_button_detail" onclick="prvsScren()">
+                <img src="../icon_img/left_icon.png" /> Previous
+            </button>
+            <button class="fix_button_detail" onclick="nextScreen()">
+                <img src="../icon_img/right_icon.png" /> Next
+            </button>
+
+            <button class="fix_button_detail size_switch" data-value="big">
+                <img src="../icon_img/size_icon.png" /> Bigger
+            </button>
+
+            <button class="fix_button_detail all_delete">
+                <img src="../icon_img/delete_black_icon.png">Full Cancel
+            </button>
+
+            <!-- <div class="view_button">
+                <input type="radio" name="size" value="basic" id="basic_f" checked>
+                <label for="basic_f">Basic</label>
+                <input type="radio" name="size" value="big" id="big_f">
+                <label for="big_f">Bigger</label>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="./BasicOrder_e.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard@latest/build/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-keyboard-layouts@latest/build/index.min.js"></script>
+
+    <!--JQuery라이브러리(Ajax)-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!--부트스트랩-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+    <script>
+
+        var secondsElapsed = 0;
+
+        // 일정 시간 이후에 메시지를 표시하고 경과 시간을 표시하는 함수
+        function showDelayedMessage() {
+            secondsElapsed = 50; // 10초 경과
+            console.log(secondsElapsed + "초 경과: 클릭 또는 터치 이벤트가 없었습니다.");
+            //alert("10초 동안 클릭 또는 터치 이벤트가 없었습니다.");
+            openModal();
+        }
+
+        function openModal() {
+            // help_msg.css를 제거합니다.
+            const help_msg_Link = document.querySelector('link[href="http://localhost:3001/help_msg/help_msg.css"]');
+            if (help_msg_Link) {
+                help_msg_Link.remove();
+            }
+
+            // detail_menu.css를 제거합니다.
+            const detailMenuLink = document.querySelector('link[href="http://localhost:3001/detail_menu_e/detail_menu_e.css"]');
+            if (detailMenuLink) {
+                detailMenuLink.remove();
+            }
+
+            $.get("http://localhost:3001/exithome_msg/exithome_msg_e.html", function (data) {
+                $("#modalContainer_e").html(data);
+
+                // help_msg.css 파일을 로드합니다.
+                const linkElement = document.createElement("link");
+                linkElement.rel = "stylesheet";
+                linkElement.type = "text/css";
+                linkElement.href = "http://localhost:3001/payment_msg_e/payment_msg_e.css";
+                document.head.appendChild(linkElement);
+
+                const modal = new bootstrap.Modal(document.getElementById("exampleModal"));
+                modal.show();
+            });
+        }
+
+        // showDelayedMessage() 함수가 실행된 후 페이지 리로드 및 경과 시간 초기화
+        function showDelayedMessageAndReload() {
+            showDelayedMessage();
+            setTimeout(function () {
+                //location.reload(); // 일정 시간 후 페이지 리로드
+            }, 10000); // 10초 후 리로드
+        }
+
+        // 페이지가 로드될 때 타이머를 시작
+        var timer = setInterval(function () {
+            secondsElapsed++; // 경과 시간 증가
+            console.log(secondsElapsed + "초");
+            if (secondsElapsed === 50) {
+                clearInterval(timer); // 타이머 중지
+                showDelayedMessage(); // 메시지 표시 함수 호출
+            }
+        }, 1000); // 1초마다 실행
+
+        // 페이지에 클릭 또는 터치 이벤트가 발생하면 경과 시간을 초기화하고 다시 타이머를 시작
+        document.addEventListener('click', function () {
+            secondsElapsed = 0; // 경과 시간 초기화
+            console.log("터치 이벤트");
+        });
+
+    </script>
+
+</body>
+
+</html>
