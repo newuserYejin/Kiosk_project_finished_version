@@ -8,7 +8,20 @@ html,body {
     padding: 0;
     font-family: 'Pretendard';
     overflow: hidden;
+    font-size: 6.8px;
 }
+
+@media screen and (min-width: 700px) {
+    html {
+      width: calc(1700vh/27);
+      height: 100vh;
+      box-sizing: border-box;
+      margin: auto;
+      border: solid 1px black;
+
+      font-size: 5px;
+    }
+  }
 
 .all {
     width: 100%;
@@ -30,6 +43,7 @@ html,body {
     height: 59.4%;
 
     display: flex;
+    line-height: normal;
 }
 
 .banner img{
@@ -50,13 +64,13 @@ html,body {
 
 .banner_ment p{
     font-weight: 600;
-    font-size: 3vw;
+    font-size: 3rem;
     padding: 0;
     margin: 0;
 }
 
 .banner_ment p:first-child{
-    font-size: 5vw;
+    font-size: 5rem;
     margin-bottom: 10px;
 }
 
@@ -105,7 +119,7 @@ html,body {
 .order_explan_content div{
     height: 100%;
 
-    font-size: 6vw;
+    font-size: 6rem;
     font-weight: 600;
 
     display: flex;
@@ -137,7 +151,7 @@ html,body {
     width: 18.4%;
     height: 31.1%;
     border-radius: 10px;
-    font-size: 3.5vw;
+    font-size: 3.5rem;
     font-weight: 400;
     background-color: black;
     color: white;
@@ -211,7 +225,7 @@ html,body {
     color: white;
     border-radius: 20px;
 
-    font-size: 6vw;
+    font-size: 6rem;
     font-weight: 600;
 }
 
@@ -230,7 +244,7 @@ html,body {
     height: 100%;
     border: solid 2px black;
     border-radius: 10px;
-    font-size: 4.5vw;
+    font-size: 4.5rem;
     font-weight: 400;
 
     display: flex;
@@ -247,6 +261,6 @@ html,body {
 
 .back_btn img{
     margin: 0 5px;
-    width: 5vw;
+    width: 5rem;
     height: auto;
 }

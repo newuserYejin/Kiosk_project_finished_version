@@ -23,6 +23,12 @@
     padding-bottom: 0;
 }
 
+@media screen and (min-width: 700px) {
+    #modalContainer_e .modal-dialog {
+      width: calc(1700vh/27*0.882);
+    }
+  }
+
 #modalContainer_e .modal-content{
     width: 100%;
     height: 100%;
